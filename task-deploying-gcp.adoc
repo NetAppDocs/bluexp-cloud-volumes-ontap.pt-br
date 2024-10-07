@@ -1,0 +1,526 @@
+---
+sidebar: sidebar 
+permalink: task-deploying-gcp.html 
+keywords: Cloud Volumes ONTAP, deploying, launching, creating, deploy, launch, create,  BYOL, license key, serial number, location, license, preconfigured packages, programmatic deployments, disk size, write speed, access control, volume protection, usage profile, register, CIFS share, quota, qtree, HA, high-availability, google cloud ha, ha in google cloud, ha pair, cloud backup, cloud tiering 
+summary: É possível iniciar o Cloud Volumes ONTAP em uma configuração de sistema único ou como par de HA no Google Cloud Platform. 
+---
+= Lançamento do Cloud Volumes ONTAP no Google Cloud
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+É possível iniciar o Cloud Volumes ONTAP em uma configuração de nó único ou como par de HA no Google Cloud.
+
+
+
+== Antes de começar
+
+Você precisa do seguinte para criar um ambiente de trabalho.
+
+[[licensing]]
+* Um conetor que está em funcionamento.
++
+** Você deve ter um https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["Conetor que está associado ao seu projeto ou área de trabalho"^].
+** https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html["Você deve estar preparado para deixar o conetor funcionando o tempo todo"^].
+** A conta de serviço associada ao conetor https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-gcp.html["deve ter as permissões necessárias"^]
+
+
+* Uma compreensão da configuração que você deseja usar.
++
+Você deve se preparar escolhendo uma configuração e obtendo informações de rede do Google Cloud do administrador. Para obter detalhes, link:task-planning-your-config-gcp.html["Planejando sua configuração do Cloud Volumes ONTAP"]consulte .
+
+* Uma compreensão do que é necessário para configurar o licenciamento para o Cloud Volumes ONTAP.
++
+link:task-set-up-licensing-google.html["Saiba como configurar o licenciamento"].
+
+* As APIs do Google Cloud devem ser https://cloud.google.com/apis/docs/getting-started#enabling_apis["habilitado em seu projeto"^]:
++
+** API do Cloud Deployment Manager V2
+** API Cloud Logging
+** API do Cloud Resource Manager
+** API do mecanismo de computação
+** API de gerenciamento de identidade e acesso (IAM)
+
+
+
+
+
+
+== Lançamento de um sistema de nó único no Google Cloud
+
+Crie um ambiente de trabalho no BlueXP  para iniciar o Cloud Volumes ONTAP no Google Cloud.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. [[Subscribe]]na página do Canvas, clique em *Adicionar ambiente de trabalho* e siga as instruções.
+. *Escolha um local*: Selecione *Google Cloud* e *Cloud Volumes ONTAP*.
+. Se for solicitado, https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["Crie um conetor"^].
+. *Detalhes e credenciais*: Selecione um projeto, especifique um nome de cluster, selecione opcionalmente uma conta de serviço, adicione rótulos opcionalmente e especifique credenciais.
++
+A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Nome do ambiente de trabalho | O BlueXP  usa o nome do ambiente de trabalho para nomear tanto o sistema Cloud Volumes ONTAP quanto a instância de VM do Google Cloud. Ele também usa o nome como prefixo para o grupo de segurança predefinido, se você selecionar essa opção. 
+
+
+| Nome da conta de serviço | Se você planeja usar link:concept-data-tiering.html["categorização de dados"] ou https://docs.netapp.com/us-en/bluexp-backup-recovery/concept-backup-to-cloud.html["Backup e recuperação do BlueXP"^] com o Cloud Volumes ONTAP, precisará ativar *conta de serviço* e selecionar uma conta de serviço que tenha a função de administrador de armazenamento predefinida. link:task-creating-gcp-service-account.html["Saiba como criar uma conta de serviço"^]. 
+
+
+| Adicionar etiquetas | Os rótulos são metadados para seus recursos do Google Cloud. O BlueXP  adiciona os rótulos ao sistema Cloud Volumes ONTAP e aos recursos do Google Cloud associados ao sistema. Você pode adicionar até quatro rótulos da interface do usuário ao criar um ambiente de trabalho e, em seguida, adicionar mais após a criação. Observe que a API não limita a quatro rótulos ao criar um ambiente de trabalho. Para obter informações sobre etiquetas, https://cloud.google.com/compute/docs/labeling-resources["Documentação do Google Cloud: Etiquetagem de recursos"^] consulte . 
+
+
+| Nome de utilizador e palavra-passe | Estas são as credenciais da conta de administrador de cluster do Cloud Volumes ONTAP. Você pode usar essas credenciais para se conetar ao Cloud Volumes ONTAP por meio do Gerenciador de sistemas do ONTAP ou da CLI do ONTAP. Mantenha o nome de usuário padrão _admin_ ou altere-o para um nome de usuário personalizado. 
+
+
+| Editar projeto  a| 
+Selecione o projeto onde você deseja que o Cloud Volumes ONTAP resida. O projeto padrão é o projeto onde o BlueXP  reside.
+
+Se você não vir nenhum projeto adicional na lista suspensa, você ainda não associou a conta de serviço do BlueXP  a outros projetos. Vá para o console do Google Cloud, abra o serviço IAM e selecione o projeto. Adicione a conta de serviço com a função BlueXP  a esse projeto. Você precisará repetir esta etapa para cada projeto.
+
+
+NOTE: Esta é a conta de serviço configurada para o BlueXP , link:https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["como descrito nesta página"^].
+
+Clique em *Adicionar assinatura* para associar as credenciais selecionadas a uma assinatura.
+
+Para criar um sistema Cloud Volumes ONTAP de pagamento conforme o uso, você precisa selecionar um projeto do Google Cloud associado a uma assinatura do Cloud Volumes ONTAP no Google Cloud Marketplace.
+
+|===
++
+O vídeo a seguir mostra como associar uma assinatura do mercado de pagamento conforme o uso ao seu projeto do Google Cloud. Em alternativa, siga os passos para subscrever localizados na https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Associar uma assinatura do Marketplace às credenciais do Google Cloud"^] secção.
+
++
+.Inscreva-se no BlueXP  no Google Cloud Marketplace
+video::373b96de-3691-4d84-b3f3-b05101161638[panopto]
+. *Serviços*: Selecione os serviços que deseja usar neste sistema. Para selecionar o backup e a recuperação do BlueXP  ou usar a disposição em camadas do BlueXP , você precisa ter especificado a conta de serviço na etapa 3.
++
+
+TIP: Se quiser utilizar WORM e disposição de dados em camadas, desative o backup e a recuperação do BlueXP  e implante um ambiente de trabalho do Cloud Volumes ONTAP com a versão 9,8 ou superior.
+
+. *Localização e conetividade*: Selecione um local, escolha uma política de firewall e confirme a conetividade de rede com o armazenamento do Google Cloud para disposição em camadas de dados.
++
+A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Verificação de conetividade | Para categorizar dados inativos em um bucket do Google Cloud Storage, a sub-rede na qual o Cloud Volumes ONTAP reside deve ser configurada para o acesso privado do Google. Para obter instruções, https://cloud.google.com/vpc/docs/configure-private-google-access["Documentação do Google Cloud: Configurando o acesso privado do Google"^] consulte . 
+
+
+| Política de firewall gerada  a| 
+Se você permitir que o BlueXP  gere a política de firewall para você, precisará escolher como permitir o tráfego:
+
+** Se você escolher *somente VPC selecionada*, o filtro de origem para o tráfego de entrada será o intervalo de sub-rede da VPC selecionada e o intervalo de sub-rede da VPC onde o conetor reside. Esta é a opção recomendada.
+** Se você escolher *todos os VPCs*, o filtro de origem para o tráfego de entrada é o intervalo IP 0,0.0.0/0.
+
+
+
+
+| Use a política de firewall existente | Se você usar uma política de firewall existente, certifique-se de que ela inclui as regras necessárias. Link: https://docs.NetApp.com/US-en/BlueXP -cloud-volumes-ONTAP/reference-networking-Cloud Volumes ONTAP.html. 
+|===
+. *Métodos de carregamento e conta NSS*: Especifique qual opção de carregamento você gostaria de usar com este sistema e especifique uma conta do site de suporte da NetApp.
++
+** link:concept-licensing.html["Saiba mais sobre as opções de licenciamento para o Cloud Volumes ONTAP"^].
+** link:task-set-up-licensing-google.html["Saiba como configurar o licenciamento"^].
+
+
+. *Pacotes pré-configurados*: Selecione um dos pacotes para implantar rapidamente um sistema Cloud Volumes ONTAP ou clique em *criar minha própria configuração*.
++
+Se você escolher um dos pacotes, você só precisa especificar um volume e, em seguida, revisar e aprovar a configuração.
+
+. *Licenciamento*: Altere a versão do Cloud Volumes ONTAP conforme necessário e selecione um tipo de máquina.
++
+
+NOTE: Se um candidato de lançamento mais recente, disponibilidade geral ou liberação de patch estiver disponível para a versão selecionada, o BlueXP  atualizará o sistema para essa versão ao criar o ambiente de trabalho. Por exemplo, a atualização ocorre se você selecionar Cloud Volumes ONTAP 9.13.1 e 9.13.1 P4 estiver disponível. A atualização não ocorre de uma versão para outra, por exemplo, de 9,13 a 9,14.
+
+. *Recursos de armazenamento subjacentes*: Escolha configurações para o agregado inicial: Um tipo de disco e o tamanho de cada disco.
++
+O tipo de disco é para o volume inicial. Você pode escolher um tipo de disco diferente para volumes subsequentes.
+
++
+O tamanho do disco é para todos os discos no agregado inicial e para quaisquer agregados adicionais criados pelo BlueXP  quando você usa a opção de provisionamento simples. Você pode criar agregados que usam um tamanho de disco diferente usando a opção Alocação avançada.
+
++
+Para obter ajuda sobre como escolher um tipo e tamanho de disco, link:task-planning-your-config-gcp.html#size-your-system-in-gcp["Dimensione seu sistema no Google Cloud"^]consulte .
+
+. *Flash Cache, velocidade de gravação e WORM*:
++
+.. Ative *Flash Cache*, se desejado.
++
+
+NOTE: A partir do Cloud Volumes ONTAP 9.13.1, o _Flash Cache_ é compatível com os tipos de instância n2-standard-16, n2-standard-32, n2-standard-48 e n2-standard-64. Não é possível desativar o Flash Cache após a implantação.
+
+.. Escolha *normal* ou *alta* velocidade de gravação, se desejado.
++
+link:concept-write-speed.html["Saiba mais sobre a velocidade de escrita"].
+
++
+
+NOTE: Alta velocidade de gravação e uma unidade de transmissão máxima (MTU) superior de 8.896 bytes estão disponíveis através da opção *High* write speed. Além disso, o MTU maior do 8.896 requer a seleção de VPC-1, VPC-2 e VPC-3 para a implantação. Para obter mais informações sobre VPC-1, VPC-2 e VPC-3,  https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-networking-gcp.html#requirements-for-the-connector["Regras para VPC-1, VPC-2 e VPC-3"^]consulte .
+
+.. Ative o storage WORM (uma gravação, muitas leituras), se desejado.
++
+O WORM não pode ser ativado se a disposição de dados em camadas foi ativada para o Cloud Volumes ONTAP versões 9,7 e inferiores. Reverter ou fazer downgrade para o Cloud Volumes ONTAP 9,8 é bloqueado depois de ativar WORM e disposição em camadas.
+
++
+link:concept-worm.html["Saiba mais sobre o armazenamento WORM"^].
+
+.. Se você ativar o storage WORM, selecione o período de retenção.
+
+
+. *Disposição em camadas de dados no Google Cloud Platform*: Escolha se deseja habilitar a disposição em camadas de dados no agregado inicial, escolher uma classe de armazenamento para os dados em camadas e, em seguida, selecionar uma conta de serviço que tenha a função de administrador de armazenamento predefinida (necessária para o Cloud Volumes ONTAP 9,7 ou posterior) ou selecionar uma conta do Google Cloud (necessária para o Cloud Volumes ONTAP 9,6).
++
+Observe o seguinte:
+
++
+** O BlueXP  define a conta de serviço na instância do Cloud Volumes ONTAP. Essa conta de serviço fornece permissões para categorização de dados em um bucket do Google Cloud Storage. Certifique-se de adicionar a conta de serviço do Connector como usuário da conta de serviço de disposição em camadas, caso contrário, você não pode selecioná-la no BlueXP 
+** Para obter ajuda com a adição de uma conta do Google Cloud,  https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Configuração e adição de contas do Google Cloud para categorização de dados no 9,6"^]consulte .
+** Você pode escolher uma política específica de disposição em categorias de volume ao criar ou editar um volume.
+** Se você desabilitar a disposição em camadas de dados, poderá ativá-la em agregados subsequentes, mas precisará desativar o sistema e adicionar uma conta de serviço a partir do console do Google Cloud.
++
+link:concept-data-tiering.html["Saiba mais sobre categorização de dados"^].
+
+
+
+. *Criar volume*: Insira os detalhes do novo volume ou clique em *Ignorar*.
++
+link:concept-client-protocols.html["Saiba mais sobre protocolos e versões de clientes compatíveis"^].
+
++
+Alguns dos campos desta página são auto-explicativos. A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Tamanho | O tamanho máximo que você pode inserir depende, em grande parte, se você ativar o provisionamento de thin, o que permite criar um volume maior do que o armazenamento físico atualmente disponível para ele. 
+
+
+| Controle de acesso (somente para NFS) | Uma política de exportação define os clientes na sub-rede que podem acessar o volume. Por padrão, o BlueXP  insere um valor que fornece acesso a todas as instâncias na sub-rede. 
+
+
+| Permissões e utilizadores/grupos (apenas para CIFS) | Esses campos permitem controlar o nível de acesso a um compartilhamento para usuários e grupos (também chamados de listas de controle de acesso ou ACLs). Você pode especificar usuários ou grupos do Windows locais ou de domínio, ou usuários ou grupos UNIX. Se você especificar um nome de usuário do domínio do Windows, você deve incluir o domínio do usuário usando o nome de domínio do formato. 
+
+
+| Política de instantâneos | Uma política de cópia Snapshot especifica a frequência e o número de cópias snapshot do NetApp criadas automaticamente. Uma cópia Snapshot do NetApp é uma imagem pontual do sistema de arquivos que não afeta a performance e exige o mínimo de storage. Você pode escolher a política padrão ou nenhuma. Você pode escolher nenhum para dados transitórios: Por exemplo, tempdb para Microsoft SQL Server. 
+
+
+| Opções avançadas (somente para NFS) | Selecione uma versão NFS para o volume: NFSv3 ou NFSv4. 
+
+
+| Grupo de iniciadores e IQN (apenas para iSCSI) | Os destinos de armazenamento iSCSI são chamados de LUNs (unidades lógicas) e são apresentados aos hosts como dispositivos de bloco padrão. Os grupos de iniciadores são tabelas de nomes de nós de host iSCSI e controlam quais iniciadores têm acesso a quais LUNs. Os destinos iSCSI se conetam à rede por meio de adaptadores de rede Ethernet (NICs) padrão, placas de mecanismo de descarga TCP (TOE) com iniciadores de software, adaptadores de rede convergidos (CNAs) ou adaptadores de barramento de host dedicados (HBAs) e são identificados por IQNs (iSCSI Qualified Names). Quando cria um volume iSCSI, o BlueXP  cria automaticamente um LUN para si. Simplificamos a criação de apenas um LUN por volume, para que não haja gerenciamento envolvido. Depois de criar o volume, link:task-connect-lun.html["Use o IQN para se conetar ao LUN a partir de seus hosts"]. 
+|===
++
+A imagem seguinte mostra a página volume preenchida para o protocolo CIFS:
+
++
+image:screenshot_cot_vol.gif["Captura de tela: Mostra a página volume preenchida para uma instância do Cloud Volumes ONTAP."]
+
+. *Configuração CIFS*: Se você escolher o protocolo CIFS, configure um servidor CIFS.
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Endereço IP primário e secundário do DNS | Os endereços IP dos servidores DNS que fornecem resolução de nomes para o servidor CIFS. Os servidores DNS listados devem conter os Registros de localização de serviço (SRV) necessários para localizar os servidores LDAP do ative Directory e os controladores de domínio para o domínio em que o servidor CIFS irá ingressar. Se você estiver configurando o ative Directory gerenciado pelo Google, o AD pode ser acessado por padrão com o endereço IP 169.254.169.254. 
+
+
+| Ative Directory Domain para aderir | O FQDN do domínio do ative Directory (AD) ao qual você deseja que o servidor CIFS se associe. 
+
+
+| Credenciais autorizadas para ingressar no domínio | O nome e a senha de uma conta do Windows com Privileges suficiente para adicionar computadores à unidade organizacional especificada (ou) dentro do domínio do AD. 
+
+
+| Nome NetBIOS do servidor CIFS | Um nome de servidor CIFS exclusivo no domínio AD. 
+
+
+| Unidade organizacional | A unidade organizacional dentro do domínio AD a associar ao servidor CIFS. A predefinição é computadores. Para configurar o Microsoft AD gerenciado pelo Google como o servidor AD para Cloud Volumes ONTAP, digite *ou computadores, ou nuvem* neste campo. https://cloud.google.com/managed-microsoft-ad/docs/manage-active-directory-objects#organizational_units["Documentação do Google Cloud: Unidades organizacionais no Google Managed Microsoft AD"^] 
+
+
+| Domínio DNS | O domínio DNS da máquina virtual de storage (SVM) do Cloud Volumes ONTAP. Na maioria dos casos, o domínio é o mesmo que o domínio AD. 
+
+
+| NTP Server | Selecione *Use ative Directory Domain* para configurar um servidor NTP usando o DNS do ative Directory. Se você precisa configurar um servidor NTP usando um endereço diferente, então você deve usar a API. Para obter mais informações, consulte o https://docs.netapp.com/us-en/bluexp-automation/index.html["Documentos de automação BlueXP "^] para obter mais informações. Observe que você pode configurar um servidor NTP somente ao criar um servidor CIFS. Não é configurável depois de criar o servidor CIFS. 
+|===
+. *Perfil de uso, tipo de disco e Política de disposição em categorias*: Escolha se você deseja habilitar os recursos de eficiência de storage e alterar a política de disposição em categorias de volume, se necessário.
++
+Para obter mais informações, link:task-planning-your-config-gcp.html#choose-a-volume-usage-profile["Escolha um perfil de uso de volume"^]consulte e link:concept-data-tiering.html["Visão geral de categorização de dados"^].
+
+. *Rever & aprovar*: Revise e confirme suas seleções.
++
+.. Reveja os detalhes sobre a configuração.
+.. Clique em *mais informações* para analisar detalhes sobre o suporte e os recursos do Google Cloud que o BlueXP  comprará.
+.. Selecione as caixas de verificação *I understand...*.
+.. Clique em *Go*.
+
+
+
+
+.Resultado
+O BlueXP  implanta o sistema Cloud Volumes ONTAP. Você pode acompanhar o progresso na linha do tempo.
+
+Se você tiver algum problema na implantação do sistema Cloud Volumes ONTAP, revise a mensagem de falha. Você também pode selecionar o ambiente de trabalho e clicar em *Re-create environment*.
+
+Para obter ajuda adicional, vá https://mysupport.netapp.com/site/products/all/details/cloud-volumes-ontap/guideme-tab["Suporte à NetApp Cloud Volumes ONTAP"^] para .
+
+.Depois de terminar
+* Se você provisionou um compartilhamento CIFS, dê aos usuários ou grupos permissões para os arquivos e pastas e verifique se esses usuários podem acessar o compartilhamento e criar um arquivo.
+* Se você quiser aplicar cotas a volumes, use o Gerenciador de sistema do ONTAP ou a CLI do ONTAP.
++
+As cotas permitem restringir ou rastrear o espaço em disco e o número de arquivos usados por um usuário, grupo ou qtree.
+
+
+
+
+
+== Lançamento de um par de HA no Google Cloud
+
+Crie um ambiente de trabalho no BlueXP  para iniciar o Cloud Volumes ONTAP no Google Cloud.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página Canvas, clique em *Adicionar ambiente de trabalho* e siga as instruções.
+. *Escolha um local*: Selecione *Google Cloud* e *Cloud Volumes ONTAP HA*.
+. *Detalhes e credenciais*: Selecione um projeto, especifique um nome de cluster, selecione opcionalmente uma conta de serviço, adicione rótulos opcionalmente e especifique credenciais.
++
+A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Nome do ambiente de trabalho | O BlueXP  usa o nome do ambiente de trabalho para nomear tanto o sistema Cloud Volumes ONTAP quanto a instância de VM do Google Cloud. Ele também usa o nome como prefixo para o grupo de segurança predefinido, se você selecionar essa opção. 
+
+
+| Nome da conta de serviço | Se você pretende usar os link:concept-data-tiering.html["Disposição em camadas do BlueXP"] serviços ou https://docs.netapp.com/us-en/bluexp-backup-recovery/concept-backup-to-cloud.html["Backup e recuperação do BlueXP"^], você precisa ativar a opção *conta de serviço* e, em seguida, selecionar a conta de serviço que tem a função Administrador de armazenamento predefinido. 
+
+
+| Adicionar etiquetas | Os rótulos são metadados para seus recursos do Google Cloud. O BlueXP  adiciona os rótulos ao sistema Cloud Volumes ONTAP e aos recursos do Google Cloud associados ao sistema. Você pode adicionar até quatro rótulos da interface do usuário ao criar um ambiente de trabalho e, em seguida, adicionar mais após a criação. Observe que a API não limita a quatro rótulos ao criar um ambiente de trabalho. Para obter informações sobre etiquetas, https://cloud.google.com/compute/docs/labeling-resources["Documentação do Google Cloud: Etiquetagem de recursos"^] consulte . 
+
+
+| Nome de utilizador e palavra-passe | Estas são as credenciais da conta de administrador de cluster do Cloud Volumes ONTAP. Você pode usar essas credenciais para se conetar ao Cloud Volumes ONTAP por meio do Gerenciador de sistemas do ONTAP ou da CLI do ONTAP. Mantenha o nome de usuário padrão _admin_ ou altere-o para um nome de usuário personalizado. 
+
+
+| Editar projeto  a| 
+Selecione o projeto onde você deseja que o Cloud Volumes ONTAP resida. O projeto padrão é o projeto onde o BlueXP  reside.
+
+Se você não vir nenhum projeto adicional na lista suspensa, você ainda não associou a conta de serviço do BlueXP  a outros projetos. Vá para o console do Google Cloud, abra o serviço IAM e selecione o projeto. Adicione a conta de serviço com a função BlueXP  a esse projeto. Você precisará repetir esta etapa para cada projeto.
+
+
+NOTE: Esta é a conta de serviço configurada para o BlueXP , link:https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["como descrito nesta página"^].
+
+Clique em *Adicionar assinatura* para associar as credenciais selecionadas a uma assinatura.
+
+Para criar um sistema Cloud Volumes ONTAP de pagamento conforme o uso, você precisa selecionar um projeto do Google Cloud associado a uma assinatura do Cloud Volumes ONTAP no Google Cloud Marketplace.
+
+|===
++
+O vídeo a seguir mostra como associar uma assinatura do mercado de pagamento conforme o uso ao seu projeto do Google Cloud. Em alternativa, siga os passos para subscrever localizados na https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Associar uma assinatura do Marketplace às credenciais do Google Cloud"^] secção.
+
++
+.Inscreva-se no BlueXP  no Google Cloud Marketplace
+video::373b96de-3691-4d84-b3f3-b05101161638[panopto]
+. *Serviços*: Selecione os serviços que deseja usar neste sistema. Para selecionar o backup e a recuperação do BlueXP , ou para usar o BlueXP  Tiering, você deve ter especificado a conta de serviço na etapa 3.
++
+
+TIP: Se quiser utilizar WORM e disposição de dados em camadas, desative o backup e a recuperação do BlueXP  e implante um ambiente de trabalho do Cloud Volumes ONTAP com a versão 9,8 ou superior.
+
+. *Modelos de implantação HA*: Escolha várias zonas (recomendado) ou uma única zona para a configuração HA. Em seguida, selecione uma região e zonas.
++
+link:concept-ha-google-cloud.html["Saiba mais sobre os modelos de implantação de HA"^].
+
+. *Conetividade*: Selecione quatro VPCs diferentes para a configuração de HA, uma sub-rede em cada VPC e, em seguida, escolha uma política de firewall.
++
+link:reference-networking-gcp.html["Saiba mais sobre os requisitos de rede"^].
+
++
+A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Política gerada  a| 
+Se você permitir que o BlueXP  gere a política de firewall para você, precisará escolher como permitir o tráfego:
+
+** Se você escolher *somente VPC selecionada*, o filtro de origem para o tráfego de entrada será o intervalo de sub-rede da VPC selecionada e o intervalo de sub-rede da VPC onde o conetor reside. Esta é a opção recomendada.
+** Se você escolher *todos os VPCs*, o filtro de origem para o tráfego de entrada é o intervalo IP 0,0.0.0/0.
+
+
+
+
+| Utilizar existente | Se utilizar uma política de firewall existente, certifique-se de que inclui as regras necessárias. link:reference-networking-gcp.html#firewall-rules["Saiba mais sobre as regras de firewall do Cloud Volumes ONTAP"^]. 
+|===
+. *Métodos de carregamento e conta NSS*: Especifique qual opção de carregamento você gostaria de usar com este sistema e especifique uma conta do site de suporte da NetApp.
++
+** link:concept-licensing.html["Saiba mais sobre as opções de licenciamento para o Cloud Volumes ONTAP"^].
+** link:task-set-up-licensing-google.html["Saiba como configurar o licenciamento"^].
+
+
+. *Pacotes pré-configurados*: Selecione um dos pacotes para implantar rapidamente um sistema Cloud Volumes ONTAP ou clique em *criar minha própria configuração*.
++
+Se você escolher um dos pacotes, você só precisa especificar um volume e, em seguida, revisar e aprovar a configuração.
+
+. *Licenciamento*: Altere a versão do Cloud Volumes ONTAP conforme necessário e selecione um tipo de máquina.
++
+
+NOTE: Se um candidato de lançamento mais recente, disponibilidade geral ou liberação de patch estiver disponível para a versão selecionada, o BlueXP  atualizará o sistema para essa versão ao criar o ambiente de trabalho. Por exemplo, a atualização ocorre se você selecionar Cloud Volumes ONTAP 9.13.1 e 9.13.1 P4 estiver disponível. A atualização não ocorre de uma versão para outra, por exemplo, de 9,13 a 9,14.
+
+. *Recursos de armazenamento subjacentes*: Escolha configurações para o agregado inicial: Um tipo de disco e o tamanho de cada disco.
++
+O tipo de disco é para o volume inicial. Você pode escolher um tipo de disco diferente para volumes subsequentes.
+
++
+O tamanho do disco é para todos os discos no agregado inicial e para quaisquer agregados adicionais criados pelo BlueXP  quando você usa a opção de provisionamento simples. Você pode criar agregados que usam um tamanho de disco diferente usando a opção Alocação avançada.
+
++
+Para obter ajuda sobre como escolher um tipo e tamanho de disco, link:task-planning-your-config-gcp.html#size-your-system-in-gcp["Dimensione seu sistema no Google Cloud"^]consulte .
+
+. *Flash Cache, velocidade de gravação e WORM*:
++
+.. Ative *Flash Cache*, se desejado.
++
+
+NOTE: A partir do Cloud Volumes ONTAP 9.13.1, o _Flash Cache_ é compatível com os tipos de instância n2-standard-16, n2-standard-32, n2-standard-48 e n2-standard-64. Não é possível desativar o Flash Cache após a implantação.
+
+.. Escolha *normal* ou *alta* velocidade de gravação, se desejado.
++
+link:concept-write-speed.html["Saiba mais sobre a velocidade de escrita"^].
+
++
+
+NOTE: Alta velocidade de gravação e uma unidade de transmissão máxima (MTU) superior de 8.896 bytes estão disponíveis através da opção de velocidade de gravação *High* com os tipos de instância n2-standard-16, n2-standard-32, n2-standard-48 e n2-standard-64. Além disso, o MTU maior do 8.896 requer a seleção de VPC-1, VPC-2 e VPC-3 para a implantação. A alta velocidade de gravação e uma MTU de 8.896 dependem de recursos e não podem ser desativadas individualmente em uma instância configurada. Para obter mais informações sobre VPC-1, VPC-2 e VPC-3,  https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-networking-gcp.html#requirements-for-the-connector["Regras para VPC-1, VPC-2 e VPC-3"^]consulte .
+
+.. Ative o storage WORM (uma gravação, muitas leituras), se desejado.
++
+O WORM não pode ser ativado se a disposição de dados em camadas foi ativada para o Cloud Volumes ONTAP versões 9,7 e inferiores. Reverter ou fazer downgrade para o Cloud Volumes ONTAP 9,8 é bloqueado depois de ativar WORM e disposição em camadas.
+
++
+link:concept-worm.html["Saiba mais sobre o armazenamento WORM"^].
+
+.. Se você ativar o storage WORM, selecione o período de retenção.
+
+
+. *Disposição em camadas de dados no Google Cloud*: Escolha se deseja habilitar a disposição em camadas de dados no agregado inicial, escolher uma classe de armazenamento para os dados em camadas e, em seguida, selecione uma conta de serviço que tenha a função de administrador de armazenamento predefinida.
++
+Observe o seguinte:
+
++
+** O BlueXP  define a conta de serviço na instância do Cloud Volumes ONTAP. Essa conta de serviço fornece permissões para categorização de dados em um bucket do Google Cloud Storage. Certifique-se de adicionar a conta de serviço do Connector como usuário da conta de serviço de disposição em camadas, caso contrário, você não pode selecioná-la no BlueXP .
+** Você pode escolher uma política específica de disposição em categorias de volume ao criar ou editar um volume.
+** Se você desabilitar a disposição em camadas de dados, poderá ativá-la em agregados subsequentes, mas precisará desativar o sistema e adicionar uma conta de serviço a partir do console do Google Cloud.
++
+link:concept-data-tiering.html["Saiba mais sobre categorização de dados"^].
+
+
+
+. *Criar volume*: Insira os detalhes do novo volume ou clique em *Ignorar*.
++
+link:concept-client-protocols.html["Saiba mais sobre protocolos e versões de clientes compatíveis"^].
+
++
+Alguns dos campos desta página são auto-explicativos. A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Tamanho | O tamanho máximo que você pode inserir depende, em grande parte, se você ativar o provisionamento de thin, o que permite criar um volume maior do que o armazenamento físico atualmente disponível para ele. 
+
+
+| Controle de acesso (somente para NFS) | Uma política de exportação define os clientes na sub-rede que podem acessar o volume. Por padrão, o BlueXP  insere um valor que fornece acesso a todas as instâncias na sub-rede. 
+
+
+| Permissões e utilizadores/grupos (apenas para CIFS) | Esses campos permitem controlar o nível de acesso a um compartilhamento para usuários e grupos (também chamados de listas de controle de acesso ou ACLs). Você pode especificar usuários ou grupos do Windows locais ou de domínio, ou usuários ou grupos UNIX. Se você especificar um nome de usuário do domínio do Windows, você deve incluir o domínio do usuário usando o nome de domínio do formato. 
+
+
+| Política de instantâneos | Uma política de cópia Snapshot especifica a frequência e o número de cópias snapshot do NetApp criadas automaticamente. Uma cópia Snapshot do NetApp é uma imagem pontual do sistema de arquivos que não afeta a performance e exige o mínimo de storage. Você pode escolher a política padrão ou nenhuma. Você pode escolher nenhum para dados transitórios: Por exemplo, tempdb para Microsoft SQL Server. 
+
+
+| Opções avançadas (somente para NFS) | Selecione uma versão NFS para o volume: NFSv3 ou NFSv4. 
+
+
+| Grupo de iniciadores e IQN (apenas para iSCSI) | Os destinos de armazenamento iSCSI são chamados de LUNs (unidades lógicas) e são apresentados aos hosts como dispositivos de bloco padrão. Os grupos de iniciadores são tabelas de nomes de nós de host iSCSI e controlam quais iniciadores têm acesso a quais LUNs. Os destinos iSCSI se conetam à rede por meio de adaptadores de rede Ethernet (NICs) padrão, placas de mecanismo de descarga TCP (TOE) com iniciadores de software, adaptadores de rede convergidos (CNAs) ou adaptadores de barramento de host dedicados (HBAs) e são identificados por IQNs (iSCSI Qualified Names). Quando cria um volume iSCSI, o BlueXP  cria automaticamente um LUN para si. Simplificamos a criação de apenas um LUN por volume, para que não haja gerenciamento envolvido. Depois de criar o volume, link:task-connect-lun.html["Use o IQN para se conetar ao LUN a partir de seus hosts"]. 
+|===
++
+A imagem seguinte mostra a página volume preenchida para o protocolo CIFS:
+
++
+image:screenshot_cot_vol.gif["Captura de tela: Mostra a página volume preenchida para uma instância do Cloud Volumes ONTAP."]
+
+. *Configuração CIFS*: Se você escolher o protocolo CIFS, configure um servidor CIFS.
++
+[cols="25,75"]
+|===
+| Campo | Descrição 
+
+
+| Endereço IP primário e secundário do DNS | Os endereços IP dos servidores DNS que fornecem resolução de nomes para o servidor CIFS. Os servidores DNS listados devem conter os Registros de localização de serviço (SRV) necessários para localizar os servidores LDAP do ative Directory e os controladores de domínio para o domínio em que o servidor CIFS irá ingressar. Se você estiver configurando o ative Directory gerenciado pelo Google, o AD pode ser acessado por padrão com o endereço IP 169.254.169.254. 
+
+
+| Ative Directory Domain para aderir | O FQDN do domínio do ative Directory (AD) ao qual você deseja que o servidor CIFS se associe. 
+
+
+| Credenciais autorizadas para ingressar no domínio | O nome e a senha de uma conta do Windows com Privileges suficiente para adicionar computadores à unidade organizacional especificada (ou) dentro do domínio do AD. 
+
+
+| Nome NetBIOS do servidor CIFS | Um nome de servidor CIFS exclusivo no domínio AD. 
+
+
+| Unidade organizacional | A unidade organizacional dentro do domínio AD a associar ao servidor CIFS. A predefinição é computadores. Para configurar o Microsoft AD gerenciado pelo Google como o servidor AD para Cloud Volumes ONTAP, digite *ou computadores, ou nuvem* neste campo. https://cloud.google.com/managed-microsoft-ad/docs/manage-active-directory-objects#organizational_units["Documentação do Google Cloud: Unidades organizacionais no Google Managed Microsoft AD"^] 
+
+
+| Domínio DNS | O domínio DNS da máquina virtual de storage (SVM) do Cloud Volumes ONTAP. Na maioria dos casos, o domínio é o mesmo que o domínio AD. 
+
+
+| NTP Server | Selecione *Use ative Directory Domain* para configurar um servidor NTP usando o DNS do ative Directory. Se você precisa configurar um servidor NTP usando um endereço diferente, então você deve usar a API. Consulte https://docs.netapp.com/us-en/bluexp-automation/index.html["Documentos de automação BlueXP "^] para obter mais informações. Observe que você pode configurar um servidor NTP somente ao criar um servidor CIFS. Não é configurável depois de criar o servidor CIFS. 
+|===
+. *Perfil de uso, tipo de disco e Política de disposição em categorias*: Escolha se você deseja habilitar os recursos de eficiência de storage e alterar a política de disposição em categorias de volume, se necessário.
++
+Para obter mais informações, link:task-planning-your-config-gcp.html#choose-a-volume-usage-profile["Escolha um perfil de uso de volume"^]consulte e link:concept-data-tiering.html["Visão geral de categorização de dados"^].
+
+. *Rever & aprovar*: Revise e confirme suas seleções.
++
+.. Reveja os detalhes sobre a configuração.
+.. Clique em *mais informações* para analisar detalhes sobre o suporte e os recursos do Google Cloud que o BlueXP  comprará.
+.. Selecione as caixas de verificação *I understand...*.
+.. Clique em *Go*.
+
+
+
+
+.Resultado
+O BlueXP  implanta o sistema Cloud Volumes ONTAP. Você pode acompanhar o progresso na linha do tempo.
+
+Se você tiver algum problema na implantação do sistema Cloud Volumes ONTAP, revise a mensagem de falha. Você também pode selecionar o ambiente de trabalho e clicar em *Re-create environment*.
+
+Para obter ajuda adicional, vá https://mysupport.netapp.com/site/products/all/details/cloud-volumes-ontap/guideme-tab["Suporte à NetApp Cloud Volumes ONTAP"^] para .
+
+.Depois de terminar
+* Se você provisionou um compartilhamento CIFS, dê aos usuários ou grupos permissões para os arquivos e pastas e verifique se esses usuários podem acessar o compartilhamento e criar um arquivo.
+* Se você quiser aplicar cotas a volumes, use o Gerenciador de sistema do ONTAP ou a CLI do ONTAP.
++
+As cotas permitem restringir ou rastrear o espaço em disco e o número de arquivos usados por um usuário, grupo ou qtree.
+
+

@@ -1,0 +1,349 @@
+---
+sidebar: sidebar 
+permalink: reference-networking-aws.html 
+keywords: networking, network, requirements, connection, connections, vpc, security group, security groups, subnets, vpn, internet, nat, s3, dns, ad, active directory, az, availability zone, floating IP, floating, SVM, management LIF, route, route tables, proxy, HTTP, private, tier, s3 endpoint, tiering, storage tier, storage tiering, proxy server, nat device, vpn, snapmanager, snapcenter, iscsi, nfs, cifs, nas, san, outbound, inbound, connections, autosupport, ha, ha pair, high availability 
+summary: O BlueXP  lida com a configuração de componentes de rede para Cloud Volumes ONTAP, como endereços IP, máscaras de rede e rotas. Você precisa se certificar de que o acesso de saída à Internet está disponível, que endereços IP privados suficientes estão disponíveis, que as conexões certas estão em vigor e muito mais. 
+---
+= Requisitos de rede para o Cloud Volumes ONTAP na AWS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O BlueXP  lida com a configuração de componentes de rede para Cloud Volumes ONTAP, como endereços IP, máscaras de rede e rotas. Você precisa se certificar de que o acesso de saída à Internet está disponível, que endereços IP privados suficientes estão disponíveis, que as conexões certas estão em vigor e muito mais.
+
+
+
+== Requisitos gerais
+
+Os requisitos a seguir devem ser atendidos na AWS.
+
+
+
+=== Acesso de saída à Internet para nós Cloud Volumes ONTAP
+
+Os nós do Cloud Volumes ONTAP requerem acesso de saída à Internet para contactar os seguintes pontos finais para operações diárias.
+
+
+
+==== Pontos de extremidade Cloud Volumes ONTAP
+
+O Cloud Volumes ONTAP requer acesso de saída à Internet para contactar vários endpoints para operações diárias.
+
+Os seguintes endpoints são específicos do Cloud Volumes ONTAP. O conetor também entra em Contato com vários endpoints para operações diárias, bem como com o console baseado na Web do BlueXP .  https://docs.netapp.com/us-en/bluexp-setup-admin/task-install-connector-on-prem.html#step-3-set-up-networking["Veja os pontos finais contactados a partir do conetor"^]Consulte e https://docs.netapp.com/us-en/bluexp-setup-admin/reference-networking-saas-console.html["Prepare a rede para usar o console BlueXP "^].
+
+[cols="5*"]
+|===
+| Endpoints | Aplicável para | Finalidade | Modos de implantação do BlueXP | Impacto se o endpoint não estiver disponível 
+
+
+| https://NetApp-cloud-account.auth0.com | Autenticação  a| 
+Usado para autenticação BlueXP .
+| Modos padrão e restritos.  a| 
+A autenticação do usuário falha e os seguintes serviços permanecem indisponíveis:
+
+* Serviços da Cloud Volumes ONTAP
+* Serviços da ONTAP
+* Protocolos e serviços proxy
+
+
+
+
+| \https://keyvault-production-aks.vault.azure.net | Cofre de chaves | Usado para recuperar a chave secreta do cliente do Azure Key Vault para se comunicar com buckets do S3 para manipulação de metadados. O serviço Cloud Volumes ONTAP usa esse componente internamente. | Modos padrão, restrito e privado. | Os serviços Cloud Volumes ONTAP não estão disponíveis. 
+
+
+| https://cloudmanager.cloud.NetApp.com/locação | Alocação | Usado para recuperar os recursos do Cloud Volumes ONTAP da BlueXP  Locancy para autorizar recursos e usuários. | Modos padrão e restritos. | Os recursos do Cloud Volumes ONTAP e os usuários não estão autorizados. 
+
+
+| https://support.NetApp.com/aods/asupmessage https://support.NetApp.com/asupprod/post/1,0/postAsup | AutoSupport | Usado para enviar dados de telemetria do AutoSupport para o suporte do NetApp. | Modos padrão e restritos. | As informações do AutoSupport permanecem não entregues. 
+
+
+| O endpoint comercial exato para o serviço AWS (sufixo com `amazonaws.com`) depende da região da AWS que você está usando. Consulte a https://docs.aws.amazon.com/general/latest/gr/rande.html["Documentação da AWS para obter detalhes"^].  a| 
+* CloudFormation
+* Nuvem de computação elástica (EC2)
+* Gerenciamento de identidade e acesso (IAM)
+* Key Management Service (KMS)
+* Serviço de token de segurança (STS)
+* Serviço de armazenamento simples (S3)
+
+| Comunicação com os serviços da AWS. | Modos padrão e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço AWS para executar operações específicas do BlueXP  na AWS. 
+
+
+| O ponto de extremidade do governo exato para o serviço AWS depende da região da AWS que você está usando. Os endpoints são sufixos com `amazonaws.com` e `c2s.ic.gov`. 	https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/Region.html["AWS SDK"]Consulte e https://docs.aws.amazon.com/general/latest/gr/rande.html["Documentação da Amazon"] para obter mais informações.  a| 
+* CloudFormation
+* Nuvem de computação elástica (EC2)
+* Gerenciamento de identidade e acesso (IAM)
+* Key Management Service (KMS)
+* Serviço de token de segurança (STS)
+* Serviço de armazenamento simples (S3)
+
+| Comunicação com os serviços da AWS. | Modo restrito. | O Cloud Volumes ONTAP não pode se comunicar com o serviço AWS para executar operações específicas do BlueXP  na AWS. 
+|===
+
+
+==== Acesso de saída à Internet para NetApp AutoSupport
+
+Os nós de Cloud Volumes ONTAP requerem acesso de saída à Internet para acessar endpoints externos para várias funções. O Cloud Volumes ONTAP não pode funcionar corretamente se esses endpoints forem bloqueados em ambientes com requisitos rígidos de segurança.
+
+Os nós do Cloud Volumes ONTAP exigem acesso de saída à Internet para NetApp AutoSupport, que monitora proativamente a integridade do sistema e envia mensagens para o suporte técnico da NetApp.
+
+As políticas de roteamento e firewall devem permitir o tráfego HTTP/HTTPS para os seguintes endpoints para que o Cloud Volumes ONTAP possa enviar mensagens AutoSupport:
+
+* https://support.NetApp.com/aods/asupmessage
+* https://support.NetApp.com/asupprod/post/1,0/postSup
+
+
+Se você tiver uma instância NAT, deverá definir uma regra de grupo de segurança de entrada que permita o tráfego HTTPS da sub-rede privada para a Internet.
+
+Se uma conexão de saída à Internet não estiver disponível para enviar mensagens AutoSupport, o BlueXP  configura automaticamente seus sistemas Cloud Volumes ONTAP para usar o conetor como um servidor proxy. O único requisito é garantir que o grupo de segurança do conetor permita conexões _inbound_ pela porta 3128. Você precisará abrir essa porta depois de implantar o conetor.
+
+Se você definiu regras de saída rígidas para o Cloud Volumes ONTAP, também precisará garantir que o grupo de segurança do Cloud Volumes ONTAP permita conexões _de saída_ pela porta 3128.
+
+Depois de verificar que o acesso de saída à Internet está disponível, você pode testar o AutoSupport para garantir que ele possa enviar mensagens. Para obter instruções, https://docs.netapp.com/us-en/ontap/system-admin/setup-autosupport-task.html["ONTAP docs: Configurar o AutoSupport"^] consulte .
+
+Se o BlueXP  notificar que as mensagens do AutoSupport não podem ser enviadas, link:task-verify-autosupport.html#troubleshoot-your-autosupport-configuration["Solucionar problemas da configuração do AutoSupport"].
+
+
+
+=== Acesso de saída à Internet para o mediador HA
+
+A instância de mediador de HA precisa ter uma conexão de saída para o serviço AWS EC2 para que a TI possa ajudar no failover de storage. Para fornecer a conexão, você pode adicionar um endereço IP público, especificar um servidor proxy ou usar uma opção manual.
+
+A opção manual pode ser um gateway NAT ou um endpoint de VPC de interface da sub-rede de destino para o serviço AWS EC2. Para obter detalhes sobre endpoints da VPC, consulte o http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpce-interface.html["Documentação da AWS: Endpoints da interface VPC (AWS PrivateLink)"^].
+
+
+
+=== Endereços IP privados
+
+O BlueXP  atribui automaticamente o número necessário de endereços IP privados ao Cloud Volumes ONTAP. Você precisa garantir que sua rede tenha endereços IP privados suficientes disponíveis.
+
+O número de LIFs alocadas pelo BlueXP  para Cloud Volumes ONTAP depende da implantação de um único sistema de nós ou de um par de HA. Um LIF é um endereço IP associado a uma porta física.
+
+
+
+==== Endereços IP para um sistema de nó único
+
+O BlueXP  aloca 6 endereços IP para um sistema de nó único.
+
+A tabela a seguir fornece detalhes sobre os LIFs associados a cada endereço IP privado.
+
+[cols="20,40"]
+|===
+| LIF | Finalidade 
+
+
+| Gerenciamento de clusters | Gerenciamento administrativo de todo o cluster (par de HA). 
+
+
+| Gerenciamento de nós | Gerenciamento administrativo de um nó. 
+
+
+| Entre clusters | Comunicação, backup e replicação entre clusters. 
+
+
+| Dados nas | Acesso de cliente através de protocolos nas. 
+
+
+| Dados iSCSI | Acesso de cliente através do protocolo iSCSI. Também usado pelo sistema para outros fluxos de trabalho de rede importantes. Este LIF é necessário e não deve ser eliminado. 
+
+
+| Gerenciamento de VM de storage | Um LIF de gerenciamento de VM de storage é usado com ferramentas de gerenciamento como o SnapCenter. 
+|===
+
+
+==== Endereços IP para pares de HA
+
+Os pares DE HA exigem mais endereços IP do que um sistema de nó único. Esses endereços IP estão espalhados por diferentes interfaces ethernet, como mostrado na imagem a seguir:
+
+image:diagram_cvo_aws_networking_ha.png["Um diagrama que mostra eth0, eth1, eth2 em uma configuração de HA do Cloud Volumes ONTAP na AWS."]
+
+O número de endereços IP privados necessários para um par de HA depende do modelo de implantação escolhido. Um par de HA implantado em uma zona de disponibilidade (AZ) _single_ da AWS requer 15 endereços IP privados, enquanto um par de HA implantado em _multiple_ AZs requer 13 endereços IP privados.
+
+As tabelas a seguir fornecem detalhes sobre os LIFs associados a cada endereço IP privado.
+
+
+
+===== LIFs para pares de HA em uma única AZ
+
+[cols="20,20,20,40"]
+|===
+| LIF | Interface | Nó | Finalidade 
+
+
+| Gerenciamento de clusters | eth0 | nó 1 | Gerenciamento administrativo de todo o cluster (par de HA). 
+
+
+| Gerenciamento de nós | eth0 | nó 1 e nó 2 | Gerenciamento administrativo de um nó. 
+
+
+| Entre clusters | eth0 | nó 1 e nó 2 | Comunicação, backup e replicação entre clusters. 
+
+
+| Dados nas | eth0 | nó 1 | Acesso de cliente através de protocolos nas. 
+
+
+| Dados iSCSI | eth0 | nó 1 e nó 2 | Acesso de cliente através do protocolo iSCSI. Também usado pelo sistema para outros fluxos de trabalho de rede importantes. Estes LIFs são necessários e não devem ser excluídos. 
+
+
+| Conectividade de cluster | eth1 | nó 1 e nó 2 | Permite que os nós se comuniquem entre si e movam dados dentro do cluster. 
+
+
+| Conectividade HA | eth2 | nó 1 e nó 2 | Comunicação entre os dois nós em caso de failover. 
+
+
+| Tráfego iSCSI RSM | eth3 | nó 1 e nó 2 | Tráfego iSCSI RAID SyncMirror, bem como a comunicação entre os dois nós Cloud Volumes ONTAP e o mediador. 
+
+
+| Mediador | eth0 | Mediador | Um canal de comunicação entre os nós e o mediador para ajudar nos processos de aquisição de storage e giveback. 
+|===
+
+
+===== LIFs para pares de HA em várias AZs
+
+[cols="20,20,20,40"]
+|===
+| LIF | Interface | Nó | Finalidade 
+
+
+| Gerenciamento de nós | eth0 | nó 1 e nó 2 | Gerenciamento administrativo de um nó. 
+
+
+| Entre clusters | eth0 | nó 1 e nó 2 | Comunicação, backup e replicação entre clusters. 
+
+
+| Dados iSCSI | eth0 | nó 1 e nó 2 | Acesso de cliente através do protocolo iSCSI. Esses LIFs também gerenciam a migração de endereços IP flutuantes entre nós. Estes LIFs são necessários e não devem ser excluídos. 
+
+
+| Conectividade de cluster | eth1 | nó 1 e nó 2 | Permite que os nós se comuniquem entre si e movam dados dentro do cluster. 
+
+
+| Conectividade HA | eth2 | nó 1 e nó 2 | Comunicação entre os dois nós em caso de failover. 
+
+
+| Tráfego iSCSI RSM | eth3 | nó 1 e nó 2 | Tráfego iSCSI RAID SyncMirror, bem como a comunicação entre os dois nós Cloud Volumes ONTAP e o mediador. 
+
+
+| Mediador | eth0 | Mediador | Um canal de comunicação entre os nós e o mediador para ajudar nos processos de aquisição de storage e giveback. 
+|===
+
+TIP: Quando implantadas em várias zonas de disponibilidade, várias LIFs são associadas ao link:reference-networking-aws.html#floatingips["Endereços IP flutuantes"], que não contam com o limite de IP privado da AWS.
+
+
+
+=== Grupos de segurança
+
+Você não precisa criar grupos de segurança porque o BlueXP  faz isso por você. Se você precisar usar o seu próprio, link:reference-security-groups.html["Regras do grupo de segurança"]consulte .
+
+
+TIP: Procurando informações sobre o conetor? https://docs.netapp.com/us-en/bluexp-setup-admin/reference-ports-aws.html["Ver regras do grupo de segurança para o conetor"^]
+
+
+
+=== Conexão para categorização de dados
+
+Se você quiser usar o EBS como um nível de desempenho e o AWS S3 como um nível de capacidade, deve garantir que o Cloud Volumes ONTAP tenha uma conexão com o S3. A melhor maneira de fornecer essa conexão é criando um endpoint VPC para o serviço S3. Para obter instruções, consulte https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpce-gateway.html#create-gateway-endpoint["Documentação da AWS: Criando um endpoint do Gateway"^] a .
+
+Ao criar o endpoint VPC, certifique-se de selecionar a tabela região, VPC e rota que corresponde à instância do Cloud Volumes ONTAP. Você também deve modificar o grupo de segurança para adicionar uma regra HTTPS de saída que permita o tráfego para o endpoint S3. Caso contrário, o Cloud Volumes ONTAP não pode se conetar ao serviço S3.
+
+Se tiver algum problema, consulte a. https://aws.amazon.com/premiumsupport/knowledge-center/connect-s3-vpc-endpoint/["AWS Support Knowledge Center: Por que não consigo me conetar a um bucket do S3 usando um endpoint VPC de gateway?"^]
+
+
+
+=== Ligações a sistemas ONTAP
+
+Para replicar dados entre um sistema Cloud Volumes ONTAP na AWS e sistemas ONTAP em outras redes, você precisa ter uma conexão VPN entre a VPC AWS e a outra rede, por exemplo, sua rede corporativa. Para obter instruções, consulte https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/SetUpVPNConnections.html["Documentação da AWS: Configurando uma conexão VPN da AWS"^] a .
+
+
+
+=== DNS e ative Directory para CIFS
+
+Se você quiser provisionar o storage CIFS, configure o DNS e o ative Directory na AWS ou estenda sua configuração local para a AWS.
+
+O servidor DNS deve fornecer serviços de resolução de nomes para o ambiente do ative Directory. Você pode configurar conjuntos de opções DHCP para usar o servidor DNS padrão EC2, que não deve ser o servidor DNS usado pelo ambiente ative Directory.
+
+Para obter instruções, consulte https://aws-quickstart.github.io/quickstart-microsoft-activedirectory/["Documentação da AWS: Serviços de domínio do ative Directory na nuvem AWS: Implantação de referência de início rápido"^] a .
+
+
+
+=== Compartilhamento de VPC
+
+A partir da versão 9.11.1, os pares de HA do Cloud Volumes ONTAP são compatíveis com o compartilhamento de VPC na AWS. O compartilhamento de VPC permite que sua organização compartilhe sub-redes com outras contas da AWS. Para usar essa configuração, você deve configurar seu ambiente AWS e implantar o par de HA usando a API.
+
+link:task-deploy-aws-shared-vpc.html["Saiba como implantar um par de HA em uma sub-rede compartilhada"].
+
+
+
+== Requisitos para pares de HA em várias AZs
+
+Requisitos adicionais de rede da AWS se aplicam a configurações do Cloud Volumes ONTAP HA que usam várias zonas de disponibilidade (AZs). Você deve analisar esses requisitos antes de iniciar um par de HA, pois deve inserir os detalhes da rede no BlueXP  ao criar o ambiente de trabalho.
+
+Para entender como os pares de HA funcionam, link:concept-ha.html["Pares de alta disponibilidade"]consulte a .
+
+Zonas de disponibilidade:: Este modelo de implantação de HA usa vários AZs para garantir alta disponibilidade de seus dados. Você deve usar uma AZ dedicada para cada instância do Cloud Volumes ONTAP e a instância do mediador, que fornece um canal de comunicação entre o par de HA.
+
+
+Uma sub-rede deve estar disponível em cada zona de disponibilidade.
+
+[[floatingips]]
+Endereços IP flutuantes para dados nas e gerenciamento de cluster/SVM:: As configurações DE HA em vários AZs usam endereços IP flutuantes que migram entre nós se ocorrerem falhas. Eles não são diretamente acessíveis de fora da VPC, a menos que você link:task-setting-up-transit-gateway.html["Configure um gateway de trânsito da AWS"].
++
+--
+Um endereço IP flutuante é para gerenciamento de cluster, um para dados NFS/CIFS no nó 1 e outro para dados NFS/CIFS no nó 2. Um quarto endereço IP flutuante para gerenciamento de SVM é opcional.
+
+
+NOTE: Um endereço IP flutuante é necessário para o LIF de gerenciamento da SVM se você usar o SnapDrive para Windows ou SnapCenter com o par de HA.
+
+É necessário inserir os endereços IP flutuantes no BlueXP  ao criar um ambiente de trabalho do Cloud Volumes ONTAP HA. O BlueXP  aloca os endereços IP para o par de HA quando ele inicia o sistema.
+
+Os endereços IP flutuantes devem estar fora dos blocos CIDR para todos os VPCs na região da AWS na qual você implementa a configuração de HA. Pense nos endereços IP flutuantes como uma sub-rede lógica que está fora dos VPCs em sua região.
+
+O exemplo a seguir mostra a relação entre endereços IP flutuantes e os VPCs em uma região da AWS. Enquanto os endereços IP flutuantes estão fora dos blocos CIDR para todos os VPCs, eles são roteáveis para sub-redes através de tabelas de rota.
+
+image:diagram_ha_floating_ips.png["Uma imagem conceitual mostrando os blocos CIDR para cinco VPCs em uma região da AWS e três endereços IP flutuantes que estão fora dos blocos CIDR dos VPCs."]
+
+
+NOTE: O BlueXP  cria automaticamente endereços IP estáticos para o acesso iSCSI e para o acesso nas de clientes fora da VPC. Você não precisa atender a nenhum requisito para esses tipos de endereços IP.
+
+--
+Gateway de trânsito para habilitar o acesso IP flutuante de fora da VPC:: Se necessário, link:task-setting-up-transit-gateway.html["Configure um gateway de trânsito da AWS"] para habilitar o acesso aos endereços IP flutuantes de um par de HA de fora da VPC onde o par de HA reside.
+Tabelas de rotas:: Depois de especificar os endereços IP flutuantes no BlueXP , você será solicitado a selecionar as tabelas de rota que devem incluir rotas para os endereços IP flutuantes. Isso permite o acesso do cliente ao par de HA.
++
+--
+Se você tiver apenas uma tabela de rota para as sub-redes na VPC (a tabela de rotas principal), o BlueXP  adicionará automaticamente os endereços IP flutuantes a essa tabela de rotas. Se tiver mais de uma tabela de rota, é muito importante selecionar as tabelas de rota corretas ao iniciar o par HA. Caso contrário, alguns clientes podem não ter acesso ao Cloud Volumes ONTAP.
+
+Por exemplo, você pode ter duas sub-redes associadas a tabelas de rota diferentes. Se você selecionar a tabela de rota A, mas não a tabela de rota B, os clientes na sub-rede associada à tabela de rota A podem acessar o par de HA, mas os clientes na sub-rede associada à tabela de rota B.
+
+Para obter mais informações sobre tabelas de rotas, consulte http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html["Documentação da AWS: Tabelas de rotas"^] a .
+
+--
+Conexão com ferramentas de gerenciamento do NetApp:: Para usar as ferramentas de gerenciamento do NetApp com configurações de HA em vários AZs, você tem duas opções de conexão:
++
+--
+. Implante as ferramentas de gerenciamento do NetApp em uma VPC diferente e link:task-setting-up-transit-gateway.html["Configure um gateway de trânsito da AWS"]no . O gateway permite o acesso ao endereço IP flutuante para a interface de gerenciamento de cluster de fora da VPC.
+. Implante as ferramentas de gerenciamento do NetApp na mesma VPC com uma configuração de roteamento semelhante aos clientes nas.
+
+
+--
+
+
+
+
+=== Exemplo de configuração de HA
+
+A imagem a seguir ilustra os componentes de rede específicos de um par de HA em vários AZs: Três zonas de disponibilidade, três sub-redes, endereços IP flutuantes e uma tabela de rotas.
+
+image:diagram_ha_networking.png["Imagem conceitual que mostra componentes em uma arquitetura do Cloud Volumes ONTAP HA: Dois nós Cloud Volumes ONTAP e uma instância de mediador, cada um em zonas de disponibilidade separadas."]
+
+
+
+== Requisitos para o conetor
+
+Se você ainda não criou um conetor, você deve rever os requisitos de rede para o conetor também.
+
+* https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-aws.html["Veja os requisitos de rede para o conetor"^]
+* https://docs.netapp.com/us-en/bluexp-setup-admin/reference-ports-aws.html["Regras do grupo de segurança na AWS"^]
+

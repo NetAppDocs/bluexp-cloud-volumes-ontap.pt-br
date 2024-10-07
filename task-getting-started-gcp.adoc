@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: task-getting-started-gcp.html 
+keywords: google cloud platform, gcp, cloud manager, deploy BlueXP, launch BlueXP, create BlueXP, getting started, networking, gcp networking, service account, tiering, data tiering, bucket, fabricpool, cloud backup, storage access key, gcp role, role, iam role, permissions, gcp permissions, cloud backup 
+summary: Comece a usar o Cloud Volumes ONTAP para Google Cloud em alguns passos. 
+---
+= Início rápido do Cloud Volumes ONTAP no Google Cloud
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Comece a usar o Cloud Volumes ONTAP para Google Cloud em alguns passos.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"] Crie um conetor
+[role="quick-margin-para"]
+Se você ainda não tem um https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html["Conetor"^], você precisa criar um. https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["Saiba como criar um conetor no Google Cloud"^]
+
+[role="quick-margin-para"]
+Observe que, se você quiser implantar o Cloud Volumes ONTAP em uma sub-rede onde não há acesso à Internet disponível, precisará instalar manualmente o conetor e acessar a interface de usuário do BlueXP  que está sendo executada nesse conetor. https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-private-mode.html["Saiba como instalar manualmente o conetor em um local sem acesso à Internet"^]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"] Planeje sua configuração
+[role="quick-margin-para"]
+O BlueXP  oferece pacotes pré-configurados que atendem aos requisitos de carga de trabalho ou você pode criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você.
+
+[role="quick-margin-para"]
+link:task-planning-your-config-gcp.html["Saiba mais sobre como Planejar sua configuração"].
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Configure a rede
+[role="quick-margin-list"]
+. Certifique-se de que a VPC e as sub-redes suportem a conetividade entre o conetor e o Cloud Volumes ONTAP.
+. Se você pretende habilitar a disposição em camadas de dados https://cloud.google.com/vpc/docs/configure-private-google-access["Configure a sub-rede do Cloud Volumes ONTAP para o acesso privado do Google"^], .
+. Se você estiver implantando um par de HA, verifique se você tem quatro VPCs, cada um com sua própria sub-rede.
+. Se você estiver usando uma VPC compartilhada, forneça a função _Compute Network User_ à conta de serviço do Connector.
+. Ative o acesso de saída à Internet a partir da VPC de destino para NetApp AutoSupport.
++
+Esta etapa não é necessária se você estiver implantando o Cloud Volumes ONTAP em um local onde não há acesso à Internet disponível.
+
+
+
+[role="quick-margin-para"]
+link:reference-networking-gcp.html["Saiba mais sobre os requisitos de rede"].
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatro"] Configure uma conta de serviço
+[role="quick-margin-para"]
+O Cloud Volumes ONTAP requer uma conta de serviço do Google Cloud para dois fins. A primeira é quando você pode link:concept-data-tiering.html["categorização de dados"]categorizar dados inativos em storage de objetos de baixo custo no Google Cloud. A segunda é quando você permite que o https://docs.netapp.com/us-en/bluexp-backup-recovery/concept-backup-to-cloud.html["Backup e recuperação do BlueXP"^] faça backup de volumes para armazenamento de objetos de baixo custo.
+
+[role="quick-margin-para"]
+Você pode configurar uma conta de serviço e usá-la para ambos os fins. A conta de serviço deve ter a função *Storage Admin*.
+
+[role="quick-margin-para"]
+link:task-creating-gcp-service-account.html["Leia as instruções passo a passo"].
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["Cinco"] Habilite as APIs do Google Cloud
+[role="quick-margin-para"]
+https://cloud.google.com/apis/docs/getting-started#enabling_apis["Ative as seguintes APIs do Google Cloud em seu projeto"^]. Essas APIs são necessárias para implantar o conetor e o Cloud Volumes ONTAP.
+
+[role="quick-margin-list"]
+* API do Cloud Deployment Manager V2
+* API Cloud Logging
+* API do Cloud Resource Manager
+* API do mecanismo de computação
+* API de gerenciamento de identidade e acesso (IAM)
+
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["Seis"] Inicie o Cloud Volumes ONTAP usando o BlueXP 
+[role="quick-margin-para"]
+Clique em *Adicionar ambiente de trabalho*, selecione o tipo de sistema que deseja implantar e conclua as etapas no assistente. link:task-deploying-gcp.html["Leia as instruções passo a passo"].
+
+.Links relacionados
+* https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["Criando um conetor a partir do BlueXP "^]
+* https://docs.netapp.com/us-en/bluexp-setup-admin/task-install-connector-on-prem.html["Instalar o software Connector em um host Linux"^]
+* https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-gcp.html["O que o BlueXP  faz com as permissões do Google Cloud"^]
+

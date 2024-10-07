@@ -1,0 +1,90 @@
+---
+sidebar: sidebar 
+permalink: task-managing-state.html 
+keywords: schedule, schedules, scheduling, shutdowns, shut down, restart, stop, stopping, turn off, weekday, weekend 
+summary: Você pode parar e iniciar o Cloud Volumes ONTAP da BlueXP  para gerenciar seus custos de computação em nuvem. 
+---
+= Gerenciando o estado do Cloud Volumes ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode parar e iniciar o Cloud Volumes ONTAP da BlueXP  para gerenciar seus custos de computação em nuvem.
+
+
+
+== Agendamento de paradas automáticas do Cloud Volumes ONTAP
+
+Você pode querer desligar o Cloud Volumes ONTAP durante intervalos de tempo específicos para reduzir seus custos de computação. Em vez de fazer isso manualmente, você pode configurar o BlueXP  para desligar automaticamente e, em seguida, reiniciar os sistemas em momentos específicos.
+
+.Sobre esta tarefa
+* Quando você agendar um desligamento automático do seu sistema Cloud Volumes ONTAP, o BlueXP  adia o desligamento se uma transferência de dados ativa estiver em andamento.
++
+O BlueXP  desliga o sistema após a conclusão da transferência.
+
+* Essa tarefa agenda paradas automáticas de ambos os nós em um par de HA.
+* Snapshots de discos de inicialização e raiz não são criados ao desativar o Cloud Volumes ONTAP por meio de paradas programadas.
++
+Os instantâneos são criados automaticamente apenas quando se executa um encerramento manual, conforme descrito na secção seguinte.
+
+
+
+.Passos
+. Na página Canvas, clique duas vezes no ambiente de trabalho desejado.
+. Na guia Visão geral, clique no painel recursos e, em seguida, clique no ícone de lápis ao lado de *tempo de inatividade programado*.
++
+image::screenshot_schedule_downtime.png[400]
+
+. Especifique o agendamento de encerramento:
++
+.. Escolha se deseja desligar o sistema todos os dias, todos os dias da semana, todos os fins de semana ou qualquer combinação das três opções.
+.. Especifique quando pretende desligar o sistema e durante quanto tempo pretende que este seja desligado.
++
+*Exemplo*
+
++
+A imagem a seguir mostra uma programação que instrui o BlueXP  a desligar o sistema todos os sábados às 20:00 HORAS (8:00 horas) por 12 horas. O BlueXP  reinicia o sistema todas as segundas-feiras às 12:00 da manhã
+
++
+image:screenshot_schedule_downtime_window.png["Captura de ecrã: Apresenta o ecrã Schedule Downtime (tempo de inatividade de programação)."]
+
+
+
+. Clique em *Salvar*.
+
+
+.Resultado
+O BlueXP  salva a programação. O item de linha de tempo de inatividade programado correspondente no painel recursos exibe 'On'.
+
+
+
+== Parar o Cloud Volumes ONTAP
+
+Parar o Cloud Volumes ONTAP evita que você acumule custos de computação e cria snapshots dos discos raiz e de inicialização, o que pode ser útil para a solução de problemas.
+
+
+NOTE: Para reduzir custos, o BlueXP  exclui periodicamente snapshots mais antigos dos discos raiz e de inicialização. Apenas os dois snapshots mais recentes são retidos para os discos raiz e de inicialização.
+
+.Sobre esta tarefa
+Quando você interrompe um par de HA, o BlueXP  encerra ambos os nós.
+
+.Passos
+. No ambiente de trabalho, clique no ícone *Desligar*.
++
+image:screenshot_turn_off_redesign.png["Captura de tela: Mostra o ícone para desligar um sistema Cloud Volumes ONTAP."]
+
+. Mantenha a opção de criar instantâneos ativada porque os instantâneos podem ativar a recuperação do sistema.
+. Clique em *Desligar*.
++
+Pode demorar alguns minutos para parar o sistema. Pode reiniciar os sistemas posteriormente a partir da página ambiente de trabalho.
+
++
+
+NOTE: Os instantâneos são criados automaticamente após a reinicialização.
+
+

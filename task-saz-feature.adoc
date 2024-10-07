@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: task-saz-feature.html 
+keywords: Microsoft Azure feature, HA in SAZ, single availability zone, Azure feature, Virtual Machine Scale Sets in Flexible mode 
+summary: Ative este recurso do Microsoft Azure para implantar HA no SAZ. 
+---
+= Ative VMOrchestratorZonalMultiFD para zonas de disponibilidade únicas
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Para implantar instâncias de VM em zonas de disponibilidade únicas de armazenamento localmente redundante (LRS), você deve ativar o recurso Microsoft `Microsoft.Compute/VMOrchestratorZonalMultiFD` para suas assinaturas. Em um modo HA, esse recurso facilita a implantação de nós em domínios de falha separados na mesma zona de disponibilidade.
+
+A menos que você ative esse recurso, a implantação zonal não ocorre e a implantação LRS não zonal anterior se torna efetiva.
+
+Para obter informações sobre a implantação de VM em uma única zona de disponibilidade, link:concept-ha-azure.html["Pares de alta disponibilidade no Azure"]consulte .
+
+Execute estas etapas como um usuário com o Privileges "proprietário":
+
+.Passos
+. Acesse o Azure Cloud Shell a partir do portal do Azure. Para obter informações, https://learn.microsoft.com/en-us/azure/cloud-shell/get-started/["Documentação do Microsoft Azure: Comece a usar o Azure Cloud Shell"^] consulte .
+. Registre-se para o `Microsoft.Compute/VMOrchestratorZonalMultiFD` recurso executando este comando:
++
+[]
+====
+az Account Set -s _<Azure_subscription_name_or_ID>_ az Feature register --name VMOrchestratorZonalMultiFD --namespace Microsoft.Compute
+
+====
+. Verifique o status do Registro e a amostra de saída:
++
+[]
+====
+Clique no botão Microsoft.Compute "OK". Clique no botão "OK": "/Subscription/_<ID>_/Providers/Microsoft.features/Providers/Microsoft.Compute/features/VMOrchestratorZonalMultiFD", "name": "Microsoft.Compute/VMOrchestratorZonalMultiFD", "Properties": "State": "Registered", "type": "Microsoft.features/Providers/Features"
+
+====
+

@@ -1,0 +1,90 @@
+---
+sidebar: sidebar 
+permalink: concept-worm.html 
+keywords: worm, write once, read many, snaplock, retain, retention, period, cloud worm, worm storage, tiering 
+summary: 'Você pode ativar o storage WORM (uma gravação, muitas leituras) em um sistema Cloud Volumes ONTAP para reter arquivos de forma não modificada por um período de retenção especificado. O storage WORM em nuvem é baseado na tecnologia SnapLock, o que significa que os arquivos WORM são protegidos no nível do arquivo.' 
+---
+= STORAGE WORM
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode ativar o storage WORM (uma gravação, muitas leituras) em um sistema Cloud Volumes ONTAP para reter arquivos de forma não modificada por um período de retenção especificado. O storage WORM em nuvem é baseado na tecnologia SnapLock, o que significa que os arquivos WORM são protegidos no nível do arquivo.
+
+
+
+== Como o storage WORM funciona
+
+Depois que um arquivo foi comprometido com o storage WORM, ele não pode ser modificado, mesmo depois que o período de retenção expirou. Um relógio à prova de violação determina quando o período de retenção para um arquivo WORM expirou.
+
+Após o período de retenção ter terminado, você é responsável por excluir quaisquer arquivos que você não precisa mais.
+
+
+
+== Ativar o storage WORM
+
+A forma como você ativa o storage WORM depende da versão do Cloud Volumes ONTAP que você está usando.
+
+
+
+=== Versão 9.10.1 e posterior
+
+A partir do Cloud Volumes ONTAP 9.10.1, você tem a opção de ativar ou desativar WORM no nível de volume.
+
+Ao criar um novo ambiente de trabalho do Cloud Volumes ONTAP, você será solicitado a ativar ou desativar o storage WORM:
+
+* Se você habilitar o storage WORM ao criar um ambiente de trabalho, cada volume que você cria do BlueXP  tem WORM ativado. Mas você pode usar o Gerenciador de sistemas do ONTAP ou a CLI do ONTAP para criar volumes com WORM desativado.
+* Se você desativar o storage WORM ao criar um ambiente de trabalho, cada volume criado com o BlueXP , o Gerenciador de sistemas do ONTAP ou a ONTAP CLI tem WORM desativado. Se você quiser habilitar WORM em um ambiente de trabalho do Cloud Volumes ONTAP que não foi ativado durante a criação, crie um ticket de suporte com suporte da NetApp para obter assistência.
+
+
+
+
+=== Versão 9.10.0 e anterior
+
+Você pode ativar o storage WORM em um sistema Cloud Volumes ONTAP ao criar um novo ambiente de trabalho. Cada volume que você cria com o BlueXP  tem WORM ativado. Não é possível desativar o storage WORM em volumes individuais.
+
+
+
+== Armazenando arquivos no WORM
+
+Você pode usar uma aplicação para vincular arquivos ao WORM em NFS ou CIFS, ou usar a CLI da ONTAP para vincular automaticamente arquivos ao WORM. Você também pode usar um arquivo anexado WORM para reter dados gravados de forma incremental, como informações de log.
+
+Depois de ativar o storage WORM em um sistema Cloud Volumes ONTAP, você precisa usar a CLI da ONTAP para todo o gerenciamento de storage WORM. Para obter instruções, http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-arch-con/home.html["Documentação do ONTAP"^] consulte .
+
+
+
+== Excluindo arquivos WORM
+
+Você pode excluir arquivos WORM durante o período de retenção usando o recurso de exclusão privilegiada.
+
+Para obter instruções, consulte https://docs.netapp.com/us-en/ontap/snaplock/delete-worm-files-concept.html["Documentação do ONTAP"^]
+
+
+
+== WORM e categorização de dados
+
+Ao criar um novo sistema Cloud Volumes ONTAP 9,8 ou posterior, é possível habilitar o storage WORM e disposição de dados em camadas. Ao habilitar a disposição de dados em categorias com storage WORM, você pode categorizar os dados em um armazenamento de objetos na nuvem.
+
+Você deve entender o seguinte sobre como habilitar o storage WORM e disposição de dados em camadas:
+
+* Os dados dispostos em camadas em storage de objetos não incluem a funcionalidade WORM do ONTAP. Para garantir a funcionalidade WORM completa, você precisará configurar as permissões de bucket corretamente.
+* Os dados dispostos em camadas no storage de objetos não possuem a funcionalidade WORM, o que significa que tecnicamente qualquer pessoa com acesso total a buckets e contêineres pode apagar os objetos dispostos em camadas pelo ONTAP.
+* Reverter ou fazer downgrade para o Cloud Volumes ONTAP 9,8 é bloqueado depois de ativar WORM e disposição em camadas.
+
+
+
+
+== Limitações
+
+* O storage WORM no Cloud Volumes ONTAP opera sob um modelo de "administrador de storage confiável". Embora os arquivos WORM sejam protegidos contra alterações ou modificações, os volumes podem ser excluídos por um administrador de cluster mesmo que esses volumes contenham dados WORM não expirados.
+* Além do modelo de administrador de storage confiável, o storage WORM no Cloud Volumes ONTAP também opera implicitamente sob um modelo de "administrador de nuvem confiável". Um administrador da nuvem pode excluir dados WORM antes de sua data de expiração, removendo ou editando o storage de nuvem diretamente do fornecedor da nuvem.
+
+
+.Informações relacionadas
+* link:reference-worm-snaplock.html["Crie cópias de Snapshot à prova de violações para storage WORM"]
+

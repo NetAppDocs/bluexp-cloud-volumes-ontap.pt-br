@@ -1,0 +1,123 @@
+---
+sidebar: sidebar 
+permalink: concept-ha-azure.html 
+keywords: high-availability, HA, concepts, understanding, overview, takeover, giveback, rpo, rto, nondisruptive, ha pairs, node, nodes, recovery point objective, recovery time objective, nas, nfs, cifs, iscsi, mpio, alua, failover, failure, azure, shared storage, active, passive, load balancer, storage accounts, page blobs 
+summary: 'Um par de alta disponibilidade (HA) da Cloud Volumes ONTAP fornece confiabilidade empresarial e operações contínuas em caso de falhas em seu ambiente de nuvem. No Azure, o storage é compartilhado entre os dois nós.' 
+---
+= Pares de alta disponibilidade no Azure
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Um par de alta disponibilidade (HA) da Cloud Volumes ONTAP fornece confiabilidade empresarial e operações contínuas em caso de falhas em seu ambiente de nuvem. No Azure, o storage é compartilhado entre os dois nós.
+
+
+
+== Componentes HA
+
+
+
+=== Configuração de zona de disponibilidade única de HA com blobs de página
+
+Uma configuração de blob de página HA do Cloud Volumes ONTAP no Azure inclui os seguintes componentes:
+
+image:diagram_ha_azure.png["Uma imagem conceitual que mostra um balanceador de carga gerenciando o tráfego de entrada de BlueXP  e clientes, dois nós de Cloud Volumes ONTAP em um VMSS Flex, discos SSD para dados de inicialização e Blobs de página para dados de clientes."]
+
+Observe o seguinte sobre os componentes do Azure que o BlueXP  implanta para você:
+
+Azure Standard Load Balancer:: O balanceador de carga gerencia o tráfego de entrada para o par de HA do Cloud Volumes ONTAP.
+VMs em zonas de disponibilidade únicas:: A partir do Cloud Volumes ONTAP 9.15.1, você pode criar e gerenciar máquinas virtuais heterogêneas (VMs) em uma única zona de disponibilidade (AZ). Você pode implantar nós de alta disponibilidade (HA) em domínios de falha separados dentro da mesma AZ, garantindo a disponibilidade ideal. Para saber mais sobre o modo de orquestração flexível que permite essa capacidade, https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/["Documentação do Microsoft Azure: Conjuntos de escala de máquinas virtuais"^] consulte .
+Discos:: Os dados do cliente residem nos blobs da página do Premium Storage. Cada nó tem acesso ao storage do outro nó. Também é necessário armazenamento adicional para link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-default-configs.html#azure-ha-pair["dados de inicialização, raiz e núcleo"^]o .
+Contas de armazenamento::
++
+--
+* Uma conta de armazenamento é necessária para discos gerenciados.
+* Uma ou mais contas de armazenamento são necessárias para os blobs de página de armazenamento Premium, uma vez que o limite de capacidade de disco por conta de armazenamento é atingido.
++
+https://docs.microsoft.com/en-us/azure/storage/common/storage-scalability-targets["Documentação do Microsoft Azure: Escalabilidade do Azure Storage e metas de desempenho para contas de storage"^].
+
+* Uma conta de storage é necessária para a disposição de dados em categorias no storage Azure Blob.
+* A partir do Cloud Volumes ONTAP 9,7, as contas de storage criadas pelo BlueXP  para pares de HA são contas de storage v2 de uso geral.
+* Você pode habilitar uma conexão HTTPS de um par de HA do Cloud Volumes ONTAP 9,7 para contas de storage do Azure ao criar um ambiente de trabalho. Observe que ativar essa opção pode afetar o desempenho de gravação. Não é possível alterar a configuração depois de criar o ambiente de trabalho.
+
+
+--
+
+
+
+
+=== Configuração de zona de disponibilidade única DE HA com discos gerenciados compartilhados
+
+Uma configuração de zona de disponibilidade única do Cloud Volumes ONTAP HA executada em cima do disco gerenciado compartilhado inclui os seguintes componentes:
+
+image:diagram_ha_azure_saz_lrs.png["Uma imagem conceitual que mostra um balanceador de carga gerenciando o tráfego de entrada de BlueXP  e clientes, dois nós de Cloud Volumes ONTAP no VMSS Flex, discos SSD para dados de inicialização e discos gerenciados LRS para dados de clientes."]
+
+Observe o seguinte sobre os componentes do Azure que o BlueXP  implanta para você:
+
+Azure Standard Load Balancer:: O balanceador de carga gerencia o tráfego de entrada para o par de HA do Cloud Volumes ONTAP.
+VMs em zonas de disponibilidade únicas:: A partir do Cloud Volumes ONTAP 9.15.1, você pode criar e gerenciar máquinas virtuais heterogêneas (VMs) em uma única zona de disponibilidade (AZ). Você pode implantar nós de alta disponibilidade (HA) em domínios de falha separados dentro da mesma AZ, garantindo a disponibilidade ideal. Para saber mais sobre o modo de orquestração flexível que permite essa capacidade, https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/["Documentação do Microsoft Azure: Conjuntos de escala de máquinas virtuais"^] consulte .
++
+--
+A implantação por zona usa discos gerenciados SSD Premium v2 quando as seguintes condições são atendidas:
+
+* A versão do Cloud Volumes ONTAP é 9.15.1 ou posterior.
+* A região e a zona selecionadas suportam discos gerenciados Premium SSD v2. Para obter informações sobre as regiões suportadas,  https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/["Site do Microsoft Azure: Produtos disponíveis por região"^]consulte .
+* A subscrição está registada para a Microsoft link:task-saz-feature.html["Recurso Microsoft.Compute/VMOrchestratorZonalMultiFD"].
+
+
+--
+Discos:: Os dados do cliente residem em discos gerenciados LRS (armazenamento localmente redundante). Cada nó tem acesso ao storage do outro nó. Também é necessário armazenamento adicional para link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-default-configs.html#azure-ha-pair["Dados de inicialização, raiz, raiz do parceiro, núcleo e NVRAM"^]o .
+Contas de armazenamento:: As contas de storage são usadas em implantações baseadas em disco gerenciado para gerenciar logs de diagnóstico e disposição em camadas no storage blob.
+
+
+
+
+=== Configuração de várias zonas de disponibilidade de HA
+
+Uma configuração de várias zonas de disponibilidade do Cloud Volumes ONTAP HA no Azure inclui os seguintes componentes:
+
+image:diagram_ha_azure_maz.png["Uma imagem conceitual que mostra um balanceador de carga gerenciando o tráfego de entrada de BlueXP  e clientes, dois nós de Cloud Volumes ONTAP em duas zonas de disponibilidade, discos SSD para dados de inicialização e discos gerenciados para dados de clientes."]
+
+Observe o seguinte sobre os componentes do Azure que o BlueXP  implanta para você:
+
+Azure Standard Load Balancer:: O balanceador de carga gerencia o tráfego de entrada para o par de HA do Cloud Volumes ONTAP.
+Zonas de disponibilidade:: A configuração de várias zonas de disponibilidade DE HA utiliza um modelo de implantação em que dois nós de Cloud Volumes ONTAP são implantados em diferentes zonas de disponibilidade, garantindo que os nós estejam em diferentes domínios de falha para fornecer redundância e disponibilidade. Para saber como os conjuntos de escala de máquinas virtuais no modo de orquestração flexível podem usar zonas de disponibilidade no Azure, https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-use-availability-zones?tabs=cli-1%2Cportal-2["Documentação do Microsoft Azure: Crie um conjunto de escala de Máquina Virtual que use zonas de disponibilidade"^] consulte .
+Discos:: Os dados do cliente residem em discos gerenciados de armazenamento redundante de zona (ZRS). Cada nó tem acesso ao storage do outro nó. Também é necessário armazenamento adicional para link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-default-configs.html#azure-ha-pair["dados de inicialização, raiz, raiz do parceiro e núcleo"^]o .
+Contas de armazenamento:: As contas de storage são usadas em implantações baseadas em disco gerenciado para gerenciar logs de diagnóstico e disposição em camadas no storage blob.
+
+
+
+
+== RPO e rto
+
+Uma configuração de HA mantém a alta disponibilidade dos dados da seguinte forma:
+
+* O objetivo do ponto de restauração (RPO) é de 0 segundos. Seus dados são consistentes transacionalmente, sem perda de dados.
+* O objetivo de tempo de recuperação (rto) é de 120 segundos. Em caso de interrupção, os dados devem estar disponíveis em 120 segundos ou menos.
+
+
+
+
+== Takeover de storage e giveback
+
+Semelhante a um cluster físico do ONTAP, o storage em um par de HA do Azure é compartilhado entre nós. As conexões com o armazenamento do parceiro permitem que cada nó acesse o armazenamento do outro no caso de um _takeover_. Os mecanismos de failover de caminho de rede garantem que os clientes e hosts continuem a se comunicar com o nó sobrevivente. O parceiro _devolve_ armazenamento quando o nó é colocado de volta na linha.
+
+Para configurações nas, os endereços IP de dados são migrados automaticamente entre nós de HA se ocorrerem falhas.
+
+Para iSCSI, o Cloud Volumes ONTAP usa e/S multipath (MPIO) e Acesso de Unidade lógica assimétrica (ALUA) para gerenciar o failover de caminho entre os caminhos otimizados para ativos e não otimizados.
+
+
+NOTE: Para obter informações sobre quais configurações de host específicas suportam ALUA, consulte o http://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"^] e o https://docs.netapp.com/us-en/ontap-sanhost/["Guia de HOSTS DE SAN e clientes DE nuvem"] do sistema operacional do seu host.
+
+Por padrão, o takeover, a ressincronização e a giveback do storage são automáticos. Nenhuma ação do usuário é necessária.
+
+
+
+== Configurações de storage
+
+Você pode usar um par de HA como uma configuração ativo-ativo, na qual ambos os nós fornecem dados aos clientes ou como uma configuração ativo-passivo, na qual o nó passivo responde a solicitações de dados somente se ele tiver ocupado o storage para o nó ativo.

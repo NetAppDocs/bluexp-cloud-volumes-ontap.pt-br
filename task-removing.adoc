@@ -1,0 +1,32 @@
+---
+sidebar: sidebar 
+permalink: task-removing.html 
+keywords: working environments, removing, remove, rediscover 
+summary: Você pode remover um ambiente de trabalho do Cloud Volumes ONTAP para movê-lo para outro sistema ou para solucionar problemas de descoberta. 
+---
+= Remoção de ambientes de trabalho do Cloud Volumes ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode remover um ambiente de trabalho do Cloud Volumes ONTAP para movê-lo para outro sistema ou para solucionar problemas de descoberta.
+
+.Sobre esta tarefa
+Remover um ambiente de trabalho do Cloud Volumes ONTAP remove-o do BlueXP . Ele não exclui o sistema Cloud Volumes ONTAP. Você pode mais tarde redescobrir o ambiente de trabalho - por exemplo, se você teve problemas durante a descoberta inicial.
+
+.Passos
+. Na página Canvas, clique duas vezes no ambiente de trabalho que deseja remover.
+. No canto superior direito do console do BlueXP , clique no ícone de elipses e selecione *Remover da área de trabalho*.
++
+image:screenshot_settings_remove.png["Uma captura de tela que mostra a opção \"Remover da área de trabalho\" no canto superior direito do console BlueXP ."]
+
+. Na janela Revisão do espaço de trabalho, clique em *Remover*.
+
+
+.Resultado
+O BlueXP  remove o ambiente de trabalho. Os usuários podem redescobrir esse ambiente de trabalho a partir da página do Canvas a qualquer momento.

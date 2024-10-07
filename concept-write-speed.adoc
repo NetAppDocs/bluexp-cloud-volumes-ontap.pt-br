@@ -1,0 +1,153 @@
+---
+sidebar: sidebar 
+permalink: concept-write-speed.html 
+keywords: write speed, high write speed, normal write speed, nvfail, writing speed, ldm, low durability mode 
+summary: O BlueXP  permite que você escolha velocidade de gravação normal ou alta para Cloud Volumes ONTAP. Antes de escolher uma velocidade de gravação, você deve entender as diferenças entre as configurações normal e alta e os riscos e recomendações ao usar alta velocidade de gravação. 
+---
+= Velocidade de gravação
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O BlueXP  permite que você escolha velocidade de gravação normal ou alta para a maioria das configurações do Cloud Volumes ONTAP. Antes de escolher uma velocidade de gravação, você deve entender as diferenças entre as configurações normal e alta e os riscos e recomendações ao usar alta velocidade de gravação.
+
+
+
+== Velocidade de gravação normal
+
+Quando você escolhe a velocidade de gravação normal, os dados são gravados diretamente no disco. Quando os dados são gravados diretamente no disco, reduz a probabilidade de perda de dados no caso de uma falha não planejada do sistema ou uma falha em cascata envolvendo uma interrupção não planejada do sistema (somente pares de HA).
+
+A velocidade de gravação normal é a opção padrão.
+
+
+
+== Alta velocidade de gravação
+
+Quando você escolhe alta velocidade de gravação, os dados são armazenados em buffer na memória antes de serem gravados no disco, o que proporciona um desempenho de gravação mais rápido. Devido a esse armazenamento em cache, existe o potencial de perda de dados se ocorrer uma falha não planejada do sistema.
+
+A quantidade de dados que pode ser perdida no caso de uma falha não planejada do sistema é a extensão dos dois últimos pontos de consistência. Um ponto de consistência é o ato de gravar dados armazenados em buffer no disco. Um ponto de consistência ocorre quando o log de gravação está cheio ou após 10 segundos (o que ocorrer primeiro). No entanto, o desempenho do storage fornecido pelo seu provedor de nuvem pode afetar o tempo de processamento do ponto de consistência.
+
+
+
+=== Quando usar alta velocidade de gravação
+
+A alta velocidade de gravação é uma boa opção se for necessário um desempenho de gravação rápido para sua carga de trabalho e você pode resistir ao risco de perda de dados no caso de uma interrupção não planejada do sistema ou uma falha em cascata envolvendo uma interrupção não planejada do sistema (somente pares de HA).
+
+
+
+=== Recomendações ao usar alta velocidade de gravação
+
+Se você habilitar a alta velocidade de gravação, garanta a proteção de gravação na camada da aplicação ou que as aplicações possam tolerar a perda de dados, se isso ocorrer.
+
+ifdef::aws[]
+
+
+
+=== Alta velocidade de gravação com um par de HA na AWS
+
+Se você planeja habilitar a alta velocidade de gravação em um par de HA na AWS, deve entender a diferença nos níveis de proteção entre uma implantação de zona de disponibilidade múltipla (AZ) e uma única implantação de AZ. A implantação de um par de HA em vários AZs oferece mais resiliência e pode ajudar a reduzir as chances de perda de dados.
+
+link:concept-ha.html["Saiba mais sobre pares de HA na AWS"].
+
+endif::aws[]
+
+
+
+=== Configurações compatíveis com alta velocidade de gravação
+
+Nem todas as configurações do Cloud Volumes ONTAP suportam alta velocidade de gravação. Essas configurações usam velocidade de gravação normal por padrão.
+
+ifdef::aws[]
+
+
+
+==== AWS
+
+Se você usar um sistema de nó único, o Cloud Volumes ONTAP oferece suporte à alta velocidade de gravação em todos os tipos de instância.
+
+A partir da versão 9,8, o Cloud Volumes ONTAP suporta alta velocidade de gravação com pares de HA ao usar quase todos os tipos de instâncias EC2 suportadas, exceto M5.xlarge e R5.xlarge.
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-aws.html["Saiba mais sobre as instâncias do Amazon EC2 suportadas pelo Cloud Volumes ONTAP"^].
+
+endif::aws[]
+
+ifdef::azure[]
+
+
+
+==== Azure
+
+Se você usar um sistema de nó único, o Cloud Volumes ONTAP oferece suporte à alta velocidade de gravação em todos os tipos de VM.
+
+Se você usar um par de HA, o Cloud Volumes ONTAP oferece suporte à alta velocidade de gravação com vários tipos de VM, a partir da versão 9,8. Vá para a https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-azure.html["Notas de versão do Cloud Volumes ONTAP"^] para ver os tipos de VM que suportam alta velocidade de gravação.
+
+endif::azure[]
+
+ifdef::gcp[]
+
+
+
+==== Google Cloud
+
+Se você usar um sistema de nó único, o Cloud Volumes ONTAP oferece suporte a alta velocidade de gravação em todos os tipos de máquina.
+
+Se você usar um par de HA, o Cloud Volumes ONTAP oferece suporte à alta velocidade de gravação com vários tipos de VM, a partir da versão 9.13.0. Vá para a https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-gcp.html#supported-configurations-by-license["Notas de versão do Cloud Volumes ONTAP"^] para ver os tipos de VM que suportam alta velocidade de gravação.
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-gcp.html["Saiba mais sobre os tipos de máquina compatíveis com o Cloud Volumes ONTAP"^].
+
+endif::gcp[]
+
+
+
+== Como selecionar uma velocidade de gravação
+
+Você pode escolher uma velocidade de gravação ao criar um novo ambiente de trabalho e pode link:task-modify-write-speed.html["altere a velocidade de gravação de um sistema existente"].
+
+
+
+== O que esperar se ocorrer perda de dados
+
+Se ocorrer perda de dados devido à alta velocidade de gravação, o sistema de Gerenciamento de Eventos (EMS) relata os dois eventos a seguir:
+
+* Cloud Volumes ONTAP 9.12.1 ou posterior
++
+ NOTICE nv.data.loss.possible: An unexpected shutdown occurred while in high write speed mode, which possibly caused a loss of data.
+* Cloud Volumes ONTAP 9.11.0 a 9.11.1
++
+ DEBUG nv.check.failed: NVRAM check failed with error "NVRAM disabled due to dirty shutdown with High Write Speed mode"
++
+ ERROR wafl.root.content.changed: Contents of the root volume '' might have changed. Verify that all recent configuration changes are still in effect..
+* Cloud Volumes ONTAP 9,8 a 9.10.1
++
+ DEBUG nv.check.failed: NVRAM check failed with error "NVRAM disabled due to dirty shutdown"
++
+ ERROR wafl.root.content.changed: Contents of the root volume '' might have changed. Verify that all recent configuration changes are still in effect.
+
+
+Quando isso acontece, o Cloud Volumes ONTAP deve ser capaz de inicializar e continuar fornecendo dados sem a intervenção do usuário.
+
+
+
+== Como parar o acesso aos dados se ocorrer perda de dados
+
+Se você estiver preocupado com a perda de dados, deseja que os aplicativos parem de ser executados após a perda de dados e o acesso aos dados seja retomado após o problema de perda de dados ser resolvido corretamente, você pode usar a opção NVFAIL da CLI para atingir esse objetivo.
+
+Para ativar a opção NVFAIL:: `vol modify -volume <vol-name> -nvfail on`
+Para verificar as definições de NVFAIL:: `vol show -volume <vol-name> -fields nvfail`
+Para desativar a opção NVFAIL:: `vol modify -volume <vol-name> -nvfail off`
+
+
+Quando a perda de dados ocorre, um volume NFS ou iSCSI com NVFAIL habilitado deve parar de fornecer dados (não há impactos no CIFS, que é um protocolo sem monitoração de estado). Para obter mais detalhes, https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-mcc-mgmt-dr/GUID-40D04B8A-01F7-4E87-8161-E30BD80F5B7F.html["Como o NVFAIL afeta o acesso a volumes NFS ou LUNs"^] consulte .
+
+Para verificar o estado NVFAIL:: `vol show -fields in-nvfailed-state`
+
+
+Depois que o problema de perda de dados for resolvido corretamente, você pode limpar o estado NVFAIL e o volume estará disponível para acesso aos dados.
+
+Para limpar o estado NVFAIL:: `vol modify -volume <vol-name> -in-nvfailed-state false`
+

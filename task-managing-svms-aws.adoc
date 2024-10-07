@@ -1,0 +1,305 @@
+---
+sidebar: sidebar 
+permalink: task-managing-svms-aws.html 
+keywords: storage virtual machine, vserver, svm, storage vm, supported number, number supported 
+summary: Uma VM de armazenamento é uma máquina virtual em execução no ONTAP que fornece serviços de armazenamento e dados aos seus clientes. Você pode saber isso como um SVM ou um vserver. O Cloud Volumes ONTAP é configurado com uma VM de storage por padrão, mas algumas configurações oferecem suporte a VMs de storage adicionais. 
+---
+= Crie VMs de storage de fornecimento de dados para o Cloud Volumes ONTAP na AWS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Uma VM de armazenamento é uma máquina virtual em execução no ONTAP que fornece serviços de armazenamento e dados aos seus clientes. Você pode saber isso como um _SVM_ ou um _vserver_. O Cloud Volumes ONTAP é configurado com uma VM de storage por padrão, mas algumas configurações oferecem suporte a VMs de storage adicionais.
+
+Para criar VMs de storage adicionais de fornecimento de dados, você precisa alocar endereços IP na AWS e executar comandos ONTAP com base na configuração do Cloud Volumes ONTAP.
+
+
+
+== Número suportado de VMs de storage
+
+Várias VMs de storage são compatíveis com configurações Cloud Volumes ONTAP específicas, começando com a versão 9,7. Vá para https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/index.html["Notas de versão do Cloud Volumes ONTAP"^] a para verificar o número suportado de VMs de armazenamento para a sua versão do Cloud Volumes ONTAP.
+
+Todas as outras configurações do Cloud Volumes ONTAP oferecem suporte a uma VM de storage de fornecimento de dados e a uma VM de storage de destino usada para recuperação de desastres. Você pode ativar a VM de storage de destino para acesso aos dados se houver uma interrupção na VM de storage de origem.
+
+
+
+== Verifique os limites da sua configuração
+
+Cada instância do EC2 suporta um número máximo de endereços IPv4 privados por interface de rede. Você precisa verificar o limite antes de alocar endereços IP na AWS para a nova VM de armazenamento.
+
+.Passos
+. Vá para https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-limits-aws.html["Limites de armazenamento seção nas Notas de versão do Cloud Volumes ONTAP"^].
+. Identifique o número máximo de endereços IP por interface para o tipo de instância.
+. Anote esse número porque você precisará dele na próxima seção quando alocar endereços IP na AWS.
+
+
+
+
+== Alocar endereços IP na AWS
+
+Os endereços IPv4 privados devem ser atribuídos à porta e0a na AWS antes de criar LIFs para a nova VM de storage.
+
+Observe que um LIF de gerenciamento opcional para uma VM de storage requer um endereço IP privado em um sistema de nó único e em um par de HA em uma única AZ. Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+.Passos
+. Faça login na AWS e abra o serviço EC2.
+. Selecione a instância do Cloud Volumes ONTAP e clique em *rede*.
++
+Se você estiver criando uma VM de storage em um par de HA, selecione o nó 1.
+
+. Role para baixo até *interfaces de rede* e clique no *ID da interface* para a porta e0a.
++
+image:screenshot_aws_e0a.gif["Uma captura de tela do Console da AWS que mostra a porta e0a em uma interface de rede."]
+
+. Selecione a interface de rede e clique em *ações > Gerenciar endereços IP*.
+. Expanda a lista de endereços IP para e0a.
+. Verifique os endereços IP:
++
+.. Conte o número de endereços IP alocados para confirmar se a porta tem espaço para IPs adicionais.
++
+Você deve ter identificado o número máximo de endereços IP suportados por interface na seção anterior desta página.
+
+.. Opcional: Vá para a CLI do ONTAP para Cloud Volumes ONTAP e execute *network interface show* para confirmar que cada um desses endereços IP está em uso.
++
+Se um endereço IP não estiver em uso, você poderá usá-lo com a nova VM de armazenamento.
+
+
+
+. De volta ao Console da AWS, clique em *Assign new IP address* (atribuir novo endereço IP) para atribuir endereços IP adicionais com base na quantidade necessária para a nova VM de armazenamento.
++
+** Sistema de nó único: É necessário um IP privado secundário não utilizado.
++
+Um IP privado secundário opcional é necessário se você quiser criar um LIF de gerenciamento na VM de armazenamento.
+
+** Par DE HA em uma única AZ: Um IP privado secundário não utilizado é necessário no nó 1.
++
+Um IP privado secundário opcional é necessário se você quiser criar um LIF de gerenciamento na VM de armazenamento.
+
+** Par HA em vários AZs: Um IP privado secundário não utilizado é necessário em cada nó.
+
+
+. Se você estiver alocando o endereço IP em um par de HA em uma única AZ, habilite *permitir que endereços IPv4 privados secundários sejam reatribuídos*.
+. Clique em *Salvar*.
+. Se você tiver um par de HA em vários AZs, precisará repetir estas etapas para o nó 2.
+
+
+
+
+== Crie uma VM de storage em um único sistema de nó
+
+Essas etapas criam uma nova VM de storage em um sistema de nó único. Um endereço IP privado é necessário para criar um LIF nas e outro endereço IP privado opcional é necessário se você quiser criar um LIF de gerenciamento.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -rootvolume-security-style unix -rootvolume root_svm_2 -snapshot-policy default -vserver svm_2 -aggregate aggr1
+----
++
+[source, cli]
+----
+network route create -destination 0.0.0.0/0 -vserver svm_2 -gateway subnet_gateway
+----
+. Crie um nas LIF.
++
+[source, cli]
+----
+network interface create -auto-revert true -vserver svm_2 -service-policy default-data-files -home-port e0a -address private_ip_x -netmask node1Mask -lif ip_nas_2 -home-node cvo-node
+----
++
+Onde _private_IP_x_ é um IP privado secundário não utilizado no e0a.
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage.
++
+[source, cli]
+----
+network interface create -auto-revert true -vserver svm_2 -service-policy default-management -home-port e0a -address private_ip_y -netmask node1Mask -lif ip_svm_mgmt_2 -home-node cvo-node
+----
++
+Onde _private_IP_y_ é outro IP privado secundário não utilizado no e0a.
+
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+
+
+
+
+== Criar uma VM de storage em um par de HA em uma única AZ
+
+Essas etapas criam uma nova VM de storage em um par de HA em uma única AZ. Um endereço IP privado é necessário para criar um LIF nas e outro endereço IP privado opcional é necessário se você quiser criar um LIF de gerenciamento.
+
+Ambos os LIFs são alocados no nó 1. Os endereços IP privados podem se mover entre nós se ocorrerem falhas.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -rootvolume-security-style unix -rootvolume root_svm_2 -snapshot-policy default -vserver svm_2 -aggregate aggr1
+----
++
+[source, cli]
+----
+network route create -destination 0.0.0.0/0 -vserver svm_2 -gateway subnet_gateway
+----
+. Crie um nas LIF no nó 1.
++
+[source, cli]
+----
+network interface create -auto-revert true -vserver svm_2 -service-policy default-data-files -home-port e0a -address private_ip_x -netmask node1Mask -lif ip_nas_2 -home-node cvo-node1
+----
++
+Onde _private_IP_x_ é um IP privado secundário não utilizado no e0a do cvo-node1. Esse endereço IP pode ser relocado para o e0a do cvo-node2 em caso de aquisição, pois os arquivos-dados-padrão da política de serviço indicam que os IPs podem migrar para o nó do parceiro.
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage no nó 1.
++
+[source, cli]
+----
+network interface create -auto-revert true -vserver svm_2 -service-policy default-management -home-port e0a -address private_ip_y -netmask node1Mask -lif ip_svm_mgmt_2 -home-node cvo-node1
+----
++
+Onde _private_IP_y_ é outro IP privado secundário não utilizado no e0a.
+
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+. Se você estiver executando o Cloud Volumes ONTAP 9.11.1 ou posterior, modifique as políticas de serviço de rede para a VM de storage.
++
+A modificação dos serviços é necessária porque garante que o Cloud Volumes ONTAP possa usar o iSCSI LIF para conexões de gerenciamento de saída.
+
++
+[source, cli]
+----
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service data-fpolicy-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ad-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-dns-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ldap-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-nis-client
+----
+
+
+
+
+== Crie uma VM de storage em um par de HA em vários AZs
+
+Essas etapas criam uma nova VM de storage em um par de HA em vários AZs.
+
+Um endereço IP _flutuante_ é necessário para um LIF nas e é opcional para um LIF de gerenciamento. Esses endereços IP flutuantes não exigem que você aloque IPs privados na AWS. Em vez disso, os IPs flutuantes são configurados automaticamente na tabela de rotas da AWS para apontar para o ENI de um nó específico na mesma VPC.
+
+Para que os IPs flutuantes funcionem com o ONTAP, um endereço IP privado deve ser configurado em cada VM de armazenamento em cada nó. Isso se reflete nas etapas abaixo em que um iSCSI LIF é criado no nó 1 e no nó 2.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -rootvolume-security-style unix -rootvolume root_svm_2 -snapshot-policy default -vserver svm_2 -aggregate aggr1
+----
++
+[source, cli]
+----
+network route create -destination 0.0.0.0/0 -vserver svm_2 -gateway subnet_gateway
+----
+. Crie um nas LIF no nó 1.
++
+[source, cli]
+----
+network interface create -auto-revert true -vserver svm_2 -service-policy default-data-files -home-port e0a -address floating_ip -netmask node1Mask -lif ip_nas_floating_2 -home-node cvo-node1
+----
++
+** O endereço IP flutuante deve estar fora dos blocos CIDR para todos os VPCs na região da AWS na qual você implementa a configuração de HA. 192.168.209.27 é um exemplo de endereço IP flutuante. link:reference-networking-aws.html#requirements-for-ha-pairs-in-multiple-azs["Saiba mais sobre como escolher um endereço IP flutuante"].
+** `-service-policy default-data-files` Indica que os IPs podem migrar para o nó do parceiro.
+
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage no nó 1.
++
+[source, cli]
+----
+network interface create -auto-revert true -vserver svm_2 -service-policy default-management -home-port e0a -address floating_ip -netmask node1Mask -lif ip_svm_mgmt_2 -home-node cvo-node1
+----
+. Crie um iSCSI LIF no nó 1.
++
+[source, cli]
+----
+network interface create -vserver svm_2 -service-policy default-data-blocks -home-port e0a -address private_ip -netmask nodei1Mask -lif ip_node1_iscsi_2 -home-node cvo-node1
+----
++
+** Este iSCSI LIF é necessário para suportar a migração de LIF dos IPs flutuantes na VM de armazenamento. Ele não precisa ser um iSCSI LIF, mas não pode ser configurado para migrar entre nós.
+** `-service-policy default-data-block` Indica que um endereço IP não migra entre nós.
+** _Private_ip_ é um endereço IP privado secundário não utilizado no eth0 (e0a) do cvo_node1.
+
+
+. Crie um iSCSI LIF no nó 2.
++
+[source, cli]
+----
+network interface create -vserver svm_2 -service-policy default-data-blocks -home-port e0a -address private_ip -netmaskNode2Mask -lif ip_node2_iscsi_2 -home-node cvo-node2
+----
++
+** Este iSCSI LIF é necessário para suportar a migração de LIF dos IPs flutuantes na VM de armazenamento. Ele não precisa ser um iSCSI LIF, mas não pode ser configurado para migrar entre nós.
+** `-service-policy default-data-block` Indica que um endereço IP não migra entre nós.
+** _Private_ip_ é um endereço IP privado secundário não utilizado no eth0 (e0a) do cvo_node2.
+
+
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+. Se você estiver executando o Cloud Volumes ONTAP 9.11.1 ou posterior, modifique as políticas de serviço de rede para a VM de storage.
++
+A modificação dos serviços é necessária porque garante que o Cloud Volumes ONTAP possa usar o iSCSI LIF para conexões de gerenciamento de saída.
+
++
+[source, cli]
+----
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service data-fpolicy-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ad-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-dns-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ldap-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-nis-client
+----
+

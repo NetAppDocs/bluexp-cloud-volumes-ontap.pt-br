@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: task-manage-capacity-settings.html 
+keywords: aggregates, delete aggregates, add disks, view aggregates 
+summary: Gerencie os agregados adicionando discos, visualizando informações sobre os agregados e excluindo-os. 
+---
+= Gerencie as configurações de capacidade em um conetor
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Cada conetor tem configurações que determinam como ele gerencia a capacidade agregada do Cloud Volumes ONTAP.
+
+Essas configurações afetam todos os sistemas Cloud Volumes ONTAP gerenciados por um conetor. Se você tiver outro conetor, ele pode ser configurado de forma diferente.
+
+.Permissões necessárias
+A Organização BlueXP  ou o administrador da conta Privileges são necessários para modificar as configurações do Cloud Volumes ONTAP.
+
+.Passos
+. No canto superior direito do console BlueXP , clique no ícone Configurações e selecione *Configurações do Cloud Volumes ONTAP*.
++
+image::screenshot-settings-cloud-volumes-ontap.png[Uma captura de tela da opção Configurações do Cloud Volumes ONTAP sob o ícone Configurações.]
+
+. Em *Capacity*, modifique qualquer uma das seguintes configurações:
++
+Modo de gerenciamento de capacidade:: Escolha se o BlueXP  notifica você sobre decisões de capacidade de storage ou se o BlueXP  gerencia automaticamente os requisitos de capacidade para você.
++
+--
+link:concept-storage-management.html#capacity-management["Saiba como o modo de gerenciamento de capacidade funciona"].
+
+--
+Limite capacidade agregada - rácio espaço livre:: Essa proporção é um parâmetro chave nas decisões de gerenciamento de capacidade, e entender seu impactos é essencial independentemente de você estar em um modo automático ou manual de gerenciamento de capacidade. Recomenda-se definir esse limite considerando suas necessidades de storage específicas e o crescimento esperado para manter um equilíbrio entre a utilização de recursos e o custo.
++
+--
+No modo manual, se a taxa de espaço livre em um agregado cair abaixo do limite especificado, ele aciona uma notificação, alertando você que você deve tomar medidas para resolver a baixa taxa de espaço livre. É importante monitorar essas notificações e gerenciar manualmente a capacidade agregada para evitar interrupções no serviço e garantir o desempenho ideal.
+
+A razão de espaço livre é calculada da seguinte forma: (Capacidade agregada - capacidade total utilizada no agregado) / capacidade agregada
+
+link:concept-storage-management.html#automatic-capacity-management["Gerenciamento automático de capacidade"]Consulte para saber agora a capacidade é gerenciada automaticamente no Cloud Volumes ONTAP.
+
+--
+Limites de capacidade agregada - taxa de espaço livre para categorização de dados:: Define quanto espaço livre é necessário na camada de performance (discos) ao categorizar dados em uma camada de capacidade (storage de objetos).
++
+--
+A proporção é importante para cenários de recuperação de desastres. À medida que os dados são lidos na camada de capacidade, a Cloud Volumes ONTAP migra os dados para a camada de performance a fim de fornecer melhor performance. Se não houver espaço suficiente, o Cloud Volumes ONTAP não poderá mover os dados.
+
+--
+
+
+. Clique em *Salvar*.
+

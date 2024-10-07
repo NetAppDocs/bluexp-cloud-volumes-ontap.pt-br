@@ -1,0 +1,46 @@
+---
+sidebar: sidebar 
+permalink: concept-flash-cache.html 
+keywords: cloud volumes ontap, flash cache, read-intensive, read, random, databases, email, file services, compression, performance, nvme 
+summary: Algumas configurações do Cloud Volumes ONTAP incluem storage NVMe local, que o Cloud Volumes ONTAP usa como Flash Cache para melhorar a performance. 
+---
+= Flash Cache
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Algumas configurações do Cloud Volumes ONTAP incluem storage NVMe local, que o Cloud Volumes ONTAP usa como _Flash Cache_ para melhor desempenho.
+
+
+
+== O que é Flash Cache?
+
+O Flash Cache acelera o acesso aos dados por meio do armazenamento em cache inteligente em tempo real dos dados do usuário lidos recentemente e dos metadados do NetApp. Ele é eficaz para cargas de trabalho com uso intenso de leitura aleatória, incluindo bancos de dados, e-mail e serviços de arquivos.
+
+
+
+== Configurações compatíveis
+
+O flash Cache é compatível com configurações Cloud Volumes ONTAP específicas. Veja as configurações suportadas no https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/index.html["Notas de versão do Cloud Volumes ONTAP"^]
+
+
+
+== Limitações
+
+ifdef::aws[]
+
+* Ao configurar o Flash Cache para Cloud Volumes ONTAP 9.12.0 ou anterior na AWS, a compactação deve ser desativada em todos os volumes para aproveitar as melhorias de desempenho do Flash Cache. Ao implantar ou atualizar para o Cloud Volumes ONTAP 9.12.1 ou posterior, não é necessário desativar a compactação.
++
+Não escolher eficiência de storage ao criar um volume a partir do BlueXP  ou criar um volume e, em seguida http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-vsmg/GUID-8508A4CB-DB43-4D0D-97EB-859F58B29054.html["Desative a compressão de dados usando a CLI"^], .
+
+
+
+endif::aws[]
+
+* O reaquecimento do cache após uma reinicialização não é suportado com o Cloud Volumes ONTAP.
+

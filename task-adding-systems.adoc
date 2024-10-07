@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: task-adding-systems.html 
+keywords: discover, discovering, add, adding, existing 
+summary: Você pode descobrir e adicionar sistemas Cloud Volumes ONTAP existentes ao BlueXP . Você pode fazer isso se você implantou um novo sistema BlueXP . 
+---
+= Adição de sistemas Cloud Volumes ONTAP existentes ao BlueXP 
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode descobrir e adicionar sistemas Cloud Volumes ONTAP existentes ao BlueXP . Você pode fazer isso se você implantou um novo sistema BlueXP .
+
+.Antes de começar
+Você deve saber a senha da conta de usuário admin do Cloud Volumes ONTAP.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página Canvas, clique em *Adicionar ambiente de trabalho*.
+. Selecione o provedor de nuvem no qual o sistema reside.
+. Escolha o tipo de sistema Cloud Volumes ONTAP.
+. Clique no link para descobrir um sistema existente.
+
+
+ifdef::aws[]
+
+E image:screenshot_discover_redesign.png["Uma captura de tela que mostra um link para descobrir um sistema Cloud Volumes ONTAP existente."]
+
+endif::aws[]
+
+. Na página região, escolha a região em que as instâncias estão sendo executadas e selecione as instâncias.
+. Na página credenciais, digite a senha do usuário admin do Cloud Volumes ONTAP e clique em *Go*.
+
+
+.Resultado
+O BlueXP  adiciona as instâncias do Cloud Volumes ONTAP ao projeto ou à área de trabalho.

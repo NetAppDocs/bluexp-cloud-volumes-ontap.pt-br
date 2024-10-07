@@ -1,0 +1,316 @@
+---
+settings:
+  name: Cloud Volumes ONTAP
+  harmony_integration: maestro
+  platform: cloud
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  rss_page: whats-new.html
+  filter:
+    label: Fornecedor de nuvem
+    default: Todos os fornecedores de nuvem
+    options:
+    - name: Amazon Web Services
+      alias: AWS
+      id: aws
+    - name: Google Cloud
+      alias: Google Cloud
+      id: gcp
+    - name: Microsoft Azure
+      alias: Azure
+      id: azure
+  langs: pt-br,us-en,ja-jp,ko-kr,zh-cn,zh-tw,de-de,es-es,fr-fr,it-it
+sidebar:
+  entries:
+  - title: Cloud Volumes ONTAP docs
+    url: "/index.html"
+  - title: Notas de lançamento
+    entries:
+    - title: O que há de novo
+      url: "/whats-new.html"
+    - title: Limitações conhecidas
+      url: "/reference-limitations.html"
+    - title: Notas de versão do Cloud Volumes ONTAP
+      url: "/whats-new-ontap.html"
+  - title: Comece agora
+    entries:
+    - title: Saiba mais sobre o Cloud Volumes ONTAP
+      url: "/concept-overview-cvo.html"
+    - title: Versões ONTAP compatíveis para novas implantações
+      url: "/reference-versions.html"
+    - title: Comece a usar o Amazon Web Services
+      flavor: aws
+      entries:
+      - title: Início rápido
+        url: "/task-getting-started-aws.html"
+      - title: Planeje sua configuração
+        url: "/task-planning-your-config.html"
+      - title: Configure a rede
+        entries:
+        - title: Requisitos de rede
+          url: "/reference-networking-aws.html"
+        - title: Configure um gateway de trânsito da AWS
+          url: "/task-setting-up-transit-gateway.html"
+        - title: Implante um par de HA em uma sub-rede compartilhada
+          url: "/task-deploy-aws-shared-vpc.html"
+        - title: Regras do grupo de segurança para a AWS
+          url: "/reference-security-groups.html"
+      - title: Configure o AWS KMS
+        url: "/task-setting-up-kms.html"
+      - title: Configure as funções do IAM
+        url: "/task-set-up-iam-roles.html"
+      - title: Configure o licenciamento
+        url: "/task-set-up-licensing-aws.html"
+      - title: Inicie o Cloud Volumes ONTAP na AWS
+        url: "/task-deploying-otc-aws.html"
+      - title: Implante o Cloud Volumes ONTAP nas regiões secretas da AWS
+        url: "/task-getting-started-aws-c2s.html"
+    - title: Comece a usar o Microsoft Azure
+      flavor: azure
+      entries:
+      - title: Início rápido
+        url: "/task-getting-started-azure.html"
+      - title: Planeje sua configuração
+        url: "/task-planning-your-config-azure.html"
+      - title: Configure a rede
+        url: "/reference-networking-azure.html"
+      - title: Configure a criptografia usando sua chave
+        url: "/task-set-up-azure-encryption.html"
+      - title: Configure o licenciamento
+        url: "/task-set-up-licensing-azure.html"
+      - title: Ative o modo de alta disponibilidade
+        url: "/task-azure-high-availability-mode.html"
+      - title: Ative VMOrchestratorZonalMultiFD para zonas de disponibilidade únicas
+        url: "/task-saz-feature.html"
+      - title: Inicie o Cloud Volumes ONTAP no Azure
+        url: "/task-deploying-otc-azure.html"
+      - title: Verificação de imagem da Plataforma Azure
+        entries:
+        - title: Visão geral
+          url: "/concept-azure-image-verification.html"
+        - title: Baixe o arquivo Azure Image Digest
+          url: "/task-azure-download-digest-file.html"
+        - title: Exportação de imagens
+          url: "/task-azure-image-export.html"
+        - title: Verificação de assinatura de arquivo
+          entries:
+          - title: Verificação de assinatura de arquivo
+            url: "/concept-azure-file-sig-verify.html"
+          - title: Verificação de assinatura de arquivo do Linux
+            url: "/task-file-verification-linux.html"
+          - title: Verificação de assinatura de arquivo do Mac os
+            url: "/task-file-verification-mac.html"
+        - title: Informações adicionais
+          url: "/reference-image-verification-links.html"
+    - title: Comece a usar o Google Cloud
+      flavor: gcp
+      entries:
+      - title: Início rápido
+        url: "/task-getting-started-gcp.html"
+      - title: Planeje sua configuração
+        url: "/task-planning-your-config-gcp.html"
+      - title: Configure a rede
+        url: "/reference-networking-gcp.html"
+      - title: Plano para controles de Serviço VPC
+        url: "/reference-vpc-service-controls-gcp.html"
+      - title: Crie uma conta de serviço
+        url: "/task-creating-gcp-service-account.html"
+      - title: Use chaves de criptografia gerenciadas pelo cliente
+        url: "/task-setting-up-gcp-encryption.html"
+      - title: Configure o licenciamento
+        url: "/task-set-up-licensing-google.html"
+      - title: Inicie o Cloud Volumes ONTAP no Google Cloud
+        url: "/task-deploying-gcp.html"
+      - title: Verificação de imagem do Google Cloud Platform
+        entries:
+        - title: Visão geral
+          url: "/concept-gcp-image-verification.html"
+        - title: Converta imagem para o formato RAW no GCP
+          url: "/task-gcp-convert-image-raw.html"
+        - title: Verificação de assinatura de imagem
+          entries:
+          - title: Verifique as imagens assinadas do GCP
+            url: "/concept-gcp-verify-signed-image.html"
+          - title: Verifique o conteúdo usando OpenSSL
+            url: "/task-verify-openssl-gcp.html"
+  - title: Use o Cloud Volumes ONTAP
+    entries:
+    - title: Gerenciamento de licenças
+      entries:
+      - title: Gerenciar licenças baseadas em capacidade
+        url: "/task-manage-capacity-licenses.html"
+      - title: Gerenciar assinaturas do Keystone
+        url: "/task-manage-keystone.html"
+      - title: Gerenciar licenças baseadas em nós
+        url: "/task-manage-node-licenses.html"
+    - title: Administração de volume e LUN
+      entries:
+      - title: Criar volumes
+        url: "/task-create-volumes.html"
+      - title: Gerenciar volumes existentes
+        url: "/task-manage-volumes.html"
+      - title: Categorize os dados inativos no storage de objetos
+        url: "/task-tiering.html"
+      - title: Conete um LUN a um host
+        url: "/task-connect-lun.html"
+      - title: Acelere o acesso aos dados com o FlexCache
+        url: "/task-accelerate-data-access.html"
+    - title: Administração de agregados
+      entries:
+      - title: Criar agregados
+        url: "/task-create-aggregates.html"
+      - title: Gerenciar agregados existentes
+        url: "/task-manage-aggregates.html"
+      - title: Gerir as definições de capacidade
+        url: "/task-manage-capacity-settings.html"
+    - title: Administração da VM de storage
+      entries:
+      - title: Trabalhar com máquinas virtuais de storage no BlueXP 
+        url: "/task-managing-svms.html"
+      - title: Crie VMs de storage na AWS
+        flavor: aws
+        url: "/task-managing-svms-aws.html"
+      - title: Crie VMs de storage no Azure
+        flavor: azure
+        url: "/task-managing-svms-azure.html"
+      - title: Criar VMs de storage no Google Cloud
+        flavor: gcp
+        url: "/task-managing-svms-gcp.html"
+      - title: Configurar a recuperação de desastres do SVM
+        url: "/task-manage-svm-dr.html"
+    - title: Segurança e criptografia de dados
+      entries:
+      - title: Criptografar volumes com criptografia NetApp
+        url: "/task-encrypting-volumes.html"
+      - title: Gerencie chaves com o AWS Key Management Service
+        flavor: aws
+        url: "/task-aws-key-management.html"
+      - title: Gerencie chaves com o Azure Key Vault
+        flavor: azure
+        url: "/task-azure-key-vault.html"
+      - title: Gerencie chaves com o Google Cloud KMS
+        flavor: gcp
+        url: "/task-google-key-manager.html"
+      - title: Aprimorar a proteção contra ransomware
+        url: "/task-protecting-ransomware.html"
+      - title: Crie cópias de Snapshot à prova de violações para storage WORM
+        url: "/reference-worm-snaplock.html"
+    - title: Administração do sistema
+      entries:
+      - title: Atualize o Cloud Volumes ONTAP
+        url: "/task-updating-ontap-cloud.html"
+      - title: Registre sistemas de pagamento conforme o uso
+        url: "/task-registering.html"
+      - title: Pare e inicie um sistema
+        url: "/task-managing-state.html"
+      - title: Sincronizar a hora do sistema
+        url: "/task-sync-time.html"
+      - title: Modifique a velocidade de gravação do sistema
+        url: "/task-modify-write-speed.html"
+      - title: Altere a palavra-passe do sistema
+        url: "/task-change-password.html"
+      - title: Adicione, remova ou exclua sistemas
+        entries:
+        - title: Adicione um sistema existente
+          url: "/task-adding-systems.html"
+        - title: Remova um ambiente de trabalho
+          url: "/task-removing.html"
+        - title: Eliminar um sistema
+          url: "/task-deleting-working-env.html"
+      - title: Administração da AWS
+        flavor: aws
+        entries:
+        - title: Altere o tipo de instância EC2
+          url: "/task-change-ec2-instance.html"
+        - title: Alterar tabelas de rota para pares HA
+          url: "/task-change-route-tables.html"
+        - title: Configurar a criação do grupo de posicionamento
+          url: task-configure-placement-group-failure-aws.html
+      - title: Administração do Azure
+        flavor: azure
+        entries:
+        - title: Altere o tipo de VM do Azure
+          url: "/task-change-azure-vm.html"
+        - title: Substituir bloqueios CIFS
+          url: "/task-overriding-cifs-locks.html"
+        - title: Use um link privado do Azure ou endpoints de serviço
+          url: "/task-enabling-private-link.html"
+        - title: Mover grupos de recursos
+          url: "/task-moving-resource-groups-azure.html"
+        - title: Segregar o tráfego SnapMirror no Azure
+          url: "/task-segregate-snapmirror-azure.html"
+      - title: Administração do Google Cloud
+        flavor: gcp
+        entries:
+        - title: Altere o tipo de máquina
+          url: "/task-change-gcp-machine.html"
+      - title: Administração do System Manager
+        url: "/task-administer-advanced-view.html"
+      - title: Administração da CLI
+        url: "/task-connecting-to-otc.html"
+    - title: Saúde do sistema e eventos
+      entries:
+      - title: Verifique a configuração do AutoSupport
+        url: "/task-verify-autosupport.html"
+      - title: Configurar o EMS
+        url: "/task-configure-ems.html"
+  - title: Conceitos
+    entries:
+    - title: Licenciamento
+      url: "/concept-licensing.html"
+    - title: Armazenamento
+      entries:
+      - title: Protocolos do cliente
+        url: "/concept-client-protocols.html"
+      - title: Discos e agregados
+        url: "/concept-storage.html"
+      - title: Volumes elásticos na AWS
+        flavor: aws
+        url: "/concept-aws-elastic-volumes.html"
+      - title: Categorização de dados
+        url: "/concept-data-tiering.html"
+      - title: Gerenciamento de storage
+        url: "/concept-storage-management.html"
+      - title: Velocidade de gravação
+        url: "/concept-write-speed.html"
+      - title: Flash Cache
+        url: "/concept-flash-cache.html"
+      - title: STORAGE WORM
+        url: "/concept-worm.html"
+    - title: Pares de alta disponibilidade
+      entries:
+      - title: Pares DE HA na AWS
+        flavor: aws
+        url: "/concept-ha.html"
+      - title: Pares DE HA no Azure
+        flavor: azure
+        url: "/concept-ha-azure.html"
+      - title: Pares DE HA no GCP
+        flavor: gcp
+        url: "/concept-ha-google-cloud.html"
+      - title: Ações durante o takeover do storage
+        url: "/concept-degraded-ha-pair.html"
+    - title: Segurança
+      url: "/concept-security.html"
+    - title: Desempenho
+      url: "/concept-performance.html"
+    - title: Gerenciamento do BYOL baseado em nós
+      url: "/concept-license-management.html"
+    - title: AutoSupport e consultor digital
+      url: "/concept-active-iq.html"
+    - title: Configurações padrão
+      url: "/reference-default-configs.html"
+  - title: Conhecimento e apoio
+    entries:
+    - title: Registre-se para obter suporte
+      url: "/task-support-registration.html"
+    - title: Obtenha ajuda
+      url: "/task-get-help.html"
+  - title: Avisos legais
+    url: "/legal-notices.html"
+product-family:
+  name: BlueXP
+  repo: bluexp-family

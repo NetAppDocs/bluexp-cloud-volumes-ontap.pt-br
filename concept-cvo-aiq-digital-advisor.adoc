@@ -1,0 +1,65 @@
+---
+sidebar: sidebar 
+permalink: concept-cvo-aiq-digital-advisor.html 
+keywords: concepts, digital advisor, cloud volumes ontap, cloud manager, BlueXP 
+summary: O consultor digital está integrado à IU do BlueXP  para que você possa otimizar as operações, a segurança e a performance dos clusters do ONTAP em um único painel. 
+---
+= Otimize seus sistemas Cloud Volumes ONTAP usando o consultor digital
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+https://www.netapp.com/services/support/active-iq/["Consultor digital da Active IQ"] (Também conhecido como consultor digital) está integrado à IU do BlueXP  para que você possa otimizar as operações, a segurança e o desempenho de seus sistemas Cloud Volumes ONTAP em um único painel.
+
+
+
+== Caraterísticas
+
+Você pode ver o status geral do seu sistema de storage, informações de alto nível sobre o bem-estar do sistema, inventário, Planejamento e insights valiosos em um nível de lista de observação usando o Digital Advisor.
+
+* Analisar e otimizar a integridade dos sistemas de storage
+* Obtenha insights sobre todos os riscos para seus sistemas de storage e ações para reduzir os riscos
+* Analise o desempenho dos seus dispositivos de armazenamento visualizando o formato gráfico dos dados de desempenho
+* Obtenha detalhes sobre sistemas que excederam 90% de capacidade ou estão próximos de 90% de capacidade
+
+
+
+
+== Sistemas ONTAP suportados
+
+O Digital Advisor fornece informações para todos os sistemas ONTAP e sistemas Cloud Volumes ONTAP locais na sua conta NSS.
+
+
+
+== Custo
+
+Não há nenhum custo para usar este serviço através do BlueXP .
+
+
+
+== Como o consultor digital funciona com o BlueXP 
+
+A interface de usuário do Digital Advisor está completamente integrada no BlueXP .
+
+No BlueXP , clique no serviço *Consultor Digital*.
+
+* Se você já registrou uma conta NSS existente no BlueXP , a IU do Consultor Digital aparece exatamente como você a veria em uma implementação autônoma em https://activeiq.netapp.com/[].
++
+image:screenshot_aiq_digital_advisor.png["Uma captura de tela da interface do usuário do Digital Advisor no BlueXP ."]
+
+* Se não tiver registado uma conta NSS no BlueXP , registe uma conta NSS agora e, em seguida, é apresentada a IU do Consultor Digital.  https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-nss-accounts.html["Gerencie credenciais NSS associadas a uma organização ou conta do BlueXP "]Consulte para obter as instruções.
+
+
+
+NOTE: A partir de 3 de dezembro de 2021, a NetApp passou para uma nova metodologia de Registro de credenciais para contas NSS. Para obter mais informações, https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/FAQs_for_NetApp_adoption_of_MS_Azure_AD_B2C_for_login["Este FAQ"] consulte . Se a sua conta NSS utilizar o antigo conjunto de credenciais, terá de atualizar a conta para as novas credenciais.
+
+
+
+== O que vem a seguir
+
+Consulte https://docs.netapp.com/us-en/active-iq/index.html["Documentação do Digital Advisor"] para obter mais informações.

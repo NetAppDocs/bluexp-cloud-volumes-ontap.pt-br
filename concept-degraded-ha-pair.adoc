@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: concept-degraded-ha-pair.html 
+keywords: storage takeover, storage giveback, degraded, degraded status, degraded state, ha pair, ha takeover, takeover, giveback 
+summary: Quando um nó em um par de HA não está disponível, o outro nó fornece dados para seu parceiro fornecer serviço de dados contínuo. Isso é chamado de aquisição de armazenamento. Várias ações ficam indisponíveis até que o armazenamento esteja concluído. 
+---
+= Ações indisponíveis durante a aquisição
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Quando um nó em um par de HA não está disponível, o outro nó fornece dados para seu parceiro fornecer serviço de dados contínuo. Isso é chamado _storage Takeover_. Várias ações ficam indisponíveis até que o armazenamento esteja concluído.
+
+
+TIP: Quando um nó em um par de HA não está disponível, o estado do ambiente de trabalho no BlueXP  é _degradado_.
+
+As seguintes ações não estão disponíveis na takeover de storage da BlueXP :
+
+* Registro de suporte
+* Alterações de licença
+* Alterações de tipo de instância ou VM
+* Alterações de velocidade de gravação
+* Configuração CIFS
+* Alterar a localização dos backups de configuração
+* Definir a palavra-passe do cluster
+* Gerenciamento de discos e agregados (alocação avançada)
+
+
+Essas ações estão disponíveis novamente após a conclusão do armazenamento de dados da giveback e o estado do ambiente de trabalho volta ao normal.

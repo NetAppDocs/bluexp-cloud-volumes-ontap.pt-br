@@ -1,0 +1,171 @@
+---
+sidebar: sidebar 
+permalink: task-set-up-licensing-aws.html 
+keywords: freemium, professional, essentials, licensing, licenses, cloud volumes ontap charging, cloud volumes ontap licenses, cloud volumes ontap licensing, cvo licenses, cvo licensing, byol, bring your own license, paygo, pay as you go, keystone flex, keystone, digital wallet 
+summary: Depois de decidir qual opção de licenciamento deseja usar para o Cloud Volumes ONTAP, algumas etapas são necessárias para que você possa escolher essa opção de licenciamento ao implantar um novo sistema. 
+---
+= Configure o licenciamento para o Cloud Volumes ONTAP na AWS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Depois de decidir qual opção de licenciamento deseja usar com o Cloud Volumes ONTAP, algumas etapas são necessárias para que você possa escolher essa opção de licenciamento ao criar um novo ambiente de trabalho.
+
+
+
+== Freemium
+
+Selecione a oferta Freemium para usar o Cloud Volumes ONTAP gratuitamente com até 500 GiB de capacidade provisionada. link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-licensing.html#free-trials["Saiba mais sobre a oferta Freemium"^].
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página Canvas, clique em *Adicionar ambiente de trabalho* e siga as etapas no BlueXP .
++
+.. Na página *Detalhes e credenciais*, clique em *Editar credenciais > Adicionar assinatura* e siga as instruções para assinar a oferta de pagamento conforme o uso no AWS Marketplace.
++
+Você não será cobrado por meio da assinatura do mercado, a menos que exceda 500 GiB de capacidade provisionada, momento em que o sistema é convertido automaticamente para o link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-licensing.html#packages["Pacote Essentials"^].
+
++
+image:screenshot-aws-paygo-subscription.png["Uma captura de tela da opção de assinatura PAYGO ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+.. Depois de voltar ao BlueXP , selecione *Freemium* quando chegar à página métodos de carregamento.
++
+image:screenshot-freemium.png["Uma captura de tela da opção Freemium ao criar um ambiente de trabalho Cloud Volumes ONTAP."]
+
+
+
+
+
+link:task-deploying-otc-aws.html["Veja instruções passo a passo para iniciar o Cloud Volumes ONTAP na AWS"].
+
+
+
+== Licença baseada em capacidade
+
+O licenciamento baseado em capacidade permite que você pague pelo Cloud Volumes ONTAP por TIB de capacidade. O licenciamento baseado em capacidade está disponível na forma de um _pacote_: O pacote Essentials ou o pacote Professional.
+
+Os pacotes Essentials e Professional estão disponíveis com os seguintes modelos de consumo:
+
+* Uma licença (BYOL) adquirida na NetApp
+* Uma assinatura por hora, com pagamento conforme o uso (PAYGO) no AWS Marketplace
+* Um contrato anual do AWS Marketplace
+
+
+link:concept-licensing.html["Saiba mais sobre licenciamento baseado em capacidade"].
+
+As seções a seguir descrevem como começar com cada um desses modelos de consumo.
+
+
+
+=== BYOL
+
+Pague antecipadamente comprando uma licença BYOL (BYOL) da NetApp para implantar sistemas Cloud Volumes ONTAP em qualquer fornecedor de nuvem.
+
+.Passos
+. https://cloud.netapp.com/contact-cds["Entre em Contato com a NetApp Sales para obter uma licença"^]
+. https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-nss-accounts.html#add-an-nss-account["Adicione sua conta do site de suporte da NetApp ao BlueXP "^]
++
+A BlueXP  consulta automaticamente o serviço de licenciamento da NetApp para obter detalhes sobre as licenças associadas à sua conta do site de suporte da NetApp. Se não houver erros, o BlueXP  adiciona automaticamente as licenças à carteira digital.
+
++
+A sua licença tem de estar disponível na carteira digital BlueXP  antes de a poder utilizar com o Cloud Volumes ONTAP. Se necessário, você pode link:task-manage-capacity-licenses.html#add-purchased-licenses-to-your-account["Adicione manualmente a licença à carteira digital BlueXP "].
+
+. Na página Canvas, clique em *Adicionar ambiente de trabalho* e siga as etapas no BlueXP .
++
+.. Na página *Detalhes e credenciais*, clique em *Editar credenciais > Adicionar assinatura* e siga as instruções para assinar a oferta de pagamento conforme o uso no AWS Marketplace.
++
+A licença que você comprou da NetApp sempre será cobrada primeiro, mas você será cobrado da taxa por hora no mercado se exceder sua capacidade licenciada ou se o prazo da licença expirar.
+
++
+image:screenshot-aws-paygo-subscription.png["Uma captura de tela da opção de assinatura PAYGO ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+.. Depois de voltar ao BlueXP , selecione um pacote baseado na capacidade quando chegar à página métodos de carregamento.
++
+image:screenshot-professional.png["Uma captura de tela da opção profissional ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+
+
+
+
+link:task-deploying-otc-aws.html["Veja instruções passo a passo para iniciar o Cloud Volumes ONTAP na AWS"].
+
+
+
+=== Subscrição PAYGO
+
+Pague por hora assinando a oferta no mercado do seu provedor de nuvem.
+
+Quando você cria um ambiente de trabalho do Cloud Volumes ONTAP, o BlueXP  solicita que você assine o contrato disponível no AWS Marketplace. Essa assinatura é então associada ao ambiente de trabalho para cobrança. Você pode usar essa mesma assinatura para ambientes de trabalho adicionais.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página Canvas, clique em *Adicionar ambiente de trabalho* e siga as etapas no BlueXP .
++
+.. Na página *Detalhes e credenciais*, clique em *Editar credenciais > Adicionar assinatura* e siga as instruções para assinar a oferta de pagamento conforme o uso no AWS Marketplace.
++
+image:screenshot-aws-paygo-subscription.png["Uma captura de tela da opção de assinatura PAYGO ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+.. Depois de voltar ao BlueXP , selecione um pacote baseado na capacidade quando chegar à página métodos de carregamento.
++
+image:screenshot-professional.png["Uma captura de tela da opção profissional ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+
+
+
+
+link:task-deploying-otc-aws.html["Veja instruções passo a passo para iniciar o Cloud Volumes ONTAP na AWS"].
+
+
+TIP: Você pode gerenciar as assinaturas do AWS Marketplace associadas às suas contas da AWS na página Configurações > credenciais. https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-aws-accounts.html["Saiba como gerenciar suas contas e assinaturas da AWS"^]
+
+
+
+=== Contrato anual
+
+Pague anualmente comprando um contrato anual no mercado do seu fornecedor de nuvem.
+
+Semelhante a uma assinatura por hora, o BlueXP  solicita que você assine o contrato anual disponível no AWS Marketplace.
+
+.Passos
+. Na página Canvas, clique em *Adicionar ambiente de trabalho* e siga as etapas no BlueXP .
++
+.. Na página *Detalhes e credenciais*, clique em *Editar credenciais > Adicionar assinatura* e siga as instruções para assinar o contrato anual no AWS Marketplace.
++
+image:screenshot-aws-annual-subscription.png["Uma captura de tela da oferta de contrato anual ao criar um ambiente de trabalho Cloud Volumes ONTAP."]
+
+.. Depois de voltar ao BlueXP , selecione um pacote baseado na capacidade quando chegar à página métodos de carregamento.
++
+image:screenshot-professional.png["Uma captura de tela da opção profissional ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+
+
+
+
+link:task-deploying-otc-aws.html["Veja instruções passo a passo para iniciar o Cloud Volumes ONTAP na AWS"].
+
+
+
+== Inscrição no Keystone
+
+Uma subscrição do Keystone é um serviço baseado em subscrição com pagamento conforme o uso. link:concept-licensing.html#keystone-subscription["Saiba mais sobre as assinaturas do NetApp Keystone"^].
+
+.Passos
+. Se você ainda não tem uma assinatura, https://www.netapp.com/forms/keystone-sales-contact/["Entre em Contato com a NetApp"^]
+. Para autorizar sua conta de usuário do BlueXP  com uma ou mais assinaturas do Keystone NetApp NetApp.
+. Depois que o NetApp autorizar sua contalink:task-manage-keystone.html#link-a-subscription["Vincule suas assinaturas para uso com o Cloud Volumes ONTAP"], .
+. Na página Canvas, clique em *Adicionar ambiente de trabalho* e siga as etapas no BlueXP .
++
+.. Selecione o método de cobrança da assinatura Keystone quando solicitado a escolher um método de cobrança.
++
+image:screenshot-keystone.png["Uma captura de tela da opção de assinatura do Keystone ao criar um ambiente de trabalho do Cloud Volumes ONTAP."]
+
+
+
+
+
+link:task-deploying-otc-aws.html["Veja instruções passo a passo para iniciar o Cloud Volumes ONTAP na AWS"].

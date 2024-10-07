@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: task-registering.html 
+keywords: Cloud Volumes ONTAP, register, registering, paygo, pay-as-you-go, registration, instance id, serial number, account id, support 
+summary: O suporte da NetApp está incluído nos sistemas Cloud Volumes ONTAP PAYGO, mas você deve primeiro ativar o suporte registrando os sistemas no NetApp. 
+---
+= Registar sistemas de pagamento conforme o uso
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O suporte da NetApp está incluído nos sistemas Cloud Volumes ONTAP PAYGO, mas você deve primeiro ativar o suporte registrando os sistemas no NetApp.
+
+O Registro de um sistema PAYGO com o NetApp é necessário para atualizar o software ONTAP usando qualquer um dos métodos link:task-updating-ontap-cloud.html["descrito nesta página"].
+
+
+TIP: Um sistema que não está registrado para suporte ainda receberá as notificações de atualização de software que aparecem no BlueXP  quando uma nova versão estiver disponível. Mas você precisará Registrar o sistema antes que você possa atualizar o software.
+
+.Passos
+. Se você ainda não adicionou sua conta do site de suporte da NetApp ao BlueXP , acesse *Configurações da conta* e adicione-a agora.
++
+https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-nss-accounts.html["Saiba como adicionar contas do site de suporte da NetApp"^].
+
+. Na página Canvas, clique duas vezes no nome do sistema que você deseja Registrar.
+. Na guia Visão geral, clique no painel recursos e, em seguida, clique no ícone de lápis ao lado de *Registro de suporte*.
++
+image::screenshot_features_support_registration_2.png[400]
+
+. Selecione uma conta do site de suporte da NetApp e clique em *Register*.
+
+
+.Resultado
+O BlueXP  Registra o sistema com o NetApp.

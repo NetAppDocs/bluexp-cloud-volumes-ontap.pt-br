@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: task-overriding-cifs-locks.html 
+keywords: CIFS locks, azure maintenance, maintenance events, cifs sessions, storage failover, storage giveback, giveback 
+summary: A organização ou o administrador da conta do BlueXP  pode habilitar uma configuração no BlueXP  que impede problemas com o armazenamento Cloud Volumes ONTAP giveback durante eventos de manutenção do Azure. Quando você ativa essa configuração, o Cloud Volumes ONTAP veta o CIFS bloqueia e redefine as sessões ativas do CIFS. 
+---
+= Substituindo bloqueios CIFS para pares de HA do Cloud Volumes ONTAP no Azure
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+A organização ou o administrador da conta do BlueXP  pode habilitar uma configuração no BlueXP  que impede problemas com o armazenamento Cloud Volumes ONTAP giveback durante eventos de manutenção do Azure. Quando você ativa essa configuração, o Cloud Volumes ONTAP veta o CIFS bloqueia e redefine as sessões ativas do CIFS.
+
+.Sobre esta tarefa
+O Microsoft Azure agenda eventos de manutenção periódica em suas máquinas virtuais. Quando ocorre um evento de manutenção em um par de HA do Cloud Volumes ONTAP, o par de HA inicia o takeover do storage. Se houver sessões CIFS ativas durante este evento de manutenção, os bloqueios nos arquivos CIFS podem impedir o armazenamento de giveback.
+
+Se ativar esta definição, o Cloud Volumes ONTAP vetará os bloqueios e redefinirá as sessões CIFS ativas. Como resultado, o par de HA pode concluir a giveback de storage durante esses eventos de manutenção.
+
+
+CAUTION: Esse processo pode ser disruptivo para clientes CIFS. Os dados que não forem comprometidos com clientes CIFS podem ser perdidos.
+
+.O que você vai precisar
+Você precisa criar um conetor antes de poder alterar as configurações do BlueXP . https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html#how-to-create-a-connector["Saiba como"^].
+
+.Passos
+. No canto superior direito do console BlueXP , clique no ícone Configurações e selecione *Configurações do Cloud Volumes ONTAP*.
++
+image:screenshot_settings_icon.png["Uma captura de tela que mostra o ícone Configurações no canto superior direito do console BlueXP ."]
+
+. Em *Azure*, clique em *bloqueios CIFS do Azure para ambientes de trabalho do Azure HA*.
+. Clique na caixa de verificação para ativar a funcionalidade e, em seguida, clique em *Guardar*.
+

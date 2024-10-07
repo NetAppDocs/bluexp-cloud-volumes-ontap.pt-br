@@ -1,0 +1,218 @@
+---
+sidebar: sidebar 
+permalink: task-planning-your-config-gcp.html 
+keywords: license, disk, ebs, storage, size, write speed, volume usage, capacity, limit, configurations, virtual machine, vm, regions, supported disks, disk types, use profile, thin provisioning, deduplication, compression, shared instance, dedicated instance, write speed, high write speed, normal write speed, network information, worksheet, limit, limits, storage limits, volume limit, aggregate limit, maximum volume size, maximum aggregate size, supported machine types, supported virtual machines, supported vms, supported instances 
+summary: Ao implantar o Cloud Volumes ONTAP, você pode escolher um sistema pré-configurado que atenda aos requisitos de workload ou criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você. 
+---
+= Planeje sua configuração do Cloud Volumes ONTAP no Google Cloud
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Ao implantar o Cloud Volumes ONTAP no Google Cloud, você pode escolher um sistema pré-configurado que atenda aos requisitos de carga de trabalho ou criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você.
+
+
+
+== Escolha uma licença Cloud Volumes ONTAP
+
+Várias opções de licenciamento estão disponíveis para o Cloud Volumes ONTAP. Cada opção permite que você escolha um modelo de consumo que atenda às suas necessidades.
+
+* link:concept-licensing.html["Saiba mais sobre as opções de licenciamento para o Cloud Volumes ONTAP"]
+* link:task-set-up-licensing-google.html["Saiba como configurar o licenciamento"]
+
+
+
+
+== Escolha uma região suportada
+
+O Cloud Volumes ONTAP é compatível com a maioria das regiões do Google Cloud. https://cloud.netapp.com/cloud-volumes-global-regions["Veja a lista completa de regiões suportadas"^].
+
+
+
+== Escolha um tipo de máquina suportado
+
+O Cloud Volumes ONTAP suporta vários tipos de máquina, dependendo do tipo de licença que você escolher.
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-gcp.html["Configurações compatíveis com o Cloud Volumes ONTAP no GCP"^]
+
+
+
+== Entenda os limites de armazenamento
+
+O limite de capacidade bruta de um sistema Cloud Volumes ONTAP está vinculado à licença. Limites adicionais afetam o tamanho dos agregados e volumes. Você deve estar ciente desses limites à medida que planeja sua configuração.
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-limits-gcp.html["Limites de storage para Cloud Volumes ONTAP no GCP"^]
+
+
+
+== Dimensione seu sistema no GCP
+
+O dimensionamento do seu sistema Cloud Volumes ONTAP pode ajudar você a atender aos requisitos de performance e capacidade. Você deve estar ciente de alguns pontos-chave ao escolher um tipo de máquina, tipo de disco e tamanho de disco:
+
+Tipo de máquina:: Veja os tipos de máquina suportados no http://docs.netapp.com/cloud-volumes-ontap/us-en/index.html["Notas de versão do Cloud Volumes ONTAP"^] e, em seguida, reveja os detalhes do Google sobre cada tipo de máquina suportado. Combine seus requisitos de carga de trabalho com o número de vCPUs e memória para o tipo de máquina. Observe que cada núcleo da CPU aumenta o desempenho da rede.
++
+--
+Consulte o seguinte para obter mais detalhes:
+
+* https://cloud.google.com/compute/docs/machine-types#n1_machine_types["Documentação do Google Cloud: N1 tipos de máquina padrão"^]
+* https://cloud.google.com/docs/compare/data-centers/networking#performance["Documentação do Google Cloud: Desempenho"^]
+
+
+--
+Tipo de disco do GCP:: Ao criar volumes para Cloud Volumes ONTAP, você precisa escolher o storage de nuvem subjacente que o Cloud Volumes ONTAP usa para um disco. O tipo de disco pode ser qualquer um dos seguintes:
++
+--
+* _Zonal SSD Persistent Disks_: Os discos persistentes SSD são melhores para cargas de trabalho que exigem altas taxas de IOPS aleatórias.
+* _Discos persistentes balanceados zonais_: Esses SSDs equilibram desempenho e custo fornecendo IOPS mais baixos por GB.
+* _Zonal Standard Persistent Disks_ : os discos persistentes padrão são econômicos e podem lidar com operações de leitura/gravação sequenciais.
++
+Para obter mais detalhes, https://cloud.google.com/compute/docs/disks/#pdspecs["Documentação do Google Cloud: Discos persistentes zonais (padrão e SSD)"^] consulte .
+
+
+
+--
+Tamanho do disco do GCP:: Você precisa escolher um tamanho de disco inicial ao implantar um sistema Cloud Volumes ONTAP. Depois disso, você pode permitir que o BlueXP  gerencie a capacidade de um sistema para você, mas se quiser construir agregados, esteja ciente do seguinte:
++
+--
+* Todos os discos em um agregado devem ter o mesmo tamanho.
+* Determine o espaço de que você precisa, levando em consideração o desempenho.
+* O desempenho dos discos persistentes é dimensionado automaticamente com o tamanho do disco e o número de vCPUs disponíveis para o sistema.
++
+Consulte o seguinte para obter mais detalhes:
+
++
+** https://cloud.google.com/compute/docs/disks/#pdspecs["Documentação do Google Cloud: Discos persistentes zonais (padrão e SSD)"^]
+** https://cloud.google.com/compute/docs/disks/performance["Documentação do Google Cloud: Otimizando o desempenho do disco persistente e do SSD local"^]
+
+
+
+
+--
+
+
+
+
+== Exibir discos do sistema padrão
+
+Além do storage para dados de usuário, a BlueXP  também compra storage de nuvem para dados de sistema do Cloud Volumes ONTAP (dados de inicialização, dados de raiz, dados básicos e NVRAM). Para fins de Planejamento, pode ajudar você a analisar esses detalhes antes de implantar o Cloud Volumes ONTAP.
+
+* link:reference-default-configs.html#google-cloud-single-node["Exibir os discos padrão para os dados do sistema Cloud Volumes ONTAP no Google Cloud"].
+* https://cloud.google.com/compute/quotas["Google Cloud docs: Cotas de recursos"^]
++
+O Google Cloud Compute Engine impõe cotas sobre o uso de recursos, portanto, você deve garantir que não atingiu seu limite antes de implantar o Cloud Volumes ONTAP.
+
+
+
+
+TIP: O conetor também requer um disco do sistema. https://docs.netapp.com/us-en/bluexp-setup-admin/reference-connector-default-config.html["Exibir detalhes sobre a configuração padrão do conetor"^].
+
+
+
+== Colete informações de rede
+
+Ao implantar o Cloud Volumes ONTAP no GCP, você precisa especificar detalhes sobre sua rede virtual. Você pode usar uma Planilha para coletar as informações do administrador.
+
+*Informações de rede para um sistema de nó único*
+
+[cols="30,70"]
+|===
+| Informações do GCP | O seu valor 
+
+
+| Região |  
+
+
+| Zona |  
+
+
+| Rede VPC |  
+
+
+| Sub-rede |  
+
+
+| Política de firewall (se estiver usando a sua própria) |  
+|===
+*Informações de rede para um par de HA em várias zonas*
+
+[cols="30,70"]
+|===
+| Informações do GCP | O seu valor 
+
+
+| Região |  
+
+
+| Zona para o nó 1 |  
+
+
+| Zona para o nó 2 |  
+
+
+| Zona para o mediador |  
+
+
+| VPC-0 e sub-rede |  
+
+
+| VPC-1 e sub-rede |  
+
+
+| VPC-2 e sub-rede |  
+
+
+| VPC-3 e sub-rede |  
+
+
+| Política de firewall (se estiver usando a sua própria) |  
+|===
+*Informações de rede para um par de HA em uma única zona*
+
+[cols="30,70"]
+|===
+| Informações do GCP | O seu valor 
+
+
+| Região |  
+
+
+| Zona |  
+
+
+| VPC-0 e sub-rede |  
+
+
+| VPC-1 e sub-rede |  
+
+
+| VPC-2 e sub-rede |  
+
+
+| VPC-3 e sub-rede |  
+
+
+| Política de firewall (se estiver usando a sua própria) |  
+|===
+
+
+== Escolha uma velocidade de gravação
+
+O BlueXP  permite escolher uma configuração de velocidade de gravação para o Cloud Volumes ONTAP, exceto para pares de alta disponibilidade (HA) no Google Cloud. Antes de escolher uma velocidade de gravação, você deve entender as diferenças entre as configurações normal e alta e os riscos e recomendações ao usar alta velocidade de gravação. link:concept-write-speed.html["Saiba mais sobre a velocidade de escrita"].
+
+
+
+== Escolha um perfil de uso de volume
+
+O ONTAP inclui vários recursos de eficiência de storage que podem reduzir a quantidade total de storage de que você precisa. Ao criar um volume no BlueXP , você pode escolher um perfil que ative esses recursos ou um perfil que os desabilite. Você deve aprender mais sobre esses recursos para ajudá-lo a decidir qual perfil usar.
+
+Os recursos de eficiência de storage da NetApp oferecem os seguintes benefícios:
+
+Thin Provisioning:: Apresenta storage mais lógico para hosts ou usuários do que você realmente tem no pool de storage físico. Em vez de pré-alocar espaço de armazenamento, o espaço de armazenamento é alocado dinamicamente a cada volume à medida que os dados são gravados.
+Deduplicação:: Melhora a eficiência localizando blocos idênticos de dados e substituindo-os por referências a um único bloco compartilhado. Essa técnica reduz os requisitos de capacidade de storage eliminando blocos redundantes de dados que residem no mesmo volume.
+Compactação:: Reduz a capacidade física necessária para armazenar dados comprimindo dados dentro de um volume em armazenamento primário, secundário e de arquivo.
+

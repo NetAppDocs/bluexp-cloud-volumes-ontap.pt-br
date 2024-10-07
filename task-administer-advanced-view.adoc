@@ -1,0 +1,101 @@
+---
+sidebar: sidebar 
+permalink: task-administer-advanced-view.html 
+keywords: system manager, advanced view, access system manager, load system manager, use system manager, cloud tiering 
+summary: Se você precisar executar o gerenciamento avançado do Cloud Volumes ONTAP, poderá fazê-lo usando o Gerenciador de sistemas do ONTAP, que é uma interface de gerenciamento fornecida com um sistema ONTAP. Incluímos a interface do Gerenciador de sistema diretamente no BlueXP  para que você não precise sair do BlueXP  para gerenciamento avançado. 
+---
+= Administrar o Cloud Volumes ONTAP usando a visualização avançada
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se você precisar executar o gerenciamento avançado do Cloud Volumes ONTAP, poderá fazê-lo usando o Gerenciador de sistemas do ONTAP, que é uma interface de gerenciamento fornecida com um sistema ONTAP. Incluímos a interface do Gerenciador de sistema diretamente no BlueXP  para que você não precise sair do BlueXP  para gerenciamento avançado.
+
+
+
+== Caraterísticas
+
+A visualização Avançada no BlueXP  oferece acesso a recursos de gerenciamento adicionais:
+
+* Gerenciamento avançado de storage
++
+Gerencie grupos de consistência, compartilhamentos, qtrees, cotas e VMs de armazenamento.
+
+* Gerenciamento de rede
++
+Gerencie IPspaces, interfaces de rede, portsets e portas ethernet.
+
+* Eventos e empregos
++
+Ver registos de eventos, alertas do sistema, trabalhos e registos de auditoria.
+
+* Proteção de dados avançada
++
+Proteja VMs de storage, LUNs e grupos de consistência.
+
+* Gerenciamento de host
++
+Configurar grupos de iniciadores SAN e clientes NFS.
+
+
+
+
+
+== Configurações compatíveis
+
+O gerenciamento avançado por meio do ONTAP System Manager é compatível com o Cloud Volumes ONTAP 9.10.0 e posterior em regiões de nuvem padrão.
+
+A integração do System Manager não é suportada nas regiões GovCloud ou em regiões que não têm acesso de saída à Internet.
+
+
+
+== Limitações
+
+Alguns recursos que aparecem na interface do Gerenciador de sistema não são suportados com o Cloud Volumes ONTAP:
+
+* Disposição em camadas do BlueXP
++
+O serviço de disposição em camadas do BlueXP  não é compatível com o Cloud Volumes ONTAP. Ao criar volumes, é necessário configurar a disposição em camadas dos dados para o storage de objetos diretamente da visualização padrão do BlueXP .
+
+* Camadas
++
+O gerenciamento de agregados (incluindo camadas locais e camadas de nuvem) não é compatível com o System Manager. Você precisa gerenciar agregados diretamente da visualização padrão do BlueXP .
+
+* Atualizações de firmware
++
+As atualizações automáticas de firmware a partir da página *Cluster > Settings* não são suportadas com o Cloud Volumes ONTAP.
+
+
+
+Além disso, o controle de acesso baseado em função do System Manager não é suportado.
+
+
+
+== Como começar
+
+Abra um ambiente de trabalho do Cloud Volumes ONTAP e clique na opção visualização avançada.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página tela, selecione um sistema Cloud Volumes ONTAP.
+. No painel direito, em *Serviços*, localize *System Manager* e selecione *Open*.
+. Se a mensagem de confirmação aparecer, leia-a e clique em *Fechar*.
+. Use o Gerenciador do sistema para gerenciar o Cloud Volumes ONTAP.
+. Se necessário, clique em *mudar para a visualização padrão* para retornar ao gerenciamento padrão por meio do BlueXP .
+
+
+
+
+== Ajuda com o uso do System Manager
+
+Se precisar de ajuda para usar o Gerenciador de sistema com o Cloud Volumes ONTAP, https://docs.netapp.com/us-en/ontap/index.html["Documentação do ONTAP"^] consulte para obter instruções passo a passo. Aqui estão alguns links que podem ajudar:
+
+* https://docs.netapp.com/us-en/ontap/volume-admin-overview-concept.html["Gerenciamento de volume e LUN"^]
+* https://docs.netapp.com/us-en/ontap/network-manage-overview-concept.html["Gerenciamento de rede"^]
+* https://docs.netapp.com/us-en/ontap/concept_dp_overview.html["Proteção de dados"^]
+

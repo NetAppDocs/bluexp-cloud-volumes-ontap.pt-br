@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: concept-gcp-verify-signed-image.html 
+keywords: Google Cloud, image, disk.raw, file signature verification, encryption,ONTAP, Cloud Volumes, OpenSSL, sha256, 
+summary: Verifique uma assinatura de arquivo de imagem exportado do Google Cloud através da ferramenta Arquivo de imagem Digest do Cloud Volumes ONTAP. 
+---
+= Verifique as imagens assinadas pelo Google Cloud
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Para verificar a imagem assinada do Google Cloud exportada, você deve baixar o arquivo de resumo da imagem do NSS para validar o arquivo disk.RAW e o conteúdo do arquivo de resumo.
+
+
+
+== Resumo do fluxo de trabalho de verificação de imagem assinada
+
+Veja a seguir uma visão geral do processo de fluxo de trabalho de verificação de imagem assinada pelo Google Cloud.
+
+*  https://mysupport.netapp.com/site/products/all/details/cloud-volumes-ontap/downloads-tab["NSS"^]No , faça o download do arquivo do Google Cloud que contém os seguintes arquivos:
++
+** Resumo assinado (.sig)
+** Certificado contendo a chave pública (.pem)
+** Cadeia de certificados (.pem)
++
+image::screenshot_cloud_volumes_ontap_tar.gz.png[imagens de Cloud Volumes ONTAP tar.gz]
+
+
+
+* Baixe o arquivo convertido disk.RAW
+* Valide o certificado usando a cadeia de certificados
+* Valide o resumo assinado usando o certificado conter a chave pública
++
+** Descriptografar o resumo assinado usando a chave pública para extrair o resumo do arquivo de imagem
+** Crie um resumo do arquivo disk.RAW baixado
+** Compare os dois arquivos de resumo para validação
++
+image::graphic_azure_check_signature.png[assinatura de verificação gráfica em azul]
+
+
+
+

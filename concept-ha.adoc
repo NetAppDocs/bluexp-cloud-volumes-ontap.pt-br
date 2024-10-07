@@ -1,0 +1,243 @@
+---
+sidebar: sidebar 
+permalink: concept-ha.html 
+keywords: high availability, HA, mediator, concepts, understanding, overview, availability zones, AZs, takeover, giveback, rpo, rto, floating ip, nondisruptive, ha pairs, node, nodes, synchronous, resync, recovery point objective, recovery time objective, nas, nfs, cifs, floating ip address, route tables, iscsi, mpio, alua, failover, mount, remount, failure, data access, access, ip address, performance 
+summary: 'Uma configuração de alta disponibilidade (HA) do Cloud Volumes ONTAP fornece operações ininterruptas e tolerância de falhas. Na AWS, os dados são espelhados de forma síncrona entre os dois nós.' 
+---
+= Pares de alta disponibilidade na AWS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Uma configuração de alta disponibilidade (HA) do Cloud Volumes ONTAP fornece operações ininterruptas e tolerância de falhas. Na AWS, os dados são espelhados de forma síncrona entre os dois nós.
+
+
+
+== Componentes HA
+
+Na AWS, as configurações do Cloud Volumes ONTAP HA incluem os seguintes componentes:
+
+* Dois nós de Cloud Volumes ONTAP cujos dados são espelhados de forma síncrona entre si.
+* Uma instância de mediador que fornece um canal de comunicação entre os nós para auxiliar nos processos de takeover do storage e giveback.
+
+
+
+
+=== Mediador
+
+Aqui estão alguns detalhes importantes sobre a instância do mediador na AWS:
+
+Tipo de instância:: t3-micro
+Discos:: Dois discos st1 de 8 GiB e 4 GiB
+Sistema operacional:: Debian 11
++
+--
+
+NOTE: Para o Cloud Volumes ONTAP 9.10.0 e versões anteriores, o Debian 10 foi instalado no mediador.
+
+--
+Atualizações:: Quando você atualiza o Cloud Volumes ONTAP, o BlueXP  também atualiza a instância do mediador conforme necessário.
+Acesso à instância:: Quando você cria um par de HA do Cloud Volumes ONTAP a partir do BlueXP , será solicitado a fornecer um par de chaves para a instância do mediador. Você pode usar esse par de chaves para acesso SSH usando o `admin` usuário.
+Agentes de terceiros:: Agentes de terceiros ou extensões de VM não são suportados na instância do mediador.
+
+
+
+
+== Takeover de storage e giveback
+
+Se um nó ficar inativo, o outro nó poderá fornecer dados para que seu parceiro forneça serviços de dados contínuos. Os clientes podem acessar os mesmos dados do nó do parceiro porque os dados foram espelhados de forma síncrona para o parceiro.
+
+Depois que o nó for reiniciado, o parceiro deverá sincronizar novamente os dados antes que ele possa retornar o armazenamento. O tempo necessário para sincronizar novamente os dados depende da quantidade de dados alterados enquanto o nó estava inativo.
+
+Por padrão, o takeover, a ressincronização e a giveback do storage são automáticos. Nenhuma ação do usuário é necessária.
+
+
+
+== RPO e rto
+
+Uma configuração de HA mantém a alta disponibilidade dos dados da seguinte forma:
+
+* O objetivo do ponto de restauração (RPO) é de 0 segundos. Seus dados são consistentes transacionalmente, sem perda de dados.
+* O objetivo de tempo de recuperação (rto) é de 120 segundos. Em caso de interrupção, os dados devem estar disponíveis em 120 segundos ou menos.
+
+
+
+
+== Modelos de IMPLANTAÇÃO DE HA
+
+Você pode garantir a alta disponibilidade de seus dados implantando uma configuração de HA em várias zonas de disponibilidade (AZs) ou em uma única zona de disponibilidade (AZ). Você deve rever mais detalhes sobre cada configuração para escolher qual melhor se adapta às suas necessidades.
+
+
+
+=== Várias zonas de disponibilidade
+
+A implantação de uma configuração de HA em várias zonas de disponibilidade (AZs) garante alta disponibilidade de seus dados se ocorrer uma falha com uma AZ ou uma instância que execute um nó Cloud Volumes ONTAP. Você deve entender como os endereços IP nas afetam o acesso aos dados e o failover de storage.
+
+
+
+==== Acesso a dados NFS e CIFS
+
+Quando uma configuração de HA é espalhada por várias zonas de disponibilidade, _endereços IP flutuantes_ ativa o acesso do cliente nas. Os endereços IP flutuantes, que devem estar fora dos blocos CIDR para todos os VPCs na região, podem migrar entre nós quando ocorrem falhas. Eles não são acessíveis nativamente para clientes que estão fora da VPC, a menos que você link:task-setting-up-transit-gateway.html["Configure um gateway de trânsito da AWS"].
+
+Se não for possível configurar um gateway de trânsito, os endereços IP privados estarão disponíveis para clientes nas que estejam fora da VPC. No entanto, esses endereços IP são estáticos – eles não podem fazer failover entre nós.
+
+Você deve analisar os requisitos para endereços IP flutuantes e tabelas de rota antes de implantar uma configuração de HA em várias zonas de disponibilidade. Você deve especificar os endereços IP flutuantes ao implantar a configuração. Os endereços IP privados são criados automaticamente pelo BlueXP .
+
+Para obter mais informações, link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-networking-aws.html#requirements-for-ha-pairs-in-multiple-azs["Requisitos de rede da AWS para o Cloud Volumes ONTAP HA em vários AZs"^]consulte .
+
+
+
+==== Acesso a dados iSCSI
+
+A comunicação de dados entre VPC não é um problema, uma vez que o iSCSI não usa endereços IP flutuantes.
+
+
+
+==== Takeover e giveback para iSCSI
+
+Para iSCSI, o Cloud Volumes ONTAP usa e/S multipath (MPIO) e Acesso de Unidade lógica assimétrica (ALUA) para gerenciar o failover de caminho entre os caminhos otimizados para ativos e não otimizados.
+
+
+NOTE: Para obter informações sobre quais configurações de host específicas suportam ALUA, consulte o http://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"^] e o https://docs.netapp.com/us-en/ontap-sanhost/["Guia de HOSTS DE SAN e clientes DE nuvem"] do sistema operacional do seu host.
+
+
+
+==== Takeover e giveback para nas
+
+Quando o controle ocorre em uma configuração nas usando IPs flutuantes, o endereço IP flutuante do nó que os clientes usam para acessar dados se move para o outro nó. A imagem a seguir mostra a aquisição de armazenamento em uma configuração nas usando IPs flutuantes. Se o nó 2 descer, o endereço IP flutuante do nó 2 será movido para o nó 1.
+
+image:diagram_takeover_giveback.png["Imagem conceitual que mostra o controle de storage em um par de HA do Cloud Volumes ONTAP: Os endereços IP flutuantes do nó 1 passam para o nó 2."]
+
+Os IPs de dados nas usados para acesso VPC externo não podem migrar entre nós se ocorrerem falhas. Se um nó ficar offline, você deverá remontar manualmente os volumes para clientes fora da VPC usando o endereço IP no outro nó.
+
+Depois que o nó com falha voltar online, remonte os clientes para volumes usando o endereço IP original. Essa etapa é necessária para evitar a transferência de dados desnecessários entre dois nós de HA, o que pode causar impactos significativo no desempenho e na estabilidade.
+
+Você pode identificar facilmente o endereço IP correto do BlueXP  selecionando o volume e clicando em *comando de montagem*.
+
+
+
+=== Zona de disponibilidade única
+
+A implantação de uma configuração de HA em uma única zona de disponibilidade (AZ) pode garantir alta disponibilidade de seus dados se uma instância que executa um nó Cloud Volumes ONTAP falhar. Todos os dados podem ser acessados de forma nativa de fora da VPC.
+
+
+NOTE: A BlueXP  cria um https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html["Grupo de posicionamento do AWS Spread"^] e lança os dois nós de HA nesse grupo de posicionamento. O grupo de posicionamento reduz o risco de falhas simultâneas, espalhando as instâncias por um hardware subjacente distinto. Esse recurso melhora a redundância do ponto de vista da computação e não do ponto de vista da falha de disco.
+
+
+
+==== Acesso a dados
+
+Como essa configuração está em uma única AZ, ela não requer endereços IP flutuantes. Você pode usar o mesmo endereço IP para acesso a dados a partir da VPC e de fora da VPC.
+
+A imagem a seguir mostra uma configuração de HA em uma única AZ. Os dados são acessíveis a partir da VPC e de fora da VPC.
+
+image:diagram_single_az.png["Imagem conceitual que mostra uma configuração do ONTAP HA em uma única zona de disponibilidade que permite o acesso a dados de fora da VPC."]
+
+
+
+==== Takeover e giveback
+
+Para iSCSI, o Cloud Volumes ONTAP usa e/S multipath (MPIO) e Acesso de Unidade lógica assimétrica (ALUA) para gerenciar o failover de caminho entre os caminhos otimizados para ativos e não otimizados.
+
+
+NOTE: Para obter informações sobre quais configurações de host específicas suportam ALUA, consulte o http://mysupport.netapp.com/matrix["Ferramenta de Matriz de interoperabilidade do NetApp"^] e o https://docs.netapp.com/us-en/ontap-sanhost/["Guia de HOSTS DE SAN e clientes DE nuvem"] do sistema operacional do seu host.
+
+Para configurações nas, os endereços IP de dados podem migrar entre nós de HA se ocorrerem falhas. Isso garante o acesso do cliente ao armazenamento.
+
+
+
+=== Zonas locais da AWS
+
+As zonas locais da AWS são uma implantação de infraestrutura onde storage, computação, banco de dados e outros serviços selecionados da AWS estão localizados perto de grandes cidades e áreas do setor. Com as zonas locais da AWS, você pode aproximar os serviços da AWS, o que melhora a latência de suas cargas de trabalho e mantém bancos de dados localmente.
+
+Você pode implantar uma única configuração AZ ou várias AZ nas zonas locais da AWS.
+
+
+NOTE: As zonas locais da AWS são suportadas ao usar o BlueXP  no modo padrão. Neste momento, as zonas locais da AWS não são suportadas ao usar o BlueXP  no modo restrito ou no modo privado.
+
+
+
+==== Exemplo de configurações da AWS local Zone
+
+A seguir estão exemplos de configurações:
+
+* Zona de disponibilidade única: Os nós de cluster e o mediador estão na mesma zona local.
+* Várias zonas de disponibilidade em várias configurações de zona de disponibilidade, há três instâncias, dois nós e um mediador. Uma instância das três instâncias deve estar em uma zona separada. Você pode escolher como configurar isso.
++
+Aqui estão três exemplos de configurações:
+
++
+** Cada nó de cluster está em uma zona local diferente e o mediador em uma zona de disponibilidade pública.
+** Um nó de cluster em uma zona local, o mediador em uma zona local e o segundo nó de cluster estão em uma zona de disponibilidade.
+** Cada nó de cluster e o mediador estão em zonas locais separadas.
+
+
+
+
+
+
+==== Tipos de disco e instância suportados
+
+O único tipo de disco suportado é GP2.
+
+As seguintes famílias de tipos de instância EC2 com tamanhos xlarge a 4xlarge são atualmente suportadas:
+
+* M5
+* C5
+* C5d
+* R5
+* R5d
+
+
+Você deve consultar a documentação da AWS para obter os detalhes mais recentes e completos sobre o link:https://aws.amazon.com/about-aws/global-infrastructure/localzones/features/?nc=sn&loc=2["EC2 tipos de instância em zonas locais"^]suportado .
+
+
+
+== Como o storage funciona em um par de HA
+
+Ao contrário de um cluster do ONTAP, o storage em um par de HA do Cloud Volumes ONTAP não é compartilhado entre nós. Em vez disso, os dados são espelhados de forma síncrona entre os nós para que os dados estejam disponíveis em caso de falha.
+
+
+
+=== Alocação de armazenamento
+
+Quando você cria um novo volume e discos adicionais são necessários, o BlueXP  aloca o mesmo número de discos para ambos os nós, cria um agregado espelhado e cria o novo volume. Por exemplo, se forem necessários dois discos para o volume, o BlueXP  aloca dois discos por nó para um total de quatro discos.
+
+
+
+=== Configurações de storage
+
+Você pode usar um par de HA como uma configuração ativo-ativo, na qual ambos os nós fornecem dados aos clientes ou como uma configuração ativo-passivo, na qual o nó passivo responde a solicitações de dados somente se ele tiver ocupado o storage para o nó ativo.
+
+
+NOTE: Você pode configurar uma configuração ativo-ativo somente quando usar o BlueXP  na visualização do sistema de armazenamento.
+
+
+
+=== Expectativas de desempenho
+
+Uma configuração do Cloud Volumes ONTAP HA replica sincronamente os dados entre nós, o que consome a largura de banda da rede. Como resultado, você pode esperar o seguinte desempenho em comparação com uma configuração de Cloud Volumes ONTAP de nó único:
+
+* Para configurações de HA que atendem dados de apenas um nó, a performance de leitura é comparável à performance de leitura de uma configuração de nó único, enquanto a performance de gravação é menor.
+* Para configurações de HA que atendem dados de ambos os nós, a performance de leitura é superior à performance de leitura de uma configuração de nó único, e a performance de gravação é igual ou superior.
+
+
+Para obter mais detalhes sobre o desempenho do Cloud Volumes ONTAP, link:concept-performance.html["Desempenho"]consulte .
+
+
+
+=== Acesso do cliente ao armazenamento
+
+Os clientes devem acessar volumes NFS e CIFS usando o endereço IP de dados do nó no qual o volume reside. Se os clientes nas acessarem um volume usando o endereço IP do nó do parceiro, o tráfego vai entre os dois nós, o que reduz o desempenho.
+
+
+TIP: Se você mover um volume entre nós em um par de HA, remonte o volume usando o endereço IP do outro nó. Caso contrário, você pode experimentar desempenho reduzido. Se os clientes suportarem referências NFSv4 ou redirecionamento de pastas para CIFS, você pode habilitar esses recursos nos sistemas Cloud Volumes ONTAP para evitar a reinstalação do volume. Para obter detalhes, consulte a documentação do ONTAP.
+
+Você pode identificar facilmente o endereço IP correto por meio da opção _Mount Command_ no painel gerenciar volumes no BlueXP .
+
+image::screenshot_mount_option.png[400]

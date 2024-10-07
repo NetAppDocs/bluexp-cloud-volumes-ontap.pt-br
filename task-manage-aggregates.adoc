@@ -1,0 +1,83 @@
+---
+sidebar: sidebar 
+permalink: task-manage-aggregates.html 
+keywords: aggregates, delete aggregates, add disks, view aggregates 
+summary: Gerencie os agregados adicionando discos, visualizando informações sobre os agregados e excluindo-os. 
+---
+= Gerenciar agregados
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Gerencie os agregados adicionando discos, visualizando informações sobre os agregados e excluindo-os.
+
+
+CAUTION: Todos os discos e agregados devem ser criados e excluídos diretamente do BlueXP . Você não deve executar essas ações de outra ferramenta de gerenciamento. Isso pode afetar a estabilidade do sistema, dificultar a capacidade de adicionar discos no futuro e, potencialmente, gerar taxas redundantes de provedores de nuvem.
+
+.Antes de começar
+Se você quiser excluir um agregado, primeiro você deve ter excluído os volumes no agregado.
+
+.Sobre esta tarefa
+Se um agregado estiver sem espaço, você poderá mover volumes para outro agregado usando o Gerenciador de sistema do ONTAP.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página Canvas, clique duas vezes no ambiente de trabalho do Cloud Volumes ONTAP no qual você deseja gerenciar agregados.
+. No ambiente de trabalho, clique na guia *agregados*.
+. Na guia agregados, navegue até o título desejado e clique em *... (ícone de elipses)*.
++
+image:screenshot_aggr_menu_options.png["Uma captura de tela das opções do menu agregados."]
+
+. Gerencie seus agregados:
++
+[cols="30,70"]
+|===
+| Tarefa | Ação 
+
+
+| Exibir informações sobre um agregado | Sob o ... (Ícone de elipses), clique em *Exibir detalhes de agregados*. 
+
+
+| Crie um volume em um agregado específico | Sob o ... (Ícone de elipses), clique em *Adicionar volume*. 
+
+
+| Adicione discos a um agregado  a| 
+.. Sob o ... (Ícone de elipses), clique em *Add Disks* (Adicionar discos).
+.. Selecione o número de discos que deseja adicionar e clique em *Adicionar*.
++
+
+TIP: Todos os discos em um agregado devem ter o mesmo tamanho.
+
+
+
+ifdef::aws[]
+
+
+
+| Aumente a capacidade de um agregado que suporte volumes elásticos do Amazon EBS  a| 
+.. Sob o ... (Ícone de elipses), clique em *aumentar a capacidade*.
+.. Introduza a capacidade adicional que pretende adicionar e, em seguida, clique em *aumentar*.
++
+Observe que você deve aumentar a capacidade do agregado em um mínimo de 256 GiB ou 10% do tamanho do agregado.
+
++
+Por exemplo, se você tem um agregado de 1,77 TIB, 10% é de 181 GiB. Isso é inferior a 256 GiB, então o tamanho do agregado deve ser aumentado pelo mínimo de 256 GiB.
+
+
+
+endif::aws[]
+
+
+
+| Excluir um agregado  a| 
+.. Selecione um bloco agregado que não contenha nenhum volume clique em *... (Ícone de elipses) > Eliminar*.
+.. Clique em *Delete* novamente para confirmar.
+
+
+|===
+

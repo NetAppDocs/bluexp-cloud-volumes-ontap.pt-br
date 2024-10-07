@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: task-azure-high-availability-mode.html 
+keywords: high availability mode, EnableHighAvailabilityMode, action required, nfsv4 
+summary: O modo de alta disponibilidade do Microsoft Azure deve estar ativado para reduzir o tempo de failover não planejado e para habilitar o suporte NFSv4 para Cloud Volumes ONTAP. 
+---
+= Ative o modo de alta disponibilidade no Azure
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O modo de alta disponibilidade do Microsoft Azure deve estar ativado para reduzir o tempo de failover não planejado e para habilitar o suporte NFSv4 para Cloud Volumes ONTAP.
+
+A partir da versão do Cloud Volumes ONTAP 9.10.1, reduzimos o tempo de failover não planejado para pares de HA do Cloud Volumes ONTAP executados no Microsoft Azure e adicionamos suporte para NFSv4. Para disponibilizar esses aprimoramentos ao Cloud Volumes ONTAP, você precisa ativar o recurso de alta disponibilidade na sua assinatura do Azure.
+
+O BlueXP  solicitará esses detalhes em uma mensagem Ação necessária quando o recurso precisar ser habilitado em uma assinatura do Azure.
+
+Observe o seguinte:
+
+* Não há problemas com a alta disponibilidade do seu par de HA do Cloud Volumes ONTAP. Esse recurso do Azure funciona em conjunto com o ONTAP para reduzir o tempo de interrupção de aplicativos observado pelo cliente para protocolos NFS que resultam de eventos de failover não planejados.
+* A ativação desse recurso não causa interrupções aos pares de HA do Cloud Volumes ONTAP.
+* Ativar este recurso na sua assinatura do Azure não causará problemas a outras VMs.
+
+
+Um usuário do Azure que tenha Privileges de "proprietário" pode ativar o recurso a partir da CLI do Azure.
+
+.Passos
+. https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart["Acesse o Azure Cloud Shell a partir do Portal do Azure"^]
+. Registe a funcionalidade do modo de alta disponibilidade:
++
+[source, azurecli]
+----
+az account set -s AZURE_SUBSCRIPTION_NAME_OR_ID
+az feature register --name EnableHighAvailabilityMode --namespace Microsoft.Network
+az provider register -n Microsoft.Network
+----
+. Opcionalmente, verifique se o recurso agora está registrado:
++
+[source, azurecli]
+----
+az feature show --name EnableHighAvailabilityMode --namespace Microsoft.Network
+----
++
+A CLI do Azure deve retornar um resultado semelhante ao seguinte:
+
++
+[listing]
+----
+{
+  "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.Features/providers/Microsoft.Network/features/EnableHighAvailabilityMode",
+  "name": "Microsoft.Network/EnableHighAvailabilityMode",
+  "properties": {
+    "state": "Registered"
+  },
+  "type": "Microsoft.Features/providers/features"
+}
+----
+

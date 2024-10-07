@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: concept-performance.html 
+keywords: performance, technical report, TR, workload, cpu 
+summary: Você pode analisar os resultados de performance para decidir quais workloads são apropriados para o Cloud Volumes ONTAP. 
+---
+= Desempenho
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode analisar os resultados de performance para decidir quais workloads são apropriados para o Cloud Volumes ONTAP.
+
+
+
+== Relatórios técnicos de desempenho
+
+ifdef::aws[]
+
+* Cloud Volumes ONTAP para AWS
++
+link:https://www.netapp.com/pdf.html?item=/media/9088-tr4383pdf.pdf["Relatório Técnico da NetApp 4383: Caraterização de desempenho do Cloud Volumes ONTAP em Serviços Web da Amazon com cargas de trabalho de aplicativos"^]
+
+
+
+endif::aws[]
+
+ifdef::azure[]
+
+* Cloud Volumes ONTAP para Microsoft Azure
++
+link:https://www.netapp.com/pdf.html?item=/media/9089-tr-4671pdf.pdf["Relatório técnico da NetApp 4671: Caraterização de desempenho do Cloud Volumes ONTAP no Azure com cargas de trabalho de aplicação"^]
+
+
+
+endif::azure[]
+
+ifdef::gcp[]
+
+* Cloud Volumes ONTAP para Google Cloud
++
+link:https://www.netapp.com/pdf.html?item=/media/9090-tr4816pdf.pdf["Relatório técnico da NetApp 4816: Caraterização de desempenho do Cloud Volumes ONTAP para o Google Cloud"^]
+
+
+
+endif::gcp[]
+
+
+
+== Desempenho da CPU
+
+Os nós do Cloud Volumes ONTAP são altamente utilizados (mais de 90%) nas ferramentas de monitoramento do seu provedor de nuvem. Isso ocorre porque o ONTAP reserva todos os vCPUs apresentados à máquina virtual para que eles estejam disponíveis quando necessário.
+
+Para obter informações, consulte a. https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/Monitoring_CPU_utilization_before_an_ONTAP_upgrade["artigo da base de conhecimento do NetApp sobre como monitorar a utilização da CPU do ONTAP usando a CLI"^]

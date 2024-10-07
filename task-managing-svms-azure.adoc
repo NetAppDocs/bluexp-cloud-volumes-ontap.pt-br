@@ -1,0 +1,719 @@
+---
+sidebar: sidebar 
+permalink: task-managing-svms-azure.html 
+keywords: storage virtual machine, vserver, svm, storage vm, supported number, number supported 
+summary: Uma VM de armazenamento é uma máquina virtual em execução no ONTAP que fornece serviços de armazenamento e dados aos seus clientes. Você pode saber isso como um SVM ou um vserver. O Cloud Volumes ONTAP é configurado com uma VM de storage por padrão, mas algumas configurações oferecem suporte a VMs de storage adicionais. 
+---
+= Crie VMs de storage de fornecimento de dados para o Cloud Volumes ONTAP no Azure
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Uma VM de armazenamento é uma máquina virtual em execução no ONTAP que fornece serviços de armazenamento e dados aos seus clientes. Você pode saber isso como um _SVM_ ou um _vserver_. O Cloud Volumes ONTAP é configurado com uma VM de storage por padrão, mas há suporte para VMs de storage adicionais ao executar o Cloud Volumes ONTAP no Azure.
+
+Para criar VMs de storage adicionais de fornecimento de dados, você precisa alocar endereços IP no Azure e executar comandos ONTAP para criar a VM de storage e LIFs de dados.
+
+
+NOTE: Para executar tarefas adicionais relacionadas à NIC, você pode atribuir uma função de colaborador de rede ou uma função personalizada com permissões apropriadas no Azure. Para obter mais informações sobre essas permissões relacionadas à NIC, consulte o https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface?tabs=azure-portal#permissions["Documentação do Microsoft Azure"^].
+
+
+
+== Número suportado de VMs de storage
+
+Várias VMs de storage são compatíveis com configurações Cloud Volumes ONTAP específicas, começando com a versão 9.9.0. Vá para https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/index.html["Notas de versão do Cloud Volumes ONTAP"^] a para verificar o número suportado de VMs de armazenamento para a sua versão do Cloud Volumes ONTAP.
+
+Todas as outras configurações do Cloud Volumes ONTAP oferecem suporte a uma VM de storage de fornecimento de dados e a uma VM de storage de destino usada para recuperação de desastres. Você pode ativar a VM de storage de destino para acesso aos dados se houver uma interrupção na VM de storage de origem.
+
+
+
+== Alocar endereços IP no Azure
+
+Você precisa alocar endereços IP no Azure antes de criar uma VM de storage e alocar LIFs.
+
+
+
+=== Sistema de nó único
+
+Os endereços IP devem ser atribuídos ao nic0 no Azure antes de criar uma VM de armazenamento e alocar LIFs.
+
+Você precisará criar um endereço IP para acesso a LIF de dados e outro endereço IP opcional para um LIF de gerenciamento de VM de storage (SVM). Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+.Passos
+. Faça login no portal do Azure e abra o serviço *Virtual Machine*.
+. Clique no nome da VM Cloud Volumes ONTAP.
+. Clique em *Networking*.
+. Clique no nome da interface de rede para nic0.
+. Em *Configurações*, clique em *configurações IP*.
+. Clique em *Add*.
+. Introduza um nome para a configuração IP, selecione *Dynamic* e, em seguida, clique em *OK*.
+. Clique no nome da configuração IP que você acabou de criar, altere a atribuição * para *estática* e clique em *Salvar*.
++
+É melhor usar um endereço IP estático porque um IP estático garante que o endereço IP não mudará, o que pode ajudar a evitar interrupções desnecessárias para o seu aplicativo.
+
+
+
+Se você quiser criar um LIF de gerenciamento de SVM, repita estas etapas para criar um endereço IP adicional.
+
+.Depois de terminar
+Copie os endereços IP privados que você acabou de criar. Você precisará especificar esses endereços IP ao criar LIFs para a nova VM de armazenamento.
+
+
+
+=== Par de HA
+
+A forma como você aloca endereços IP para um par de HA depende do protocolo de storage que você está usando.
+
+[role="tabbed-block"]
+====
+.ISCSI
+--
+Os endereços IP iSCSI devem ser atribuídos ao nic0 no Azure antes de criar uma VM de armazenamento e alocar LIFs. Os IPS para iSCSI são atribuídos a nic0 e não ao balanceador de carga porque o iSCSI usa o ALUA para failover.
+
+Você precisará criar os seguintes endereços IP:
+
+* Um endereço IP para acesso iSCSI data LIF a partir do nó 1
+* Um endereço IP para acesso iSCSI data LIF a partir do nó 2
+* Um endereço IP opcional para um LIF de gerenciamento de VM de storage (SVM)
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+
+
+.Passos
+. Faça login no portal do Azure e abra o serviço *Virtual Machine*.
+. Clique no nome da VM do Cloud Volumes ONTAP para o nó 1.
+. Clique em *Networking*.
+. Clique no nome da interface de rede para nic0.
+. Em *Configurações*, clique em *configurações IP*.
+. Clique em *Add*.
+. Introduza um nome para a configuração IP, selecione *Dynamic* e, em seguida, clique em *OK*.
+. Clique no nome da configuração IP que você acabou de criar, altere a atribuição * para *estática* e clique em *Salvar*.
++
+É melhor usar um endereço IP estático porque um IP estático garante que o endereço IP não mudará, o que pode ajudar a evitar interrupções desnecessárias para o seu aplicativo.
+
+. Repita estas etapas no nó 2.
+. Se você quiser criar um LIF de gerenciamento de SVM, repita estas etapas no nó 1.
+
+
+--
+.NFS
+--
+Os endereços IP usados para NFS são alocados no balanceador de carga para que os endereços IP possam migrar para o outro nó caso ocorram eventos de failover.
+
+Você precisará criar os seguintes endereços IP:
+
+* Um endereço IP para acesso de LIF de dados nas a partir do nó 1
+* Um endereço IP para acesso de LIF de dados nas a partir do nó 2
+* Um endereço IP opcional para um LIF de gerenciamento de VM de storage (SVM)
++
+Os iSCSI LIFs são necessários para a comunicação DNS. Um iSCSI LIF é usado para esse fim porque não migra no failover.
+
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+
+
+.Passos
+. No portal do Azure, abra o serviço *Load Balancers*.
+. Clique no nome do balanceador de carga do par de HA.
+. Crie uma configuração de IP frontend para acesso de LIF de dados do nó 1, outra para acesso de LIF de dados do nó 2 e outro IP frontend opcional para um LIF de gerenciamento de VM de armazenamento (SVM).
++
+.. Em *Settings*, clique em *Frontend IP Configuration*.
+.. Clique em *Add*.
+.. Digite um nome para o IP frontend, selecione a sub-rede para o par de HA Cloud Volumes ONTAP, deixe *Dinâmico* selecionado e, em regiões com zonas de disponibilidade, deixe *zona redundante* selecionado para garantir que o endereço IP permaneça disponível se uma zona falhar.
+.. Clique em *Salvar*.
++
+image:screenshot_azure_frontend_ip.png["Uma captura de tela da adição de um endereço IP frontend no portal do Azure onde um nome e uma sub-rede são selecionados."]
+
+.. Clique no nome da configuração IP frontend que você acabou de criar, altere *Assignment* para *Static* e clique em *Save*.
++
+É melhor usar um endereço IP estático porque um IP estático garante que o endereço IP não mudará, o que pode ajudar a evitar interrupções desnecessárias para o seu aplicativo.
+
+
+
+. Adicione uma sonda de saúde para cada IP frontend que você acabou de criar.
++
+.. Em *Settings* do balanceador de carga, clique em *Health probes*.
+.. Clique em *Add*.
+.. Introduza um nome para a sonda de saúde e introduza um número de porta entre 63005 e 65000. Mantenha os valores padrão para os outros campos.
++
+É importante que o número da porta esteja entre 63005 e 65000. Por exemplo, se você estiver criando três sondas de saúde, poderá inserir sondas que usam os números de porta 63005, 63006 e 63007.
+
++
+image:screenshot_azure_health_probe.gif["Uma captura de tela da adição de uma sonda de integridade no portal do Azure onde um nome e uma porta são inseridos."]
+
+
+
+. Crie novas regras de balanceamento de carga para cada IP frontend.
++
+.. Em *Configurações* do balanceador de carga, clique em *regras de balanceamento de carga*.
+.. Clique em *Add* e insira as informações necessárias:
++
+*** *Nome*: Insira um nome para a regra.
+*** *Versão IP*: Selecione *IPv4*.
+*** *Frontend IP address*: Selecione um dos endereços IP frontend que você acabou de criar.
+*** *Portas HA*: Ative esta opção.
+*** *Pool de back-end*: Mantenha o pool de back-end padrão que já foi selecionado.
+*** *Sonda de saúde*: Selecione a sonda de saúde que você criou para o IP frontend selecionado.
+*** *Persistência da sessão*: Selecione *nenhum*.
+*** *Floating IP*: Selecione *Enabled*.
++
+image:screenshot_azure_lb_rule.gif["Uma captura de tela da adição de uma regra de balanceamento de carga no portal do Azure com os campos mostrados acima."]
+
+
+
+
+
+. Certifique-se de que as regras do grupo de segurança de rede para o Cloud Volumes ONTAP permitem que o balanceador de carga envie sondas TCP para as sondas de integridade criadas na etapa 4 acima. Observe que isso é permitido por padrão.
+
+
+--
+.SMB
+--
+Os endereços IP que você usa para dados SMB são alocados no balanceador de carga para que os endereços IP possam migrar para o outro nó caso ocorram eventos de failover.
+
+Você precisará criar os seguintes endereços IP no balanceador de carga:
+
+* Um endereço IP para acesso de LIF de dados nas a partir do nó 1
+* Um endereço IP para acesso de LIF de dados nas a partir do nó 2
+* Um endereço IP para um iSCSI LIF no nó 1 em cada VM respetivo NIC0
+* Um endereço IP para um iSCSI LIF no nó 2
++
+Os iSCSI LIFs são necessários para comunicação DNS e SMB. Um iSCSI LIF é usado para esse fim porque não migra no failover.
+
+* Um endereço IP opcional para um LIF de gerenciamento de VM de storage (SVM)
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+
+
+.Passos
+. No portal do Azure, abra o serviço *Load Balancers*.
+. Clique no nome do balanceador de carga do par de HA.
+. Crie o número necessário de configurações IP frontend apenas para os dados e LIFs SVM:
++
+
+NOTE: Um IP frontend só deve ser criado sob o NIC0 para cada SVM correspondente. Para obter mais informações sobre como adicionar o endereço IP ao SVM NIC0, consulte "Etapa 7 [hiperlink]"
+
++
+.. Em *Settings*, clique em *Frontend IP Configuration*.
+.. Clique em *Add*.
+.. Digite um nome para o IP frontend, selecione a sub-rede para o par de HA Cloud Volumes ONTAP, deixe *Dinâmico* selecionado e, em regiões com zonas de disponibilidade, deixe *zona redundante* selecionado para garantir que o endereço IP permaneça disponível se uma zona falhar.
+.. Clique em *Salvar*.
++
+image:screenshot_azure_frontend_ip.png["Uma captura de tela da adição de um endereço IP frontend no portal do Azure onde um nome e uma sub-rede são selecionados."]
+
+.. Clique no nome da configuração IP frontend que você acabou de criar, altere *Assignment* para *Static* e clique em *Save*.
++
+É melhor usar um endereço IP estático porque um IP estático garante que o endereço IP não mudará, o que pode ajudar a evitar interrupções desnecessárias para o seu aplicativo.
+
+
+
+. Adicione uma sonda de saúde para cada IP frontend que você acabou de criar.
++
+.. Em *Settings* do balanceador de carga, clique em *Health probes*.
+.. Clique em *Add*.
+.. Introduza um nome para a sonda de saúde e introduza um número de porta entre 63005 e 65000. Mantenha os valores padrão para os outros campos.
++
+É importante que o número da porta esteja entre 63005 e 65000. Por exemplo, se você estiver criando três sondas de saúde, poderá inserir sondas que usam os números de porta 63005, 63006 e 63007.
+
++
+image:screenshot_azure_health_probe.gif["Uma captura de tela da adição de uma sonda de integridade no portal do Azure onde um nome e uma porta são inseridos."]
+
+
+
+. Crie novas regras de balanceamento de carga para cada IP frontend.
++
+.. Em *Configurações* do balanceador de carga, clique em *regras de balanceamento de carga*.
+.. Clique em *Add* e insira as informações necessárias:
++
+*** *Nome*: Insira um nome para a regra.
+*** *Versão IP*: Selecione *IPv4*.
+*** *Frontend IP address*: Selecione um dos endereços IP frontend que você acabou de criar.
+*** *Portas HA*: Ative esta opção.
+*** *Pool de back-end*: Mantenha o pool de back-end padrão que já foi selecionado.
+*** *Sonda de saúde*: Selecione a sonda de saúde que você criou para o IP frontend selecionado.
+*** *Persistência da sessão*: Selecione *nenhum*.
+*** *Floating IP*: Selecione *Enabled*.
++
+image:screenshot_azure_lb_rule.gif["Uma captura de tela da adição de uma regra de balanceamento de carga no portal do Azure com os campos mostrados acima."]
+
+
+
+
+
+. Certifique-se de que as regras do grupo de segurança de rede para o Cloud Volumes ONTAP permitem que o balanceador de carga envie sondas TCP para as sondas de integridade criadas na etapa 4 acima. Observe que isso é permitido por padrão.
+. Para iSCSI LIFs, adicione o endereço IP para NIC0.
++
+.. Clique no nome da VM Cloud Volumes ONTAP.
+.. Clique em *Networking*.
+.. Clique no nome da interface de rede para nic0.
+.. Em Configurações, clique em *configurações IP*.
+.. Clique em *Add*.
++
+image:screenshot_azure_ip_config_add.png["Uma captura de tela da página de configurações IP no portal do Azure"]
+
+.. Introduza um nome para a configuração IP, selecione Dinâmico e, em seguida, clique em *OK*.
++
+image:screenshot_azure_ip_add_config_window.png["Uma captura de tela para a janela Adicionar configuração IP"]
+
+.. Clique no nome da configuração IP que você acabou de criar, altere a atribuição para estática e clique em *Salvar*.
+
+
+
+
+
+NOTE: É melhor usar um endereço IP estático porque um IP estático garante que o endereço IP não mudará, o que pode ajudar a evitar interrupções desnecessárias para o seu aplicativo.
+
+--
+====
+.Depois de terminar
+Copie os endereços IP privados que você acabou de criar. Você precisará especificar esses endereços IP ao criar LIFs para a nova VM de armazenamento.
+
+
+
+== Crie uma VM e LIFs de storage
+
+Depois de alocar endereços IP no Azure, você pode criar uma nova VM de storage em um único sistema de nó ou em um par de HA.
+
+
+
+=== Sistema de nó único
+
+A forma como você cria uma VM de storage e LIFs em um sistema de nó único depende do protocolo de storage que você está usando.
+
+[role="tabbed-block"]
+====
+.ISCSI
+--
+Siga estas etapas para criar uma nova VM de armazenamento, juntamente com os LIFs necessários.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-name> -rootvolume-security-style unix
+----
++
+[source, cli]
+----
+network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
+----
+. Criar um LIF de dados:
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node1> -data-protocol iscsi
+----
+. Opcional: Crie um LIF de gerenciamento de VM de storage.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default
+----
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+
+
+--
+.NFS
+--
+Siga estas etapas para criar uma nova VM de armazenamento, juntamente com os LIFs necessários.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-name> -rootvolume-security-style unix
+----
++
+[source, cli]
+----
+network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
+----
+. Criar um LIF de dados:
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -service-policy default-data-files -address <nas-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy disabled -firewall-policy data -home-port e0a -auto-revert true -failover-group Default
+----
+. Opcional: Crie um LIF de gerenciamento de VM de storage.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default
+----
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+
+
+--
+.SMB
+--
+Siga estas etapas para criar uma nova VM de armazenamento, juntamente com os LIFs necessários.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-name> -rootvolume-security-style unix
+----
++
+[source, cli]
+----
+network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
+----
+. Criar um LIF de dados:
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -service-policy default-data-files -address <nas-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy disabled -firewall-policy data -home-port e0a -auto-revert true -failover-group Default
+----
+. Opcional: Crie um LIF de gerenciamento de VM de storage.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default
+----
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+
+
+--
+====
+
+
+=== Par de HA
+
+A forma como você cria uma VM de storage e LIFs em um par de HA depende do protocolo de storage que você está usando.
+
+[role="tabbed-block"]
+====
+.ISCSI
+--
+Siga estas etapas para criar uma nova VM de armazenamento, juntamente com os LIFs necessários.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-name> -rootvolume-security-style unix
+----
++
+[source, cli]
+----
+network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
+----
+. Criar LIFs de dados:
++
+.. Use o seguinte comando para criar um iSCSI LIF no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node1> -data-protocol iscsi
+----
+.. Use o seguinte comando para criar um iSCSI LIF no nó 2.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node2> -data-protocol iscsi
+----
+
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default
+----
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+. Se você estiver executando o Cloud Volumes ONTAP 9.11.1 ou posterior, modifique as políticas de serviço de rede para a VM de storage.
++
+.. Introduza o seguinte comando para aceder ao modo avançado.
++
+[source, cli]
+----
+::> set adv -con off
+----
++
+A modificação dos serviços é necessária porque garante que o Cloud Volumes ONTAP possa usar o iSCSI LIF para conexões de gerenciamento de saída.
+
++
+[source, cli]
+----
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service data-fpolicy-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ad-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-dns-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ldap-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-nis-client
+----
+
+
+
+
+--
+.NFS
+--
+Siga estas etapas para criar uma nova VM de armazenamento, juntamente com os LIFs necessários.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-name> -rootvolume-security-style unix
+----
++
+[source, cli]
+----
+network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
+----
+. Criar LIFs de dados:
++
+.. Use o seguinte comando para criar um nas LIF no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -service-policy default-data-files -address <nfs-cifs-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy data -home-port e0a -auto-revert true -failover-group Default -probe-port <port-number-for-azure-health-probe1>
+----
+.. Use o seguinte comando para criar um nas LIF no nó 2.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -service-policy default-data-files -address <nfs-cifs-ip-address> -netmask-length <length> -home-node <name-of-node2> -status-admin up -failover-policy system-defined -firewall-policy data -home-port e0a -auto-revert true -failover-group Default -probe-port <port-number-for-azure-health-probe2>
+----
+
+
+. Criar iSCSI LIFs para fornecer comunicação DNS:
++
+.. Use o seguinte comando para criar um iSCSI LIF no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node1> -data-protocol iscsi
+----
+.. Use o seguinte comando para criar um iSCSI LIF no nó 2.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node2> -data-protocol iscsi
+----
+
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default -probe-port <port-number-for-azure-health-probe3>
+----
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default -probe-port <port-number-for-azure-health-probe3>
+----
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+. Se você estiver executando o Cloud Volumes ONTAP 9.11.1 ou posterior, modifique as políticas de serviço de rede para a VM de storage.
++
+.. Introduza o seguinte comando para aceder ao modo avançado.
++
+[source, cli]
+----
+::> set adv -con off
+----
++
+A modificação dos serviços é necessária porque garante que o Cloud Volumes ONTAP possa usar o iSCSI LIF para conexões de gerenciamento de saída.
+
++
+[source, cli]
+----
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service data-fpolicy-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ad-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-dns-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ldap-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-nis-client
+----
+
+
+
+
+--
+.SMB
+--
+Siga estas etapas para criar uma nova VM de armazenamento, juntamente com os LIFs necessários.
+
+.Passos
+. Crie a VM de armazenamento e uma rota para a VM de armazenamento.
++
+[source, cli]
+----
+vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-name> -rootvolume-security-style unix
+----
++
+[source, cli]
+----
+network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
+----
+. Criar LIFs de dados nas:
++
+.. Use o seguinte comando para criar um nas LIF no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -service-policy default-data-files -address <nfs-cifs-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy data -home-port e0a -auto-revert true -failover-group Default -probe-port <port-number-for-azure-health-probe1>
+----
+.. Use o seguinte comando para criar um nas LIF no nó 2.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -service-policy default-data-files -address <nfs-cifs-ip-address> -netmask-length <length> -home-node <name-of-node2> -status-admin up -failover-policy system-defined -firewall-policy data -home-port e0a -auto-revert true -failover-group Default -probe-port <port-number-for-azure-health-probe2>
+----
+
+
+. Criar iSCSI LIFs para fornecer comunicação DNS:
++
+.. Use o seguinte comando para criar um iSCSI LIF no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node1> -data-protocol iscsi
+----
+.. Use o seguinte comando para criar um iSCSI LIF no nó 2.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -home-port e0a -address <iscsi-ip-address> -netmask-length <# of mask bits> -lif <lif-name> -home-node <name-of-node2> -data-protocol iscsi
+----
+
+
+. Opcional: Crie um LIF de gerenciamento de VM de storage no nó 1.
++
+[source, cli]
+----
+network interface create -vserver <svm-name> -lif <lif-name> -role data -data-protocol none -address <svm-mgmt-ip-address> -netmask-length <length> -home-node <name-of-node1> -status-admin up -failover-policy system-defined -firewall-policy mgmt -home-port e0a -auto-revert false -failover-group Default -probe-port <port-number-for-azure-health-probe3>
+----
++
+Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
+
+. Atribua um ou mais agregados à VM de storage.
++
+[source, cli]
+----
+vserver add-aggregates -vserver svm_2 -aggregates aggr1,aggr2
+----
++
+Essa etapa é necessária porque a nova VM de storage precisa ter acesso a pelo menos um agregado antes de criar volumes na VM de storage.
+
+. Se você estiver executando o Cloud Volumes ONTAP 9.11.1 ou posterior, modifique as políticas de serviço de rede para a VM de storage.
++
+.. Introduza o seguinte comando para aceder ao modo avançado.
++
+[source, cli]
+----
+::> set adv -con off
+----
++
+A modificação dos serviços é necessária porque garante que o Cloud Volumes ONTAP possa usar o iSCSI LIF para conexões de gerenciamento de saída.
+
++
+[source, cli]
+----
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service data-fpolicy-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ad-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-dns-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-ldap-client
+network interface service-policy remove-service -vserver <svm-name> -policy default-data-files -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-blocks -service management-nis-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service data-fpolicy-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ad-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-dns-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-ldap-client
+network interface service-policy add-service -vserver <svm-name> -policy default-data-iscsi -service management-nis-client
+----
+
+
+
+
+--
+====
+.O que se segue?
+Depois de criar uma VM de storage em um par de HA, é melhor esperar 12 horas antes de provisionar o storage nesse SVM. A partir da versão do Cloud Volumes ONTAP 9.10.1, o BlueXP  verifica as configurações do balanceador de carga de um par de HA em um intervalo de 12 horas. Se houver novos SVMs, o BlueXP  ativará uma configuração que forneça failover não planejado mais curto.

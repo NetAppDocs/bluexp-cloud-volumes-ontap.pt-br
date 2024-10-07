@@ -1,0 +1,705 @@
+---
+sidebar: sidebar 
+permalink: task-getting-started-aws-c2s.html 
+keywords: commercial cloud services, c2s, secret cloud, top secret cloud, aws secret region, BlueXP 
+summary: Semelhante a uma região padrão da AWS, você pode usar o BlueXP  nos ambientes de nuvem secreta da AWS e nuvem secreta para implantar o Cloud Volumes ONTAP, que fornece recursos de classe empresarial para seu armazenamento em nuvem. As regiões da nuvem secreta da AWS e da nuvem secreta são regiões fechadas específicas da Comunidade de Inteligência dos EUA; as instruções nesta página aplicam-se apenas aos usuários da região da nuvem secreta da AWS e da nuvem secreta principal. 
+---
+= Implante o Cloud Volumes ONTAP nas regiões da nuvem secreta da AWS e das principais regiões da nuvem secreta
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Semelhante a uma região padrão da AWS, você pode usar o BlueXP  in link:https://aws.amazon.com/federal/secret-cloud/["Nuvem secreta da AWS"^] e in link:https://aws.amazon.com/federal/top-secret-cloud/["Nuvem secreta principal da AWS"^] para implantar o Cloud Volumes ONTAP, que fornece recursos de classe empresarial para o seu storage de nuvem. A nuvem secreta da AWS e a nuvem secreta principal são regiões fechadas específicas para a Comunidade de Inteligência dos EUA; as instruções nesta página aplicam-se apenas aos usuários da região da nuvem secreta da AWS e da nuvem secreta principal.
+
+.Antes de começar
+Antes de começar, consulte as versões suportadas na nuvem secreta da AWS e na nuvem secreta principal e saiba mais sobre o modo privado no BlueXP .
+
+* Consulte as seguintes versões suportadas na nuvem secreta da AWS e na nuvem secreta principal:
++
+** Cloud Volumes ONTAP 9.12.1 P2
+** Versão 3.9.32 do conetor
++
+O conetor é um software necessário para implantar e gerenciar o Cloud Volumes ONTAP na AWS. Você fará login no BlueXP  a partir do software que é instalado na instância do Connector. O site SaaS da BlueXP  não é compatível com a nuvem secreta da AWS e a nuvem secreta principal.
+
+
+
+* Saiba mais sobre o modo privado
++
+Na nuvem secreta da AWS e na nuvem secreta principal, o BlueXP  opera em _modo privado_. No modo privado, não há conetividade com a camada SaaS do BlueXP . Os usuários acessam o BlueXP  localmente a partir do console baseado na Web que está disponível no conetor, não na camada SaaS.
+
++
+Para saber mais sobre como o modo privado funciona, link:https://docs.netapp.com/us-en/bluexp-setup-admin/concept-modes.html#private-mode["Modo de implantação privada do BlueXP "^]consulte .
+
+
+
+
+
+== Passo 1: Configure sua rede
+
+Configure sua rede da AWS para que o Cloud Volumes ONTAP possa funcionar corretamente.
+
+.Passos
+. Escolha a VPC e as sub-redes nas quais você deseja iniciar a instância do Connector e as instâncias do Cloud Volumes ONTAP.
+. Certifique-se de que a VPC e as sub-redes suportem a conetividade entre o conetor e o Cloud Volumes ONTAP.
+. Configure um endpoint de VPC para o serviço S3.
++
+Um endpoint de VPC é necessário se você quiser categorizar dados inativos do Cloud Volumes ONTAP para storage de objetos de baixo custo.
+
+
+
+
+
+== Passo 2: Configurar permissões
+
+Configure as políticas e funções do IAM que fornecem ao Connector e ao Cloud Volumes ONTAP as permissões necessárias para executar ações na nuvem secreta da AWS ou na nuvem secreta principal.
+
+Você precisa de uma política do IAM e de uma função do IAM para cada uma das seguintes opções:
+
+* A instância do conetor
+* Instâncias do Cloud Volumes ONTAP
+* Para pares de HA, a instância de mediador do Cloud Volumes ONTAP HA (se você quiser implantar pares de HA)
+
+
+.Passos
+. Vá para o console do AWS IAM e clique em *políticas*.
+. Crie uma política para a instância do conetor.
++
+
+NOTE: Você cria essas políticas para dar suporte aos buckets do S3 no seu ambiente AWS. Ao criar os buckets mais tarde, certifique-se de que os nomes dos buckets sejam prefixados com `fabric-pool-`o . Esse requisito se aplica às regiões da nuvem secreta da AWS e da nuvem secreta principal.
+
++
+[role="tabbed-block"]
+====
+.Regiões secretas
+--
+[source, json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeInstanceStatus",
+                "ec2:RunInstances",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeImages",
+                "ec2:CreateTags",
+                "ec2:CreateVolume",
+                "ec2:DescribeVolumes",
+                "ec2:ModifyVolumeAttribute",
+                "ec2:DeleteVolume",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DeleteNetworkInterface",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeDhcpOptions",
+                "ec2:CreateSnapshot",
+                "ec2:DeleteSnapshot",
+                "ec2:DescribeSnapshots",
+                "ec2:GetConsoleOutput",
+                "ec2:DescribeKeyPairs",
+                "ec2:DescribeRegions",
+                "ec2:DeleteTags",
+                "ec2:DescribeTags",
+                "cloudformation:CreateStack",
+                "cloudformation:DeleteStack",
+                "cloudformation:DescribeStacks",
+                "cloudformation:DescribeStackEvents",
+                "cloudformation:ValidateTemplate",
+                "iam:PassRole",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:PutRolePolicy",
+                "iam:ListInstanceProfiles",
+                "iam:CreateInstanceProfile",
+                "iam:DeleteRolePolicy",
+                "iam:AddRoleToInstanceProfile",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:DeleteInstanceProfile",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:GetBucketTagging",
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets",
+                "kms:List*",
+                "kms:Describe*",
+                "ec2:AssociateIamInstanceProfile",
+                "ec2:DescribeIamInstanceProfileAssociations",
+                "ec2:DisassociateIamInstanceProfile",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:CreatePlacementGroup",
+                "ec2:DeletePlacementGroup"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "fabricPoolPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteBucket",
+                "s3:GetLifecycleConfiguration",
+                "s3:PutLifecycleConfiguration",
+                "s3:PutBucketTagging",
+                "s3:ListBucketVersions"
+            ],
+            "Resource": [
+                "arn:aws-iso-b:s3:::fabric-pool*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances",
+                "ec2:AttachVolume",
+                "ec2:DetachVolume"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "ec2:ResourceTag/WorkingEnvironment": "*"
+                }
+            },
+            "Resource": [
+                "arn:aws-iso-b:ec2:*:*:instance/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AttachVolume",
+                "ec2:DetachVolume"
+            ],
+            "Resource": [
+                "arn:aws-iso-b:ec2:*:*:volume/*"
+            ]
+        }
+    ]
+}
+----
+--
+.Top regiões secretas
+--
+[source, json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeInstanceStatus",
+                "ec2:RunInstances",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeImages",
+                "ec2:CreateTags",
+                "ec2:CreateVolume",
+                "ec2:DescribeVolumes",
+                "ec2:ModifyVolumeAttribute",
+                "ec2:DeleteVolume",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DeleteNetworkInterface",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeDhcpOptions",
+                "ec2:CreateSnapshot",
+                "ec2:DeleteSnapshot",
+                "ec2:DescribeSnapshots",
+                "ec2:GetConsoleOutput",
+                "ec2:DescribeKeyPairs",
+                "ec2:DescribeRegions",
+                "ec2:DeleteTags",
+                "ec2:DescribeTags",
+                "cloudformation:CreateStack",
+                "cloudformation:DeleteStack",
+                "cloudformation:DescribeStacks",
+                "cloudformation:DescribeStackEvents",
+                "cloudformation:ValidateTemplate",
+                "iam:PassRole",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:PutRolePolicy",
+                "iam:ListInstanceProfiles",
+                "iam:CreateInstanceProfile",
+                "iam:DeleteRolePolicy",
+                "iam:AddRoleToInstanceProfile",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:DeleteInstanceProfile",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:GetBucketTagging",
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets",
+                "kms:List*",
+                "kms:Describe*",
+                "ec2:AssociateIamInstanceProfile",
+                "ec2:DescribeIamInstanceProfileAssociations",
+                "ec2:DisassociateIamInstanceProfile",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:CreatePlacementGroup",
+                "ec2:DeletePlacementGroup"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "fabricPoolPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteBucket",
+                "s3:GetLifecycleConfiguration",
+                "s3:PutLifecycleConfiguration",
+                "s3:PutBucketTagging",
+                "s3:ListBucketVersions"
+            ],
+            "Resource": [
+                "arn:aws-iso:s3:::fabric-pool*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances",
+                "ec2:AttachVolume",
+                "ec2:DetachVolume"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "ec2:ResourceTag/WorkingEnvironment": "*"
+                }
+            },
+            "Resource": [
+                "arn:aws-iso:ec2:*:*:instance/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AttachVolume",
+                "ec2:DetachVolume"
+            ],
+            "Resource": [
+                "arn:aws-iso:ec2:*:*:volume/*"
+            ]
+        }
+    ]
+}
+----
+--
+====
+. Crie uma política para o Cloud Volumes ONTAP.
++
+[role="tabbed-block"]
+====
+.Regiões secretas
+--
+[source, json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Action": "s3:ListAllMyBuckets",
+        "Resource": "arn:aws-iso-b:s3:::*",
+        "Effect": "Allow"
+    }, {
+        "Action": [
+            "s3:ListBucket",
+            "s3:GetBucketLocation"
+        ],
+        "Resource": "arn:aws-iso-b:s3:::fabric-pool-*",
+        "Effect": "Allow"
+    }, {
+        "Action": [
+            "s3:GetObject",
+            "s3:PutObject",
+            "s3:DeleteObject"
+        ],
+        "Resource": "arn:aws-iso-b:s3:::fabric-pool-*",
+        "Effect": "Allow"
+    }]
+}
+----
+--
+.Top regiões secretas
+--
+[source, json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Action": "s3:ListAllMyBuckets",
+        "Resource": "arn:aws-iso:s3:::*",
+        "Effect": "Allow"
+    }, {
+        "Action": [
+            "s3:ListBucket",
+            "s3:GetBucketLocation"
+        ],
+        "Resource": "arn:aws-iso:s3:::fabric-pool-*",
+        "Effect": "Allow"
+    }, {
+        "Action": [
+            "s3:GetObject",
+            "s3:PutObject",
+            "s3:DeleteObject"
+        ],
+        "Resource": "arn:aws-iso:s3:::fabric-pool-*",
+        "Effect": "Allow"
+    }]
+}
+----
+--
+====
++
+Para pares de HA, se você planeja implantar um par de HA do Cloud Volumes ONTAP, crie uma política para o mediador de HA.
+
++
+[source, json]
+----
+{
+	"Version": "2012-10-17",
+	"Statement": [{
+			"Effect": "Allow",
+			"Action": [
+				"ec2:AssignPrivateIpAddresses",
+				"ec2:CreateRoute",
+				"ec2:DeleteRoute",
+				"ec2:DescribeNetworkInterfaces",
+				"ec2:DescribeRouteTables",
+				"ec2:DescribeVpcs",
+				"ec2:ReplaceRoute",
+				"ec2:UnassignPrivateIpAddresses"
+			],
+			"Resource": "*"
+		}
+	]
+}
+----
+. Crie funções do IAM com o tipo de função Amazon EC2 e anexe as políticas criadas nas etapas anteriores.
++
+.Crie a função:
+Semelhante às políticas, você deve ter uma função do IAM para o conetor e uma para os nós do Cloud Volumes ONTAP. Para pares de HA: Assim como as políticas, você deve ter uma função do IAM para o conector, uma para os nós Cloud Volumes ONTAP e uma para o mediador de HA (se quiser implantar pares de HA).
+
++
+.Selecione a função:
+Você deve selecionar a função do IAM do conetor quando iniciar a instância do conetor. Você pode selecionar as funções do IAM para o Cloud Volumes ONTAP ao criar um ambiente de trabalho do Cloud Volumes ONTAP no BlueXP . Para pares de HA, você pode selecionar as funções do IAM para o Cloud Volumes ONTAP e o mediador de HA ao criar um ambiente de trabalho do Cloud Volumes ONTAP no BlueXP .
+
+
+
+
+
+== Etapa 3: Configurar o AWS KMS
+
+Se você quiser usar a criptografia da Amazon com o Cloud Volumes ONTAP, verifique se os requisitos são atendidos para o Serviço de Gerenciamento de chaves da AWS (KMS).
+
+.Passos
+. Certifique-se de que existe uma chave mestra do cliente (CMK) ativa na sua conta ou em outra conta da AWS.
++
+O CMK pode ser um CMK gerenciado pela AWS ou um CMK gerenciado pelo cliente.
+
+. Se o CMK estiver em uma conta da AWS separada da conta em que você planeja implantar o Cloud Volumes ONTAP, você precisará obter o ARN dessa chave.
++
+Você precisará fornecer o ARN ao BlueXP  ao criar o sistema Cloud Volumes ONTAP.
+
+. Adicione a função do IAM para a instância do Connector à lista de usuários-chave de um CMK.
++
+Isso dá permissões BlueXP  para usar o CMK com Cloud Volumes ONTAP.
+
+
+
+
+
+== Passo 4: Instale o conetor e configure o BlueXP 
+
+Antes de começar a usar o BlueXP  para implantar o Cloud Volumes ONTAP na AWS, você deve instalar e configurar o BlueXP  Connector. O conetor permite que o BlueXP  gerencie recursos e processos em seu ambiente de nuvem pública (isso inclui o Cloud Volumes ONTAP).
+
+.Passos
+. Obtenha um certificado raiz assinado por uma autoridade de certificação (CA) no formato X,509 codificado com base em Email Avançado de Privacidade (PEM) 64. Consulte as políticas e procedimentos da sua organização para obter o certificado.
++
+
+NOTE: Para regiões da nuvem secreta da AWS, você deve fazer o upload do `NSS Root CA 2` certificado e, para a nuvem secreta superior, o `Amazon Root CA 4` certificado. Certifique-se de carregar apenas estes certificados e não toda a cadeia. O arquivo para a cadeia de certificados é grande e o upload pode falhar. Se você tiver certificados adicionais, você pode carregá-los mais tarde, como descrito na próxima etapa.
+
++
+Você precisará fazer o upload do certificado durante o processo de configuração. O BlueXP  usa o certificado confiável ao enviar solicitações para a AWS por HTTPS.
+
+. Inicie a instância do conetor:
++
+.. Acesse a página do mercado da Comunidade de Inteligência da AWS para o BlueXP .
+.. Na guia Lançamento Personalizado, escolha a opção para iniciar a instância no console EC2.
+.. Siga as instruções para configurar a instância.
++
+Observe o seguinte ao configurar a instância:
+
++
+*** Recomendamos T3.xlarge.
+*** Você deve escolher a função do IAM que você criou ao configurar permissões.
+*** Você deve manter as opções de armazenamento padrão.
+*** Os métodos de conexão necessários para o conetor são os seguintes: SSH, HTTP e HTTPS.
+
+
+
+
+. Configure o BlueXP  a partir de um host que tenha uma conexão com a instância do conetor:
++
+.. Abra um navegador da Web e digite https://_ipaddress_[] onde _ipaddress_ é o endereço IP do host Linux onde você instalou o conetor.
+.. Especifique um servidor proxy para conetividade com os serviços da AWS.
+.. Carregue o certificado obtido na etapa 1.
+.. Selecione *Configurar novo BlueXP * e siga as instruções para configurar o sistema.
++
+*** *Detalhes do sistema*: Insira um nome para o conetor e o nome da sua empresa.
+*** *Criar usuário Admin*: Crie o usuário admin para o sistema.
++
+Esta conta de utilizador é executada localmente no sistema. Não há conexão com o serviço auth0 disponível através do BlueXP .
+
+*** *Revisão*: Revise os detalhes, aceite o contrato de licença e selecione *Configurar*.
+
+
+.. Para concluir a instalação do certificado assinado pela CA, reinicie a instância do conetor a partir do console EC2.
+
+
+. Depois que o conetor for reiniciado, faça login usando a conta de usuário do administrador criada no assistente de configuração.
+
+
+
+
+== Passo 5: (Opcional) instale um certificado de modo privado
+
+Esta etapa é opcional para as regiões da AWS Secret Cloud e Top Secret Cloud e é necessária somente se você tiver certificados adicionais além dos certificados raiz instalados na etapa anterior.
+
+.Passos
+. Listar os certificados instalados existentes.
++
+.. Para coletar o ID do docker do contentor occm (nome identificado "ds-occm-1"), execute o seguinte comando:
++
+[source, CLI]
+----
+docker ps
+----
+.. Para entrar no contentor occm, execute o seguinte comando:
++
+[source, CLI]
+----
+docker exec -it <docker-id> /bin/sh
+----
+.. Para coletar a senha da variável de ambiente "TRUST_STORE_password", execute o seguinte comando:
++
+[source, CLI]
+----
+env
+----
+.. Para listar todos os certificados instalados no truststore, execute o seguinte comando e use a senha coletada na etapa anterior:
++
+[source, CLI]
+----
+keytool -list -v -keystore occm.truststore
+----
+
+
+. Adicione um certificado.
++
+.. Para coletar o ID do docker do contentor occm (nome identificado "ds-occm-1"), execute o seguinte comando:
++
+[source, CLI]
+----
+docker ps
+----
+.. Para entrar no contentor occm, execute o seguinte comando:
++
+[source, CLI]
+----
+docker exec -it <docker-id> /bin/sh
+----
++
+Salve o novo arquivo de certificado dentro.
+
+.. Para coletar a senha da variável de ambiente "TRUST_STORE_password", execute o seguinte comando:
++
+[source, CLI]
+----
+env
+----
+.. Para adicionar o certificado ao armazenamento confiável, execute o seguinte comando e use a senha da etapa anterior:
++
+[source, CLI]
+----
+keytool -import -alias <alias-name> -file <certificate-file-name> -keystore occm.truststore
+----
+.. Para verificar se o certificado foi instalado, execute o seguinte comando:
++
+[source, CLI]
+----
+keytool -list -v -keystore occm.truststore -alias <alias-name>
+----
+.. Para sair do contentor de occm, execute o seguinte comando:
++
+[source, CLI]
+----
+exit
+----
+.. Para redefinir o contentor de occm, execute o seguinte comando:
++
+[source, CLI]
+----
+docker restart <docker-id>
+----
+
+
+
+
+--
+
+--
+
+
+== Passo 6: Adicione uma licença à carteira digital BlueXP 
+
+Se você comprou uma licença da NetApp, precisará adicioná-la à carteira digital da BlueXP  para que possa selecionar a licença ao criar um novo sistema Cloud Volumes ONTAP. A carteira digital identifica essas licenças como não atribuídas.
+
+.Passos
+. No menu de navegação BlueXP , selecione *Governança > carteira digital*.
+. Na guia *Cloud Volumes ONTAP*, selecione *licenças baseadas em nós* na lista suspensa.
+. Clique em *Unassigned*.
+. Clique em *Adicionar licenças não atribuídas*.
+. Introduza o número de série da licença ou carregue o ficheiro da licença.
+. Se ainda não tiver o ficheiro de licença, terá de carregar manualmente o ficheiro de licença a partir do NetApp.com.
++
+.. Aceda ao link:https://register.netapp.com/site/vsnr/register/getlicensefile["Gerador de arquivos de licença NetApp"^] e inicie sessão utilizando as suas credenciais do site de suporte da NetApp.
+.. Introduza a sua palavra-passe, escolha o seu produto, introduza o número de série, confirme que leu e aceitou a política de privacidade e, em seguida, clique em *Enviar*.
+.. Escolha se você deseja receber o arquivo JSON serialnumber.NLF por e-mail ou download direto.
+
+
+. Clique em *Adicionar licença*.
+
+
+.Resultado
+O BlueXP  adiciona a licença à carteira digital. A licença será identificada como não atribuída até que você a associe a um novo sistema Cloud Volumes ONTAP. Depois que isso acontece, a licença passa para a guia BYOL na carteira digital.
+
+
+
+== Passo 7: Inicie o Cloud Volumes ONTAP a partir do BlueXP 
+
+Você pode iniciar instâncias do Cloud Volumes ONTAP na nuvem secreta da AWS e na nuvem secreta criando novos ambientes de trabalho no BlueXP .
+
+.Antes de começar
+Para pares de HA, é necessário um par de chaves para habilitar a autenticação SSH baseada em chave para o mediador de HA.
+
+.Passos
+. Na página ambientes de trabalho, clique em *Adicionar ambiente de trabalho*.
+. Em *criar*, selecione Cloud Volumes ONTAP.
++
+Para HA: Em *Create*, selecione Cloud Volumes ONTAP ou Cloud Volumes ONTAP HA.
+
+. Conclua as etapas no assistente para iniciar o sistema Cloud Volumes ONTAP.
++
+
+CAUTION: Ao fazer seleções através do assistente, não selecione *Data Sense & Compliance* e *Backup to Cloud* em *Serviços*. Em *Pacotes pré-configurados*, selecione *alterar configuração* somente e certifique-se de que não selecionou nenhuma outra opção. Pacotes pré-configurados não são suportados nas regiões da AWS Secret Cloud e Top Secret Cloud e, se selecionado, sua implantação falhará.
+
+
+
+.Notas para implantar o Cloud Volumes ONTAP HA em várias zonas de disponibilidade
+Observe o seguinte ao concluir o assistente para pares de HA.
+
+* Você deve configurar um gateway de trânsito quando implantar o Cloud Volumes ONTAP HA em várias zonas de disponibilidade (AZs). Para obter instruções, link:task-setting-up-transit-gateway.html["Configure um gateway de trânsito da AWS"]consulte .
+* Implemente a configuração como a seguir, porque apenas dois AZs estavam disponíveis na nuvem secreta principal da AWS no momento da publicação:
++
+** Nó 1: Zona de disponibilidade A
+** Nó 2: Zona de disponibilidade B
+** Mediador: Zona de disponibilidade A ou B
+
+
+
+
+.Notas para implantar o Cloud Volumes ONTAP em nós único e de HA
+Observe o seguinte ao concluir o assistente:
+
+* Você deve deixar a opção padrão para usar um grupo de segurança gerado.
++
+O grupo de segurança predefinido inclui as regras que o Cloud Volumes ONTAP precisa para operar com êxito. Se você tiver um requisito para usar o seu próprio, você pode consultar a seção do grupo de segurança abaixo.
+
+* Você deve escolher a função do IAM que criou ao preparar seu ambiente AWS.
+* O tipo de disco subjacente da AWS é para o volume inicial do Cloud Volumes ONTAP.
++
+Você pode escolher um tipo de disco diferente para volumes subsequentes.
+
+* O desempenho dos discos da AWS está vinculado ao tamanho do disco.
++
+Você deve escolher o tamanho de disco que ofereça a performance contínua de que precisa. Consulte a documentação da AWS para obter mais detalhes sobre o desempenho do EBS.
+
+* O tamanho do disco é o tamanho padrão para todos os discos no sistema.
++
+
+NOTE: Se você precisar de um tamanho diferente mais tarde, você pode usar a opção Alocação avançada para criar um agregado que use discos de um tamanho específico.
+
+
+
+.Resultado
+O BlueXP  inicia a instância do Cloud Volumes ONTAP. Você pode acompanhar o progresso na linha do tempo.
+
+
+
+== Etapa 8: Instalar certificados de segurança para categorização de dados
+
+Você precisa instalar manualmente certificados de segurança para habilitar a disposição em camadas de dados nas regiões da AWS Secret Cloud e Top Secret Cloud.
+
+.Antes de começar
+. Crie buckets do S3.
++
+
+NOTE: Certifique-se de que os nomes do bucket estão prefixados com `fabric-pool-.`, por `fabric-pool-testbucket` exemplo, .
+
+. Mantenha os certificados raiz que você instalou `step 4` a calhar.
+
+
+.Passos
+. Copie o texto dos certificados raiz instalados no `step 4`.
+. Conete-se com segurança ao sistema Cloud Volumes ONTAP usando a CLI.
+. Instale os certificados raiz. Talvez seja necessário pressionar a `ENTER` tecla várias vezes:
++
+[listing]
+----
+security certificate install -type server-ca -cert-name <certificate-name>
+----
+. Quando solicitado, insira todo o texto copiado, incluindo e de `----- BEGIN CERTIFICATE -----` para `----- END CERTIFICATE -----`.
+. Mantenha uma cópia do certificado digital assinado pela CA para referência futura.
+. Guarde o nome da CA e o número de série do certificado.
+. Configure o armazenamento de objetos para as regiões da AWS Secret Cloud e da Top Secret Cloud: `set -privilege advanced -confirmations off`
+. Execute este comando para configurar o armazenamento de objetos.
++
+
+NOTE: Todos os nomes de recursos do Amazon (Arns) devem ser sufixos com `-iso-b`, `arn:aws-iso-b` como . Por exemplo, se um recurso exigir um ARN com uma região, para a nuvem secreta superior, use a convenção de nomenclatura como `us-iso-b` para a `-server` bandeira. Para a nuvem secreta da AWS, use `us-iso-b-1`o .
+
++
+[listing]
+----
+storage aggregate object-store config create -object-store-name <S3Bucket> -provider-type AWS_S3 -auth-type EC2-IAM -server <s3.us-iso-b-1.server_name> -container-name <fabric-pool-testbucket> -is-ssl-enabled true -port 443
+----
+. Verifique se o armazenamento de objetos foi criado com sucesso: `storage aggregate object-store show -instance`
+. Anexe o armazenamento de objetos ao agregado. Isso deve ser repetido para cada novo agregado: `storage aggregate object-store attach -aggregate <aggr1> -object-store-name <S3Bucket>`
+

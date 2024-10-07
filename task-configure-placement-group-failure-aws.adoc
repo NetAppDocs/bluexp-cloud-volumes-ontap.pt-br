@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: task-configure-placement-group-failure-aws.html 
+keywords: placement group, failure, HA single zone, app.conf, rollback, AWS 
+summary: O Cloud Volumes ONTAP usa um link privado do Azure para conexões com suas contas de armazenamento associadas. Se necessário, você pode desativar os links privados do Azure e usar endpoints de serviço em vez disso. 
+---
+= Configurar a criação do grupo de posicionamento para AWS HA Single AZ
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O Cloud Volumes ONTAP falha e reverte novas implantações de configurações de alta disponibilidade (HA) da AWS em uma única zona de disponibilidade (AZ) sempre que a criação do grupo de posicionamento falhar. Se necessário, você pode forçar a conclusão bem-sucedida das implantações configurando grupos de posicionamento para ignorar o processo de reversão sempre que a criação falhar.
+
+
+
+== Visão geral
+
+Por padrão, as implantações falham e revertem sempre que um grupo de posicionamento falha no processo de criação de um ambiente de trabalho de zona de disponibilidade única de HA. A criação do grupo de posicionamento também falha e reverte se os nós do Cloud Volumes ONTAP e a instância do mediador não estiverem presentes.
+
+Você pode ignorar o processo de reversão sempre que a criação do grupo de posicionamento falhar e permitir que as implantações continuem configurando o arquivo app.conf. Ao ignorar o processo de reversão, as implantações são concluídas com êxito e o sistema gera uma notificação informando que a criação do grupo de posicionamento falhou com um estado de incompleto.
+
+
+
+=== Desative a reversão na falha do grupo de posicionamento
+
+Para desativar a falha do grupo de posicionamento, o sinalizador "rollback-on-placement-group-failure" deve ser definido como "false".
+
+.Passos
+. Use SSH para se conetar ao host do conetor e fazer login.
+. Navegue para o seguinte diretório: /Opt/application/NetApp/cloudmanager/docker_occm/data
+. Edite o app.conf alterando o valor do parâmetro "rollback-on-placement-group-failure" para 'false':
++
+[listing]
+----
+{
+    "occm" : {
+        "aws" : {
+            "rollback-on-placement-group-failure" : false
+        }
+    }
+}
+----
++
+
+NOTE: Por padrão, o parâmetro "rollback-on-placement-group-failure" é definido como "true".
+
+. Guarde o ficheiro e termine a sessão no conetor.
++
+Não é necessário reiniciar.
+
+

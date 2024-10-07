@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: task-create-aggregates.html 
+keywords: storage, provisioning, aggregates, provision, create, advanced allocation, creating aggregates, adding an aggregate, add an aggregate, create an aggregate 
+summary: Você mesmo pode criar agregados ou permitir que o BlueXP  faça isso por você quando cria volumes. O benefício de criar agregados por conta própria é que você pode escolher o tamanho de disco subjacente, que permite dimensionar seu agregado para a capacidade ou a performance de que precisa. 
+---
+= Criar agregados
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você mesmo pode criar agregados ou permitir que o BlueXP  faça isso por você quando cria volumes. O benefício de criar agregados por conta própria é que você pode escolher o tamanho de disco subjacente, que permite dimensionar seu agregado para a capacidade ou a performance de que precisa.
+
+
+CAUTION: Todos os discos e agregados devem ser criados e excluídos diretamente do BlueXP . Você não deve executar essas ações de outra ferramenta de gerenciamento. Isso pode afetar a estabilidade do sistema, dificultar a capacidade de adicionar discos no futuro e, potencialmente, gerar taxas redundantes de provedores de nuvem.
+
+.Passos
+. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+. Na página tela, clique duas vezes no nome da instância do Cloud Volumes ONTAP na qual você deseja gerenciar agregados.
+. Na guia agregados, clique em *Adicionar agregado* e especifique detalhes para o agregado.
++
+[role="tabbed-block"]
+====
+ifdef::aws[]
+
+.AWS
+--
+** Se você for solicitado a escolher um tipo de disco e tamanho de disco, link:task-planning-your-config.html["Planeje sua configuração do Cloud Volumes ONTAP na AWS"]consulte .
+** Se você for solicitado a inserir o tamanho da capacidade do agregado, então você estará criando um agregado em uma configuração que suporte o recurso volumes elásticos do Amazon EBS. A captura de tela a seguir mostra um exemplo de um novo agregado composto por GP3 discos.
++
+image:screenshot-aggregate-size-ev.png["Uma captura de tela da tela de discos agregados para um disco GP3 em que você insere o tamanho agregado no TIB."]
+
++
+link:concept-aws-elastic-volumes.html["Saiba mais sobre o suporte para volumes elásticos"].
+
+
+
+--
+endif::aws[]
+
+ifdef::azure[]
+
+.Azure
+--
+Para obter ajuda sobre o tipo de disco e o tamanho do disco, link:task-planning-your-config-azure.html["Planeje sua configuração do Cloud Volumes ONTAP no Azure"]consulte .
+
+--
+endif::azure[]
+
+ifdef::gcp[]
+
+.Google Cloud
+--
+Para obter ajuda sobre o tipo de disco e o tamanho do disco, link:task-planning-your-config-gcp.html["Planeje sua configuração do Cloud Volumes ONTAP no Google Cloud"]consulte .
+
+--
+endif::gcp[]
+
+====
+. Clique em *Go* e, em seguida, clique em *Approve and Purchase*.
+

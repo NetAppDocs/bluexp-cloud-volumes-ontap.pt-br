@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: task-connecting-to-otc.html 
+keywords: connecting, cli, command, command line, connect, shell, interface 
+summary: A CLI do Cloud Volumes ONTAP permite executar todos os comandos administrativos e é uma boa escolha para tarefas avançadas ou se você estiver mais confortável usando a CLI. Você pode se conetar ao CLI usando SSH. 
+---
+= Administrar o Cloud Volumes ONTAP a partir da CLI
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+A CLI do Cloud Volumes ONTAP permite executar todos os comandos administrativos e é uma boa escolha para tarefas avançadas ou se você estiver mais confortável usando a CLI. Você pode se conetar à CLI usando o Secure Shell (SSH).
+
+.Antes de começar
+O host a partir do qual você usa SSH para se conetar ao Cloud Volumes ONTAP deve ter uma conexão de rede com o Cloud Volumes ONTAP. Por exemplo, você pode precisar de SSH de um host jump que esteja na rede do seu provedor de nuvem.
+
+ifdef::aws[]
+
+
+NOTE: Quando implantadas em vários AZs, as configurações do Cloud Volumes ONTAP HA usam um endereço IP flutuante para a interface de gerenciamento de cluster, o que significa que o roteamento externo não está disponível. Você deve se conetar a partir de um host que faça parte do mesmo domínio de roteamento.
+
+endif::aws[]
+
+.Passos
+. No BlueXP , identifique o endereço IP da interface de gerenciamento de cluster:
++
+.. No menu de navegação à esquerda, selecione *Storage > Canvas*.
+.. Na página tela, selecione o sistema Cloud Volumes ONTAP.
+.. Copie o endereço IP de gerenciamento de cluster que aparece no painel direito.
+
+
+. Use SSH para se conetar ao endereço IP da interface de gerenciamento de cluster usando a conta de administrador.
++
+*Exemplo*
+
++
+A imagem a seguir mostra um exemplo usando PuTTY:
+
++
+image:screenshot_cli2.gif["Captura de tela: Mostra o destino admin@192.168.11.5 na porta 22."]
+
+. No prompt de login, insira a senha da conta de administrador.
++
+*Exemplo*
+
++
+....
+Password: ********
+COT2::>
+....
+

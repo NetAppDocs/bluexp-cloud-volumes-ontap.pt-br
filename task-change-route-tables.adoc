@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: task-change-route-tables.html 
+keywords: route tables, update route tables, modify route tables, change route table 
+summary: Você pode modificar as tabelas de rota da AWS que incluem rotas para os endereços IP flutuantes de um par de HA implantado em várias zonas de disponibilidade da AWS. Você pode fazer isso se novos clientes NFS ou CIFS precisarem acessar um par de HA na AWS. 
+---
+= Alterar tabelas de rota para pares HA em vários AZs
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode modificar as tabelas de rota da AWS que incluem rotas para os endereços IP flutuantes de um par de HA implantado em várias zonas de disponibilidade da AWS (AZs). Você pode fazer isso se novos clientes NFS ou CIFS precisarem acessar um par de HA na AWS.
+
+.Passos
+. Na página Canvas, selecione o ambiente de trabalho.
+. Na guia Visão geral, clique no painel recursos e, em seguida, clique no ícone de lápis ao lado de *tabelas de rota*.
++
+image:screenshot_features_route_tables.png["Uma captura de tela que mostra a configuração de tabelas de rota no painel recursos disponível no canto superior direito da página Visão geral ao exibir um ambiente de trabalho."]
+
+. Modifique a lista de tabelas de rota selecionadas e clique em *Salvar*.
+
+
+.Resultado
+O BlueXP  envia uma solicitação da AWS para modificar as tabelas de rota.

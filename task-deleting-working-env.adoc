@@ -1,0 +1,48 @@
+---
+sidebar: sidebar 
+permalink: task-deleting-working-env.html 
+keywords: terminate, delete, working environment, remove, terminate working environment, terminate instance, delete cloud volumes ontap, delete instance, delete working environment, delete backups, cloud backup, cloud data sense 
+summary: Você deve sempre excluir sistemas Cloud Volumes ONTAP do BlueXP , em vez de do console do seu provedor de nuvem. Por exemplo, se você encerrar uma instância do Cloud Volumes ONTAP licenciada do seu provedor de nuvem, não poderá usar a chave de licença para outra instância. Você deve excluir o ambiente de trabalho do BlueXP  para liberar a licença. 
+---
+= Eliminar um sistema Cloud Volumes ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você deve sempre excluir sistemas Cloud Volumes ONTAP do BlueXP , em vez de do console do seu provedor de nuvem. Por exemplo, se você encerrar uma instância do Cloud Volumes ONTAP licenciada do seu provedor de nuvem, não poderá usar a chave de licença para outra instância. Você deve excluir o ambiente de trabalho do BlueXP  para liberar a licença.
+
+Quando você exclui um ambiente de trabalho, o BlueXP  encerra instâncias do Cloud Volumes ONTAP e exclui discos e snapshots.
+
+Os recursos gerenciados por outros serviços, como backups para backup e recuperação do BlueXP  e instâncias para classificação do BlueXP , não são excluídos quando você exclui um ambiente de trabalho. Você precisará excluí-los manualmente. Se você não fizer isso, continuará a receber cobranças por esses recursos.
+
+
+NOTE: Quando o BlueXP  implanta o Cloud Volumes ONTAP em seu provedor de nuvem, ele habilita a proteção de encerramento nas instâncias. Esta opção ajuda a evitar a cessação acidental.
+
+.Passos
+. Se você ativou o backup e a recuperação do BlueXP  no ambiente de trabalho, determine se os dados de backup ainda são necessários e, em seguida https://docs.netapp.com/us-en/bluexp-backup-recovery/task-manage-backups-ontap.html#deleting-backups["exclua os backups, se necessário"^], .
++
+O backup e a recuperação do BlueXP  são independentes do Cloud Volumes ONTAP por design. O backup e a recuperação do BlueXP  não excluem automaticamente os backups quando você exclui um sistema Cloud Volumes ONTAP e não há suporte atual na IU para excluir os backups depois que o sistema for excluído.
+
+. Se você ativou a classificação do BlueXP  neste ambiente de trabalho e nenhum outro ambiente de trabalho usa esse serviço, então você precisará excluir a instância do serviço.
++
+https://docs.netapp.com/us-en/bluexp-classification/concept-cloud-compliance.html#the-cloud-data-sense-instance["Saiba mais sobre a instância de classificação do BlueXP "^].
+
+. Exclua o ambiente de trabalho do Cloud Volumes ONTAP.
++
+.. Na página tela, clique duas vezes no nome do ambiente de trabalho do Cloud Volumes ONTAP que você deseja excluir.
+.. No canto superior direito do console BlueXP , clique no ícone de elipses e selecione *Excluir*.
++
+image:screenshot_settings_delete.png["Uma captura de tela que mostra o menu disponível no ambiente de trabalho que contém a ação Excluir."]
+
+.. Na janela Excluir ambiente de trabalho, digite o nome do ambiente de trabalho e clique em *Excluir*.
++
+Pode demorar até 5 minutos para eliminar o ambiente de trabalho.
+
+
+
+

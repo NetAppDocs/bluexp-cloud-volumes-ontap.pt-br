@@ -1,0 +1,152 @@
+---
+sidebar: sidebar 
+permalink: task-enabling-private-link.html 
+keywords: azure private link, private link connection, private link to storage, service endpoints, enable service endpoint, disable private link 
+summary: O Cloud Volumes ONTAP usa um link privado do Azure para conexões com suas contas de armazenamento associadas. Se necessário, você pode desativar os links privados do Azure e usar endpoints de serviço em vez disso. 
+---
+= Use um link privado do Azure ou endpoints de serviço
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O Cloud Volumes ONTAP usa um link privado do Azure para conexões com suas contas de armazenamento associadas. Se necessário, você pode desativar os links privados do Azure e usar endpoints de serviço em vez disso.
+
+
+
+== Visão geral
+
+Por padrão, o BlueXP  habilita um link privado do Azure para conexões entre o Cloud Volumes ONTAP e suas contas de armazenamento associadas. Um link privado do Azure protege conexões entre endpoints no Azure e fornece benefícios de desempenho.
+
+Se necessário, você pode configurar o Cloud Volumes ONTAP para usar endpoints de serviço em vez de um link privado do Azure.
+
+Em qualquer uma das configurações, o BlueXP  sempre limita o acesso à rede para conexões entre Cloud Volumes ONTAP e contas de armazenamento. O acesso à rede é limitado ao VNet onde o Cloud Volumes ONTAP é implantado e ao VNet onde o conetor é implantado.
+
+
+
+== Desative os links privados do Azure e use endpoints de serviço em vez disso
+
+Se exigido pela sua empresa, você pode alterar uma configuração no BlueXP  para que ele configure o Cloud Volumes ONTAP para usar endpoints de serviço em vez de um link privado do Azure. A alteração desta definição aplica-se aos novos sistemas Cloud Volumes ONTAP criados por si. Os pontos de extremidade de serviço são suportados apenas link:https://docs.microsoft.com/en-us/azure/availability-zones/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies["Pares de regiões do Azure"^]entre o conetor e os VNets Cloud Volumes ONTAP.
+
+O conetor deve ser implantado na mesma região do Azure que os sistemas Cloud Volumes ONTAP que gerencia, ou no https://docs.microsoft.com/en-us/azure/availability-zones/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies["Par de regiões do Azure"^] para os sistemas Cloud Volumes ONTAP.
+
+.Passos
+. No canto superior direito do console BlueXP , clique no ícone Configurações e selecione *Configurações do Cloud Volumes ONTAP*.
++
+image:screenshot_settings_icon.png["Uma captura de tela que mostra o ícone Configurações no canto superior direito do console BlueXP ."]
+
+. Em *Azure*, clique em *usar o Azure Private Link*.
+. Desmarque *ligação privada entre o Cloud Volumes ONTAP e contas de armazenamento*.
+. Clique em *Salvar*.
+
+
+.Depois de terminar
+Se você desativou os Links privados do Azure e o conetor usa um servidor proxy, você deve habilitar o tráfego direto da API.
+
+https://docs.netapp.com/us-en/bluexp-setup-admin/task-configuring-proxy.html#enable-a-proxy-on-a-connector["Saiba como ativar o tráfego direto da API no conetor"^]
+
+
+
+== Trabalhe com o Azure Private Links
+
+Na maioria dos casos, não há nada que você precise fazer para configurar os links privados do Azure com o Cloud Volumes ONTAP. O BlueXP  gerencia links privados do Azure para você. Mas se você usar uma zona DNS privada do Azure existente, precisará editar um arquivo de configuração.
+
+
+
+=== Requisito para DNS personalizado
+
+Opcionalmente, se você trabalha com DNS personalizado, você precisa criar um encaminhador condicional para a zona DNS privada do Azure a partir de seus servidores DNS personalizados. Para saber mais, link:https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns#on-premises-workloads-using-a-dns-forwarder["Documentação do Azure sobre o uso de um encaminhador DNS"^]consulte .
+
+
+
+=== Como as conexões de link privado funcionam
+
+Quando o BlueXP  implanta o Cloud Volumes ONTAP no Azure, ele cria um endpoint privado no grupo de recursos. O endpoint privado está associado às contas de armazenamento do Cloud Volumes ONTAP. Como resultado, o acesso ao storage Cloud Volumes ONTAP viaja pela rede backbone da Microsoft.
+
+O acesso ao cliente passa pelo link privado quando os clientes estão dentro do mesmo VNet que o Cloud Volumes ONTAP, dentro de VNets peered ou em sua rede local ao usar uma conexão VPN privada ou ExpressRoute ao VNet.
+
+Aqui está um exemplo que mostra o acesso do cliente através de um link privado dentro do mesmo VNet e de uma rede local que tem uma conexão VPN privada ou ExpressRoute.
+
+image:diagram_azure_private_link.png["Uma imagem conceitual que mostra o acesso aos dados indo para o Cloud Volumes ONTAP e por meio de um endpoint privado e link privado para a conta de armazenamento."]
+
+
+NOTE: Se o conetor e os sistemas Cloud Volumes ONTAP forem implantados em VNets diferentes, você deverá configurar o peering VNet entre o VNet onde o conetor é implantado e o VNet onde os sistemas Cloud Volumes ONTAP são implantados.
+
+
+
+=== Forneça ao BlueXP  detalhes sobre o DNS Privado do Azure
+
+Se utilizar https://docs.microsoft.com/en-us/azure/dns/private-dns-overview["DNS privado do Azure"^]o , terá de modificar um ficheiro de configuração em cada conetor. Caso contrário, o BlueXP  não pode ativar a conexão do Azure Private Link entre o Cloud Volumes ONTAP e suas contas de armazenamento associadas.
+
+Observe que o nome DNS deve corresponder aos requisitos de nomenclatura do DNS do Azure https://docs.microsoft.com/en-us/azure/storage/common/storage-private-endpoints#dns-changes-for-private-endpoints["Como mostrado na documentação do Azure"^] .
+
+.Passos
+. SSH para o host do conetor e faça login.
+. Navegue para o seguinte diretório: /Opt/application/NetApp/cloudmanager/docker_occm/data
+. Edite o app.conf adicionando o parâmetro "user-private-dns-zone-settings" com os seguintes pares de palavras-chave-valor:
++
+....
+"user-private-dns-zone-settings" : {
+   "resource-group" : "<resource group name of the DNS zone>",
+   "subscription" : "<subscription ID>",
+   "use-existing" : true,
+   "create-private-dns-zone-link" : true
+}
+....
++
+O parâmetro deve ser inserido no mesmo nível que "System-id", como mostrado abaixo:
+
++
+....
+"system-id" : "<system ID>",
+"user-private-dns-zone-settings" : {
+....
++
+Observe que a palavra-chave de assinatura é necessária somente se a zona DNS Privada existir em uma assinatura diferente do conetor.
+
+. Guarde o ficheiro e termine a sessão no conetor.
++
+Não é necessário reiniciar.
+
+
+
+
+
+=== Ativar reversão em falhas
+
+Se o BlueXP  não criar um link privado do Azure como parte de ações específicas, ele conclui a ação sem a conexão do link privado do Azure. Isso pode acontecer ao criar um novo ambiente de trabalho (nó único ou par de HA), ou quando as seguintes ações ocorrem em um par de HA: Criar um novo agregado, adicionar discos a um agregado existente ou criar uma nova conta de storage quando estiver acima de 32 TIB.
+
+Você pode alterar esse comportamento padrão habilitando rollback se o BlueXP  não conseguir criar o link privado do Azure. Isso pode ajudar a garantir que você esteja totalmente em conformidade com os regulamentos de segurança da sua empresa.
+
+Se você ativar a reversão, o BlueXP  interromperá a ação e reverterá todos os recursos criados como parte da ação.
+
+Você pode ativar a reversão através da API ou atualizando o arquivo app.conf.
+
+*Ativar rollback através da API*
+
+.Passo
+. Use a `PUT /occm/config` chamada API com o seguinte corpo de solicitação:
++
+[source, json]
+----
+{ "rollbackOnAzurePrivateLinkFailure": true }
+----
+
+
+*Ativar reversão atualizando o app.conf*
+
+.Passos
+. SSH para o host do conetor e faça login.
+. Navegue para o seguinte diretório: /Opt/application/NetApp/cloudmanager/docker_occm/data
+. Edite o app.conf adicionando o seguinte parâmetro e valor:
++
+ "rollback-on-private-link-failure": true
+. Guarde o ficheiro e termine a sessão no conetor.
++
+Não é necessário reiniciar.
+
+

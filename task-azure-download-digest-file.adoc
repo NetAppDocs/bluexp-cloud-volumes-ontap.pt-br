@@ -1,0 +1,48 @@
+---
+sidebar: sidebar 
+permalink: task-azure-download-digest-file.html 
+keywords: Azure, image, image signature, download, digest file, decompress, Linux, Mac OS, md5, sha256 
+summary: Você pode baixar o arquivo de Digest de imagens do Azure no site de suporte da NetApp. 
+---
+= Faça o download do arquivo de Digest da imagem do Azure
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O ficheiro de imagem do Azure pode ser transferido a partir do https://mysupport.netapp.com/site/["Site de suporte da NetApp"^]. O download está no formato tar.gz e contém arquivos para verificação de assinatura de imagem.
+
+.Passos
+. Aceda ao https://mysupport.netapp.com/site/products/all/details/cloud-volumes-ontap/guideme-tab["Página do produto Cloud Volumes ONTAP no site de suporte da NetApp"^] e transfira a versão de software necessária na secção Transferências.
+. Na página de download do Cloud Volumes ONTAP, clique no botão *download* do arquivo de imagem do Azure para baixar o arquivo TAR.GZ.
++
+image::screenshot_cloud_volumes_ontap_tar.gz.png[imagens de Cloud Volumes ONTAP tar.gz]
+
+. Para Linux e MacOS, você deve executar o seguinte para obter o md5sum e sha256sum para o arquivo Azure Image Digest baixado.
++
+.. Para md5sum, introduza o `md5sum` comando.
+.. Para sha256sum, introduza o `sha256sum` comando.
+
+
+. Verifique se `md5sum` os valores e `sha256sum` correspondem ao download do Arquivo de Digest da imagem do Azure.
+. No Linux e Mac os, execute o `tar -xzf` comando para extrair o arquivo tar.gz.
++
+O arquivo TAR.GZ extraído contém o arquivo digest(.sig), o arquivo de certificado de chave pública(.pem) e o arquivo de certificado de cadeia(.pem).
+
++
+*Lista resultado do arquivo untar tar.gz*
+
++
+[listing]
+----
+$ ls cert/ -l
+-rw-r----- 1 netapp netapp  384 May  13 13:00 9.15.0P1_azure_digest.sig
+-rw-r----- 1 netapp netapp 2365 May  13 13:00 Certificate-9.15.0P1_azure.pem
+-rw-r----- 1 netapp netapp 8537 May  13 13:00 Certificate-Chain-9.15.0P1_azure.pem
+-rw-r----- 1 netapp netapp 8537 May  13 13:00 version_readme
+----
+
