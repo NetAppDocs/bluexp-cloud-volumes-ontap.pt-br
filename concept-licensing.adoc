@@ -23,7 +23,7 @@ Várias opções de licenciamento estão disponíveis para o Cloud Volumes ONTAP
 As opções de licenciamento a seguir estão disponíveis para novos clientes.
 
 Licenciamento baseado em capacidade:: Pague por vários sistemas Cloud Volumes ONTAP na sua conta do NetApp por capacidade provisionada. Inclui a capacidade de adquirir serviços de dados de nuvem complementares.
-Inscrição no Keystone:: Um serviço baseado em subscrição com pagamento conforme o uso que proporciona uma experiência otimizada de nuvem híbrida para pares de HA.
+Inscrição no Keystone:: Um serviço baseado em subscrição com pagamento conforme o uso que proporciona uma experiência otimizada de nuvem híbrida para pares de alta disponibilidade (HA).
 
 
 O modelo de licenciamento por nó anterior permanece disponível para clientes existentes que já compraram uma licença ou que tenham uma assinatura ativa do mercado.
@@ -121,7 +121,7 @@ endif::gcp[]
 
 ==== Essenciais
 
-Pague por capacidade pelo Cloud Volumes ONTAP em várias configurações diferentes.
+Você pode pagar por capacidade em várias configurações diferentes:
 
 * Escolha sua configuração do Cloud Volumes ONTAP:
 +
@@ -130,6 +130,26 @@ Pague por capacidade pelo Cloud Volumes ONTAP em várias configurações diferen
 
 
 * Adicione qualquer um dos serviços de dados de nuvem da NetApp a um custo extra
+
+
+O licenciamento é baseado inteiramente no tipo de volume criado nos sistemas Cloud Volumes ONTAP:
+
+* Nó único Essentials: Volumes de leitura/gravação criados em um sistema Cloud Volumes ONTAP usando apenas um nó ONTAP.
+* Essentials HA: Volumes de leitura/gravação usando dois nós de ONTAP que podem fazer failover uns para os outros para acesso a dados sem interrupções.
+* Nó único secundário do Essentials: Volumes do tipo de proteção de dados (normalmente volumes de destino SnapMirror ou SnapVault que são somente leitura) criados em um sistema Cloud Volumes ONTAP usando apenas um nó ONTAP.
++
+
+NOTE: Se um volume somente leitura/DP se tornar um volume primário, o BlueXP  o considera como dados primários e os custos de carregamento são calculados com base no tempo em que o volume estava no modo de leitura/gravação. Quando o volume é novamente feito somente leitura/DP, a BlueXP  considera-o como dados secundários novamente e cobra de acordo com a licença mais adequada na carteira digital.
+
+* Essentials secundário HA: Volumes do tipo de proteção de dados (DP) (normalmente volumes de destino SnapMirror ou SnapVault somente leitura) criados em um sistema Cloud Volumes ONTAP usando dois nós de ONTAP que podem fazer failover entre si para acesso a dados sem interrupções.
+
+
+Observe estes pontos:
+
+* Cobrança mínima: Há uma cobrança mínima de 4 TIB para cada VM de storage de fornecimento de dados que tenha pelo menos um volume primário (leitura-gravação). Para o pacote Essentials, essa cobrança mínima não se aplica às VMs de storage somente com volumes secundários (proteção de dados).
+* Excedentes: Se a capacidade licenciada for excedida, os excedentes são cobrados pelas taxas de mercado, com preferência pela utilização da capacidade disponível de outras licenças em primeiro lugar.
+* FlexClone e FlexCache volumes: O FlexClone volumes não é cobrado. Os volumes FlexCache de origem e destino são considerados dados primários e são cobrados de acordo com o espaço provisionado.
+* Carregamento de pares HA: Para pares de HA, somente a capacidade provisionada em um nó é cobrada. Os dados espelhados de forma síncrona para o nó do parceiro não são cobrados.
 
 
 
@@ -403,7 +423,7 @@ endif::gcp[]
 O licenciamento baseado em nó é o modelo de licenciamento da geração anterior que permitiu licenciar o Cloud Volumes ONTAP por nó. Este modelo de licenciamento não está disponível para novos clientes. O carregamento por nó foi substituído pelos métodos de carregamento por capacidade adicional descritos acima.
 
 
-IMPORTANT: O NetApp irá descontinuar o licenciamento baseado em nó em breve, que será substituído por licenças baseadas em capacidade. Para obter informações, https://mysupport.netapp.com/info/communications/CPC-00589.html["Comunicado do cliente: CPC-00589"^] consulte .
+IMPORTANT: O NetApp encerrará a disponibilidade do licenciamento baseado em nós em breve. Após o término da disponibilidade, as licenças baseadas em nós precisarão ser convertidas em licenças baseadas em capacidade. Para obter informações, https://mysupport.netapp.com/info/communications/CPC-00589.html["Comunicado do cliente: CPC-00589"^] consulte .
 
 O licenciamento baseado em nós ainda está disponível para clientes existentes:
 

@@ -20,6 +20,29 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 
 
+== 25 de outubro de 2024
+
+
+
+=== Máquinas da série N1 indisponíveis para seleção no BlueXP 
+
+As máquinas da série n1 não estão mais disponíveis para seleção no BlueXP  ao implantar novas instâncias do Cloud Volumes ONTAP no Google Cloud. As máquinas da série n1 serão mantidas e suportadas apenas em sistemas existentes mais antigos. Novas implantações do Cloud Volumes ONTAP são suportadas no Google Cloud apenas a partir da versão 9,8. Recomendamos que mude para os tipos de máquinas da série n2 compatíveis com o Cloud Volumes ONTAP 9,8 e posterior. As máquinas da série n1, no entanto, estarão disponíveis para novas implantações realizadas através da API.
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-gcp.html["Configurações compatíveis no Google Cloud"^].
+
+
+
+=== Suporte a zonas locais para Amazon Web Services em modo privado
+
+O BlueXP  agora oferece suporte a zonas locais da AWS para implantações de alta disponibilidade (HA) do Cloud Volumes ONTAP no modo privado. O suporte anteriormente limitado apenas ao modo padrão foi agora estendido para incluir o modo privado.
+
+
+NOTE: As zonas locais da AWS não são suportadas ao usar o BlueXP  no modo restrito.
+
+Para obter mais informações sobre zonas locais da AWS com implantações de HA, link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-ha.html#aws-local-zones["Zonas locais da AWS"^]consulte .
+
+
+
 == 7 de outubro de 2024
 
 
