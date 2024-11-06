@@ -4737,7 +4737,6 @@
   <block id="e5182edc3707e8e354c40ab7fa819f39" category="section-title">7 de outubro de 2024</block>
   <block id="1b658f77da3dfa84be0559359889c6d1" category="section-title">Experiência de usuário aprimorada na seleção de versão para atualização</block>
   <block id="76723ae6fdfacae29242fdb7085394b0" category="paragraph">A partir desta versão, quando você tentar atualizar o Cloud Volumes ONTAP usando a notificação BlueXP , você receberá orientações sobre as versões padrão, mais recentes e compatíveis a serem usadas. Além disso, agora você pode selecionar o patch mais recente ou a versão principal compatível com sua instância do Cloud Volumes ONTAP, ou inserir manualmente uma versão para atualização.</block>
-  <block id="c2f5c6d8ccd2cc8bdc92db0ad0c79342" category="paragraph"><block ref="c2f5c6d8ccd2cc8bdc92db0ad0c79342" category="inline-link-rx"></block></block>
   <block id="c842acaca9e3ea9ec2dc61f28e69ea15" category="section-title">9 de setembro de 2024</block>
   <block id="cdd78645b017b927a25b5449e345f823" category="section-title">As funcionalidades WORM e ARP não são mais carregáveis</block>
   <block id="c5686848892b4de33534dcc294c33fff" category="paragraph">Os recursos de segurança e proteção de dados incorporados do WORM (Write Once Read many) e do ARP (Autonomous ransomware Protection) serão oferecidos com licenças do Cloud Volumes ONTAP sem custo adicional. O novo modelo de preços se aplica às assinaturas BYOL e PAYGO/Marketplace novas e existentes da AWS, Azure e Google Cloud. As licenças baseadas em capacidade e baseadas em nós contêm ARP e WORM para todas as configurações, incluindo nó único e pares de alta disponibilidade (HA), sem custo adicional.</block>
@@ -4746,8 +4745,6 @@
   <block id="3817bf50b7761fc5155c59e4a334d37a" category="list-text">Se suas contas atuais não incluírem esses recursos, agora você pode optar por WORM e ARP sem custo adicional.</block>
   <block id="1974af11cb1ac87d0b58d8696f893e4d" category="list-text">Todas as ofertas do Cloud Volumes ONTAP para quaisquer novas contas excluirão cobranças por WORM e ARP.</block>
   <block id="0e3986fb787ff1e55f1d15206f8b39d9" category="paragraph">Saiba mais sobre esses recursos:</block>
-  <block id="a7cf7c6eee288b3a91bcae2e6522aa7a" category="list-text"><block ref="a7cf7c6eee288b3a91bcae2e6522aa7a" category="inline-link-rx"></block></block>
-  <block id="a100999de1d9ee815d7e13741acf163d" category="list-text"><block ref="a100999de1d9ee815d7e13741acf163d" category="inline-link-rx"></block></block>
   <block id="caf47538a5b97cacf4aba3098b6f9924" category="section-title">23 de agosto de 2024</block>
   <block id="2c8ad7deb621eae9ecb23ccf84d9c22c" category="section-title">A região oeste do Canadá agora é compatível com a AWS</block>
   <block id="184c928c73aa00c7569ba55c0b9e0064" category="paragraph">A região Oeste do Canadá agora é suportada na AWS para Cloud Volumes ONTAP 9.12.1 GA e posterior.</block>
@@ -5521,4 +5518,7 @@
   <block id="e8ae21b110baed89680dca18585c158c" category="section-title">Suporte a zonas locais para Amazon Web Services em modo privado</block>
   <block id="b32702079d81c2fd1e39448319edfa06" category="paragraph">O BlueXP  agora oferece suporte a zonas locais da AWS para implantações de alta disponibilidade (HA) do Cloud Volumes ONTAP no modo privado. O suporte anteriormente limitado apenas ao modo padrão foi agora estendido para incluir o modo privado.</block>
   <block id="648169096ce56c8569ce36a4abebe9c7" category="admonition">As zonas locais da AWS não são suportadas ao usar o BlueXP  no modo restrito.</block>
+  <block id="7a73f560e215c4ff952d3384c5435ae9" category="list-text"><block ref="7a73f560e215c4ff952d3384c5435ae9" category="inline-link-rx"></block></block>
+  <block id="c8eac8ecc3bb9bb52e4fa6b3d34c3c38" category="list-text"><block ref="c8eac8ecc3bb9bb52e4fa6b3d34c3c38" category="inline-link-rx"></block></block>
+  <block id="448c087351c52cb72f971666e2159491" category="paragraph"><block ref="448c087351c52cb72f971666e2159491" category="inline-link-rx"></block></block>
 </blocks>
