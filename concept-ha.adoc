@@ -164,7 +164,11 @@ NOTE: As zonas locais da AWS são suportadas ao usar o BlueXP  nos modos padrã
 
 ==== Exemplo de configurações da AWS local Zone
 
-O Cloud Volumes ONTAP é compatível apenas com implantações de HA nas zonas locais da AWS. A seguir estão exemplos de configurações:
+O Cloud Volumes ONTAP na AWS suporta apenas o modo de alta disponibilidade (HA) em uma única zona de disponibilidade. Implantações de nó único não são compatíveis.
+
+O Cloud Volumes ONTAP não é compatível com categorização de dados, disposição em camadas na nuvem e instâncias não qualificadas nas zonas locais da AWS.
+
+A seguir estão exemplos de configurações:
 
 * Zona de disponibilidade única: Os nós de cluster e o mediador estão na mesma zona local.
 * Várias zonas de disponibilidade em várias configurações de zona de disponibilidade, há três instâncias, dois nós e um mediador. Uma instância das três instâncias deve estar em uma zona separada. Você pode escolher como configurar isso.
@@ -192,7 +196,10 @@ O único tipo de disco suportado é GP2. As seguintes famílias de tipos de inst
 * R5d
 
 
-O Cloud Volumes ONTAP é compatível apenas com essas configurações. Selecionar qualquer outro tipo de disco ou instância EC2 na configuração da zona local da AWS para o Cloud Volumes ONTAP pode resultar em falha de implantação. Consulte a documentação da AWS para obter os detalhes mais recentes e completos do link:https://aws.amazon.com/about-aws/global-infrastructure/localzones/features/?nc=sn&loc=2["EC2 tipos de instância em zonas locais"^].
+
+NOTE: O Cloud Volumes ONTAP é compatível apenas com essas configurações. Selecionar tipos de disco não suportados ou instâncias não qualificadas na configuração da zona local da AWS pode resultar em falha de implantação. A disposição de dados em categorias para o AWS S3 não está disponível nas zonas locais da AWS devido à falta de conectividade.
+
+Consulte a documentação da AWS para obter os detalhes mais recentes e completos do link:https://aws.amazon.com/about-aws/global-infrastructure/localzones/features/?nc=sn&loc=2["EC2 tipos de instância em zonas locais"^].
 
 
 

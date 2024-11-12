@@ -18,7 +18,7 @@ Gerencie licenças baseadas em nós na carteira digital BlueXP  para garantir q
 
 _Licenças baseadas em nós_ são o modelo de licenciamento da geração anterior (e não disponível para novos clientes):
 
-* Licenças BYOL adquiridas na NetApp
+* Traga suas próprias licenças de licença (BYOL) adquiridas na NetApp
 * Assinaturas de pagamento conforme o uso (PAYGO) por hora a partir do mercado do seu provedor de nuvem
 
 
@@ -231,3 +231,6 @@ https://docs.netapp.com/us-en/bluexp-replication/task-replicating-data.html["Sai
 https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-deleting-working-env.html["Saiba como excluir um ambiente de trabalho do Cloud Volumes ONTAP"].
 
 
+
+.Tópico relacionado
+link: link:concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"] link:task-convert-node-capacity.html["Converta licenças baseadas em nós em capacidade"]

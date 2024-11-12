@@ -51,7 +51,7 @@ O licenciamento baseado em capacidade permite que você pague pelo Cloud Volumes
 
 Os pacotes Essentials e Professional estão disponíveis com os seguintes modelos de consumo:
 
-* Uma licença (BYOL) adquirida na NetApp
+* Uma licença (traga sua própria licença (BYOL)) comprada da NetApp
 * Uma assinatura por hora, com pagamento conforme o uso (PAYGO) no AWS Marketplace
 * Um contrato anual do AWS Marketplace
 

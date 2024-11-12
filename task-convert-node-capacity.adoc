@@ -1,0 +1,98 @@
+---
+sidebar: sidebar 
+permalink: task-convert-node-capacity.html 
+keywords: license conversion, convert node-based to capacity based, by-node to by-capacity, bluexp license conversion for node based 
+summary: 'Após o fim da disponibilidade (EOA) de suas licenças baseadas em nós, você deve fazer a transição para o licenciamento baseado em capacidade usando a ferramenta de conversão de licenças do BlueXP .' 
+---
+= Converta licenças baseadas em nós em capacidade
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Após o fim da disponibilidade (EOA) de suas licenças baseadas em nós, você deve fazer a transição para o licenciamento baseado em capacidade usando a ferramenta de conversão de licenças do BlueXP .
+
+Para compromissos anuais ou de longo prazo, a NetApp recomenda que você entre em Contato com seu representante da NetApp antes da data da EOA (11 de novembro de 2024) ou da data de expiração da licença para garantir que os pré-requisitos para a transição estejam em vigor. Se você não tiver um contrato de longo prazo para um nó Cloud Volumes ONTAP e executar seu sistema com uma assinatura paga conforme o uso (PAYGO) sob demanda, é importante Planejar sua conversão antes do final do suporte (EOS) em 31 de dezembro de 2024. Em ambos os casos, você deve garantir que seu sistema atenda aos requisitos antes de usar a ferramenta de conversão de licenças do BlueXP  para uma transição perfeita.
+
+Para obter informações sobre a EOA e a EOS, link:concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"]consulte .
+
+.Sobre esta tarefa
+* Quando você usa a ferramenta de conversão de licença, a transição do modelo de licenciamento baseado em nó para o modelo de licenciamento baseado em capacidade é executada on-line e isso elimina a necessidade de qualquer migração de dados ou provisionamento de recursos de nuvem adicionais.
+* Ele é uma operação sem interrupções, e não ocorre interrupção do serviço ou tempo de inatividade do aplicativo.
+* Os dados da conta e da aplicação no sistema Cloud Volumes ONTAP permanecem intactos.
+* Os recursos de nuvem subjacentes não são afetados após a conversão.
+* A ferramenta de conversão de licenças oferece suporte a todos os tipos de implantação, como nó único, alta disponibilidade (HA) em zona de disponibilidade única (AZ), HA em várias AZ, traga sua própria licença (BYOL) e PAYGO.
+* A ferramenta suporta todas as licenças baseadas em nós como origem e todas as licenças baseadas em capacidade como destino. Por exemplo, se você tiver uma licença baseada em nó PAYGO Standard, poderá convertê-la em uma licença baseada em capacidade BYOL.
+* A conversão é compatível com todos os fornecedores de nuvem, AWS, Azure e Google Cloud.
+* Após a conversão, o número de série da licença baseada em nó será substituído por um formato baseado em capacidade. Isso é feito como parte da conversão e é refletido em sua conta do site de suporte da NetApp (NSS).
+* Quando você faz a transição para o modelo baseado em capacidade, seus dados continuam sendo mantidos no mesmo local do licenciamento baseado em nó. Essa abordagem garante a ausência de interrupções no posicionamento dos dados e mantém os princípios de soberania de dados durante a transição.
+
+
+.Antes de começar
+* Você deve ter uma conta NSS com acesso ao cliente ou acesso de administrador.
+* Sua conta NSS deve ser registrada com as credenciais de usuário do BlueXP .
+* O ambiente de trabalho deve estar associado à conta NSS com acesso ao cliente ou acesso de administrador.
+* Você deve ter uma licença baseada em capacidade válida, seja uma licença BYOL ou uma assinatura do mercado.
+* Uma licença baseada em capacidade deve estar disponível na conta BlueXP . Essa licença pode ser uma assinatura de mercado ou um pacote de oferta BYOL/private na carteira digital BlueXP .
+* Compreenda os seguintes critérios antes de selecionar um pacote de destino:
++
+** Se a conta tiver uma licença BYOL baseada em capacidade, o pacote de destino selecionado deverá estar alinhado com as licenças baseadas em capacidade BYOL da conta:
++
+*** Quando `Professional` for selecionado como o pacote de destino, a conta deve ter uma licença BYOL com um pacote Professional:
+*** Quando `Essentials` for selecionado como o pacote de destino, a conta deve ter uma licença BYOL com o pacote Essentials.
+*** Quando `Optimized` é selecionado como o pacote de destino, a conta deve ter uma licença BYOL com o pacote otimizado.
+
+
+** Se o pacote de destino não se alinhar com a disponibilidade de licença BYOL da conta, isso implica que a licença baseada em capacidade pode não incluir o pacote selecionado. Nesse caso, você será cobrado por meio de sua assinatura do marketplace.
+** Se não houver licença BYOL baseada em capacidade, mas apenas uma assinatura do mercado, você deve garantir que o pacote selecionado esteja incluído na sua assinatura do mercado baseada em capacidade.
+** Se não houver capacidade suficiente na sua licença baseada em capacidade existente e se você tiver uma assinatura do mercado para cobrar pelo uso adicional de capacidade, você será cobrado pela capacidade adicional por meio da sua assinatura do mercado.
+** Se não houver capacidade suficiente em sua licença baseada em capacidade existente e você não tiver uma assinatura do mercado para cobrar pelo uso de capacidade adicional, a conversão não poderá ocorrer. Você deve adicionar uma assinatura de mercado para cobrar a capacidade adicional ou estender a capacidade disponível à sua licença atual.
+** Se o pacote de destino não se alinhar com a disponibilidade de licença BYOL da conta e também se não houver capacidade suficiente em sua licença baseada em capacidade existente, você será cobrado por meio de sua assinatura do marketplace.
+
+
+
+
+
+NOTE: Se algum desses requisitos não for cumprido, a conversão de licença não acontece. Em casos específicos, a licença pode ser convertida, mas não pode ser usada. Clique no ícone de informações para identificar os problemas e tomar medidas corretivas.
+
+.Passos
+. Na página Canvas, clique duas vezes no nome do ambiente de trabalho para o qual você deseja modificar o tipo de licença.
+. Na guia Visão geral, clique no painel recursos.
+. Verifique o ícone do lápis ao lado de *método de carregamento*. Se o método de carregamento para o seu sistema for `Node Based`, pode convertê-lo em carregamento por capacidade.
++
+
+TIP: O ícone é desativado se o sistema Cloud Volumes ONTAP já tiver sido cobrado por capacidade ou se algum dos requisitos não for cumprido.
+
+. Na tela *Converter licenças baseadas em nó para capacidade*, verifique o nome do ambiente de trabalho e os detalhes da licença de origem.
+. Selecione o pacote de destino para converter a licença existente:
++
+** Essenciais. O valor padrão é `Essentials`.
+** Profissional
+
+
+
+
+ifdef::azure[]
+
+* Otimizado (para Azure)
+
+
+endif::azure[]
+
+ifdef::gcp[]
+
+* Otimizado (para Google Cloud)
+
+
+endif::gcp[]
+
+. Se você tiver uma licença BYOL, marque a caixa de seleção para excluir a licença baseada em nó da conversão pós-carteira digital da BlueXP . Se a conversão não estiver concluída, mesmo ao selecionar esta caixa de seleção, a licença não será excluída da carteira digital. Se você tiver uma assinatura do marketplace, essa opção não estará disponível.
+. Selecione a caixa de verificação para confirmar que compreende as implicações da alteração e, em seguida, clique em *Proceed*.
+
+
+.Depois de terminar
+Veja o novo número de série da licença e verifique as alterações na carteira digital BlueXP .

@@ -57,7 +57,7 @@ Se você não planeja acessar os dados inativos, você pode reduzir seus custos 
 
 Os custos de acesso são maiores se você acessar os dados, então leve isso em consideração antes de alterar a classe de storage. https://aws.amazon.com/s3/storage-classes["Documentação do Amazon S3: Saiba mais sobre as classes de armazenamento do Amazon S3"^].
 
-Você pode selecionar uma classe de armazenamento ao criar o ambiente de trabalho e pode alterá-la a qualquer momento. Para obter instruções sobre como alterar a classe de armazenamento, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+Você pode selecionar uma classe de armazenamento ao criar o ambiente de trabalho e pode alterá-la a qualquer momento depois. Para obter instruções sobre como alterar a classe de armazenamento, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
 
 A classe de storage para disposição de dados em categorias é de todo o sistema, não é por volume.
 
@@ -96,9 +96,7 @@ O BlueXP  cria a conta de armazenamento com as seguintes configurações:
 Camadas de acesso ao storage:: A camada de acesso de storage padrão para dados em camadas no Azure é o nível _hot_. A camada quente é ideal para dados acessados com frequência na camada de capacidade.
 +
 --
-Se você não planeja acessar os dados inativos na camada de capacidade, pode reduzir seus custos de storage mudando para a camada de storage _cool_. Quando você muda a categoria de storage para inativo, os dados da categoria de capacidade inativa são movidos diretamente para a categoria de storage inativo.
-
-Os custos de acesso são maiores se você acessar os dados, então leve isso em consideração antes de alterar a camada de storage. https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers["Documentação do Microsoft Azure: Saiba mais sobre os níveis de acesso ao armazenamento do Azure Blob"^].
+Se você não planeja acessar os dados inativos no nível de capacidade, pode escolher o nível de storage _cool_, onde os dados inativos são retidos por um mínimo de 30 dias. Você também pode optar pelo nível _cold_, onde os dados inativos são armazenados por um mínimo de 90 dias. Com base em seus requisitos de storage e considerações de custo, você pode selecionar o nível mais adequado às suas necessidades. Quando você altera o nível de storage para _COOL_ ou _COLD_, os dados do nível de capacidade inativo são movidos diretamente para o nível de storage frio ou frio. As camadas fria e fria oferecem custos de storage menores em comparação com a camada quente, mas elas geram custos de acesso mais altos. Portanto, leve isso em consideração antes de alterar a camada de storage. Consulte a https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers["Documentação do Microsoft Azure: Saiba mais sobre os níveis de acesso ao armazenamento do Azure Blob"^].
 
 Você pode selecionar uma camada de storage ao criar o ambiente de trabalho e alterá-la a qualquer momento. Para obter detalhes sobre como alterar a camada de storage, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
 

@@ -63,22 +63,12 @@ O Cloud Volumes ONTAP oferece suporte ao recurso de proteção Autônoma contra 
 
 Separado das proteções de extensão de arquivo fornecidas pelo https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-protecting-ransomware.html#protection-from-common-ransomware-file-extensions["configuração de proteção contra ransomware"] , o recurso ARP usa análise de carga de trabalho para alertar o usuário sobre possíveis ataques com base na "atividade anormal" detetada. Tanto a configuração de proteção contra ransomware quanto o recurso ARP podem ser usados em conjunto para uma proteção abrangente contra ransomware.
 
-O recurso ARP está disponível para uso com assinaturas BYOL e marketplace para licenças baseadas em nós e baseadas em capacidade sem custo adicional. Entre em Contato com seu representante de vendas da NetApp para adicionar ARP à sua licença atual.
+O recurso ARP está disponível para uso com as assinaturas bring Your own license (BYOL) e marketplace para suas licenças sem custo adicional.
 
-A licença ARP é considerada uma licença "flutuante", o que significa que não está vinculada a uma única instância do Cloud Volumes ONTAP e pode ser aplicada a vários ambientes Cloud Volumes ONTAP.
-
-
-NOTE: O uso do recurso ARP com licenças Cloud Volumes ONTAP baseadas em nós não se reflete atualmente na carteira digital. A capacidade de visualizar o uso de ARP baseado em nós estará disponível em carteira digital em uma versão futura.
-
-Após a compra de uma licença complementar e adicioná-la à carteira digital, você pode ativar o ARP em uma base por volume com o Cloud Volumes ONTAP.
-
-Os volumes ativados por ARP têm um estado designado de "modo de aprendizagem" ou "Ativo".
+Os volumes habilitados para ARP têm um estado designado de "modo de aprendizagem" ou "Ativo".
 
 A configuração do ARP para volumes é realizada por meio do Gerenciador do sistema ONTAP e da CLI do ONTAP.
 
 Para obter mais informações sobre como ativar o ARP com o Gerenciador de sistemas ONTAP e a CLI do ONTAP, https://docs.netapp.com/us-en/ontap/anti-ransomware/enable-task.html["Ative a proteção Autonomous ransomware"^] consulte .
 
 image::screenshot_arp.png[A captura de tela mostra a licença adicional para Autonomous ransomware Protection.]
-
-
-NOTE: O suporte não está disponível para o uso de recursos licenciados sem uma licença.

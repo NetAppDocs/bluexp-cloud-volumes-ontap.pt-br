@@ -46,9 +46,9 @@ Se você não puder alterar o tipo de instância de instâncias C4, M4 ou R4, co
 +
 image::screenshot_features_instance_type.png[400]
 
-+
-.. Se você estiver usando uma licença PAYGO baseada em nó, você pode escolher uma licença e tipo de instância diferentes clicando no ícone de lápis ao lado de *tipo de licença*.
 
+
+Se você estiver usando uma licença de pagamento conforme o uso (PAYGO) baseada em nó, você pode escolher uma licença e tipo de instância diferentes clicando no ícone de lápis ao lado de *tipo de licença*.
 
 . Escolha um tipo de instância, marque a caixa de seleção para confirmar que você entende as implicações da alteração e clique em *alterar*.
 

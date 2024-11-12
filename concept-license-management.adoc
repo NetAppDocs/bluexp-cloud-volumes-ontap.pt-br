@@ -14,7 +14,7 @@ summary: Cada sistema Cloud Volumes ONTAP que tenha um BYOL baseado em nós prec
 
 
 [role="lead"]
-Cada sistema Cloud Volumes ONTAP que tenha um BYOL baseado em nós precisa ter uma licença de sistema instalada com uma assinatura ativa. O BlueXP  simplifica o processo gerenciando licenças para você e exibindo um aviso antes que elas expirem.
+Cada sistema Cloud Volumes ONTAP que tenha uma licença bring Your own license (BYOL) baseada em nós precisa ter uma licença de sistema instalada com uma assinatura ativa. O BlueXP  simplifica o processo gerenciando licenças para você e exibindo um aviso antes que elas expirem.
 
 
 TIP: Uma licença baseada em nó é a geração anterior do BYOL para Cloud Volumes ONTAP. Uma licença baseada em nó está disponível apenas para renovações de licença.

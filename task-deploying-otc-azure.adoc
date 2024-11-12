@@ -146,6 +146,7 @@ NOTE: Se um candidato de lançamento mais recente, disponibilidade geral ou libe
 Observe o seguinte:
 
 +
+** Se o acesso público à sua conta de armazenamento estiver desativado no VNet, não será possível ativar a disposição de dados em camadas no sistema Cloud Volumes ONTAP. Para obter informações, link:reference-networking-azure.html#security-group-rules["Regras do grupo de segurança"]consulte .
 ** O tipo de disco é para o volume inicial. Você pode escolher um tipo de disco diferente para volumes subsequentes.
 ** O tamanho do disco é para todos os discos no agregado inicial e para quaisquer agregados adicionais criados pelo BlueXP  quando você usa a opção de provisionamento simples. Você pode criar agregados que usam um tamanho de disco diferente usando a opção Alocação avançada.
 +
@@ -386,6 +387,7 @@ Observe o seguinte:
 +
 Para obter ajuda sobre como escolher um tamanho de disco, link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-planning-your-config-azure.html#size-your-system-in-azure["Dimensione seu sistema no Azure"^]consulte .
 
+** Se o acesso público à sua conta de armazenamento estiver desativado no VNet, não será possível ativar a disposição de dados em camadas no sistema Cloud Volumes ONTAP. Para obter informações, link:reference-networking-azure.html#security-group-rules["Regras do grupo de segurança"]consulte .
 ** Você pode escolher uma política específica de disposição em categorias de volume ao criar ou editar um volume.
 ** Se você desativar a disposição de dados em categorias, poderá ativá-la em agregados subsequentes.
 +

@@ -227,6 +227,7 @@ Quando você cria um ambiente de trabalho e escolhe um grupo de segurança prede
 
 * *Somente VNet selecionado*: A origem do tráfego de entrada é o intervalo de sub-rede do VNet para o sistema Cloud Volumes ONTAP e o intervalo de sub-rede do VNet onde o conetor reside. Esta é a opção recomendada.
 * *Todos os VNets*: A origem do tráfego de entrada é o intervalo IP 0,0.0.0/0.
+* *Disabled*: Esta opção restringe o acesso da rede pública à sua conta de armazenamento e desativa a disposição em camadas de dados para sistemas Cloud Volumes ONTAP. Esta é uma opção recomendada se os seus endereços IP privados não devem ser expostos mesmo dentro do mesmo VNet devido a regulamentos e políticas de segurança.
 
 
 [cols="4*"]
@@ -317,6 +318,9 @@ Quando você cria um ambiente de trabalho e escolhe um grupo de segurança prede
 
 
 NOTE: Os SISTEMAS HA têm menos regras de entrada do que os sistemas de nó único porque o tráfego de dados de entrada passa pelo Azure Standard Load Balancer. Devido a isso, o tráfego do Load Balancer deve estar aberto, como mostrado na regra "AllowAzureLoadBalancerInBound".
+
+* *Disabled*: Esta opção restringe o acesso da rede pública à sua conta de armazenamento e desativa a disposição em camadas de dados para sistemas Cloud Volumes ONTAP. Esta é uma opção recomendada se os seus endereços IP privados não devem ser expostos mesmo dentro do mesmo VNet devido a regulamentos e políticas de segurança.
+
 
 [cols="4*"]
 |===

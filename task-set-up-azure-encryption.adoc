@@ -100,7 +100,7 @@ Várias zonas de disponibilidade do Azure HA com discos gerenciados compartilhad
 
 
 |===
-Todas as contas de armazenamento do Azure para Cloud Volumes ONTAP são criptografadas usando uma chave gerenciada pelo cliente. Se você quiser criptografar suas contas de storage durante a criação, crie e forneça a ID do recurso na solicitação de criação do CVO. Isso se aplica a todos os tipos de implantações. Se você não o fornecer, as contas de armazenamento ainda serão criptografadas, mas o BlueXP  primeiro criará as contas de armazenamento com criptografia de chave gerenciada pela Microsoft e atualizará as contas de armazenamento para usar a chave gerenciada pelo cliente.
+Todas as contas de armazenamento do Azure para Cloud Volumes ONTAP são criptografadas usando uma chave gerenciada pelo cliente. Se você quiser criptografar suas contas de storage durante a criação, crie e forneça a ID do recurso na solicitação de criação do Cloud Volumes ONTAP. Isso se aplica a todos os tipos de implantações. Se você não o fornecer, as contas de armazenamento ainda serão criptografadas, mas o BlueXP  primeiro criará as contas de armazenamento com criptografia de chave gerenciada pela Microsoft e atualizará as contas de armazenamento para usar a chave gerenciada pelo cliente.
 
 
 

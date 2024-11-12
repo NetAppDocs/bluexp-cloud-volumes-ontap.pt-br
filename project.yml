@@ -204,6 +204,8 @@ sidebar:
         url: "/task-updating-ontap-cloud.html"
       - title: Registre sistemas de pagamento conforme o uso
         url: "/task-registering.html"
+      - title: Converta licenças baseadas em nós
+        url: "/task-convert-node-capacity.html"
       - title: Pare e inicie um sistema
         url: "/task-managing-state.html"
       - title: Sincronizar a hora do sistema
@@ -260,7 +262,11 @@ sidebar:
   - title: Conceitos
     entries:
     - title: Licenciamento
-      url: "/concept-licensing.html"
+      entries:
+      - title: Licenciamento em Cloud Volumes ONTAP
+        url: "/concept-licensing.html"
+      - title: Mais sobre licenças baseadas em capacidade
+        url: "/concept-licensing-charging.html"
     - title: Armazenamento
       entries:
       - title: Protocolos do cliente

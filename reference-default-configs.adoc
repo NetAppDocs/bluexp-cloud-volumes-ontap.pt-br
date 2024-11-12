@@ -31,7 +31,7 @@ A partir da versão do BlueXP  3.9.5, o relatório de espaço lógico é ativad
 ** FlexClone
 ** ISCSI
 ** Gerenciamento de chaves de criptografia de vários locatários (MTEKM), começando com o Cloud Volumes ONTAP 9.12.1 GA
-** Criptografia de volume NetApp (somente para sistemas BYOL ou PAYGO registrados)
+** Criptografia de volume do NetApp (somente para sistemas traga sua própria licença (BYOL) ou pay-as-you-go registrado (PAYGO))
 ** NFS
 
 

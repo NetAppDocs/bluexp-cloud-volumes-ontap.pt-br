@@ -120,4 +120,4 @@ Por padrão, o takeover, a ressincronização e a giveback do storage são autom
 
 == Configurações de storage
 
-Você pode usar um par de HA como uma configuração ativo-ativo, na qual ambos os nós fornecem dados aos clientes ou como uma configuração ativo-passivo, na qual o nó passivo responde a solicitações de dados somente se ele tiver ocupado o storage para o nó ativo.
+Você pode usar um par de HA como uma configuração ativo-ativo, na qual ambos os nós fornecem dados aos clientes ou como uma configuração ativo-passivo, na qual o nó passivo responde às solicitações de dados somente se ele assumiu o storage do nó ativo.
