@@ -276,7 +276,7 @@ Deixará de receber o suporte NetApp após a data EOS, até que faça a transiç
 .Exclusões
 A NetApp reconhece que certas situações exigem consideração especial, e a EOA e EOS de licenciamento baseado em nós não se aplicarão aos seguintes casos:
 
-* Clientes do USPS
+* Clientes do setor público dos EUA
 * Implantações em modo privado
 * Implementações da região da China do Cloud Volumes ONTAP na AWS
 

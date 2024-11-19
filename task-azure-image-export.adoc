@@ -67,23 +67,28 @@ South Central US          southcentralus       (US) South Central US
 ----
 
 
-. Revise o nome do SKU para o tipo de implantação da VM correspondente na tabela abaixo.
+. Reveja os nomes de SKU para as versões Cloud Volumes ONTAP correspondentes e os tipos de implantação de VM na tabela abaixo.
 +
 O nome do SKU é usado como o valor para a variável "skuName" ao definir a URNA da imagem do mercado.
 
 +
-Por exemplo, as implantações de nó único devem usar o nome do SKU "ONTAP_cloud_byol".
+Por exemplo, todas as implantações de nó único com o Cloud Volumes ONTAP 9.15.0 devem ser usadas `ontap_cloud_byol` como o nome do SKU.
 
 +
-[cols="1,1"]
+[cols="1,1,1"]
 |===
-| Tipo de implantação da VM | Nome SKU 
 
 
-| Nó único | ONTAP_cloud_byol 
+| *Versão Cloud Volumes ONTAP* | *Tipo de implantação da VM* | *Nome SKU* 
 
 
-| Alta disponibilidade | ONTAP_cloud_byol_ha 
+| 9.15.1 e 9.16.0 | Todas as implantações por meio do BlueXP  | ONTAP_cloud 
+
+
+| 9.15.0 | Nó único | ONTAP_cloud_byol 
+
+
+| 9.15.0 | Alta disponibilidade | ONTAP_cloud_byol_ha 
 |===
 . Assim que a versão do ONTAP e a imagem do marketplace do Azure forem mapeadas, exporte o arquivo VHD do marketplace do Azure por meio do Azure Cloud Shell ou da CLI do Azure.
 
@@ -94,7 +99,7 @@ Por exemplo, as implantações de nó único devem usar o nome do SKU "ONTAP_clo
 
 . A partir do Azure Cloud Shell, exporte a imagem do mercado para um vhd (image2, por exemplo, 9150.01000024.05090105.vhd) e faça o download para sua máquina local (por exemplo, uma máquina Linux ou um PC Windows).
 +
-.Clique para apresentar
+.Veja os passos
 [%collapsible]
 ====
 [source]
@@ -150,7 +155,7 @@ PS /home/user1> Remove-AzDisk -ResourceGroupName $diskRG -DiskName $diskName
 
 . Exporte a imagem do marketplace para um vhd através da CLI do Azure a partir de uma máquina Linux local.
 +
-.Clique para apresentar
+.Veja os passos
 [%collapsible]
 ====
 [source]
