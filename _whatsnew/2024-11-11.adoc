@@ -8,7 +8,7 @@
 
 A NetApp planejou o fim da disponibilidade (EOA) e o fim do suporte (EOS) do licenciamento baseado em nós da Cloud Volumes ONTAP. A partir de 11 de novembro de 2024, a disponibilidade limitada de licenças baseadas em nós foi encerrada. O suporte para licenciamento baseado em nós termina em 31 de dezembro de 2024. Após a EOA de suas licenças baseadas em nós, você deve fazer a transição para o licenciamento baseado em capacidade usando a ferramenta de conversão de licença do BlueXP .
 
-Para compromissos anuais ou de longo prazo, a NetApp recomenda que você entre em Contato com seu representante da NetApp antes da data da EOA ou da data de expiração da licença para garantir que os pré-requisitos para a transição estejam em vigor. Se não tiver um contrato de longo prazo para um nó Cloud Volumes ONTAP e executar o seu sistema com base numa subscrição PAYGO a pedido, é importante planear a sua conversão antes da data EOS. Para contratos de longo prazo e assinaturas PAYGO, você pode usar a ferramenta de conversão de licenças BlueXP  para uma conversão perfeita.
+Para compromissos anuais ou de longo prazo, a NetApp recomenda que você entre em Contato com seu representante da NetApp antes da data da EOA ou da data de expiração da licença para garantir que os pré-requisitos para a transição estejam em vigor. Se você não tiver um contrato de longo prazo para um nó Cloud Volumes ONTAP e executar seu sistema com uma assinatura paga conforme o uso (PAYGO) sob demanda, é importante Planejar sua conversão antes da data EOS. Para contratos de longo prazo e assinaturas PAYGO, você pode usar a ferramenta de conversão de licenças BlueXP  para uma conversão perfeita.
 
 https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"^] https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-convert-node-capacity.html["Converta licenças baseadas em nós em capacidade"^]
 
@@ -48,6 +48,6 @@ https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/reference-networking-az
 
 === Habilitação DE WORM após a implantação do Cloud Volumes ONTAP
 
-Anteriormente, você poderia habilitar o storage WORM ao criar um ambiente de trabalho do Cloud Volumes ONTAP no BlueXP . Agora, o BlueXP  oferece a você a opção de habilitar WORM em um ambiente de trabalho, mesmo que WORM não tenha sido ativado durante a criação. Depois de ativá-lo, não é possível desativar WORM.
+Agora, você pode ativar o storage WORM (uma gravação, muitas leituras) em um sistema Cloud Volumes ONTAP existente usando o BlueXP . Esse recurso oferece a flexibilidade de habilitar o WORM em um ambiente de trabalho, mesmo que o WORM não tenha sido ativado durante sua criação. Uma vez ativado, você não pode desativar WORM.
 
 https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-worm.html#enabling-worm-on-a-cloud-volumes-ontap-working-environment["Habilitando WORM em um ambiente de trabalho do Cloud Volumes ONTAP"^]

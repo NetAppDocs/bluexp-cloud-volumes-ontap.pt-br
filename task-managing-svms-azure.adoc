@@ -66,7 +66,7 @@ Copie os endereços IP privados que você acabou de criar. Você precisará espe
 
 === Par de HA
 
-A forma como você aloca endereços IP para um par de HA depende do protocolo de storage que você está usando.
+Para pares de alta disponibilidade (HA), você deve acessar cada VM de storage (SVM) no cluster e criar IPs correspondentes em nic0 para cada SVM. A forma como você aloca endereços IP para um par de HA depende do protocolo de storage que você está usando. No modo HA, os usuários devem garantir que os endereços IP estejam corretamente configurados para suportar failover e redundância, o que é essencial para manter a alta disponibilidade e confiabilidade do sistema de storage.
 
 [role="tabbed-block"]
 ====
@@ -78,7 +78,7 @@ Você precisará criar os seguintes endereços IP:
 
 * Um endereço IP para acesso iSCSI data LIF a partir do nó 1
 * Um endereço IP para acesso iSCSI data LIF a partir do nó 2
-* Um endereço IP opcional para um LIF de gerenciamento de VM de storage (SVM)
+* Um endereço IP opcional para um LIF de gerenciamento da SVM
 +
 Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
 
@@ -111,7 +111,7 @@ Você precisará criar os seguintes endereços IP:
 * Um endereço IP para acesso de LIF de dados nas a partir do nó 2
 * Um endereço IP opcional para um LIF de gerenciamento de VM de storage (SVM)
 +
-Os iSCSI LIFs são necessários para a comunicação DNS. Um iSCSI LIF é usado para esse fim porque não migra no failover.
+Os iSCSI LIFs são necessários para a comunicação DNS mesmo quando o protocolo iSCSI não é usado. Um iSCSI LIF é usado para esse fim porque não migra no failover.
 
 +
 Esse LIF de gerenciamento fornece uma conexão com ferramentas de gerenciamento como o SnapCenter.
@@ -434,7 +434,7 @@ vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-nam
 ----
 network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
 ----
-. Criar LIFs de dados:
+. Crie LIFs de dados. Nesta etapa, você usa os IPs alocados no link:task-managing-svms-azure.html#ha-pair["procedimento anterior"] para servir como LIFs de dados.
 +
 .. Use o seguinte comando para criar um iSCSI LIF no nó 1.
 +
@@ -519,7 +519,7 @@ vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-nam
 ----
 network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
 ----
-. Criar LIFs de dados:
+. Crie LIFs de dados. Nesta etapa, você usa os IPs alocados no link:task-managing-svms-azure.html#ha-pair["procedimento anterior"] para servir como LIFs de dados.
 +
 .. Use o seguinte comando para criar um nas LIF no nó 1.
 +
@@ -535,7 +535,7 @@ network interface create -vserver <svm-name> -lif <lif-name> -service-policy def
 ----
 
 
-. Criar iSCSI LIFs para fornecer comunicação DNS:
+. Crie iSCSI LIFs para fornecer comunicação DNS. Os iSCSI LIFs são necessários para a comunicação DNS mesmo quando o protocolo iSCSI não é usado.
 +
 .. Use o seguinte comando para criar um iSCSI LIF no nó 1.
 +
@@ -629,7 +629,7 @@ vserver create -vserver <svm-name> -subtype default -rootvolume <root-volume-nam
 ----
 network route create -vserver <svm-name> -destination 0.0.0.0/0 -gateway <ip-of-gateway-server>
 ----
-. Criar LIFs de dados nas:
+. Criar LIFs de dados nas. Nesta etapa, você usa os IPs alocados no link:task-managing-svms-azure.html#ha-pair["procedimento anterior"] para servir como LIFs de dados.
 +
 .. Use o seguinte comando para criar um nas LIF no nó 1.
 +
@@ -645,7 +645,7 @@ network interface create -vserver <svm-name> -lif <lif-name> -service-policy def
 ----
 
 
-. Criar iSCSI LIFs para fornecer comunicação DNS:
+. Crie iSCSI LIFs para fornecer comunicação DNS. Os iSCSI LIFs são necessários para a comunicação DNS mesmo quando o protocolo iSCSI não é usado.
 +
 .. Use o seguinte comando para criar um iSCSI LIF no nó 1.
 +

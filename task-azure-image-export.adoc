@@ -82,7 +82,7 @@ Por exemplo, todas as implantações de nó único com o Cloud Volumes ONTAP 9.1
 | *Versão Cloud Volumes ONTAP* | *Tipo de implantação da VM* | *Nome SKU* 
 
 
-| 9.15.1 e 9.16.0 | Todas as implantações por meio do BlueXP  | ONTAP_cloud 
+| 9.15.1 | Todas as implantações por meio do BlueXP  | ONTAP_cloud 
 
 
 | 9.15.0 | Nó único | ONTAP_cloud_byol 
