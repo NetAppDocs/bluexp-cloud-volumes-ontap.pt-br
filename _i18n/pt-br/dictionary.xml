@@ -1729,7 +1729,6 @@
   <block id="91e09743e1f25ab741e5f94a5852dfc4" category="list-text">9,8 P10</block>
   <block id="19d6e3f3d60f0c83123cd6e040378404" category="list-text">9,7 P6</block>
   <block id="5d46d9d34dce758984570380cdc60f89" category="summary">Ao optar por bloquear seu ambiente do Google com controles de serviço de VPC, você deve entender como o BlueXP  e o Cloud Volumes ONTAP interagem com as APIs do Google, bem como como como configurar seu parâmetro de serviço para implantar o BlueXP  e o Cloud Volumes ONTAP.</block>
-  <block id="499ff401ab7023a3297fee865d79a8f9" category="doc">Planejamento de controles de serviço VPC no GCP</block>
   <block id="ad5571e5652bf6da2a87ff238427dd83" category="paragraph">Ao optar por bloquear seu ambiente do Google Cloud com controles de serviço de VPC, você deve entender como o BlueXP  e o Cloud Volumes ONTAP interagem com as APIs do Google Cloud, bem como como como configurar seu perímetro de serviço para implantar o BlueXP  e o Cloud Volumes ONTAP.</block>
   <block id="51864fc98a7ac79ddec9d933162b734b" category="inline-link">Saiba mais sobre os controles do serviço VPC do Google Cloud</block>
   <block id="1ea7fcd26fa8ab32a75247310351f611" category="paragraph">Os controles de serviço da VPC permitem que você controle o acesso a serviços gerenciados do Google fora de um perímetro confiável, bloqueie o acesso a dados de locais não confiáveis e reduza riscos de transferência de dados não autorizados.<block ref="a3874a083385bdd3c92e9cffcd9eea61" category="inline-link-rx"></block>.</block>
@@ -5505,8 +5504,6 @@
   <block id="3c7a90227f7481790a6d7eb5b1a274ea" category="list-text">*PAYGO*: Uma assinatura paga conforme o uso (PAYGO) é uma assinatura por hora do mercado do seu provedor de nuvem.</block>
   <block id="2b0470da2a26cbbea5d95f4e261d82ee" category="paragraph">Para obter informações sobre como converter licenças baseadas em nós para baseadas em capacidade, consulte</block>
   <block id="7af9b0ab22150a40b2c1c451de82db3c" category="section-title">Preços e configurações compatíveis</block>
-  <block id="f05f2e524280a4aaf976825a1f6748f6" category="inline-link-macro">Cobrança de licenças baseadas em capacidade</block>
-  <block id="6c418172eb2db3f08bae6e40862aa940" category="paragraph">Para obter mais informações, <block ref="28d08582e43bd81e1450bd514123324f" category="inline-link-macro-rx"></block>consulte .</block>
   <block id="a9949f1e97b05bac6285563868b6954a" category="admonition">É necessária uma subscrição de pagamento conforme o uso (PAYGO) para a recuperação e o backup do BlueXP , no entanto, não haverá cobrança pelo uso deste serviço. Para obter mais informações sobre como configurar o licenciamento para backup e recuperação do BlueXP ,<block ref="c958f229a6c4d788e19159c7ba08a48b" category="inline-link-rx"></block> consulte .</block>
   <block id="05e7dd258874d61cb2bb985c9da9a17d" category="paragraph">A NetApp planejou o fim da disponibilidade (EOA) e o suporte (EOS) do licenciamento baseado em nós. Após a EOA e a EOS, as licenças baseadas em nós precisarão ser convertidas em licenças baseadas em capacidade.</block>
   <block id="8c6aee7f6d39fa3bea95c2ae09851a7a" category="paragraph">Para obter informações,<block ref="f09d1138443525e41476e551a1dde747" category="inline-link-rx"></block> consulte .</block>
@@ -5629,4 +5626,6 @@
   <block id="7e5f8351d1e24c2cf0c0d5fbc956ea2b" category="list-text">Crie LIFs de dados. Nesta etapa, você usa os IPs alocados no <block ref="c0438a20d1b940963832742d765316e8" category="inline-link-macro-rx"></block> para servir como LIFs de dados.</block>
   <block id="e5da8bd8aa33e128edc30f4d0c6082f4" category="list-text">Crie iSCSI LIFs para fornecer comunicação DNS. Os iSCSI LIFs são necessários para a comunicação DNS mesmo quando o protocolo iSCSI não é usado.</block>
   <block id="1ea87a95c176e342e1e8fd101628481f" category="list-text">Criar LIFs de dados nas. Nesta etapa, você usa os IPs alocados no <block ref="c0438a20d1b940963832742d765316e8" category="inline-link-macro-rx"></block> para servir como LIFs de dados.</block>
+  <block id="c023c17ce97ef2fee30e2cb2aa0cd81a" category="paragraph">Para obter mais informações, <block ref="7e81f0f3d7f6d88b77289e1baaf5eecf" category="inline-link-macro-rx"></block>consulte .</block>
+  <block id="c0131b1cf44af0fec95135e45a801bbe" category="doc">Planejamento de controles de serviço VPC no Google Cloud</block>
 </blocks>
