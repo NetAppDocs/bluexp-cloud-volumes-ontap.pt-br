@@ -20,6 +20,18 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 
 
+== 9 de dezembro de 2024
+
+
+
+=== Lista de VMs com suporte atualizadas para o Azure para se alinhar às práticas recomendadas
+
+As famílias de máquinas DS_v2 e ES_v3 não estão mais disponíveis para seleção no BlueXP  ao implantar novas instâncias do Cloud Volumes ONTAP no Azure. Essas famílias serão mantidas e apoiadas apenas em sistemas antigos e existentes. Novas implantações do Cloud Volumes ONTAP são suportadas no Azure somente a partir da versão 9.12.1. Recomendamos que mude para ES_v4 ou qualquer outra série compatível com Cloud Volumes ONTAP 9.12.1 e posterior. No entanto, as máquinas das séries DS_v2 e ES_v3 estarão disponíveis para novas implantações feitas através da API.
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-azure.html["Configurações compatíveis no Azure"^]
+
+
+
 == 11 de novembro de 2024
 
 
@@ -78,7 +90,7 @@ https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-worm.html#enabl
 
 
 
-=== Máquinas da série N1 indisponíveis para seleção no BlueXP 
+=== Lista de VMs com suporte atualizada para o Google Cloud para se alinhar às práticas recomendadas
 
 As máquinas da série n1 não estão mais disponíveis para seleção no BlueXP  ao implantar novas instâncias do Cloud Volumes ONTAP no Google Cloud. As máquinas da série n1 serão mantidas e suportadas apenas em sistemas existentes mais antigos. Novas implantações do Cloud Volumes ONTAP são suportadas no Google Cloud apenas a partir da versão 9,8. Recomendamos que mude para os tipos de máquinas da série n2 compatíveis com o Cloud Volumes ONTAP 9,8 e posterior. As máquinas da série n1, no entanto, estarão disponíveis para novas implantações realizadas através da API.
 
@@ -1409,7 +1421,7 @@ As seguintes alterações foram introduzidas com a versão 3.9.10 do conetor.
 
 === Chave de criptografia gerenciada pelo cliente no Azure
 
-Os dados são criptografados automaticamente no Cloud Volumes ONTAP no Azure usando https://azure.microsoft.com/en-us/documentation/articles/storage-service-encryption/["Criptografia do Serviço de storage do Azure"^] uma chave gerenciada pela Microsoft. Mas agora você pode usar sua própria chave de criptografia gerenciada pelo cliente, executando as seguintes etapas:
+Os dados são criptografados automaticamente no Cloud Volumes ONTAP no Azure usando https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview["Criptografia do Serviço de storage do Azure"^] uma chave gerenciada pela Microsoft. Mas agora você pode usar sua própria chave de criptografia gerenciada pelo cliente, executando as seguintes etapas:
 
 . A partir do Azure, crie um cofre de chaves e, em seguida, gere uma chave nesse cofre.
 . No BlueXP , use a API para criar um ambiente de trabalho do Cloud Volumes ONTAP que use a chave.
