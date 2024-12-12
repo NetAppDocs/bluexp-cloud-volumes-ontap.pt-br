@@ -22,7 +22,7 @@ Entender como o Cloud Volumes ONTAP é configurado por padrão pode ajudá-lo a 
 
 * O BlueXP  cria uma VM de storage de fornecimento de dados quando implanta o Cloud Volumes ONTAP. Algumas configurações suportam VMs de storage adicionais. link:task-managing-svms.html["Saiba mais sobre como gerenciar VMs de armazenamento"].
 +
-A partir da versão do BlueXP  3.9.5, o relatório de espaço lógico é ativado na VM de storage inicial. Quando o espaço é relatado logicamente, o ONTAP relata o espaço de volume de modo que todo o espaço físico salvo pelos recursos de eficiência de storage também seja reportado como usado.
+A partir da versão do BlueXP  3.9.5, o relatório de espaço lógico é ativado na VM de storage inicial. Quando o espaço é relatado logicamente, o ONTAP relata o espaço de volume de modo que todo o espaço físico salvo pelos recursos de eficiência de storage também seja reportado como usado. Para obter informações sobre recursos de eficiência de storage in-line, consulte o artigo da base de conhecimento https://kb.netapp.com/Cloud/Cloud_Volumes_ONTAP/What_Inline_Storage_Efficiency_features_are_supported_with_CVO#["KB: Quais recursos de eficiência de armazenamento em linha são suportados pelo CVO?"^]
 
 * O BlueXP  instala automaticamente as seguintes licenças de recurso do ONTAP no Cloud Volumes ONTAP:
 +
@@ -32,28 +32,18 @@ A partir da versão do BlueXP  3.9.5, o relatório de espaço lógico é ativad
 ** ISCSI
 ** Gerenciamento de chaves de criptografia de vários locatários (MTEKM), começando com o Cloud Volumes ONTAP 9.12.1 GA
 ** Criptografia de volume do NetApp (somente para sistemas traga sua própria licença (BYOL) ou pay-as-you-go registrado (PAYGO))
-** NFS
+** NFS ifdef::aws[] endif::aws[] ifdef::azure[] endif::azure[]
+** SnapMirror
+** SnapRestore
+** SnapVault
 
 
-
-
-ifdef::aws[]
-
-endif::aws[]
-
-ifdef::azure[]
-
-endif::azure[]
-
-* SnapMirror
-* SnapRestore
-* SnapVault
+* Várias interfaces de rede são criadas por padrão:
 +
-** Várias interfaces de rede são criadas por padrão:
+** Um LIF de gerenciamento de clusters
+** Um LIF entre clusters
 
 
-* Um LIF de gerenciamento de clusters
-* Um LIF entre clusters
 
 
 ifdef::azure[]

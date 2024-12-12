@@ -18,26 +18,4 @@ O Cloud Volumes ONTAP é compatível com criptografia de volume NetApp (NVE) e c
 
 Tanto o NVE quanto o NAE são compatíveis com um gerenciador de chaves externo.
 
-ifdef::aws[]
-
-endif::aws[]
-
-ifdef::azure[]
-
-endif::azure[]
-
-ifdef::gcp[]
-
-endif::gcp[]
-
-ifdef::aws[]
-
-endif::aws[]
-
-ifdef::azure[]
-
-endif::azure[]
-
-ifdef::gcp[]
-
-endif::gcp[]
+ifdef::aws[] endif::aws[] ifdef::azure[] endif::azure[] ifdef::gcp[] endif::gcp[] ifdef::aws[] endif::aws[] ifdef::azure[] endif::azure[:gcp[]
