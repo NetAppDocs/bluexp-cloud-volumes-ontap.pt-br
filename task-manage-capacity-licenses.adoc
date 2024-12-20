@@ -230,6 +230,8 @@ Você também pode notar que a carteira digital da BlueXP  atualiza a capacidad
 
 Se uma licença baseada em capacidade expirou e não estiver mais em uso, você poderá removê-la a qualquer momento.
 
+Para saber o que acontece com os dados do Cloud Volumes ONTAP ao expirar ou remover a licença, https://kb.netapp.com/Cloud/Cloud_Volumes_ONTAP/FAQs_on_Cloud_Volumes_ONTAP_license_expiry["Este artigo da base de conhecimento (KB)"^] consulte .
+
 .Passos
 . No menu de navegação BlueXP , selecione *Governança > carteira digital*.
 . Na guia *Cloud Volumes ONTAP*, clique no menu de ação ao lado da licença e selecione *Remover licença*.
