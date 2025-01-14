@@ -57,7 +57,7 @@ Se você não planeja acessar os dados inativos, você pode reduzir seus custos 
 
 Os custos de acesso são maiores se você acessar os dados, então leve isso em consideração antes de alterar a classe de storage. https://aws.amazon.com/s3/storage-classes["Documentação do Amazon S3: Saiba mais sobre as classes de armazenamento do Amazon S3"^].
 
-Você pode selecionar uma classe de armazenamento ao criar o ambiente de trabalho e pode alterá-la a qualquer momento depois. Para obter instruções sobre como alterar a classe de armazenamento, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+Você pode selecionar uma classe de armazenamento ao criar o ambiente de trabalho e pode alterá-la a qualquer momento depois. Para obter instruções sobre como alterar a classe de armazenamento, link:task-tiering.html["Categorize os dados inativos em storage de objetos de baixo custo"]consulte .
 
 A classe de storage para disposição de dados em categorias é de todo o sistema, não é por volume.
 
@@ -98,7 +98,7 @@ Camadas de acesso ao storage:: A camada de acesso de storage padrão para dados 
 --
 Se você não planeja acessar os dados inativos no nível de capacidade, pode escolher o nível de storage _cool_, onde os dados inativos são retidos por um mínimo de 30 dias. Você também pode optar pelo nível _cold_, onde os dados inativos são armazenados por um mínimo de 90 dias. Com base em seus requisitos de storage e considerações de custo, você pode selecionar o nível mais adequado às suas necessidades. Quando você altera o nível de storage para _COOL_ ou _COLD_, os dados do nível de capacidade inativo são movidos diretamente para o nível de storage frio ou frio. As camadas fria e fria oferecem custos de storage menores em comparação com a camada quente, mas elas geram custos de acesso mais altos. Portanto, leve isso em consideração antes de alterar a camada de storage. Consulte a https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers["Documentação do Microsoft Azure: Saiba mais sobre os níveis de acesso ao armazenamento do Azure Blob"^].
 
-Você pode selecionar uma camada de storage ao criar o ambiente de trabalho e alterá-la a qualquer momento. Para obter detalhes sobre como alterar a camada de storage, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+Você pode selecionar uma camada de storage ao criar o ambiente de trabalho e alterá-la a qualquer momento. Para obter detalhes sobre como alterar a camada de storage, link:task-tiering.html["Categorize os dados inativos em storage de objetos de baixo custo"]consulte .
 
 A camada de acesso a storage para categorização de dados é de todo o sistema, não é por volume.
 
@@ -140,7 +140,7 @@ NOTE: Todos os dados inativos existentes manterão a classe de armazenamento pad
 
 Os custos de acesso são maiores se você acessar os dados, então leve isso em consideração antes de alterar a classe de storage. Para saber mais, https://cloud.google.com/storage/docs/storage-classes["Documentação do Google Cloud: Classes de armazenamento"^] consulte .
 
-Você pode selecionar uma camada de storage ao criar o ambiente de trabalho e alterá-la a qualquer momento. Para obter detalhes sobre como alterar a classe de armazenamento, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+Você pode selecionar uma camada de storage ao criar o ambiente de trabalho e alterá-la a qualquer momento. Para obter detalhes sobre como alterar a classe de armazenamento, link:task-tiering.html["Categorize os dados inativos em storage de objetos de baixo custo"]consulte .
 
 A classe de storage para disposição de dados em categorias é de todo o sistema, não é por volume.
 
@@ -212,4 +212,4 @@ TIP: Quando o Cloud Volumes ONTAP é desligado, a temperatura de cada bloco é p
 
 == Configuração de categorização de dados
 
-Para obter instruções e uma lista de configurações suportadas, link:task-tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+Para obter instruções e uma lista de configurações suportadas, link:task-tiering.html["Categorize os dados inativos em storage de objetos de baixo custo"]consulte .

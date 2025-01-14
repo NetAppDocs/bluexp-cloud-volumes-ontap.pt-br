@@ -221,9 +221,6 @@ A autenticação do usuário falha e os seguintes serviços permanecem indispon�
 
 
 
-| \https://keyvault-production-aks.vault.azure.net | Cofre de chaves | Usado para recuperar a chave secreta do cliente do Azure Key Vault para se comunicar com o bucket do S3 para manipulação de metadados. O serviço Cloud Volumes ONTAP usa esse componente internamente. | Modos padrão, restrito e privado. | Os serviços Cloud Volumes ONTAP não estão disponíveis. 
-
-
 | https://cloudmanager.cloud.NetApp.com/locação | Alocação | Usado para recuperar os recursos do Cloud Volumes ONTAP da BlueXP  Locancy para autorizar recursos e usuários. | Modos padrão e restritos. | Os recursos do Cloud Volumes ONTAP e os usuários não estão autorizados. 
 
 

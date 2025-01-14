@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: task-tiering.html 
-keywords: tier, tiering, cold data, hot data, storage tiering, data tiering, fabricpool, fabric pool, s3 endpoint, endpoint, connection, performance tier, capacity tier, object store, blob tiering, container, inactive, tiering requirements 
+keywords: tier, tiering, cold data, hot data, storage tiering, data tiering, fabricpool, fabric pool, s3 endpoint, endpoint, connection, performance tier, capacity tier, object store, blob tiering, container, inactive, tiering requirements, remove S3 bucket, delete S3 CVO bucket 
 summary: Você pode reduzir os custos de storage do Cloud Volumes ONTAP combinando uma camada de desempenho de SSD ou HDD para dados ativos com uma camada de capacidade de storage de objetos para dados inativos. A disposição de dados em categorias é baseada na tecnologia FabricPool. 
 ---
-= Disposição em camadas dos dados inativos em storage de objetos de baixo custo
+= Categorize os dados inativos em storage de objetos de baixo custo
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -47,7 +47,7 @@ endif::gcp[]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Garanta que você tenha um agregado com a disposição em categorias ativada
 [role="quick-margin-para"]
-A disposição de dados em categorias deve ser habilitada em um agregado para permitir a disposição de dados em categorias em um volume. Você deve estar ciente dos requisitos para novos volumes e volumes existentes. <<Garantir que a disposição em camadas seja ativada em agregados,Saiba mais>>.
+A disposição de dados em categorias deve ser habilitada em um agregado para permitir a disposição de dados em categorias em um volume. Você deve estar ciente dos requisitos para novos volumes e volumes existentes. <<Ensuring that tiering is enabled on aggregates,Saiba mais>>.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatro"] Escolha uma política de disposição em categorias ao criar, modificar ou replicar um volume
 [role="quick-margin-para"]
@@ -65,7 +65,7 @@ O BlueXP  solicita que você escolha uma política de disposição em categoria
 * Não é necessário criar um armazenamento de objetos para o nível de capacidade. BlueXP  faz isso por você.
 * Não é necessário habilitar a disposição em camadas de dados no nível do sistema.
 +
-O BlueXP  cria um armazenamento de objetos para dados inativos quando o sistema é criado, <<Habilitando a disposição de dados em categorias após a implementação dos requisitos,desde que não haja problemas de conetividade ou permissões>>. Depois disso, basta habilitar a disposição de dados em categorias em volumes (e, em alguns casos, <<Garantir que a disposição em camadas seja ativada em agregados,em agregados>>).
+O BlueXP  cria um armazenamento de objetos para dados inativos quando o sistema é criado, <<Enabling data tiering after implementing the requirements,desde que não haja problemas de conetividade ou permissões>>. Depois disso, basta habilitar a disposição de dados em categorias em volumes (e, em alguns casos, <<Ensuring that tiering is enabled on aggregates,em agregados>>).
 
 
 
@@ -193,7 +193,7 @@ endif::gcp[]
 
 
 
-=== Habilitando a disposição de dados em categorias após a implementação dos requisitos
+=== Habilite a disposição de dados em categorias após a implementação dos requisitos
 
 O BlueXP  cria um armazenamento de objetos para dados inativos quando o sistema é criado, desde que não haja problemas de conetividade ou permissões. Se você não implementar os requisitos listados acima até depois de criar o sistema, precisará habilitar manualmente a disposição em camadas por meio da API ou do Gerenciador de sistema do ONTAP, que cria o armazenamento de objetos.
 
@@ -202,7 +202,7 @@ NOTE: A capacidade de habilitar a disposição em camadas por meio da interface 
 
 
 
-== Garantir que a disposição em camadas seja ativada em agregados
+== Garantir que a disposição em camadas esteja ativada em agregados
 
 A disposição de dados em categorias deve ser habilitada em um agregado para permitir a disposição de dados em categorias em um volume. Você deve estar ciente dos requisitos para novos volumes e volumes existentes.
 
@@ -236,7 +236,7 @@ Agora, você pode habilitar a disposição de dados em volumes novos e existente
 
 
 
-== Disposição em camadas dos dados de volumes de leitura-gravação
+== Armazene dados em categorias de volumes de leitura e gravação
 
 O Cloud Volumes ONTAP pode categorizar dados inativos em volumes de leitura-gravação para storage de objetos econômico, liberando a categoria de performance para dados ativos.
 
@@ -270,7 +270,7 @@ O BlueXP  cria um novo agregado para o volume se um agregado habilitado para ca
 
 
 
-== Disposição de dados em camadas em volumes de proteção de dados
+== Armazene dados em categorias em volumes de proteção de dados
 
 O Cloud Volumes ONTAP pode categorizar dados de um volume de proteção de dados em uma categoria de capacidade. Se você ativar o volume de destino, os dados serão movidos gradualmente para o nível de performance à medida que forem lidos.
 
@@ -291,7 +291,7 @@ Para obter ajuda com a replicação de dados, https://docs.netapp.com/us-en/blue
 
 
 
-== Alteração da classe de armazenamento para dados em camadas
+== Altere a classe de armazenamento para dados em camadas
 
 Depois de implantar o Cloud Volumes ONTAP, você poderá reduzir os custos de storage alterando a classe de storage para dados inativos que não foram acessados por 30 dias. Os custos de acesso são maiores se você acessar os dados, então você deve levar isso em consideração antes de alterar a classe de storage.
 
@@ -306,7 +306,7 @@ Para obter informações sobre classes de armazenamento suportadas, link:concept
 
 
 
-== Alteração da taxa de espaço livre para categorização de dados
+== Alterar a taxa de espaço livre para categorização de dados
 
 A taxa de espaço livre para categorização de dados define quanto espaço livre é necessário para SSDs/HDDs do Cloud Volumes ONTAP ao dispor dados em categorias para o storage de objetos. A configuração padrão é 10% de espaço livre, mas você pode ajustar a configuração com base em seus requisitos.
 
@@ -328,7 +328,7 @@ image:screenshot_settings_icon.png["Uma captura de tela que mostra o ícone Conf
 
 
 
-== Alterar o período de resfriamento da política de disposição automática em camadas
+== Altere o período de resfriamento da política de disposição automática em categorias
 
 Se você habilitou a disposição de dados em categorias em um volume Cloud Volumes ONTAP usando a política de disposição em camadas _auto_, poderá ajustar o período de resfriamento padrão com base nas necessidades da sua empresa. Essa ação é suportada apenas usando a CLI e a API do ONTAP.
 
@@ -343,3 +343,17 @@ O período de resfriamento padrão da política de disposição automática em c
 .Passo
 . Use o parâmetro _minimumCoolingDays_ com sua solicitação de API ao criar um volume ou modificar um volume existente.
 
+
+
+
+== Remova um balde S3 ao desativar um ambiente de trabalho
+
+Você pode excluir um bucket do S3 com os dados dispostos em camadas de um ambiente de trabalho do Cloud Volumes ONTAP ao desativar o ambiente.
+
+Você pode excluir o bucket do S3 somente se:
+
+* O ambiente de trabalho do Cloud volume ONTAP é excluído do BlueXP .
+* Todos os objetos são excluídos do bucket e o bucket S3 está vazio.
+
+
+Quando você desativa um ambiente de trabalho do Cloud Volumes ONTAP, o bucket do S3 criado para o ambiente não é excluído automaticamente. Em vez disso, permanece em um estado órfão para evitar qualquer perda acidental de dados. Você pode excluir os objetos no bucket e, posteriormente, remover o bucket S3 propriamente dito ou mantê-lo para uso posterior. Consulte a https://docs.netapp.com/us-en/ontap-cli/vserver-object-store-server-bucket-delete.html#description["CLI do ONTAP: Exclusão do bucket do servidor de armazenamento de objetos do svm"^].

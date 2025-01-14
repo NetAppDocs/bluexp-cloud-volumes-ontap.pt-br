@@ -290,7 +290,7 @@ NOTE: Mesmo nesses cenários, novas licenças baseadas em nós e renovações de
 
 == Conversão de licença
 
-O BlueXP  permite uma conversão contínua de licenças baseadas em nós para capacidade com base na ferramenta de conversão de licenças. Para obter informações sobre a EOA do licenciamento baseado em nós, link:/concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"]consulte .
+O BlueXP  permite uma conversão contínua de licenças baseadas em nós para capacidade com base na ferramenta de conversão de licenças. Para obter informações sobre a EOA do licenciamento baseado em nós, link:concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"]consulte .
 
 Antes da transição, é bom se familiarizar com a diferença entre os dois modelos de licenciamento. O licenciamento baseado em nó inclui capacidade fixa para cada instância do ONTAP, o que pode restringir a flexibilidade. O licenciamento baseado em capacidade, por outro lado, permite um pool compartilhado de storage em várias instâncias, oferecendo maior flexibilidade, otimizando a utilização de recursos e reduzindo o potencial de penalidades financeiras ao redistribuir cargas de trabalho. O carregamento baseado em capacidade ajusta-se perfeitamente às mudanças nos requisitos de armazenamento.
 
