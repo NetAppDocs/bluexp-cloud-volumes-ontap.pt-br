@@ -114,6 +114,6 @@ Você deve entender o seguinte sobre como habilitar o storage WORM e disposiçã
 * Além do modelo de administrador de storage confiável, o storage WORM no Cloud Volumes ONTAP também opera implicitamente sob um modelo de "administrador de nuvem confiável". Um administrador da nuvem pode excluir dados WORM antes de sua data de expiração, removendo ou editando o storage de nuvem diretamente do fornecedor da nuvem.
 
 
-.Informações relacionadas
+.Link relacionado
 * link:reference-worm-snaplock.html["Crie cópias de Snapshot à prova de violações para storage WORM"]
 

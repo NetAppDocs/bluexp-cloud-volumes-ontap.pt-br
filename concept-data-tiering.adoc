@@ -55,7 +55,7 @@ Classes de armazenamento:: A classe de armazenamento padrão para dados em camad
 --
 Se você não planeja acessar os dados inativos, você pode reduzir seus custos de armazenamento alterando a classe de armazenamento para um dos seguintes: _Intelligent Tiering_, _One-Zone unless Access_, _Standard-unreallow Access_ ou _S3 Glacier Instant Retrieval_. Quando você altera a classe de armazenamento, os dados inativos começam na classe de armazenamento padrão e passam para a classe de armazenamento selecionada, se os dados não forem acessados após 30 dias.
 
-Os custos de acesso são maiores se você acessar os dados, então leve isso em consideração antes de alterar a classe de storage. https://aws.amazon.com/s3/storage-classes["Documentação do Amazon S3: Saiba mais sobre as classes de armazenamento do Amazon S3"^].
+Os custos de acesso são maiores se você acessar os dados, então considere isso antes de alterar a classe de armazenamento. https://aws.amazon.com/s3/storage-classes["Documentação do Amazon S3: Saiba mais sobre as classes de armazenamento do Amazon S3"^].
 
 Você pode selecionar uma classe de armazenamento ao criar o ambiente de trabalho e pode alterá-la a qualquer momento depois. Para obter instruções sobre como alterar a classe de armazenamento, link:task-tiering.html["Categorize os dados inativos em storage de objetos de baixo custo"]consulte .
 

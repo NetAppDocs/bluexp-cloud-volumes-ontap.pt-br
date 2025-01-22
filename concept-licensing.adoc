@@ -152,6 +152,12 @@ NOTE: É necessária uma subscrição de pagamento conforme o uso (PAYGO) para a
 
 
 
+=== Disponibilidade de licenças baseadas em capacidade
+
+A disponibilidade das licenças PAYGO e BYOL para sistemas Cloud Volumes ONTAP exige que o conetor BlueXP  esteja ativo e em execução. Para obter mais informações, https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html#impact-on-cloud-volumes-ontap["Saiba mais sobre conetores"^] consulte .
+
+
+
 === Como começar
 
 Saiba como começar a usar o licenciamento baseado em capacidade:

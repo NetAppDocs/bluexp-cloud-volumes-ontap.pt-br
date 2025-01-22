@@ -47,7 +47,7 @@ Para obter detalhes, link:reference-networking-aws.html["Requisitos de rede para
 
 == Lançamento de um sistema Cloud Volumes ONTAP de nó único na AWS
 
-Para iniciar o Cloud Volumes ONTAP na AWS, é necessário criar um novo ambiente de trabalho no BlueXP 
+Para iniciar o Cloud Volumes ONTAP na AWS, é necessário criar um novo ambiente de trabalho no BlueXP .
 
 .Sobre esta tarefa
 Imediatamente após criar o ambiente de trabalho, o BlueXP  inicia uma instância de teste na VPC especificada para verificar a conetividade. Se bem-sucedido, o BlueXP  encerra imediatamente a instância e, em seguida, começa a implantar o sistema Cloud Volumes ONTAP. Se o BlueXP  não puder verificar a conetividade, a criação do ambiente de trabalho falhará. A instância de teste é um T2.nano (para alocação de VPC padrão) ou m3.medium (para alocação de VPC dedicada).

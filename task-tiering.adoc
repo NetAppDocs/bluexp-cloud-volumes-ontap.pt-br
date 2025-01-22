@@ -20,7 +20,7 @@ Para configurar a disposição de dados em categorias, você precisa fazer o seg
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"] Escolha uma configuração suportada
 [role="quick-margin-para"]
-A maioria das configurações é compatível. Se você tem um sistema Cloud Volumes ONTAP executando a versão mais recente, então você deve ser bom para ir. link:task-tiering.html#configurations-that-support-data-tiering["Saiba mais"].
+A maioria das configurações é compatível. Se você tem um sistema Cloud Volumes ONTAP executando a versão mais recente, então você está pronto para ir. link:task-tiering.html#configurations-that-support-data-tiering["Saiba mais"].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"] Garanta a conectividade entre o Cloud Volumes ONTAP e o storage de objetos
 [role="quick-margin-list"]
@@ -47,7 +47,7 @@ endif::gcp[]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Garanta que você tenha um agregado com a disposição em categorias ativada
 [role="quick-margin-para"]
-A disposição de dados em categorias deve ser habilitada em um agregado para permitir a disposição de dados em categorias em um volume. Você deve estar ciente dos requisitos para novos volumes e volumes existentes. <<Ensuring that tiering is enabled on aggregates,Saiba mais>>.
+A disposição de dados em categorias deve ser habilitada em um agregado para habilitá-la em um volume. Você deve estar ciente dos requisitos para novos volumes e volumes existentes. <<Ensuring that tiering is enabled on aggregates,Saiba mais>>.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatro"] Escolha uma política de disposição em categorias ao criar, modificar ou replicar um volume
 [role="quick-margin-para"]
@@ -65,7 +65,7 @@ O BlueXP  solicita que você escolha uma política de disposição em categoria
 * Não é necessário criar um armazenamento de objetos para o nível de capacidade. BlueXP  faz isso por você.
 * Não é necessário habilitar a disposição em camadas de dados no nível do sistema.
 +
-O BlueXP  cria um armazenamento de objetos para dados inativos quando o sistema é criado, <<Enabling data tiering after implementing the requirements,desde que não haja problemas de conetividade ou permissões>>. Depois disso, basta habilitar a disposição de dados em categorias em volumes (e, em alguns casos, <<Ensuring that tiering is enabled on aggregates,em agregados>>).
+O BlueXP  cria um armazenamento de objetos para dados inativos quando cria o sistema<<Enabling data tiering after implementing the requirements,desde que não haja problemas de conetividade ou permissões>>, . Depois disso, basta habilitar a disposição de dados em categorias em volumes (e, em alguns casos, <<Ensuring that tiering is enabled on aggregates,em agregados>>).
 
 
 
@@ -162,7 +162,7 @@ Você não precisa configurar uma conexão entre o nível de performance e o ní
 "Microsoft.Network/virtualNetworks/subnets/write",
 "Microsoft.Network/routeTables/join/action",
 ----
-As permissões são incluídas na função personalizada por padrão. https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-azure.html["Veja a permissão do Azure para o conetor"^]
+A função personalizada inclui as permissões por padrão. https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-azure.html["Veja a permissão do Azure para o conetor"^]
 
 endif::azure[]
 
@@ -212,7 +212,7 @@ Se você está habilitando a disposição de dados em categorias em um novo volu
 
 * *Volumes existentes*
 +
-Se você quiser habilitar a disposição em categorias de dados em um volume existente, precisará garantir que a disposição em categorias de dados esteja habilitada no agregado subjacente. Se a categorização de dados não estiver habilitada no agregado existente, você precisará usar o Gerenciador de sistema do ONTAP para anexar um agregado existente ao armazenamento de objetos.
+Para habilitar a disposição de dados em categorias em um volume existente, verifique se ele está habilitado no agregado subjacente. Se a categorização de dados não estiver habilitada no agregado existente, você precisará usar o Gerenciador de sistema do ONTAP para anexar um agregado existente ao armazenamento de objetos.
 
 
 
@@ -356,4 +356,4 @@ Você pode excluir o bucket do S3 somente se:
 * Todos os objetos são excluídos do bucket e o bucket S3 está vazio.
 
 
-Quando você desativa um ambiente de trabalho do Cloud Volumes ONTAP, o bucket do S3 criado para o ambiente não é excluído automaticamente. Em vez disso, permanece em um estado órfão para evitar qualquer perda acidental de dados. Você pode excluir os objetos no bucket e, posteriormente, remover o bucket S3 propriamente dito ou mantê-lo para uso posterior. Consulte a https://docs.netapp.com/us-en/ontap-cli/vserver-object-store-server-bucket-delete.html#description["CLI do ONTAP: Exclusão do bucket do servidor de armazenamento de objetos do svm"^].
+Quando você desativa um ambiente de trabalho do Cloud Volumes ONTAP, o bucket do S3 criado para o ambiente não é excluído automaticamente. Em vez disso, permanece em um estado órfão para evitar qualquer perda acidental de dados. Você pode excluir os objetos no bucket e, em seguida, remover o bucket do S3 ou mantê-lo para uso posterior. Consulte a https://docs.netapp.com/us-en/ontap-cli/vserver-object-store-server-bucket-delete.html#description["CLI do ONTAP: Exclusão do bucket do servidor de armazenamento de objetos do svm"^].
