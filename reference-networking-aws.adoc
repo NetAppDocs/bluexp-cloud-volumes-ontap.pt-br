@@ -26,15 +26,15 @@ Os requisitos a seguir devem ser atendidos na AWS.
 
 === Acesso de saída à Internet para nós Cloud Volumes ONTAP
 
-Os nós do Cloud Volumes ONTAP requerem acesso de saída à Internet para contactar os seguintes pontos finais para operações diárias.
+Os sistemas Cloud Volumes ONTAP requerem acesso de saída à Internet para aceder a endpoints externos para várias funções. O Cloud Volumes ONTAP não pode funcionar corretamente se esses endpoints forem bloqueados em ambientes com requisitos rígidos de segurança.
+
+O conetor BlueXP  também entra em Contato com vários endpoints para operações diárias, bem como com o console baseado na Web do BlueXP . Para obter informações sobre os endpoints do BlueXP , https://docs.netapp.com/us-en/bluexp-setup-admin/task-install-connector-on-prem.html#step-3-set-up-networking["Veja os pontos finais contactados a partir do conetor"^] consulte e https://docs.netapp.com/us-en/bluexp-setup-admin/reference-networking-saas-console.html["Prepare a rede para usar o console BlueXP "^].
 
 
 
 ==== Pontos de extremidade Cloud Volumes ONTAP
 
-O Cloud Volumes ONTAP requer acesso de saída à Internet para contactar vários endpoints para operações diárias.
-
-Os seguintes endpoints são específicos do Cloud Volumes ONTAP. O conetor também entra em Contato com vários endpoints para operações diárias, bem como com o console baseado na Web do BlueXP .  https://docs.netapp.com/us-en/bluexp-setup-admin/task-install-connector-on-prem.html#step-3-set-up-networking["Veja os pontos finais contactados a partir do conetor"^]Consulte e https://docs.netapp.com/us-en/bluexp-setup-admin/reference-networking-saas-console.html["Prepare a rede para usar o console BlueXP "^].
+O Cloud Volumes ONTAP usa esses endpoints para se comunicar com vários serviços.
 
 [cols="5*"]
 |===
