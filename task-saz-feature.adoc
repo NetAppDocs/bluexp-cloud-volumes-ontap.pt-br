@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: task-saz-feature.html 
-keywords: Microsoft Azure feature, HA in SAZ, single availability zone, Azure feature, Virtual Machine Scale Sets in Flexible mode 
+keywords: Microsoft Azure feature, HA in SAZ, single availability zone, Azure feature, Virtual Machine Scale Sets in Flexible mode, VMOrchestratorZonalMultiFD, VM Orchestrator, Zonal, MultiFD, Microsoft.Compute/VMOrchestratorZonalMultiFD feature 
 summary: Ative este recurso do Microsoft Azure para implantar HA no SAZ. 
 ---
 = Ative VMOrchestratorZonalMultiFD para zonas de disponibilidade únicas
@@ -14,7 +14,7 @@ summary: Ative este recurso do Microsoft Azure para implantar HA no SAZ.
 
 
 [role="lead"]
-Para implantar instâncias de VM em zonas de disponibilidade únicas de armazenamento localmente redundante (LRS), você deve ativar o recurso Microsoft `Microsoft.Compute/VMOrchestratorZonalMultiFD` para suas assinaturas. Em um modo HA, esse recurso facilita a implantação de nós em domínios de falha separados na mesma zona de disponibilidade.
+Para implantar instâncias de VM em zonas de disponibilidade únicas (AZ) de armazenamento localmente redundante (LRS), você deve ativar o recurso Microsoft `Microsoft.Compute/VMOrchestratorZonalMultiFD` para suas assinaturas. Em um modo de alta disponibilidade (HA), esse recurso facilita a implantação de nós em domínios de falha separados na mesma zona de disponibilidade.
 
 A menos que você ative esse recurso, a implantação zonal não ocorre e a implantação LRS não zonal anterior se torna efetiva.
 

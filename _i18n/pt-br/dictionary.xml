@@ -3890,7 +3890,6 @@
   <block id="fefa70b1c4e33b9a37d96658b2133389" category="paragraph">O BlueXP  remove o ambiente de trabalho. Os usuários podem redescobrir esse ambiente de trabalho a partir da página do Canvas a qualquer momento.</block>
   <block id="acdfc619ad459d4ab0532bb87b6d7fca" category="summary">Ative este recurso do Microsoft Azure para implantar HA no SAZ.</block>
   <block id="e9e34ff3ab97c79b3c316c17375f6ff1" category="doc">Ative VMOrchestratorZonalMultiFD para zonas de disponibilidade únicas</block>
-  <block id="12d6e3573a8a3e22461317ae16813b4a" category="paragraph">Para implantar instâncias de VM em zonas de disponibilidade únicas de armazenamento localmente redundante (LRS), você deve ativar o recurso Microsoft<block ref="fdfb47698b60e554acc8cff3a6065992" prefix=" " category="inline-code"></block> para suas assinaturas. Em um modo HA, esse recurso facilita a implantação de nós em domínios de falha separados na mesma zona de disponibilidade.</block>
   <block id="e290db697594a259148850f7bb013a47" category="paragraph">A menos que você ative esse recurso, a implantação zonal não ocorre e a implantação LRS não zonal anterior se torna efetiva.</block>
   <block id="492c71bc471f165a3195703edddf3149" category="paragraph">Para obter informações sobre a implantação de VM em uma única zona de disponibilidade, <block ref="c9a9063659db2ec9460653bbe2cdb792" category="inline-link-macro-rx"></block>consulte .</block>
   <block id="c3f8ce3d677b4ec2cfbd8d1b970709ef" category="paragraph">Execute estas etapas como um usuário com o Privileges "proprietário":</block>
@@ -4644,7 +4643,6 @@
   <block id="aadc07877f54bb2b6bcb6970f062ae93" category="inline-link">Vá para as Notas de versão do Cloud Volumes ONTAP</block>
   <block id="5f8e217f50c261f6778e55f5dc048bc9" category="paragraph"><block ref="5f8e217f50c261f6778e55f5dc048bc9" category="inline-link-rx"></block></block>
   <block id="221a174f8f629fb4aa230caa988c2112" category="summary">Saiba o que há de novo com o gerenciamento de Cloud Volumes ONTAP no BlueXP .</block>
-  <block id="490414e0366b091220802d406e52c076" category="doc">O que há de novo</block>
   <block id="3a293828e70d21dff60d66d4ef2d6993" category="paragraph">Os aprimoramentos descritos nesta página são específicos dos recursos do BlueXP  que permitem o gerenciamento do Cloud Volumes ONTAP. Para saber o que há de novo com o próprio software Cloud Volumes ONTAP,<block ref="708e09e3f2783926556b9c6d77f63a27" category="inline-link-rx"></block></block>
   <block id="e5182edc3707e8e354c40ab7fa819f39" category="section-title">7 de outubro de 2024</block>
   <block id="1b658f77da3dfa84be0559359889c6d1" category="section-title">Experiência de usuário aprimorada na seleção de versão para atualização</block>
@@ -5664,4 +5662,7 @@
   <block id="70dfa56e7de1c3a338c88fe5bed4fe14" category="paragraph">Os sistemas Cloud Volumes ONTAP requerem acesso de saída à Internet para aceder a endpoints externos para várias funções. O Cloud Volumes ONTAP não pode funcionar corretamente se esses endpoints forem bloqueados em ambientes com requisitos rígidos de segurança.</block>
   <block id="6a4145e8bef527d8870a20695d55d74f" category="paragraph">O conetor BlueXP  também entra em Contato com vários endpoints para operações diárias, bem como com o console baseado na Web do BlueXP . Para obter informações sobre os endpoints do BlueXP ,<block ref="0a8949f1130beab385180d157118cad5" category="inline-link-rx"></block> consulte e<block ref="979bd9d5982d3343248cd50bd0e0a8e2" category="inline-link-rx"></block>.</block>
   <block id="54df7aa57f75c8fe24e8c54795f38fa6" category="paragraph">O Cloud Volumes ONTAP usa esses endpoints para se comunicar com vários serviços.</block>
+  <block id="23507528d9eb5706668d0e76ef371e2a" category="paragraph">Para implantar instâncias de VM em zonas de disponibilidade únicas (AZ) de armazenamento localmente redundante (LRS), você deve ativar o recurso Microsoft<block ref="fdfb47698b60e554acc8cff3a6065992" prefix=" " category="inline-code"></block> para suas assinaturas. Em um modo de alta disponibilidade (HA), esse recurso facilita a implantação de nós em domínios de falha separados na mesma zona de disponibilidade.</block>
+  <block id="9d72c2bef829db2eecf218dce9aa0f18" category="doc">O que há de novo no Cloud Volumes ONTAP</block>
+  <block id="8cd62eba7c68cffeab4caeac1efd39a3" category="sidebar">Configurar o Cloud Volumes ONTAP para a criação do grupo de posicionamento da AWS</block>
 </blocks>
