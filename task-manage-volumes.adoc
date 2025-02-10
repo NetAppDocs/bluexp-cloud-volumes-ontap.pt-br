@@ -16,7 +16,7 @@ summary: O BlueXP  permite gerenciar volumes e servidores CIFS. Ele também sol
 [role="lead"]
 O BlueXP  permite gerenciar volumes e servidores CIFS. Ele também solicita que você mova volumes para evitar problemas de capacidade.
 
-Você pode gerenciar volumes no modo de exibição padrão do BlueXP  ou no modo de exibição avançado. A visualização padrão fornece um conjunto limitado de opções para modificar seus volumes. A visualização avançada fornece nível avançado de gerenciamento, como clonagem, redimensionamento, alteração de configurações para anti-ransomware, análises, proteção e controle de atividades, além da movimentação de volumes entre camadas. Para obter informações, link:task-administer-advanced-view.html["Administrar o Cloud Volumes ONTAP usando a visualização avançada"]consulte .
+Você pode gerenciar volumes no modo de exibição padrão do BlueXP  ou no Gerenciador de sistemas do ONTAP incluído no BlueXP  para gerenciamento avançado de volumes. A visualização padrão fornece um conjunto limitado de opções para modificar seus volumes. O System Manager fornece um nível avançado de gerenciamento, como clonagem, redimensionamento, alteração de configurações para anti-ransomware, análises, proteção e controle de atividades, além da movimentação de volumes entre camadas. Para obter informações, link:task-administer-advanced-view.html["Administrar o Cloud Volumes ONTAP usando o Gerenciador de sistemas"]consulte .
 
 
 
@@ -126,10 +126,10 @@ NOTE: O BlueXP  move o volume para um agregado existente que usa o tipo de disc
 
 Por padrão, um volume aumenta automaticamente para um tamanho máximo quando está fora do espaço. O valor padrão é 1.000, o que significa que o volume pode crescer para 11 vezes seu tamanho. Este valor é configurável nas definições do conetor.
 
-Se você precisar redimensionar seu volume, você pode fazê-lo a partir da visualização avançada no BlueXP .
+Se você precisar redimensionar seu volume, você pode fazê-lo a partir do Gerenciador de sistema do ONTAP no BlueXP .
 
 .Passos
-. Abra a visualização avançada para redimensionar um volume através do Gerenciador de sistema do ONTAP. link:task-administer-advanced-view.html#how-to-get-started["Como começar"]Consulte a .
+. Clique na exibição Gerenciador do sistema para redimensionar um volume por meio do Gerenciador do sistema do ONTAP. link:task-administer-advanced-view.html#how-to-get-started["Como começar"]Consulte a .
 . No menu de navegação à esquerda, selecione *armazenamento > volumes*.
 . Na lista de volumes, identifique o que você deve redimensionar.
 . Clique no ícone de opções image:screenshot_gallery_options.gif["ícone kabob"].

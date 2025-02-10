@@ -20,6 +20,39 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 
 
+== 10 de fevereiro de 2025
+
+
+
+=== Autenticação de usuário habilitada para acessar o Gerenciador de sistema a partir do BlueXP 
+
+Como administrador do BlueXP , agora você pode ativar a autenticação para usuários do ONTAP acessando o Gerenciador de sistema do ONTAP a partir do BlueXP . Pode ativar esta opção editando as definições do conetor BlueXP . Esta opção está disponível para os modos padrão e privado.
+
+link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-administer-advanced-view.html["Administrar o Cloud Volumes ONTAP usando o Gerenciador de sistemas"^].
+
+
+
+=== Vista avançada do BlueXP  renomeada para Gestor do sistema
+
+A opção de gerenciamento avançado do Cloud Volumes ONTAP do BlueXP  através do Gerenciador de sistema do ONTAP foi renomeada de *Visão Avançada* para *Gerenciador de sistema*.
+
+link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-administer-advanced-view.html["Administrar o Cloud Volumes ONTAP usando o Gerenciador de sistemas"^].
+
+
+
+=== Apresentamos uma forma mais simples de gerir licenças com a carteira digital BlueXP 
+
+Agora, você pode experimentar o gerenciamento simplificado das licenças do Cloud Volumes ONTAP usando pontos de navegação aprimorados na carteira digital do BlueXP :
+
+* Aceda facilmente às suas informações de licença Cloud Volumes ONTAP através dos separadores *Governança > carteira digital > Visão geral/licenças de serviço de dados*.
+* Clique em *Exibir* no painel Cloud volume ONTAP na guia *Visão geral* para obter uma compreensão abrangente de suas licenças baseadas em capacidade. Esta visualização avançada oferece informações detalhadas sobre as suas licenças e subscrições.
+* Se preferir a interface anterior, clique no botão *mudar para a vista legada* para ver os detalhes da licença por tipo e modificar os métodos de carregamento para as suas licenças.
+
+
+link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-manage-capacity-licenses.html["Gerenciar licenças baseadas em capacidade"^].
+
+
+
 == 9 de dezembro de 2024
 
 
