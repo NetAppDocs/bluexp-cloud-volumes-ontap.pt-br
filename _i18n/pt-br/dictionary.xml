@@ -3099,7 +3099,6 @@
   <block id="492847bcbc9ec0bd3075b612aa43e4a7" category="list-text">Selecione *Keystone*.</block>
   <block id="daf4ae396784c74ec2cbf002eaaa25f4" category="list-text">Se você vir a página *bem-vindo ao NetApp Keystone*, envie um e-mail para o endereço listado na página.</block>
   <block id="16692c26ca4528e651bbb36d93c465c7" category="paragraph">Um representante da NetApp processará o seu pedido autorizando a sua conta de utilizador a aceder às subscrições.</block>
-  <block id="5da6315cfe65abaef2d0e00c90898ddc" category="list-text">Volte para a *Keystone Subscription* para ver suas assinaturas.</block>
   <block id="3d6aabe991edb10f282fd60995e725ca" category="inline-image-macro">Uma captura de tela que mostra uma lista de assinaturas do Keystone.</block>
   <block id="6fd94fda3665b39867817d4700d184e8" category="paragraph"><block ref="6fd94fda3665b39867817d4700d184e8" category="inline-image-macro-rx" type="image"></block></block>
   <block id="06f358c39bc3b4633cefd78beb67e671" category="section-title">Vincular uma assinatura</block>
@@ -3122,7 +3121,6 @@
   <block id="20ea4c62f4c9e4254314fe7fbbef0319" category="inline-link">Saiba mais sobre como monitorar o uso de assinaturas</block>
   <block id="d7105dd212dc96a8b292b6b48f84916f" category="paragraph"><block ref="d7105dd212dc96a8b292b6b48f84916f" category="inline-link-rx"></block></block>
   <block id="0c0401d1e9169d6dd38462b1e0d04126" category="section-title">Desvincular uma assinatura</block>
-  <block id="28ca5cda5cdef790c457097830d81ca5" category="paragraph">Se você não quiser mais usar uma assinatura do Keystone com BlueXP , pode desvincular a assinatura. Observe que você só pode desvincular uma assinatura que não esteja anexada a uma assinatura Cloud Volumes ONTAP existente.</block>
   <block id="a666a430e484ea214384aefaa30da852" category="list-text">Para a assinatura que você deseja desvincular, clique <block ref="c9c50c6d591d91ccce1ee232fa490fb4" category="inline-image-macro-rx" type="image"></block> e selecione *Unlink*.</block>
   <block id="287c693dd0bc6ec48aa0fc3f4b950a9e" category="paragraph">A assinatura é desvinculada da sua organização ou conta do BlueXP  e não está mais disponível para selecionar ao criar um ambiente de trabalho do Cloud Volumes ONTAP.</block>
   <block id="334457e955e851dd9304247244593287" category="summary">Gerencie suas licenças baseadas em nós na carteira digital BlueXP  para garantir que cada sistema Cloud Volumes ONTAP tenha uma licença válida com a capacidade necessária.</block>
@@ -3616,7 +3614,6 @@
   <block id="e7010d3e26fcd0c3b7c9d7059b1649f0" category="list-text"><block ref="e7010d3e26fcd0c3b7c9d7059b1649f0" category="inline-link-macro-rx"></block></block>
   <block id="519fd69508502bac64035ccc9de1d25e" category="section-title">Escolha uma região suportada</block>
   <block id="3b61cbbfa7452cc07df9dbea0756d650" category="inline-link">Veja a lista completa de regiões suportadas</block>
-  <block id="88a397c48e684bb909af786b6f5aea86" category="paragraph">O Cloud Volumes ONTAP é compatível com a maioria das regiões do Microsoft Azure.<block ref="b20bc1eb7525b24c91ae87786e46adca" category="inline-link-rx"></block>.</block>
   <block id="e3a47201ab0cc67c20d5aeacce3b8ced" category="section-title">Escolha um tipo de VM compatível</block>
   <block id="00d6f59010ef5b4445142547ef7725f2" category="paragraph">O Cloud Volumes ONTAP suporta vários tipos de VM, dependendo do tipo de licença escolhido.</block>
   <block id="a09c3a7be8e7dc42776a7b03793d536c" category="inline-link">Configurações compatíveis com o Cloud Volumes ONTAP no Azure</block>
@@ -3671,7 +3668,6 @@
   <block id="a89897d61f59af926b4d06d06e8b2884" category="summary">Ao implantar o Cloud Volumes ONTAP, você pode escolher um sistema pré-configurado que atenda aos requisitos de workload ou criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você.</block>
   <block id="70cc6814c68e3ce95f7b70c2f1ea3e9d" category="paragraph">Ao implantar o Cloud Volumes ONTAP no Google Cloud, você pode escolher um sistema pré-configurado que atenda aos requisitos de carga de trabalho ou criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você.</block>
   <block id="f1e89d709c35aed2650bbf12a55f1ba1" category="list-text"><block ref="f1e89d709c35aed2650bbf12a55f1ba1" category="inline-link-macro-rx"></block></block>
-  <block id="cdbc190f457d5caf189142ea336d2259" category="paragraph">O Cloud Volumes ONTAP é compatível com a maioria das regiões do Google Cloud.<block ref="b20bc1eb7525b24c91ae87786e46adca" category="inline-link-rx"></block>.</block>
   <block id="18ff4ec9e6259918d45028a5d6040d91" category="section-title">Escolha um tipo de máquina suportado</block>
   <block id="64efea6517490623e51052b533085d96" category="paragraph">O Cloud Volumes ONTAP suporta vários tipos de máquina, dependendo do tipo de licença que você escolher.</block>
   <block id="9ee8a2504ba9f03aae4b30973ea35ad4" category="inline-link">Configurações compatíveis com o Cloud Volumes ONTAP no GCP</block>
@@ -3724,9 +3720,6 @@
   <block id="43c795154e3b7bf74f7abd49f2e26e1a" category="paragraph">O BlueXP  permite escolher uma configuração de velocidade de gravação para o Cloud Volumes ONTAP, exceto para pares de alta disponibilidade (HA) no Google Cloud. Antes de escolher uma velocidade de gravação, você deve entender as diferenças entre as configurações normal e alta e os riscos e recomendações ao usar alta velocidade de gravação. <block ref="12222f10612c9f092ca31c9e99478649" category="inline-link-macro-rx"></block>.</block>
   <block id="72d7d9fbd92253175591abfdb19dc6a1" category="summary">Ao implantar o Cloud Volumes ONTAP na AWS, você pode escolher um sistema pré-configurado que corresponda aos requisitos de workload ou criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você.</block>
   <block id="b2908e7df27905e20924b93b3ff0b803" category="list-text"><block ref="b2908e7df27905e20924b93b3ff0b803" category="inline-link-macro-rx"></block></block>
-  <block id="af510d6a7a30587243cc07000a8ff59a" category="paragraph">O Cloud Volumes ONTAP é compatível com a maioria das regiões da AWS.<block ref="b20bc1eb7525b24c91ae87786e46adca" category="inline-link-rx"></block>.</block>
-  <block id="37c70997814f20525df54f05b63b82ef" category="inline-link">Saiba como habilitar uma região</block>
-  <block id="20f4e542fc804667ca2377386269841c" category="paragraph">As regiões mais recentes da AWS devem estar habilitadas para que você possa criar e gerenciar recursos nessas regiões.<block ref="37189395d1b647ca4eabf700b1185d58" category="inline-link-rx"></block>.</block>
   <block id="64d1ac557c8992bc5d65b98a95e0b497" category="section-title">Escolha uma zona local suportada</block>
   <block id="b1968c5681446da9bdcedadbf7a34131" category="inline-link-macro">Veja a lista completa de zonas locais</block>
   <block id="a455e3549f40e60e4a9c2e8c6580a6a2" category="paragraph"><block ref="27bdb425ba8206d688a379332282fbb4" category="inline-link-macro-rx"></block>. As zonas locais têm de estar ativadas antes de poder criar e gerir recursos nessas zonas.</block>
@@ -4948,7 +4941,6 @@
   <block id="c86d179c90248acd6ebdba05bd94320c" category="section-title">Novo suporte à região do Azure Cloud</block>
   <block id="c55cc410beff8f86afc3ba8027b681f7" category="paragraph">A partir da versão 9.10.1, o Cloud Volumes ONTAP agora é suportado na região Azure West US 3.</block>
   <block id="d1ce20099e22fd96c2217da218a20a9e" category="inline-link">Veja a lista completa de regiões compatíveis com o Cloud Volumes ONTAP</block>
-  <block id="efb1786cdf88244f9480e15cb039f942" category="paragraph"><block ref="efb1786cdf88244f9480e15cb039f942" category="inline-link-rx"></block></block>
   <block id="1a3362a1b5304a4e1e1112496974b9ae" category="section-title">Licença ONTAP S3 no Azure</block>
   <block id="f225a4f57ea32da8b983d7bffd20b6eb" category="paragraph">Uma licença do ONTAP S3 agora está incluída em sistemas Cloud Volumes ONTAP novos e existentes que executam a versão 9.9.1 ou posterior no Azure.</block>
   <block id="f8b475a3fefebada77a30229238d0a1a" category="section-title">7 de junho de 2022</block>
@@ -5680,4 +5672,13 @@
   <block id="d117724162371ab94db86f4cbcd703ae" category="paragraph">Se você precisar redimensionar seu volume, você pode fazê-lo a partir do Gerenciador de sistema do ONTAP no BlueXP .</block>
   <block id="41e16b15d9c9cc44372d27b0cfe659ad" category="list-text">Clique na exibição Gerenciador do sistema para redimensionar um volume por meio do Gerenciador do sistema do ONTAP. <block ref="1bf7174b0a06a67edc83de5c18b2bf58" category="inline-link-macro-rx"></block>Consulte a .</block>
   <block id="c523b074da0b63e607578686184d5981" category="section-title">10 de fevereiro de 2025</block>
+  <block id="1ce97cc664bad2b8b354b3220e6331e7" category="list-text">Selecione *Keystone Subscriptions*.</block>
+  <block id="23698106a2d9dc1f2df20e97a71a625c" category="list-text">Volte para a aba *Keystone Subscriptions* para ver suas assinaturas.</block>
+  <block id="436fa170392050162dd4653f969cf048" category="paragraph">Se você não quiser mais usar uma assinatura do Keystone com BlueXP , pode desvincular a assinatura. Observe que você só pode desvincular uma assinatura que não esteja anexada a uma assinatura Cloud Volumes ONTAP existente.</block>
+  <block id="e242baa97428f1acdd0a43c0f27ecf0e" category="paragraph">O Cloud Volumes ONTAP é compatível com a maioria das regiões do Microsoft Azure.<block ref="0de6b81e82e22001f2c59ffd34a8aeac" category="inline-link-rx"></block>.</block>
+  <block id="c24e9fc1263121db1bb6501931efe09c" category="paragraph">O Cloud Volumes ONTAP é compatível com a maioria das regiões do Google Cloud.<block ref="0de6b81e82e22001f2c59ffd34a8aeac" category="inline-link-rx"></block>.</block>
+  <block id="77616d628efddeba1fd424b939777229" category="paragraph">O Cloud Volumes ONTAP é compatível com a maioria das regiões da AWS.<block ref="0de6b81e82e22001f2c59ffd34a8aeac" category="inline-link-rx"></block>.</block>
+  <block id="77ccb62da3cbac8ecfb3dcda7b4635b9" category="inline-link">Documentação da AWS: Saiba como habilitar uma região</block>
+  <block id="fef606ad68172c64f478d929b8842876" category="paragraph">As regiões mais recentes da AWS devem estar habilitadas para que você possa criar e gerenciar recursos nessas regiões.<block ref="b7b79d9a35f355344e562154976e1f3d" category="inline-link-rx"></block>.</block>
+  <block id="c1a328cf0660e851f6654745d3aca99e" category="paragraph"><block ref="c1a328cf0660e851f6654745d3aca99e" category="inline-link-rx"></block></block>
 </blocks>
