@@ -100,7 +100,7 @@ Se uma conexão de saída à Internet não estiver disponível para enviar mensa
 
 Se você definiu regras de saída rígidas para o Cloud Volumes ONTAP, também precisará garantir que o grupo de segurança do Cloud Volumes ONTAP permita conexões _de saída_ pela porta 3128.
 
-Depois de verificar que o acesso de saída à Internet está disponível, você pode testar o AutoSupport para garantir que ele possa enviar mensagens. Para obter instruções, https://docs.netapp.com/us-en/ontap/system-admin/setup-autosupport-task.html["ONTAP docs: Configurar o AutoSupport"^] consulte .
+Depois de verificar que o acesso de saída à Internet está disponível, você pode testar o AutoSupport para garantir que ele possa enviar mensagens. Para obter instruções, consulte https://docs.netapp.com/us-en/ontap/system-admin/setup-autosupport-task.html["Documentação do ONTAP: Configurar o AutoSupport"^] a .
 
 Se o BlueXP  notificar que as mensagens do AutoSupport não podem ser enviadas, link:task-verify-autosupport.html#troubleshoot-your-autosupport-configuration["Solucionar problemas da configuração do AutoSupport"].
 

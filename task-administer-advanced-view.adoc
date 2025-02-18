@@ -118,7 +118,7 @@ Você pode acessar o Gerenciador de sistema do ONTAP a partir de um ambiente de 
 
 == Ajuda com o uso do System Manager
 
-Se precisar de ajuda para usar o Gerenciador de sistema com o Cloud Volumes ONTAP, https://docs.netapp.com/us-en/ontap/index.html["Documentação do ONTAP"^] consulte para obter instruções passo a passo. Aqui estão alguns links que podem ajudar:
+Se precisar de ajuda para usar o Gerenciador de sistema com o Cloud Volumes ONTAP, consulte o https://docs.netapp.com/us-en/ontap/index.html["Documentação do ONTAP"^] para obter instruções passo a passo. Aqui estão alguns links de documentação do ONTAP que podem ajudar:
 
 * https://docs.netapp.com/us-en/ontap/ontap-security-hardening/roles-applications-authentication.html["Funções, aplicativos e autenticação do ONTAP"^]
 * https://docs.netapp.com/us-en/ontap/system-admin/access-cluster-system-manager-browser-task.html["Use o System Manager para acessar um cluster"^].

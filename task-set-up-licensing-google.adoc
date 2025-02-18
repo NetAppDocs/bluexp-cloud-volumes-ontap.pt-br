@@ -64,7 +64,7 @@ As seções a seguir descrevem como começar com cada um desses modelos de consu
 Pague antecipadamente comprando uma licença BYOL (BYOL) da NetApp para implantar sistemas Cloud Volumes ONTAP em qualquer fornecedor de nuvem.
 
 .Passos
-. https://cloud.netapp.com/contact-cds["Entre em Contato com a NetApp Sales para obter uma licença"^]
+. https://bluexp.netapp.com/contact-cds["Entre em Contato com a NetApp Sales para obter uma licença"^]
 . https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-nss-accounts.html#add-an-nss-account["Adicione sua conta do site de suporte da NetApp ao BlueXP "^]
 +
 A BlueXP  consulta automaticamente o serviço de licenciamento da NetApp para obter detalhes sobre as licenças associadas à sua conta do site de suporte da NetApp. Se não houver erros, o BlueXP  adiciona automaticamente as licenças à carteira digital.

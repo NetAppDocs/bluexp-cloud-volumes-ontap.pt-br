@@ -74,40 +74,48 @@ sidebar:
     - title: Comece a usar o Microsoft Azure
       flavor: azure
       entries:
-      - title: Início rápido
-        url: "/task-getting-started-azure.html"
-      - title: Planeje sua configuração
-        url: "/task-planning-your-config-azure.html"
-      - title: Configure a rede
-        url: "/reference-networking-azure.html"
-      - title: Configure a criptografia usando sua chave
-        url: "/task-set-up-azure-encryption.html"
-      - title: Configure o licenciamento
-        url: "/task-set-up-licensing-azure.html"
-      - title: Ative o modo de alta disponibilidade
-        url: "/task-azure-high-availability-mode.html"
-      - title: Ative VMOrchestratorZonalMultiFD para zonas de disponibilidade únicas
-        url: "/task-saz-feature.html"
-      - title: Inicie o Cloud Volumes ONTAP no Azure
-        url: "/task-deploying-otc-azure.html"
-      - title: Verificação de imagem da Plataforma Azure
+      - title: Saiba mais sobre suas opções de implantação
+        url: "/concept-azure-mktplace-direct.html"
+      - title: Começar em BlueXP 
         entries:
-        - title: Visão geral
-          url: "/concept-azure-image-verification.html"
-        - title: Baixe o arquivo Azure Image Digest
-          url: "/task-azure-download-digest-file.html"
-        - title: Exportação de imagens
-          url: "/task-azure-image-export.html"
-        - title: Verificação de assinatura de arquivo
+        - title: Início rápido
+          url: "/task-getting-started-azure.html"
+        - title: Planeje sua configuração
+          url: "/task-planning-your-config-azure.html"
+        - title: Configure a rede
+          url: "/reference-networking-azure.html"
+        - title: Configure a criptografia usando sua chave
+          url: "/task-set-up-azure-encryption.html"
+        - title: Configure o licenciamento
+          url: "/task-set-up-licensing-azure.html"
+        - title: Ative o modo de alta disponibilidade
+          url: "/task-azure-high-availability-mode.html"
+        - title: Ative VMOrchestratorZonalMultiFD para zonas de disponibilidade únicas
+          url: "/task-saz-feature.html"
+        - title: Inicie o Cloud Volumes ONTAP no Azure
+          url: "/task-deploying-otc-azure.html"
+        - title: Verificação de imagem da Plataforma Azure
           entries:
+          - title: Visão geral
+            url: "/concept-azure-image-verification.html"
+          - title: Baixe o arquivo Azure Image Digest
+            url: "/task-azure-download-digest-file.html"
+          - title: Exportação de imagens
+            url: "/task-azure-image-export.html"
           - title: Verificação de assinatura de arquivo
-            url: "/concept-azure-file-sig-verify.html"
-          - title: Verificação de assinatura de arquivo do Linux
-            url: "/task-file-verification-linux.html"
-          - title: Verificação de assinatura de arquivo do Mac os
-            url: "/task-file-verification-mac.html"
-        - title: Informações adicionais
-          url: "/reference-image-verification-links.html"
+            entries:
+            - title: Verificação de assinatura de arquivo
+              url: "/concept-azure-file-sig-verify.html"
+            - title: Verificação de assinatura de arquivo do Linux
+              url: "/task-file-verification-linux.html"
+            - title: Verificação de assinatura de arquivo do Mac os
+              url: "/task-file-verification-mac.html"
+          - title: Informações adicionais
+            url: "/reference-image-verification-links.html"
+      - title: Comece no mercado
+        entries:
+        - title: Implante o Cloud Volumes ONTAP no mercado
+          url: "/task-deploy-cvo-azure-mktplc.html"
     - title: Comece a usar o Google Cloud
       flavor: gcp
       entries:
@@ -228,7 +236,7 @@ sidebar:
       - title: Administração da AWS
         flavor: aws
         entries:
-        - title: Altere o tipo de instância EC2
+        - title: Trabalhe com instâncias do EC2 na AWS
           url: "/task-change-ec2-instance.html"
         - title: Alterar tabelas de rota para pares HA
           url: "/task-change-route-tables.html"

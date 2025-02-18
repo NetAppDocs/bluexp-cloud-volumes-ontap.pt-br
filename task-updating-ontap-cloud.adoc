@@ -150,7 +150,9 @@ Por exemplo, se você estiver executando a versão 9,8 e quiser atualizar para a
 
 === Lançamentos de patches
 
-A partir de janeiro de 2024, as atualizações de patch só estão disponíveis no BlueXP  se forem uma versão de patch para as três versões mais recentes do Cloud Volumes ONTAP. Usamos a versão mais recente do GA para determinar as três versões mais recentes a serem exibidas no BlueXP . Por exemplo, se a versão atual do GA for 9.13.1, os patches para 9.11.1-9.13.1 aparecem no BlueXP . Se você quiser atualizar para uma versão de patch para as versões 9.11.1 ou abaixo, você precisará usar o procedimento de atualização manual pelo <<Atualize a partir de uma imagem disponível em um URL,Transferir a imagem ONTAP>>.
+A partir de janeiro de 2024, as atualizações de patch só estão disponíveis no BlueXP  se houver uma versão de patch para as três versões mais recentes do Cloud Volumes ONTAP. Versões de patch estão ocasionalmente disponíveis para implantação, quando a versão RC ou GA não está disponível para implantação.
+
+Usamos a versão mais recente do GA para determinar as três versões mais recentes a serem exibidas no BlueXP . Por exemplo, se a versão atual do GA for 9.13.1, os patches para 9.11.1-9.13.1 aparecem no BlueXP . Se você quiser atualizar para uma versão de patch para as versões 9.11.1 ou abaixo, você precisará usar o procedimento de atualização manual pelo <<Atualize a partir de uma imagem disponível em um URL,Transferir a imagem ONTAP>>.
 
 Como regra geral para versões de patch (P), você pode atualizar de uma versão para qualquer versão P da versão atual ou da próxima versão.
 
@@ -226,7 +228,7 @@ Quando você atualiza um sistema de nó único, o processo de atualização leva
 
 Em muitos casos, a atualização de um par de HA não causa interrupções e e/S é ininterrupta. Durante esse processo de atualização sem interrupções, cada nó é atualizado em conjunto para continuar fornecendo e/S aos clientes.
 
-Protocolos orientados para sessões podem causar efeitos adversos em clientes e aplicações em determinadas áreas durante as atualizações. Para mais detalhes, https://docs.netapp.com/us-en/ontap/upgrade/concept_considerations_for_session_oriented_protocols.html["Consulte a documentação do ONTAP"^]
+Protocolos orientados para sessões podem causar efeitos adversos em clientes e aplicações em determinadas áreas durante as atualizações. Para obter mais informações, consulte a. https://docs.netapp.com/us-en/ontap/upgrade/concept_considerations_for_session_oriented_protocols.html["Documentação do ONTAP"^]
 
 
 
@@ -234,7 +236,7 @@ Protocolos orientados para sessões podem causar efeitos adversos em clientes e 
 
 A giveback automática deve estar ativada num par de HA Cloud Volumes ONTAP (esta é a predefinição). Se não for, então a operação falhará.
 
-http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/GUID-3F50DE15-0D01-49A5-BEFD-D529713EC1FA.html["Documentação do ONTAP 9: Comandos para configurar o giveback automático"^]
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/GUID-3F50DE15-0D01-49A5-BEFD-D529713EC1FA.html["Documentação do ONTAP: Comandos para configurar o giveback automático"^]
 
 
 
@@ -288,9 +290,9 @@ image:screenshots_aggregate_details_state.png["Captura de tela: Mostra o campo E
 
 === Verifique se todos os LIFs estão em portas residenciais
 
-Antes de atualizar, todos os LIFs devem estar em portas domésticas. Consulte a documentação do ONTAP para link:https://docs.netapp.com/us-en/ontap/upgrade/task_enabling_and_reverting_lifs_to_home_ports_preparing_the_ontap_software_for_the_update.html["Verifique se todos os LIFs estão em portas residenciais"].
+Antes de atualizar, todos os LIFs devem estar em portas domésticas. Consulte a documentação da ONTAP para link:https://docs.netapp.com/us-en/ontap/upgrade/task_enabling_and_reverting_lifs_to_home_ports_preparing_the_ontap_software_for_the_update.html["Verifique se todos os LIFs estão em portas residenciais"^].
 
-Se ocorrer um erro de falha de atualização, consulte o link:https://kb.netapp.com/Cloud/Cloud_Volumes_ONTAP/CVO_upgrade_fails["artigo da base de dados de conhecimento "Falha na atualização do Cloud Volumes ONTAP""].
+Se ocorrer um erro de falha de atualização, consulte o artigo da base de dados de Conhecimento (KB) link:https://kb.netapp.com/Cloud/Cloud_Volumes_ONTAP/CVO_upgrade_fails["Falha na atualização do Cloud Volumes ONTAP"^].
 
 
 

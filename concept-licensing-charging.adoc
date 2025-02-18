@@ -64,7 +64,7 @@ Para obter informações sobre como converter licenças baseadas em nós para ba
 
 == Preços e configurações compatíveis
 
-Para obter detalhes sobre preços, https://cloud.netapp.com/pricing?hsCtaTracking=4f8b7b77-8f63-4b73-b5af-ee09eab4fbd6%7C5fefbc99-396c-4084-99e6-f1e22dc8ffe7["Site da NetApp BlueXP "^] visite .
+Para obter detalhes sobre preços, https://bluexp.netapp.com/pricing/["Site da NetApp BlueXP "^] visite .
 
 Pacotes de licenciamento baseados em capacidade estão disponíveis com o Cloud Volumes ONTAP 9,7 e versões posteriores.
 

@@ -96,6 +96,10 @@ TIP: Se quiser utilizar WORM e disposição de dados em camadas, desative o back
 
 
 . *Localização*: Selecione uma região, zona de disponibilidade, VNet e sub-rede e, em seguida, marque a caixa de seleção para confirmar a conetividade de rede entre o conetor e o local de destino.
++
+
+NOTE: Para as regiões da China, implantações de nó único são suportadas apenas no Cloud Volumes ONTAP 9.12.1 GA e 9.13.0 GA. Você pode atualizar essas versões para patches e versões posteriores do Cloud Volumes ONTAP. Se você quiser implantar versões mais recentes do Cloud Volumes ONTAP nas regiões da China, entre em Contato com o suporte da NetApp. Somente licenças adquiridas diretamente da NetApp são suportadas nessas regiões.
+
 . *Conetividade*: Escolha um grupo de recursos novo ou existente e escolha se deseja usar o grupo de segurança predefinido ou o seu próprio.
 +
 A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
