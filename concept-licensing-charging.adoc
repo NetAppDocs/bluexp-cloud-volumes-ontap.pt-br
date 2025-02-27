@@ -146,7 +146,7 @@ Para o pacote Essentials, a taxa de capacidade mínima de 4 TIB não se aplica a
 
 === Excesso de idade
 
-Se você exceder sua capacidade BYOL ou se sua licença expirar, será cobrado por excesso de idade à taxa por hora com base na assinatura do marketplace.
+Se você exceder sua capacidade BYOL ou se sua licença expirar, será cobrado por excesso de idade a taxas por hora com base na assinatura do marketplace. Os excedentes são cobrados às taxas de mercado, com preferência pelo uso da capacidade disponível de outras licenças primeiro.
 
 
 
@@ -164,14 +164,6 @@ O licenciamento é baseado inteiramente no tipo de volume criado nos sistemas Cl
 NOTE: Se um volume somente leitura/DP se tornar um volume primário, o BlueXP  o considera como dados primários e os custos de carregamento são calculados com base no tempo em que o volume estava no modo de leitura/gravação. Quando o volume é novamente feito somente leitura/DP, a BlueXP  considera-o como dados secundários novamente e cobra de acordo com a licença mais adequada na carteira digital.
 
 * Essentials secundário HA: Volumes do tipo de proteção de dados (DP) (normalmente volumes de destino SnapMirror ou SnapVault somente leitura) criados em um sistema Cloud Volumes ONTAP usando dois nós de ONTAP que podem fazer failover entre si para acesso a dados sem interrupções.
-
-
-Observe estes pontos:
-
-* Cobrança mínima: Há uma cobrança mínima de 4 TIB para cada VM de storage de fornecimento de dados que tenha pelo menos um volume primário (leitura-gravação). Para o pacote Essentials, essa cobrança mínima não se aplica às VMs de storage somente com volumes secundários (proteção de dados).
-* Excedentes: Se a capacidade licenciada for excedida, os excedentes são cobrados pelas taxas de mercado, com preferência pela utilização da capacidade disponível de outras licenças em primeiro lugar.
-* FlexClone e FlexCache volumes: O FlexClone volumes não é cobrado. Os volumes FlexCache de origem e destino são considerados dados primários e são cobrados de acordo com o espaço provisionado.
-* Carregamento de pares HA: Para pares de HA, somente a capacidade provisionada em um nó é cobrada. Os dados espelhados de forma síncrona para o nó do parceiro não são cobrados.
 
 
 .BYOL

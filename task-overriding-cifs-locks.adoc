@@ -24,7 +24,7 @@ Se ativar esta definição, o Cloud Volumes ONTAP vetará os bloqueios e redefin
 
 CAUTION: Esse processo pode ser disruptivo para clientes CIFS. Os dados que não forem comprometidos com clientes CIFS podem ser perdidos.
 
-.O que você vai precisar
+.Antes de começar
 Você precisa criar um conetor antes de poder alterar as configurações do BlueXP . https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html#how-to-create-a-connector["Saiba como"^].
 
 .Passos

@@ -14,7 +14,7 @@ summary:
 
 
 [role="lead"]
-A partir do Cloud Volumes ONTAP 9.16.1, você pode usar a implantação direta do marketplace do Azure para implantar o Cloud Volumes ONTAP com rapidez e facilidade a partir do marketplace do Azure e explorar seus principais recursos e funcionalidades no seu ambiente.
+A partir do Cloud Volumes ONTAP 9.16.1, você pode usar a implantação direta do Azure Marketplace para implantar o Cloud Volumes ONTAP de forma rápida e fácil. Com o marketplace do Azure, você pode implantar o Cloud Volumes ONTAP rapidamente com apenas alguns cliques e explorar seus principais recursos e funcionalidades no seu ambiente.
 
 Para obter mais informações sobre esta oferta, link:concept-azure-mktplace-direct.html["Saiba mais sobre as ofertas da Cloud Volumes ONTAP no BlueXP  e no mercado"]consulte .
 
@@ -23,11 +23,11 @@ A instância do Cloud Volumes ONTAP implantada usando a implantação direta do 
 
 * A versão mais recente do Cloud Volumes ONTAP (9.16.1 ou posterior).
 * Uma licença gratuita para Cloud Volumes ONTAP limitada a 500 GiB de capacidade provisionada. Esta licença não inclui suporte NetApp e não tem data de validade.
-* Dois nós configurados em um modo de alta disponibilidade (HA) em uma única zona de disponibilidade (AZ), provisionados com números de série padrão. As máquinas virtuais de armazenamento (SVMs) são implantadas em um link:concept-ha-azure.html#ha-single-availability-zone-configuration-with-shared-managed-disks["modo de orquestração flexível"].
+* Dois nós configurados em um modo de alta disponibilidade (HA) em uma única zona de disponibilidade (AZ), provisionados com números de série padrão. As máquinas virtuais de armazenamento (VMs de armazenamento) são implantadas em um link:concept-ha-azure.html#ha-single-availability-zone-configuration-with-shared-managed-disks["modo de orquestração flexível"].
 * Um agregado para a instância criada por padrão.
 * Um disco gerenciado Premium SSD v2 de capacidade provisionada de 500 GiB, e uma raiz e um disco de dados.
-* Um data SVM implantado, com serviços de dados NFS, CIFS, iSCSI e NVMe/TCP. Nenhuma provisão para SVMs adicionais.
-* Licenças para NFS, CIFS (SMB), iSCSI, anti-ransomware (ARW), SnapLock e SnapMirror instaladas com base nos números de série padrão.
+* Uma VM de storage de dados implantada, com serviços de dados NFS, CIFS, iSCSI e NVMe/TCP. Não é possível adicionar VMs de armazenamento de dados adicionais.
+* Licenças instaladas para NFS, CIFS (SMB), iSCSI, anti-ransomware (ARW), SnapLock e SnapMirror.
 * https://docs.netapp.com/us-en/ontap/volumes/enable-temperature-sensitive-efficiency-concept.html["Eficiência de storage sensível à temperatura (ONTAP)"^], criptografia de volume e gerenciamento de chaves externas habilitados por padrão.
 * Esses recursos não são suportados:
 +
@@ -67,9 +67,9 @@ NOTE: Se você registrou o provedor de recursos "Microsoft.storage" para sua ass
 . Na guia *Basics*, forneça os seguintes detalhes:
 +
 ** *Assinatura*: Selecione uma assinatura. A implantação será vinculada ao número da assinatura.
-** *Grupo de recursos*: Use um grupo de recursos existente ou crie um novo. Os grupos de recursos ajudam a alocar todos os recursos, como discos e SVMs, em um único grupo para uma instância do Cloud Volumes ONTAP.
+** *Grupo de recursos*: Use um grupo de recursos existente ou crie um novo. Os grupos de recursos ajudam a alocar todos os recursos, como discos e VMs de storage, em um único grupo para uma instância do Cloud Volumes ONTAP.
 ** *Região*: Selecione uma região que suporte a implantação do Azure HA em uma única AZ. Você verá apenas as regiões disponíveis na lista.
-** *Tamanho*: Selecione um tamanho SVM para o disco gerenciado Premium SSD v2 suportado.
+** * Tamanho*: Selecione um tamanho de VM de armazenamento para o disco gerenciado Premium SSD v2 suportado.
 ** *Zona*: Selecione uma zona para a região selecionada.
 ** *Admin Password*: Defina uma senha. Utilize esta palavra-passe de administrador para iniciar sessão no sistema após a implementação.
 ** *Confirm Password*: Digite novamente a mesma senha para confirmação.
@@ -90,9 +90,9 @@ NOTE: Para cumprir as restrições do Microsoft Azure, você deve criar uma nova
 
 
 .Depois de terminar
-Selecione o ícone de notificação para ver o progresso da implementação. Depois que o Cloud Volumes ONTAP for implantado, você poderá visualizar o SVM listado nas operações.
+Selecione o ícone de notificação para ver o progresso da implementação. Depois que o Cloud Volumes ONTAP for implantado, você poderá visualizar a VM de storage listada para operações.
 
-Uma vez acessível, use o Gerenciador de sistemas do ONTAP ou a CLI do ONTAP para fazer login no SVM com as credenciais de administrador definidas. Depois disso, você pode criar volumes, LUNs ou compartilhamentos e começar a utilizar as funcionalidades de storage do Cloud Volumes ONTAP.
+Uma vez acessível, use o Gerenciador de sistema do ONTAP ou a CLI do ONTAP para fazer login na VM de storage com as credenciais de administrador definidas. Depois disso, você pode criar volumes, LUNs ou compartilhamentos e começar a utilizar as funcionalidades de storage do Cloud Volumes ONTAP.
 
 
 

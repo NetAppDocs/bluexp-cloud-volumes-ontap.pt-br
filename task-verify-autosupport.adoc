@@ -24,7 +24,7 @@ A única etapa de configuração necessária é garantir que o Cloud Volumes ONT
 
 Os nós do Cloud Volumes ONTAP exigem acesso de saída à Internet para NetApp AutoSupport, que monitora proativamente a integridade do sistema e envia mensagens para o suporte técnico da NetApp.
 
-As políticas de roteamento e firewall devem permitir o tráfego HTTP/HTTPS para os seguintes endpoints para que o Cloud Volumes ONTAP possa enviar mensagens AutoSupport:
+As políticas de roteamento e firewall devem permitir o tráfego HTTPS para os seguintes endpoints para que o Cloud Volumes ONTAP possa enviar mensagens AutoSupport:
 
 * https://support.NetApp.com/aods/asupmessage
 * https://support.NetApp.com/asupprod/post/1,0/postSup
