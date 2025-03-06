@@ -1,10 +1,10 @@
-= A região Norte da Nova Zelândia agora é compatível com o Azure
+= Suporte para a região Norte da Nova Zelândia no Azure
 :allow-uri-read: 
 
 
 
 
-=== A região Norte da Nova Zelândia agora é compatível com o Azure
+=== Suporte para a região Norte da Nova Zelândia no Azure
 
 A região Norte da Nova Zelândia agora é compatível com o Azure para configurações de nó único e alta disponibilidade (HA) do Cloud Volumes ONTAP 9.12.1 GA e posteriores. Observe que o tipo de instância Lsv3 não é suportado nessa região.
 
