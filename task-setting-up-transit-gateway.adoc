@@ -4,7 +4,7 @@ permalink: task-setting-up-transit-gateway.html
 keywords: transit gateway, aws, amazon web services, transit gateway, floating ip, client access, nas, outside, vpc, virtual private cloud, route table 
 summary: Configure um gateway de trânsito da AWS para permitir o acesso do cliente nas a endereços IP flutuantes de fora da VPC onde o Cloud Volumes ONTAP reside. Isso é benéfico porque os IPs flutuantes migram automaticamente entre nós quando ocorrem falhas. 
 ---
-= Configurando um gateway de trânsito da AWS para pares de HA em vários AZs
+= Configurar um gateway de trânsito da AWS para pares de HA do Cloud Volumes ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

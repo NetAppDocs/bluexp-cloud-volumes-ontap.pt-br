@@ -4,7 +4,7 @@ permalink: task-gcp-convert-image-raw.html
 keywords: Google Cloud, image, VHD, image signature file, comvert, raw format, 
 summary: Converta uma imagem exportada para o formato disk.RAW através da linha de comando do Google Cloud. 
 ---
-= Converta imagem para o formato RAW no Google Cloud
+= Converta a imagem do Google Cloud para o formato RAW para Cloud Volumes ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

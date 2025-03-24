@@ -4,7 +4,7 @@ permalink: concept-security.html
 keywords: security, encryption, antivirus, concepts, key managers, safenet, kms, keys, vscan, encrypt, key management service, cmk, customer master key, data at rest, data-at-rest, netapp storage encryption, certificate signing request, csr, certificate, ca certificate, virus, scan, virus scan, certificate authority, netapp volume encryption, nve, volume encryption, key management server, ransomware, fpolicy, snapshots 
 summary: O Cloud Volumes ONTAP é compatível com a criptografia de dados e oferece proteção contra vírus e ransomware. 
 ---
-= Segurança
+= Saiba mais sobre a criptografia de dados do Cloud Volumes ONTAP e a proteção contra ransomware
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -64,7 +64,7 @@ ifdef::azure[] endif::azure[] ifdef::gcp[] endif::gcp[]
 
 Os novos agregados têm a encriptação de agregados NetApp (NAE) ativada por predefinição depois de configurar um gestor de chaves externo. Novos volumes que não fazem parte de um agregado NAE terão a criptografia de volume NetApp (NVE) ativada por padrão (por exemplo, se você tiver agregados existentes que foram criados antes de configurar um gerenciador de chaves externo).
 
-Configurar um gerenciador de chaves suportado é o único passo necessário. Para obter instruções de configuração, link:task-encrypting-volumes.html["Criptografando volumes com soluções de criptografia NetApp"]consulte .
+Configurar um gerenciador de chaves suportado é o único passo necessário. Para obter instruções de configuração, link:task-encrypting-volumes.html["Criptografe volumes com as soluções de criptografia NetApp"]consulte .
 
 ifdef::aws[]
 

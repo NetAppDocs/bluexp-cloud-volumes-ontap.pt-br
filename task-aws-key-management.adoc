@@ -4,7 +4,7 @@ permalink: task-aws-key-management.html
 keywords: aws, amazon, encryption, NVE, NetApp volume encryption, KMIP, kms, key manager service 
 summary: Utilize o serviço de gerenciamento de chaves da AWS para seu serviço de gerenciamento de chaves de terceiros. 
 ---
-= Gerencie chaves com o AWS Key Management Service
+= Gerencie chaves de criptografia Cloud Volumes ONTAP com o AWS Key Management Service
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,36 +4,19 @@ permalink: task-configure-placement-group-failure-aws.html
 keywords: placement group, failure, HA single zone, app.conf, rollback, AWS 
 summary: O Cloud Volumes ONTAP usa um link privado do Azure para conexões com suas contas de armazenamento associadas. Se necessário, você pode desativar os links privados do Azure e usar endpoints de serviço em vez disso. 
 ---
-= Configurar a criação do grupo de posicionamento para AWS HA Single AZ
-:hardbreaks:
+= Configurar a criação de grupo de posicionamento para pares de HA do Cloud Volumes ONTAP em AZs únicos da AWS
 :allow-uri-read: 
-:nofooter: 
-:icons: font
-:linkattrs: 
-:imagesdir: ./media/
 
 
 [role="lead"]
-O Cloud Volumes ONTAP falha e reverte novas implantações de configurações de alta disponibilidade (HA) da AWS em uma única zona de disponibilidade (AZ) sempre que a criação do grupo de posicionamento falhar. Se necessário, você pode forçar a conclusão bem-sucedida das implantações configurando grupos de posicionamento para ignorar o processo de reversão sempre que a criação falhar.
+As implantações de alta disponibilidade (HA) do Cloud Volumes ONTAP na zona de disponibilidade única (AZ) da AWS podem falhar e reverter se a criação do grupo de posicionamento falhar. A criação do grupo de posicionamento também falha e a implantação volta se o nó Cloud Volumes ONTAP e a instância de mediador não estiverem disponíveis. Para evitar isso, você pode modificar a configuração para permitir que a implantação seja concluída, mesmo que a criação do grupo de posicionamento falhe.
 
-
-
-== Visão geral
-
-Por padrão, as implantações falham e revertem sempre que um grupo de posicionamento falha no processo de criação de um ambiente de trabalho de zona de disponibilidade única de HA. A criação do grupo de posicionamento também falha e reverte se os nós do Cloud Volumes ONTAP e a instância do mediador não estiverem presentes.
-
-Você pode ignorar o processo de reversão sempre que a criação do grupo de posicionamento falhar e permitir que as implantações continuem configurando o arquivo app.conf. Ao ignorar o processo de reversão, as implantações são concluídas com êxito e o sistema gera uma notificação informando que a criação do grupo de posicionamento falhou com um estado de incompleto.
-
-
-
-=== Desative a reversão na falha do grupo de posicionamento
-
-Para desativar a falha do grupo de posicionamento, o sinalizador "rollback-on-placement-group-failure" deve ser definido como "false".
+Ao ignorar o processo de reversão, o processo de implantação do Cloud Volumes ONTAP é concluído com êxito e notifica você que a criação do grupo de posicionamento está incompleta.
 
 .Passos
 . Use SSH para se conetar ao host do conetor e fazer login.
-. Navegue para o seguinte diretório: /Opt/application/NetApp/cloudmanager/docker_occm/data
-. Edite o app.conf alterando o valor do parâmetro "rollback-on-placement-group-failure" para 'false':
+. Navegue até `/opt/application/netapp/cloudmanager/docker_occm/data`.
+. Edite `app.conf` alterando o valor do `rollback-on-placement-group-failure` parâmetro para `false`. O valor padrão deste parâmetro é `true`.
 +
 [listing]
 ----
@@ -45,12 +28,5 @@ Para desativar a falha do grupo de posicionamento, o sinalizador "rollback-on-pl
     }
 }
 ----
-+
-
-NOTE: Por padrão, o parâmetro "rollback-on-placement-group-failure" é definido como "true".
-
-. Guarde o ficheiro e termine a sessão no conetor.
-+
-Não é necessário reiniciar.
-
+. Guarde o ficheiro e termine a sessão no conetor. Não é necessário reiniciar o conetor.
 

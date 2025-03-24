@@ -4,7 +4,7 @@ permalink: task-set-up-iam-roles.html
 keywords: iam role, mediator role, cloud volumes ontap role, policy, iam policy, permissions, cloud backup 
 summary: As funções do IAM com as permissões necessárias devem ser anexadas a cada nó do Cloud Volumes ONTAP. O mesmo se aplica ao mediador da HA. É mais fácil permitir que o BlueXP  crie as funções do IAM para você, mas você pode usar suas próprias funções. 
 ---
-= Configurar funções do IAM para o Cloud Volumes ONTAP
+= Configurar funções do AWS IAM para nós do Cloud Volumes ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

@@ -4,7 +4,7 @@ permalink: concept-active-iq.html
 keywords: autosupport, digital advisor, active iq digital advisor, telemetry 
 summary: O componente AutoSupport do ONTAP coleta telemetria e envia-a para análise. O consultor digital analisa os dados do AutoSupport e fornece cuidado e otimização proativos. Usando inteligência artificial, o Digital Advisor pode identificar possíveis problemas e ajudá-lo a resolvê-los antes que eles afetem seu negócio. 
 ---
-= AutoSupport e consultor digital
+= Saiba como o AutoSupport e o Consultor Digital são usados para o Cloud Volumes ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

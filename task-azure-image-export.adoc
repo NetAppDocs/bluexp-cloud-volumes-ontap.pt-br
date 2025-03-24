@@ -4,7 +4,7 @@ permalink: task-azure-image-export.html
 keywords: Azure, image, VHD, image signature file, export, marketplace, 
 summary: Você pode exportar imagens do ONTAP do Azure Marketplace para verificar a assinatura do arquivo VHD. 
 ---
-= Exportação de imagens do Azure Marketplace
+= Exporte imagens VHD para o Cloud Volumes ONTAP a partir do marketplace do Azure
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

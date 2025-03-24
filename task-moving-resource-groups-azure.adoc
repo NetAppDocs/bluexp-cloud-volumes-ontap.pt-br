@@ -4,7 +4,7 @@ permalink: task-moving-resource-groups-azure.html
 keywords: move resource groups, azure, remove working environment, resource groups, azure console, Azure subscriptions 
 summary: O Cloud Volumes ONTAP oferece suporte a movimentos de grupos de recursos do Azure, mas o fluxo de trabalho acontece somente no console do Azure. 
 ---
-= Movendo grupos de recursos
+= Mova um grupo de recursos do Azure para o Cloud Volumes ONTAP no console do Azure
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

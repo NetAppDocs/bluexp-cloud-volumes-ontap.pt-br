@@ -4,7 +4,7 @@ permalink: task-google-key-manager.html
 keywords: google cloud, encryption, NVE, NetApp volume encryption, KMIP, GCP, GCP KMS, key manager service, encryption 
 summary: Utilize o serviço de gestão de chaves do Google para o seu serviço de gestão de chaves de terceiros. 
 ---
-= Gerencie chaves com o Cloud Key Management Service do Google
+= Gerencie chaves de criptografia Cloud Volumes ONTAP com o Google Cloud KMS
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,7 +12,7 @@ summary: Utilize o serviço de gestão de chaves do Google para o seu serviço d
 
 
 [role="lead"]
-Você pode usar link:https://cloud.google.com/kms/docs["Serviço de gerenciamento de chaves do Google Cloud Platform (Cloud KMS)"^] para proteger suas chaves de criptografia do ONTAP em um aplicativo implantado no Google Cloud Platform.
+Você pode usar link:https://cloud.google.com/kms/docs["Serviço de gerenciamento de chaves do Google Cloud Platform (Cloud KMS)"^] para proteger suas chaves de criptografia do Cloud Volumes ONTAP em um aplicativo implantado no Google Cloud Platform.
 
 O gerenciamento de chaves com o Cloud KMS pode ser habilitado com a CLI da ONTAP ou a API REST do ONTAP.
 

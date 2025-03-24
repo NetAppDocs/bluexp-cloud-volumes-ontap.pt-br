@@ -4,7 +4,7 @@ permalink: task-create-volumes.html
 keywords: storage, provisioning, iscsi, nfs, cifs, volumes, create a volume, add a volume, create volumes, add volumes, creating a volume, adding a volume, provision volume, provision a volume, provisioning volumes, add volume to second node, add volume to node 2, cloud backup 
 summary: Se você precisar de mais storage depois de iniciar o sistema Cloud Volumes ONTAP inicial, poderá criar novos volumes FlexVol para NFS, CIFS ou iSCSI a partir do BlueXP . 
 ---
-= Criar volumes FlexVol
+= Crie um FlexVol volume em um sistema Cloud Volumes ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

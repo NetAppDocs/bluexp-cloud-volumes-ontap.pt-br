@@ -4,7 +4,7 @@ permalink: concept-storage.html
 keywords: storage, capacity, volumes, aggregates, raw capacity, usable capacity 
 summary: Entender como o Cloud Volumes ONTAP usa o storage de nuvem pode ajudar você a entender seus custos de storage. 
 ---
-= Discos e agregados
+= Discos e agregados usados para clusters Cloud Volumes ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -45,7 +45,7 @@ Armazenamento EBS:: Na AWS, um agregado pode conter até 6 discos com o mesmo ta
 --
 O tamanho máximo do disco é de 16 TIB.
 
-O tipo de disco EBS subjacente pode ser SSDs de uso geral (GP3 ou GP2), SSD IOPS provisionado (IO1) ou HDD otimizado para throughput (st1). Você pode emparelhar um disco EBS com o Amazon S3 para link:concept-data-tiering.html["categorize os dados inativos em storage de objetos de baixo custo"].
+O tipo de disco EBS subjacente pode ser SSDs de uso geral (GP3 ou GP2), SSD IOPS provisionado (IO1) ou HDD otimizado para throughput (st1). Você pode emparelhar um disco EBS com o Amazon S3 para link:concept-data-tiering.html["storage de objetos de baixo custo"].
 
 
 NOTE: A disposição em camadas dos dados no storage de objetos não é recomendada quando se usa HDDs otimizados para taxa de transferência (st1).
@@ -83,7 +83,7 @@ Sistemas de nó único:: Os sistemas de nó único podem usar esses tipos de dis
 Cada tipo de disco gerenciado tem um tamanho máximo de disco de 32 TIB.
 
 +
-É possível emparelhar um disco gerenciado com o storage Azure Blob ao link:concept-data-tiering.html["categorize os dados inativos em storage de objetos de baixo custo"].
+É possível emparelhar um disco gerenciado com o storage Azure Blob ao link:concept-data-tiering.html["storage de objetos de baixo custo"].
 
 
 
@@ -101,7 +101,7 @@ Pares HA:: Os pares DE HA usam dois tipos de discos que oferecem alto desempenho
 * Ligações relacionadas*
 
 * link:task-planning-your-config-azure.html["Saiba como escolher tipos de disco e tamanhos de disco para seus sistemas no Azure"]
-* link:task-deploying-otc-azure.html#launching-a-cloud-volumes-ontap-ha-pair-in-azure["Lançamento de um par de HA do Cloud Volumes ONTAP no Azure"]
+* link:task-deploying-otc-azure.html#launching-a-cloud-volumes-ontap-ha-pair-in-azure["Inicie um par de HA do Cloud Volumes ONTAP no Azure"]
 * https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types["Documentação do Microsoft Azure: Tipos de disco gerenciados do Azure"^]
 * https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-pageblob-overview["Documentação do Microsoft Azure: Visão geral dos blobs de páginas do Azure"^]
 * https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-limits-azure.html["Analisar os limites de armazenamento do Cloud Volumes ONTAP no Azure"^]
@@ -117,7 +117,7 @@ ifdef::gcp[]
 
 No Google Cloud, um agregado pode conter até 6 discos com o mesmo tamanho. O tamanho máximo do disco é de 64 TIB.
 
-O tipo de disco pode ser _Zonal SSD Persistent Disks_, _Zonal Balanced Persistent Disks_ ou _Zonal Standard Persistent Disks_. É possível emparelhar discos persistentes com um bucket do Google Storage ao link:concept-data-tiering.html["categorize os dados inativos em storage de objetos de baixo custo"].
+O tipo de disco pode ser _Zonal SSD Persistent Disks_, _Zonal Balanced Persistent Disks_ ou _Zonal Standard Persistent Disks_. É possível emparelhar discos persistentes com um bucket do Google Storage ao link:concept-data-tiering.html["storage de objetos de baixo custo"].
 
 * Ligações relacionadas*
 

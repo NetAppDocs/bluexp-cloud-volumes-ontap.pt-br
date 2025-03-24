@@ -4,7 +4,7 @@ permalink: concept-degraded-ha-pair.html
 keywords: storage takeover, storage giveback, degraded, degraded status, degraded state, ha pair, ha takeover, takeover, giveback 
 summary: Quando um nó em um par de HA não está disponível, o outro nó fornece dados para seu parceiro fornecer serviço de dados contínuo. Isso é chamado de aquisição de armazenamento. Várias ações ficam indisponíveis até que o armazenamento esteja concluído. 
 ---
-= Ações indisponíveis durante a aquisição
+= Operações indisponíveis quando um nó no par de HA do Cloud Volumes ONTAP está offline
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
