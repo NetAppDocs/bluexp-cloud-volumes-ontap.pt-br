@@ -20,6 +20,18 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 
 
+== 28 de março de 2025
+
+
+
+=== Implantações de modo privado ativadas para o Cloud Volumes ONTAP 9.14.1
+
+Agora você pode implantar o Cloud Volumes ONTAP 9.14.1 no modo privado na AWS, Azure e Google Cloud. O modo privado está ativado para implantações de nó único e alta disponibilidade (HA) do Cloud Volumes ONTAP 9.14.1.
+
+Para obter mais informações sobre implantações de modo privado, https://docs.netapp.com/us-en/bluexp-setup-admin/concept-modes.html#restricted-mode["Saiba mais sobre os modos de implantação do BlueXP"^]consulte .
+
+
+
 == 12 de março de 2025
 
 
