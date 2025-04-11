@@ -26,9 +26,6 @@ A partir do Cloud Volumes ONTAP 9,9.0, com base na sua licença, várias VMs de 
 
 Todas as versões do Cloud Volumes ONTAP anteriores a 9.9.0 oferecem suporte a uma VM de storage de fornecimento de dados e a uma VM de storage de destino usada para recuperação de desastres. Você pode ativar a VM de storage de destino para acesso aos dados se houver uma interrupção na VM de storage de origem.
 
-.Antes de começar
-O conetor requer permissões específicas para criar e gerenciar VMs de storage para Cloud Volumes ONTAP. As permissões necessárias estão incluídas no https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-azure.html["As políticas fornecidas pela NetApp"^].
-
 
 
 == Crie uma VM de storage
@@ -45,6 +42,9 @@ Quando você cria VMs de armazenamento usando as APIs, juntamente com a configur
 * `management-nis-client`
 
 
+.Antes de começar
+O conetor requer permissões específicas para criar VMs de armazenamento para Cloud Volumes ONTAP. As permissões necessárias estão incluídas no https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-azure.html["As políticas fornecidas pela NetApp"^].
+
 
 
 === Sistema de nó único
@@ -53,7 +53,7 @@ Use a seguinte chamada de API para criar uma VM de storage em um sistema de nó 
 
 `POST /azure/vsa/working-environments/{workingEnvironmentId}/svm`
 
-O organismo de solicitação deve incluir o seguinte:
+Inclua os seguintes parâmetros no corpo da solicitação:
 
 [source, json]
 ----
@@ -65,11 +65,11 @@ O organismo de solicitação deve incluir o seguinte:
 
 === Par de HA
 
-Use a seguinte chamada de API para criar uma VM de storage em uma configuração do Azure HA:
+Use a seguinte chamada de API para criar uma VM de storage em um par de HA:
 
 `POST /azure/ha/working-environments/{workingEnvironmentId}/svm`
 
-O organismo de solicitação deve incluir o seguinte:
+Inclua os seguintes parâmetros no corpo da solicitação:
 
 [source, json]
 ----
@@ -83,6 +83,9 @@ O organismo de solicitação deve incluir o seguinte:
 
 Com as APIs do BlueXP , você pode renomear e excluir VMs de storage em configurações de nó único e HA.
 
+.Antes de começar
+O conetor requer permissões específicas para gerenciar VMs de storage para Cloud Volumes ONTAP. As permissões necessárias estão incluídas no https://docs.netapp.com/us-en/bluexp-setup-admin/reference-permissions-azure.html["As políticas fornecidas pela NetApp"^].
+
 
 
 === Renomeie uma VM de armazenamento
@@ -95,7 +98,7 @@ Para renomear uma VM de armazenamento, você deve fornecer os nomes da VM de arm
 `PUT /azure/vsa/working-environments/{workingEnvironmentId}/svm`
 
 +
-O organismo de solicitação deve incluir o seguinte:
+Inclua os seguintes parâmetros no corpo da solicitação:
 
 +
 [source, json]
@@ -105,12 +108,12 @@ O organismo de solicitação deve incluir o seguinte:
   "svmName": "OldSvmName"
 }
 ----
-* Use a seguinte chamada de API para renomear uma VM de armazenamento em uma configuração de HA:
+* Use a seguinte chamada de API para renomear uma VM de armazenamento em um par de HA:
 +
 `PUT /azure/ha/working-environments/{workingEnvironmentId}/svm`
 
 +
-O organismo de solicitação deve incluir o seguinte:
+Inclua os seguintes parâmetros no corpo da solicitação:
 
 +
 [source, json]
@@ -133,7 +136,7 @@ Em um único nó ou configuração de HA, você poderá remover uma VM de storag
 +
 `DELETE /azure/vsa/working-environments/{workingEnvironmentId}/svm/{svmName}`
 
-* Use a seguinte chamada de API para excluir uma VM de armazenamento em uma configuração de HA:
+* Use a seguinte chamada de API para excluir uma VM de armazenamento em um par de HA:
 +
 `DELETE /azure/ha/working-environments/{workingEnvironmentId}/svm/{svmName}`
 

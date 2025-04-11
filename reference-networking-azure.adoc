@@ -62,19 +62,19 @@ A autenticação do usuário falha e os seguintes serviços permanecem indispon�
 | https://support.NetApp.com/aods/asupmessage https://support.NetApp.com/asupprod/post/1,0/postAsup | AutoSupport | Usado para enviar dados de telemetria do AutoSupport para o suporte do NetApp. | Modos padrão e restritos. | As informações do AutoSupport permanecem não entregues. 
 
 
-| \https://management.azure.com \https://login.microsoftonline.com \https://blob.core.windows.net \https://core.windows.net | Regiões públicas | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações específicas do BlueXP  no Azure. 
+| \https://management.azure.com \https://login.microsoftonline.com \https://blob.core.windows.net \https://core.windows.net | Regiões públicas | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações BlueXP  específicas no Azure. 
 
 
-| \https://management.chinacloudapi.cn \https://login.chinacloudapi.cn \https://blob.core.chinacloudapi.cn \https://core.chinacloudapi.cn | Região da China | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações específicas do BlueXP  no Azure. 
+| \https://management.chinacloudapi.cn \https://login.chinacloudapi.cn \https://blob.core.chinacloudapi.cn \https://core.chinacloudapi.cn | Região da China | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações BlueXP  específicas no Azure. 
 
 
-| \https://management.microsoftazure.de \https://login.microsoftonline.de \https://blob.core.cloudapi.de \https://core.cloudapi.de | Região da Alemanha | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações específicas do BlueXP  no Azure. 
+| \https://management.microsoftazure.de \https://login.microsoftonline.de \https://blob.core.cloudapi.de \https://core.cloudapi.de | Região da Alemanha | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações BlueXP  específicas no Azure. 
 
 
-| \https://management.usgovcloudapi.net \https://login.microsoftonline.us \https://blob.core.usgovcloudapi.net \https://core.usgovcloudapi.net | Regiões governamentais dos EUA | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações específicas do BlueXP  no Azure. 
+| \https://management.usgovcloudapi.net \https://login.microsoftonline.us \https://blob.core.usgovcloudapi.net \https://core.usgovcloudapi.net | Regiões governamentais dos EUA | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações BlueXP  específicas no Azure. 
 
 
-| \https://management.azure.microsoft.scloud \https://login.microsoftonline.microsoft.scloud \https://blob.core.microsoft.scloud \https://core.microsoft.scloud | Governo das regiões DoD | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações específicas do BlueXP  no Azure. 
+| \https://management.azure.microsoft.scloud \https://login.microsoftonline.microsoft.scloud \https://blob.core.microsoft.scloud \https://core.microsoft.scloud | Governo das regiões DoD | Comunicação com os serviços do Azure. | Modos padrão, restrito e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço Azure para executar operações BlueXP  específicas no Azure. 
 |===
 
 

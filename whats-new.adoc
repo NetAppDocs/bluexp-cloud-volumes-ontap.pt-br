@@ -20,6 +20,18 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 
 
+== 14 de abril de 2025
+
+
+
+=== Criação automatizada de VM de storage por meio das APIs no Google Cloud
+
+Agora você pode usar as APIs do BlueXP  para automatizar a criação de VM de storage no Google Cloud. Você usa esse recurso nas configurações de alta disponibilidade (HA) do Cloud Volumes ONTAP e agora também pode usá-lo em implantações de nó único. Usando as APIs do BlueXP , você pode facilmente criar, renomear e excluir VMs de storage adicionais de fornecimento de dados no ambiente do Google Cloud, sem a necessidade de configurar manualmente as interfaces de rede, LIFs e LIFs de gerenciamento necessárias. Essa automação simplifica o processo de gerenciamento de VMs de storage.
+
+https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-managing-svms-gcp.html["Gerencie VMs de storage de fornecimento de dados para Cloud Volumes ONTAP no Google Cloud"^]
+
+
+
 == 28 de março de 2025
 
 
@@ -122,7 +134,7 @@ link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-administer-ad
 
 Agora, você pode experimentar o gerenciamento simplificado das licenças do Cloud Volumes ONTAP usando pontos de navegação aprimorados na carteira digital do BlueXP :
 
-* Aceda facilmente às suas informações de licença Cloud Volumes ONTAP através dos separadores *Governança > carteira digital > Visão geral/licenças de serviço de dados*.
+* Aceda facilmente às informações da sua licença Cloud Volumes ONTAP através dos separadores *Governança > carteira digital > Visão geral/licenças diretas*.
 * Clique em *Exibir* no painel Cloud volume ONTAP na guia *Visão geral* para obter uma compreensão abrangente de suas licenças baseadas em capacidade. Esta visualização avançada oferece informações detalhadas sobre as suas licenças e subscrições.
 * Se preferir a interface anterior, clique no botão *mudar para a vista legada* para ver os detalhes da licença por tipo e modificar os métodos de carregamento para as suas licenças.
 

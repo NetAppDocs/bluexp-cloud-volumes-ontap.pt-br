@@ -40,7 +40,14 @@ Uma Virtual Private Cloud (VPC) é necessária para um sistema de nó único.
 
 ==== Endereços IP privados
 
-O BlueXP  aloca 3 ou 4 endereços IP privados para um sistema de nó único no Google Cloud.
+Para um sistema de nó único no Google Cloud, o BlueXP  aloca endereços IP privados para o seguinte:
+
+* Nó
+* Cluster
+* Armazenamento VM
+* Data nas LIF
+* Data iSCSI LIF
+
 
 Você pode ignorar a criação do LIF de gerenciamento de VM de storage (SVM) se implantar o Cloud Volumes ONTAP usando a API e especificar o seguinte sinalizador:
 
