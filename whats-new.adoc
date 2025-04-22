@@ -20,6 +20,22 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 
 
+== 16 de abril de 2025
+
+
+
+=== Novas regiões com suporte no Azure
+
+Agora você pode implantar o Cloud Volumes ONTAP 9.12.1 GA e versões posteriores em zonas de disponibilidade únicas e múltiplas no Azure nas seguintes regiões. Isso inclui suporte para implantações de nó único e alta disponibilidade (HA).
+
+* Espanha Central
+* México Central
+
+
+Para obter uma lista de todas as regiões, consulte https://bluexp.netapp.com/cloud-volumes-global-regions["Mapa das Regiões globais no Azure"^]a .
+
+
+
 == 14 de abril de 2025
 
 
@@ -29,6 +45,18 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 Agora você pode usar as APIs do BlueXP  para automatizar a criação de VM de storage no Google Cloud. Você usa esse recurso nas configurações de alta disponibilidade (HA) do Cloud Volumes ONTAP e agora também pode usá-lo em implantações de nó único. Usando as APIs do BlueXP , você pode facilmente criar, renomear e excluir VMs de storage adicionais de fornecimento de dados no ambiente do Google Cloud, sem a necessidade de configurar manualmente as interfaces de rede, LIFs e LIFs de gerenciamento necessárias. Essa automação simplifica o processo de gerenciamento de VMs de storage.
 
 https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-managing-svms-gcp.html["Gerencie VMs de storage de fornecimento de dados para Cloud Volumes ONTAP no Google Cloud"^]
+
+
+
+== 3 de abril de 2025
+
+
+
+=== Suporte para regiões da China para Cloud Volumes ONTAP 9.13.1 na AWS
+
+Agora você pode implantar o Cloud Volumes ONTAP 9.13.1 na AWS nas regiões da China. Isso inclui suporte para implantações de nó único e alta disponibilidade (HA). Depois de implantar o Cloud Volumes ONTAP 9.13.1, você pode atualizá-lo para versões posteriores. Apenas licenças adquiridas diretamente da NetApp são suportadas.
+
+Para obter informações sobre a disponibilidade regional, consulte o https://bluexp.netapp.com/cloud-volumes-global-regions["Mapas de regiões globais para Cloud Volumes ONTAP"^].
 
 
 
@@ -311,7 +339,7 @@ Para obter as configurações suportadas, https://docs.netapp.com/us-en/cloud-vo
 
 === Avaliações gratuitas para assinaturas de marketplace obsoletas
 
-A avaliação gratuita automática de 30 dias para assinaturas de pagamento conforme o uso no mercado do provedor de nuvem não estará mais disponível no Cloud Volumes ONTAP. A cobrança de qualquer tipo de assinatura do mercado (PAYGO ou contrato anual) será ativada a partir da primeira utilização, sem qualquer período de teste gratuito.
+A licença de avaliação ou avaliação gratuita automática de 30 dias para assinaturas de pagamento conforme o uso no mercado do provedor de nuvem não estará mais disponível no Cloud Volumes ONTAP. A cobrança de qualquer tipo de assinatura do mercado (PAYGO ou contrato anual) será ativada a partir da primeira utilização, sem qualquer período de teste gratuito.
 
 
 
