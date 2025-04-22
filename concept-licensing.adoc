@@ -70,18 +70,18 @@ endif::gcp[]
 
 ==== Freemium
 
-Fornece todos os recursos do Cloud Volumes ONTAP gratuitamente da NetApp (taxas de provedor de nuvem ainda se aplicam).
+Fornece todos os recursos do Cloud Volumes ONTAP gratuitamente da NetApp (taxas de provedor de nuvem ainda se aplicam). Um pacote Freemium tem estas caraterísticas:
 
 * Nenhuma licença ou contrato é necessário.
 * O suporte do NetApp não está incluído.
 * Você está limitado a 500 GiB de capacidade provisionada por sistema Cloud Volumes ONTAP.
-* Você pode usar até 10 sistemas Cloud Volumes ONTAP com a oferta Freemium por conta NetApp, em qualquer provedor de nuvem.
-* Se a capacidade provisionada para um sistema Cloud Volumes ONTAP exceder 500 GiB, o BlueXP  converte o sistema no pacote Essentials.
+* Você pode usar até 10 sistemas Cloud Volumes ONTAP com a oferta Freemium por conta NetApp, para qualquer provedor de nuvem.
+* Se a capacidade provisionada para um sistema Cloud Volumes ONTAP exceder 500 GiB, o BlueXP  converte o sistema em um pacote Essentials.
 +
-Assim que um sistema é convertido para o pacote Essentials, o link:concept-licensing-charging.html#minimum-charge["carregamento mínimo"] aplica-se.
+Assim que um sistema é convertido para o pacote Essentials, link:concept-licensing-charging.html#minimum-charge["carregamento mínimo"] aplica-se a ele.
 
 +
-Quaisquer outros sistemas que tenham menos de 500 GiB de capacidade provisionada permanecem no Freemium (desde que sejam implantados usando a oferta do Freemium).
+Um sistema Cloud Volumes ONTAP que foi convertido em um pacote Essentials não pode ser comutado de volta para Freemium mesmo que a capacidade provisionada seja reduzida para menos de 500 GiB. Outros sistemas com menos de 500 GiB de capacidade provisionada permanecem no Freemium (desde que sejam implantados usando a oferta Freemium).
 
 
 

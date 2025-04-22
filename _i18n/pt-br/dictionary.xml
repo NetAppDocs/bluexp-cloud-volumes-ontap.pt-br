@@ -550,13 +550,9 @@
   <block id="9e931b1cee40a7346d1f06dd6a75ba8e" category="inline-link-macro">Configurações compatíveis no Google Cloud</block>
   <block id="d8643ec11a6eaa26d934c76df70f05f3" category="list-text"><block ref="d8643ec11a6eaa26d934c76df70f05f3" category="inline-link-macro-rx"></block></block>
   <block id="d8fe59d93325a956d9b5fd3e85bb96d8" category="section-title">Freemium</block>
-  <block id="d7c357dcc3b8476a2eeba19c87ec383d" category="paragraph">Fornece todos os recursos do Cloud Volumes ONTAP gratuitamente da NetApp (taxas de provedor de nuvem ainda se aplicam).</block>
   <block id="24996c045717f17c4e40ebb44791b2af" category="list-text">Nenhuma licença ou contrato é necessário.</block>
   <block id="cc3b16b51bb72e66b8f103fef83035d9" category="list-text">O suporte do NetApp não está incluído.</block>
   <block id="895dacd81cbc05951744c0bce981546c" category="list-text">Você está limitado a 500 GiB de capacidade provisionada por sistema Cloud Volumes ONTAP.</block>
-  <block id="46cb473c7acee70e9be90113f3acce9d" category="list-text">Você pode usar até 10 sistemas Cloud Volumes ONTAP com a oferta Freemium por conta NetApp, em qualquer provedor de nuvem.</block>
-  <block id="16c274138bfaf739b851a1b611d4cdb0" category="list-text">Se a capacidade provisionada para um sistema Cloud Volumes ONTAP exceder 500 GiB, o BlueXP  converte o sistema no pacote Essentials.</block>
-  <block id="2b5b1f6feb7719bc282a3518f33b1784" category="paragraph">Quaisquer outros sistemas que tenham menos de 500 GiB de capacidade provisionada permanecem no Freemium (desde que sejam implantados usando a oferta do Freemium).</block>
   <block id="6e539d2ea7d82ed0e31c450e64ff8c04" category="section-title">Otimizado</block>
   <block id="a131e5df30c445534883b2b08d3f9e4e" category="paragraph">Pague por operações de e/S e capacidade provisionadas separadamente.</block>
   <block id="258f58bf86a685fa4951f45a75224c86" category="list-text">Nó único ou HA da Cloud Volumes ONTAP</block>
@@ -5604,7 +5600,6 @@
   <block id="95b5ae6b0af18840a3741634cd325668" category="list-text">Pague por vários sistemas Cloud Volumes ONTAP na sua conta do NetApp por capacidade provisionada. Inclui a capacidade de adquirir serviços de dados de nuvem complementares. Para obter mais informações sobre modelos de consumo em licenças baseadas em capacidade, <block ref="800c64ac20219346d421e96b28656701" category="inline-link-macro-rx"></block>consulte .</block>
   <block id="c3f0a05442b6c8a72739ff963cfeed7f" category="paragraph">Os seguintes pacotes baseados em capacidade estão disponíveis para o Cloud Volumes ONTAP. Para obter mais informações sobre pacotes de licença baseados em capacidade, <block ref="800c64ac20219346d421e96b28656701" category="inline-link-macro-rx"></block>consulte .</block>
   <block id="19a5330bf6f5eac370d1103981c5a834" category="inline-link-macro">carregamento mínimo</block>
-  <block id="b0890bcc109876c5e12a5adec396926f" category="paragraph">Assim que um sistema é convertido para o pacote Essentials, o <block ref="7af77c30f2eff63b0d18155ad569ed75" category="inline-link-macro-rx"></block> aplica-se.</block>
   <block id="f6d538cae99e0f8fa45e7e8780358583" category="paragraph">Para saber como pode efetuar esta conversão, <block ref="3fdaa70059ad7f9b695791d3dfebbc25" category="inline-link-macro-rx"></block>consulte .</block>
   <block id="1a7468dd02c2c074fc65d2ee7db41483" category="doc">Saiba mais sobre o monitoramento de desempenho para cargas de trabalho do Cloud Volumes ONTAP</block>
   <block id="554a0d7666ec33e45169ab1eed7eb037" category="doc">Saiba mais sobre a criptografia de dados do Cloud Volumes ONTAP e a proteção contra ransomware</block>
@@ -5780,4 +5775,9 @@
   <block id="801c0fa0d304ca22d8afec06189bcf93" category="section-title">16 de abril de 2025</block>
   <block id="f0d468a1074534e3b37c7322f2e97bb1" category="section-title">3 de abril de 2025</block>
   <block id="bbe4e5e3881ef8307eb1dd518412cb45" category="paragraph">A licença de avaliação ou avaliação gratuita automática de 30 dias para assinaturas de pagamento conforme o uso no mercado do provedor de nuvem não estará mais disponível no Cloud Volumes ONTAP. A cobrança de qualquer tipo de assinatura do mercado (PAYGO ou contrato anual) será ativada a partir da primeira utilização, sem qualquer período de teste gratuito.</block>
+  <block id="f10f9d69e12a045fa89f83322880ee7c" category="paragraph">Fornece todos os recursos do Cloud Volumes ONTAP gratuitamente da NetApp (taxas de provedor de nuvem ainda se aplicam). Um pacote Freemium tem estas caraterísticas:</block>
+  <block id="4e2db8f84e83acbb3ce91109a9eef20e" category="list-text">Você pode usar até 10 sistemas Cloud Volumes ONTAP com a oferta Freemium por conta NetApp, para qualquer provedor de nuvem.</block>
+  <block id="84befd86706fa21112c130084b373991" category="list-text">Se a capacidade provisionada para um sistema Cloud Volumes ONTAP exceder 500 GiB, o BlueXP  converte o sistema em um pacote Essentials.</block>
+  <block id="a0f8f1341588aae4d56d3b5fb0fde3de" category="paragraph">Assim que um sistema é convertido para o pacote Essentials, <block ref="7af77c30f2eff63b0d18155ad569ed75" category="inline-link-macro-rx"></block> aplica-se a ele.</block>
+  <block id="0551862e260539a3a516b4868d9bcead" category="paragraph">Um sistema Cloud Volumes ONTAP que foi convertido em um pacote Essentials não pode ser comutado de volta para Freemium mesmo que a capacidade provisionada seja reduzida para menos de 500 GiB. Outros sistemas com menos de 500 GiB de capacidade provisionada permanecem no Freemium (desde que sejam implantados usando a oferta Freemium).</block>
 </blocks>
