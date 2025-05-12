@@ -18,6 +18,8 @@ Uma VM de armazenamento é uma máquina virtual em execução no ONTAP que forne
 
 Para criar e gerenciar VMs de storage adicionais de fornecimento de dados no Google Cloud, use as APIs do BlueXP . Isso ocorre porque as APIs automatizam o processo de criação das VMs de storage e configuração das interfaces de rede necessárias. Ao criar as VMs de armazenamento, o BlueXP  configura os serviços de LIF necessários, bem como um iSCSI LIF necessário para comunicações SMB/CIFS de saída a partir da VM de armazenamento.
 
+Para obter informações sobre a execução de chamadas de API do Cloud Volumes ONTAP, https://docs.netapp.com/us-en/bluexp-automation/cm/your_api_call.html#step-1-select-the-identifie["Sua primeira chamada de API"^] consulte .
+
 
 
 == Número suportado de VMs de storage
@@ -140,4 +142,9 @@ Em um único nó ou configuração de HA, você poderá remover uma VM de storag
 +
 `DELETE /gcp/ha/working-environments/{workingEnvironmentId}/svm/{svmName}`
 
+
+
+.Informações relacionadas
+* https://docs.netapp.com/us-en/bluexp-automation/cm/prepare.html["Prepare-se para usar a API"^]
+* https://docs.netapp.com/us-en/bluexp-automation/cm/workflow_processes.html#organization-of-cloud-volumes-ontap-workflows["Workflows do Cloud Volumes ONTAP"^]
 

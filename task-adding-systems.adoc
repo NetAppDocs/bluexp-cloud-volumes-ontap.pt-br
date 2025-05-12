@@ -23,7 +23,7 @@ Você deve saber a senha da conta de usuário admin do Cloud Volumes ONTAP.
 . No menu de navegação à esquerda, selecione *Storage > Canvas*.
 . Na página Canvas, clique em *Adicionar ambiente de trabalho*.
 . Selecione o provedor de nuvem no qual o sistema reside.
-. Escolha o tipo de sistema Cloud Volumes ONTAP.
+. Escolha o tipo de sistema Cloud Volumes ONTAP a adicionar.
 . Clique no link para descobrir um sistema existente.
 
 
@@ -33,8 +33,12 @@ E image:screenshot_discover_redesign.png["Uma captura de tela que mostra um link
 
 endif::aws[]
 
-. Na página região, escolha a região em que as instâncias estão sendo executadas e selecione as instâncias.
-. Na página credenciais, digite a senha do usuário admin do Cloud Volumes ONTAP e clique em *Go*.
+. Na página região, selecione uma região. Você pode ver os sistemas que estão sendo executados na região selecionada.
++
+
+NOTE: Os sistemas Cloud Volumes ONTAP são representados como instâncias nesta página. Na lista, você pode selecionar apenas as instâncias que estão registradas na conta atual.
+
+. Na página credenciais, insira a senha do usuário admin do Cloud Volumes ONTAP e selecione *Go*.
 
 
 .Resultado

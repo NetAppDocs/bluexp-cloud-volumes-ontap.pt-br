@@ -18,7 +18,9 @@ O NetApp oferece duas opções para implantar o Cloud Volumes ONTAP no Azure. A 
 
 Ao implantar o Cloud Volumes ONTAP diretamente do marketplace do Azure, não é necessário configurar o BlueXP  Connector ou atender a outros critérios de segurança e integração necessários para implantar o Cloud Volumes ONTAP por meio do BlueXP . Com o marketplace do Azure, você pode implantar o Cloud Volumes ONTAP rapidamente com apenas alguns cliques e explorar seus principais recursos e funcionalidades no seu ambiente.
 
-Aqui está a comparação de recursos entre as duas opções:
+Ao concluir a implantação no marketplace do Azure, você pode descobrir esses sistemas no BlueXP . Após a descoberta, você pode gerenciá-los como ambientes de trabalho e aproveitar todos os recursos do BlueXP . link:task-deploy-cvo-azure-mktplc.html["Descubra os sistemas implantados no BlueXP "]Consulte a .
+
+Aqui está a comparação de recursos entre as duas opções. Observe que os recursos de uma instância autônoma implantada por meio do marketplace do Azure mudam quando ela é descoberta no BlueXP .
 
 [cols="3*"]
 |===
@@ -28,7 +30,12 @@ Aqui está a comparação de recursos entre as duas opções:
 | *Onboarding* | Preparação mínima e mais curta, mínima necessária para a implantação direta | Processo de integração mais longo, incluindo a instalação do conetor BlueXP  
 
 
-| *Tipos de máquina virtual (VM) suportados* | Edsv5 e Lsv3 | Gama completa de tipos de VM. https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-azure.html["Configurações compatíveis no Azure"^] 
+| *Tipos de máquina virtual (VM) suportados*  a| 
+Tipos de instância EDS_v5 e LS_v3
+
+
+NOTE: O tipo de instância L8s_v3 é suportado no marketplace do Azure para configurações de HA, mas não no BlueXP . O BlueXP  não será capaz de detectá-lo corretamente durante a descoberta.
+| Gama completa de tipos de VM. https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-azure.html["Configurações compatíveis no Azure"^] 
 
 
 | *Licença* | Licença gratuita | Qualquer licença baseada em capacidade. link:concept-licensing.html["Licenciamento do Cloud Volumes ONTAP"] 
@@ -60,8 +67,6 @@ Aqui está a comparação de recursos entre as duas opções:
 
 | *Disposição em camadas do FabricPool* | Não suportado | Suportado 
 |===
-No futuro, o BlueXP  Connector será capaz de identificar implantações feitas por meio da implantação direta do marketplace do Azure. Isso permitirá que você aproveite os recursos aprimorados oferecidos pelo BlueXP .
-
 .Links relacionados
 * Implantação direta do Azure Marketplace: link:task-deploy-cvo-azure-mktplc.html["Implante o Cloud Volumes ONTAP a partir do marketplace do Azure"]
 * Implantação do BlueXP : link:task-getting-started-azure.html["Início rápido para Cloud Volumes ONTAP no Azure"]
