@@ -407,7 +407,7 @@ O grupo de segurança predefinido para o Cloud Volumes ONTAP inclui as seguintes
 Se você precisar de regras rígidas para o tráfego de saída, você pode usar as seguintes informações para abrir apenas as portas necessárias para a comunicação de saída pelo Cloud Volumes ONTAP.
 
 
-NOTE: A origem é a interface (endereço IP) no sistema Cloud Volumes ONTAP.
+NOTE: A origem é a interface (endereço IP) do sistema Cloud Volumes ONTAP.
 
 [cols="10,10,6,20,20,34"]
 |===

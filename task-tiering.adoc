@@ -82,12 +82,13 @@ ifdef::aws[]
 
 === Suporte na AWS
 
-* A disposição de dados em categorias é compatível com a AWS a partir do Cloud Volumes ONTAP 9,2.
+* A hierarquização de dados é suportada na AWS a partir do Cloud Volumes ONTAP 9.2.
 * A categoria de performance pode ser SSDs de uso geral (GP3 ou GP2) ou SSDs IOPS provisionados (IO1).
 +
 
-NOTE: A disposição em camadas dos dados no storage de objetos não é recomendada quando se usa HDDs otimizados para taxa de transferência (st1).
+NOTE: Não recomendamos hierarquizar dados no armazenamento de objetos ao usar HDDs com taxa de transferência otimizada (st1).
 
+* Os dados inativos são alocados em camadas aos buckets do Amazon S3. O compartilhamento em camadas com outros provedores não é suportado.
 
 
 endif::aws[]
@@ -105,6 +106,7 @@ ifdef::azure[]
 
 
 * A camada de desempenho pode ser discos gerenciados SSD Premium, discos gerenciados SSD padrão ou discos gerenciados HDD padrão.
+* Os dados inativos são alocados em camadas ao Microsoft Azure Blob. Não há suporte para alocação em camadas a outros provedores.
 
 
 endif::azure[]
@@ -115,8 +117,9 @@ ifdef::gcp[]
 
 === Suporte no Google Cloud
 
-* A disposição de dados em categorias é compatível com o Google Cloud a partir do Cloud Volumes ONTAP 9,6.
+* O armazenamento em camadas de dados é compatível com o Google Cloud a partir do Cloud Volumes ONTAP 9.6.
 * A camada de performance pode ser discos persistentes de SSD, discos persistentes balanceados ou discos persistentes padrão.
+* Os dados inativos são alocados ao Google Cloud Storage. O compartilhamento com outros provedores não é suportado.
 
 
 endif::gcp[]

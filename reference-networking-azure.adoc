@@ -212,12 +212,11 @@ O BlueXP  enfrenta problemas de conexão se você tentar implantar um segundo p
 
 === Regras do grupo de segurança
 
-O BlueXP  cria grupos de segurança do Azure que incluem as regras de entrada e saída que o Cloud Volumes ONTAP precisa para operar com sucesso. Você pode querer consultar as portas para fins de teste ou se preferir usar seus próprios grupos de segurança.
+O BlueXP cria grupos de segurança do Azure que incluem as regras de entrada e saída para que o Cloud Volumes ONTAP opere com sucesso.  https://docs.netapp.com/us-en/bluexp-setup-admin/reference-ports-azure.html["Ver regras do grupo de segurança para o conetor"^] .
 
-O grupo de segurança do Cloud Volumes ONTAP requer regras de entrada e saída.
+Os grupos de segurança do Azure para o Cloud Volumes ONTAP exigem que as portas apropriadas sejam abertas para comunicação interna entre os nós.  https://docs.netapp.com/us-en/ontap/networking/ontap_internal_ports.html["Saiba mais sobre as portas internas do ONTAP"^] .
 
-
-TIP: Procurando informações sobre o conetor? https://docs.netapp.com/us-en/bluexp-setup-admin/reference-ports-azure.html["Ver regras do grupo de segurança para o conetor"^]
+Não recomendamos modificar os grupos de segurança predefinidos ou usar grupos de segurança personalizados. No entanto, se necessário, observe que o processo de implantação exige que o sistema Cloud Volumes ONTAP tenha acesso total à sua própria sub-rede. Após a conclusão da implantação, se você decidir modificar o grupo de segurança de rede, certifique-se de manter as portas do cluster e as portas de rede de alta disponibilidade abertas. Isso garante uma comunicação perfeita dentro do cluster do Cloud Volumes ONTAP (comunicação entre nós).
 
 
 
