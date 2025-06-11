@@ -84,7 +84,12 @@ O BlueXP  cria a conta de armazenamento com as seguintes configurações:
 
 * Camada de acesso: Quente
 * Desempenho: Padrão
-* Redundância: Armazenamento localmente redundante (LRS)
+* Redundância: De acordo com a implantação do Cloud Volume ONTAP
++
+** Zona de disponibilidade única: Armazenamento localmente redundante (LRS)
+** Zona de disponibilidade múltipla: Armazenamento redundante de zona (ZRS)
+
+
 * Conta: StorageV2 (finalidade geral v2)
 * Exigir transferência segura para operações de API REST: Ativado
 * Acesso à chave da conta de armazenamento: Ativado
