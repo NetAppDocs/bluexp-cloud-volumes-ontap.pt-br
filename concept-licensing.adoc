@@ -42,7 +42,7 @@ Por exemplo, você pode comprar uma única licença TIB de 20 TB, implantar quat
 O licenciamento baseado em capacidade está disponível na forma de um _pacote_. Ao implantar um sistema Cloud Volumes ONTAP, você pode escolher entre vários pacotes de licenciamento com base nas necessidades da sua empresa.
 
 
-NOTE: Embora o uso real e a medição dos produtos e serviços gerenciados no BlueXP  sejam sempre calculados em GiB e TIB, os termos GB/GiB e TB/TIB são usados de forma intercambiável. Isso é refletido nas listagens do Cloud Marketplace, cotações de preços, descrições de listagem e em outra documentação de suporte.
+NOTE: Embora o uso real e a medição dos produtos e serviços gerenciados no BlueXP  sejam sempre calculados em GiB e TIB, os termos GB/GiB e TB/TIB são usados de forma intercambiável. Isso se reflete nas listagens do mercado de nuvem, cotações de preços, descrições de listagens e em outra documentação de suporte.
 
 
 
@@ -115,14 +115,14 @@ Você não será cobrado por e/S relacionadas à replicação de dados (SnapMirr
 
 ifdef::azure[]
 
-* Disponível no Azure Marketplace como uma oferta de pagamento conforme o uso ou como um contrato anual
+* Disponível no mercado do Azure como uma oferta de pagamento conforme o uso ou como um contrato anual
 
 
 endif::azure[]
 
 ifdef::gcp[]
 
-* Disponível no Google Cloud Marketplace como uma oferta de pagamento conforme o uso ou como um contrato anual
+* Disponível no mercado do Google Cloud como uma oferta de pagamento conforme o uso ou como um contrato anual
 
 
 endif::gcp[]

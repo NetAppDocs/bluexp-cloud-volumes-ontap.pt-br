@@ -92,14 +92,14 @@ NOTE: Esta é a conta de serviço configurada para o BlueXP , link:https://docs
 
 Clique em *Adicionar assinatura* para associar as credenciais selecionadas a uma assinatura.
 
-Para criar um sistema Cloud Volumes ONTAP de pagamento conforme o uso, você precisa selecionar um projeto do Google Cloud associado a uma assinatura do Cloud Volumes ONTAP no Google Cloud Marketplace.
+Para criar um sistema Cloud Volumes ONTAP com pagamento conforme o uso, você precisa selecionar um projeto do Google Cloud associado a uma assinatura do Cloud Volumes ONTAP no marketplace do Google Cloud.
 
 |===
 +
-O vídeo a seguir mostra como associar uma assinatura do mercado de pagamento conforme o uso ao seu projeto do Google Cloud. Em alternativa, siga os passos para subscrever localizados na https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Associar uma assinatura do Marketplace às credenciais do Google Cloud"^] secção.
+O vídeo a seguir mostra como associar uma assinatura de marketplace paga conforme o uso ao seu projeto do Google Cloud. Em alternativa, siga os passos para subscrever localizados na https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Associar uma assinatura do Marketplace às credenciais do Google Cloud"^] secção.
 
 +
-.Inscreva-se no BlueXP  no Google Cloud Marketplace
+.Assine o BlueXP no marketplace do Google Cloud
 video::373b96de-3691-4d84-b3f3-b05101161638[panopto]
 . *Serviços*: Selecione os serviços que deseja usar neste sistema. Para selecionar o backup e a recuperação do BlueXP  ou usar a disposição em camadas do BlueXP , você precisa ter especificado a conta de serviço na etapa 3.
 +
@@ -332,10 +332,10 @@ Para criar um sistema Cloud Volumes ONTAP de pagamento conforme o uso, você pre
 
 |===
 +
-O vídeo a seguir mostra como associar uma assinatura do mercado de pagamento conforme o uso ao seu projeto do Google Cloud. Em alternativa, siga os passos para subscrever localizados na https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Associar uma assinatura do Marketplace às credenciais do Google Cloud"^] secção.
+O vídeo a seguir mostra como associar uma assinatura de marketplace paga conforme o uso ao seu projeto do Google Cloud. Em alternativa, siga os passos para subscrever localizados na https://docs.netapp.com/us-en/bluexp-setup-admin/task-adding-gcp-accounts.html["Associando uma assinatura do marketplace às credenciais do Google Cloud"^] secção.
 
 +
-.Inscreva-se no BlueXP  no Google Cloud Marketplace
+.Assine o BlueXP no marketplace do Google Cloud
 video::373b96de-3691-4d84-b3f3-b05101161638[panopto]
 . *Serviços*: Selecione os serviços que deseja usar neste sistema. Para selecionar o backup e a recuperação do BlueXP , ou para usar o BlueXP  Tiering, você deve ter especificado a conta de serviço na etapa 3.
 +

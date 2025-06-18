@@ -17,7 +17,7 @@ summary: Verifique o arquivo Disk.RAW baixado do Google Cloud contra o conteúdo
 Você pode verificar o arquivo Disk.RAW baixado do Google Cloud contra o conteúdo do arquivo digest disponível através do https://mysupport.netapp.com/site/products/all/details/cloud-volumes-ontap/downloads-tab["NSS"^] usando OpenSSL.
 
 
-NOTE: Os comandos OpenSSL para validar a imagem são compatíveis com máquinas Linux, Mac os e Windows.
+NOTE: Os comandos OpenSSL para validar a imagem são compatíveis com máquinas Linux, macOS e Windows.
 
 .Passos
 . Verifique o certificado usando OpenSSL.

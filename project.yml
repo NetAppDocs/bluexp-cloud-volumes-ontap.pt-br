@@ -95,21 +95,21 @@ sidebar:
           url: "/task-saz-feature.html"
         - title: Inicie o Cloud Volumes ONTAP no Azure
           url: "/task-deploying-otc-azure.html"
-        - title: Verificação de imagem da Plataforma Azure
+        - title: Verificar imagem da plataforma Azure
           entries:
           - title: Visão geral
             url: "/concept-azure-image-verification.html"
-          - title: Baixe o arquivo Azure Image Digest
+          - title: Baixe o arquivo de imagem do Azure
             url: "/task-azure-download-digest-file.html"
-          - title: Exportação de imagens
+          - title: Exportar o arquivo de imagem do Azure
             url: "/task-azure-image-export.html"
-          - title: Verificação de assinatura de arquivo
+          - title: Verificar assinatura do arquivo
             entries:
-            - title: Verificação de assinatura de arquivo
+            - title: Saiba mais sobre a verificação de assinatura de arquivo
               url: "/concept-azure-file-sig-verify.html"
-            - title: Verificação de assinatura de arquivo do Linux
+            - title: Verificar assinatura de arquivo no Linux
               url: "/task-file-verification-linux.html"
-            - title: Verificação de assinatura de arquivo do Mac os
+            - title: Verificar assinatura de arquivo no macOS
               url: "/task-file-verification-mac.html"
       - title: Comece no mercado
         url: "/task-deploy-cvo-azure-mktplc.html"

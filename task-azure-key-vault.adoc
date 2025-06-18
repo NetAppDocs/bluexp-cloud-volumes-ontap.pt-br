@@ -183,7 +183,7 @@ Category: kms_wrapped_key_status
 3 entries were displayed.
 ----
 +
-Se o `service_reachability` status não for `OK` , o SVM não poderá alcançar o serviço Azure Key Vault com toda a conetividade e permissões necessárias. Certifique-se de que as políticas de rede e o roteamento do Azure não bloqueiem o vNet privado de alcançar o endpoint público do Azure KeyVault. Se o fizerem, considere usar um endpoint privado do Azure para acessar o Vault de chaves a partir do vNet. Você também pode precisar adicionar uma entrada de hosts estáticos no SVM para resolver o endereço IP privado do endpoint.
+Se o `service_reachability` status não for `OK` , o SVM não poderá alcançar o serviço Azure Key Vault com toda a conetividade e permissões necessárias. Certifique-se de que suas políticas de rede e roteamento do Azure não bloqueiem sua vNet privada de alcançar o ponto de extremidade público do Azure Key Vault. Se o fizerem, considere usar um endpoint privado do Azure para acessar o Vault de chaves a partir do vNet. Você também pode precisar adicionar uma entrada de hosts estáticos no SVM para resolver o endereço IP privado do endpoint.
 
 +
 O `kms_wrapped_key_status` irá comunicar `UNKNOWN` na configuração inicial. Seu status mudará para `OK` depois que o primeiro volume for criptografado.
@@ -197,9 +197,12 @@ Se configurado corretamente, o Cloud Volumes ONTAP criará automaticamente o vol
 
 . Confirme se o volume foi criado e criptografado corretamente. Se for, o `-is-encrypted` parâmetro será exibido como `true`.
 `vol show -vserver _SVM_name_ -fields is-encrypted`
+. Opcional: se você quiser atualizar as credenciais no certificado de autenticação do Azure Key Vault, use o seguinte comando: 
+`security key-manager external azure update-credentials -vserver v1 -authentication-method certificate`
 
 
 .Links relacionados
 * link:task-set-up-azure-encryption.html["Configure o Cloud Volumes ONTAP para usar uma chave gerenciada pelo cliente no Azure"]
 * https://learn.microsoft.com/en-us/azure/key-vault/general/overview["Microsoft Azure docmentation: Sobre o Azure Key Vault"^]
+* https://docs.netapp.com/us-en/ontap-cli/index.html["Guia de referência de comando ONTAP"^]
 
