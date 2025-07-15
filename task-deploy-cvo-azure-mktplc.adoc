@@ -135,9 +135,6 @@ Ao descobrir os sistemas Cloud Volumes ONTAP implantados usando a implantação 
 .Antes de começar
 Certifique-se de que a implantação esteja concluída no marketplace do Azure. O BlueXP  Connector pode descobrir os sistemas somente quando a implantação estiver concluída e estiver disponível para descoberta.
 
-
-NOTE: A implantação direta do Azure Marketplace suporta os tipos de instância L8s_v3. No entanto, o BlueXP  não oferece suporte a esse tipo de instância para configurações de HA e não poderá detectá-lo corretamente durante a descoberta.
-
 .Passos
 No BlueXP , você segue o procedimento padrão para descobrir sistemas existentes. link:task-adding-systems.html["Adicione um sistema Cloud Volumes ONTAP existente ao BlueXP "]Consulte a .
 

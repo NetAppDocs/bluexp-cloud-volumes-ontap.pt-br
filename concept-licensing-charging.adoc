@@ -102,7 +102,7 @@ Não há limite máximo de capacidade quando se trata da própria licença.
 
 == Número máximo de sistemas
 
-Com o licenciamento baseado em capacidade, o número máximo de sistemas Cloud Volumes ONTAP é limitado a 20 por conta do NetApp. Um _System_ é um par de HA do Cloud Volumes ONTAP, um sistema de nó único do Cloud Volumes ONTAP ou quaisquer VMs de storage adicionais que você criar. A VM de armazenamento padrão não conta com o limite. Este limite aplica-se a todos os modelos de licenciamento.
+Com o licenciamento baseado em capacidade, o número máximo de sistemas Cloud Volumes ONTAP é limitado a 24 por conta BlueXP . Um _System_ é um par de HA do Cloud Volumes ONTAP, um sistema de nó único do Cloud Volumes ONTAP ou quaisquer VMs de storage adicionais que você criar. A VM de armazenamento padrão não conta com o limite. Este limite aplica-se a todos os modelos de licenciamento.
 
 Por exemplo, digamos que você tenha três ambientes de trabalho:
 
@@ -122,9 +122,11 @@ Esse ambiente de trabalho conta como três sistemas: Um para o par de HA e dois 
 
 São seis sistemas no total. Você teria então espaço para um sistema 14 adicional em sua conta.
 
-Se você tiver uma implantação grande que exija mais de 20 sistemas, entre em Contato com o representante de sua conta ou com a equipe de vendas.
+Se você tiver uma implantação grande que exija mais de 24 sistemas, entre em Contato com o representante de sua conta ou com a equipe de vendas.
 
-https://docs.netapp.com/us-en/bluexp-setup-admin/concept-netapp-accounts.html["Saiba mais sobre as contas do NetApp"^].
+https://docs.netapp.com/us-en/bluexp-setup-admin/concept-netapp-accounts.html["Saiba mais sobre contas BlueXP"^].
+
+https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/index.html["Saiba mais sobre os limites de armazenamento para AWS, Azure e Google Cloud"^].
 
 
 

@@ -238,29 +238,6 @@ A autenticação do usuário falha e os seguintes serviços permanecem indispon�
 |===
 
 
-==== Acesso de saída à Internet para NetApp AutoSupport
-
-O Cloud Volumes ONTAP requer acesso de saída à Internet para NetApp AutoSupport, que monitora proativamente a integridade do sistema e envia mensagens para o suporte técnico da NetApp.
-
-As políticas de roteamento e firewall devem permitir o tráfego HTTPS para os seguintes endpoints para que o Cloud Volumes ONTAP possa enviar mensagens AutoSupport:
-
-* https://support.NetApp.com/aods/asupmessage
-* https://support.NetApp.com/asupprod/post/1,0/postSup
-
-
-Se uma conexão de saída à Internet não estiver disponível para enviar mensagens AutoSupport, o BlueXP  configura automaticamente seus sistemas Cloud Volumes ONTAP para usar o conetor como um servidor proxy. O único requisito é garantir que o firewall do conetor permita conexões _inbound_ pela porta 3128. Você precisará abrir essa porta depois de implantar o conetor.
-
-Se você definiu regras de saída rígidas para o Cloud Volumes ONTAP, também precisará garantir que o firewall do Cloud Volumes ONTAP permita conexões _de saída_ pela porta 3128.
-
-Depois de verificar que o acesso de saída à Internet está disponível, você pode testar o AutoSupport para garantir que ele possa enviar mensagens. Para obter instruções, consulte https://docs.netapp.com/us-en/ontap/system-admin/setup-autosupport-task.html["Documentação do ONTAP: Configurar o AutoSupport"^] a .
-
-
-TIP: Se você estiver usando um par de HA, o mediador de HA não precisará de acesso de saída à Internet.
-
-Se o BlueXP  notificar que as mensagens do AutoSupport não podem ser enviadas, link:task-verify-autosupport.html#troubleshoot-your-autosupport-configuration["Solucionar problemas da configuração do AutoSupport"].
-
-
-
 === Conexões com sistemas ONTAP em outras redes
 
 Para replicar dados entre um sistema Cloud Volumes ONTAP no Google Cloud e sistemas ONTAP em outras redes, você precisa ter uma conexão VPN entre a VPC e a outra rede, por exemplo, sua rede corporativa.
@@ -381,10 +358,7 @@ Se você usar sua própria política de firewall, certifique-se de adicionar tod
 
 O grupo de segurança predefinido para o Cloud Volumes ONTAP abre todo o tráfego de saída. Se isso for aceitável, siga as regras básicas de saída. Se você precisar de regras mais rígidas, use as regras de saída avançadas.
 
-
-
-===== Regras básicas de saída
-
+.Regras básicas de saída
 O grupo de segurança predefinido para o Cloud Volumes ONTAP inclui as seguintes regras de saída.
 
 [cols="20,20,60"]
@@ -400,11 +374,8 @@ O grupo de segurança predefinido para o Cloud Volumes ONTAP inclui as seguintes
 
 | Todos os UDP | Tudo | Todo o tráfego de saída 
 |===
-
-
-===== Regras de saída avançadas
-
-Se você precisar de regras rígidas para o tráfego de saída, você pode usar as seguintes informações para abrir apenas as portas necessárias para a comunicação de saída pelo Cloud Volumes ONTAP.
+.Regras de saída avançadas
+Se você precisar de regras rígidas para o tráfego de saída, você pode usar as seguintes informações para abrir apenas as portas necessárias para a comunicação de saída pelo Cloud Volumes ONTAP. Os clusters Cloud Volumes ONTAP usam as seguintes portas para regular o tráfego de nós.
 
 
 NOTE: A origem é a interface (endereço IP) do sistema Cloud Volumes ONTAP.
@@ -477,9 +448,6 @@ NOTE: A origem é a interface (endereço IP) do sistema Cloud Volumes ONTAP.
 | TCP | 3128 | LIF de gerenciamento de nós | Conetor | Enviar mensagens AutoSupport através de um servidor proxy no conetor, se uma conexão de saída de Internet não estiver disponível 
 
 
-| Cluster | Todo o tráfego | Todo o tráfego | Todos os LIFs em um nó | Todos os LIFs no outro nó | Comunicações entre clusters (apenas Cloud Volumes ONTAP HA) 
-
-
 | Backups de configuração | HTTP | 80 | LIF de gerenciamento de nós | Http://<connector-IP-address>/occm/offboxconfig | Envie backups de configuração para o conetor. link:https://docs.netapp.com/us-en/ontap/system-admin/node-cluster-config-backed-up-automatically-concept.html["Documentação do ONTAP"^] 
 
 
@@ -539,4 +507,29 @@ Se você ainda não criou um conetor, você deve rever os requisitos de rede par
 
 * https://docs.netapp.com/us-en/bluexp-setup-admin/task-quick-start-connector-google.html["Veja os requisitos de rede para o conetor"^]
 * https://docs.netapp.com/us-en/bluexp-setup-admin/reference-ports-gcp.html["Regras de firewall no Google Cloud"^]
+
+
+
+
+=== Configurações de rede para oferecer suporte ao proxy do conector
+
+Você pode usar os servidores proxy configurados para o Conector BlueXP para habilitar o acesso de saída à internet a partir do Cloud Volumes ONTAP. O BlueXP suporta dois tipos de proxies:
+
+* *Proxy explícito*: O tráfego de saída do Cloud Volumes ONTAP usa o endereço HTTP do servidor proxy especificado durante a configuração do proxy do Conector. O administrador do Conector também pode ter configurado credenciais de usuário e certificados de CA raiz para autenticação adicional. Se um certificado de CA raiz estiver disponível para o proxy explícito, certifique-se de obter e enviar o mesmo certificado para o seu ambiente de trabalho do Cloud Volumes ONTAP usando o  https://docs.netapp.com/us-en/ontap-cli/security-certificate-install.html["ONTAP CLI: instalação do certificado de segurança"^] comando.
+* *Proxy transparente*: A rede está configurada para rotear automaticamente o tráfego de saída do Cloud Volumes ONTAP por meio do proxy do Conector. Ao configurar um proxy transparente, o administrador do Conector precisa fornecer apenas um certificado de CA raiz para conectividade do Cloud Volumes ONTAP, não o endereço HTTP do servidor proxy. Certifique-se de obter e carregar o mesmo certificado de CA raiz para o seu ambiente de trabalho do Cloud Volumes ONTAP usando o  https://docs.netapp.com/us-en/ontap-cli/security-certificate-install.html["ONTAP CLI: instalação do certificado de segurança"^] comando.
+
+
+Para obter informações sobre como configurar servidores proxy para o BlueXP Connector, consulte o  https://docs.netapp.com/us-en/bluexp-setup-admin/task-configuring-proxy.html["Configure um conetor para usar um servidor proxy"^] .
+
+.Configurar tags de rede para o Cloud Volumes ONTAP no Google Cloud
+Durante a configuração do proxy transparente do Conector, o administrador do Conector adiciona uma tag de rede para o Google Cloud. Você precisa obter e adicionar manualmente a mesma tag de rede para a sua configuração do Cloud Volumes ONTAP . Essa tag é necessária para o funcionamento correto do servidor proxy.
+
+. No console do Google Cloud, localize seu ambiente de trabalho do Cloud Volumes ONTAP .
+. Vá para *Detalhes > Rede > Tags de rede*.
+. Adicione a tag usada para o Conector e salve a configuração.
+
+
+.Tópicos relacionados
+* link:task-verify-autosupport.html["Verifique a configuração do AutoSupport para Cloud Volumes ONTAP"]
+* https://docs.netapp.com/us-en/ontap/networking/ontap_internal_ports.html["Saiba mais sobre as portas internas do ONTAP"^].
 

@@ -147,4 +147,6 @@ Em um único nó ou configuração de HA, você poderá remover uma VM de storag
 .Informações relacionadas
 * https://docs.netapp.com/us-en/bluexp-automation/cm/prepare.html["Prepare-se para usar a API"^]
 * https://docs.netapp.com/us-en/bluexp-automation/cm/workflow_processes.html#organization-of-cloud-volumes-ontap-workflows["Workflows do Cloud Volumes ONTAP"^]
+* https://docs.netapp.com/us-en/bluexp-automation/platform/get_identifiers.html#get-the-connector-identifier["Obtenha os identificadores necessários"^]
+* https://docs.netapp.com/us-en/bluexp-automation/platform/use_rest_apis.html["Use as APIs REST do BlueXP"^]
 

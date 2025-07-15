@@ -32,9 +32,6 @@ Aqui está a comparação de recursos entre as duas opções. Observe que os rec
 
 | *Tipos de máquina virtual (VM) suportados*  a| 
 Tipos de instância EDS_v5 e LS_v3
-
-
-NOTE: O tipo de instância L8s_v3 é suportado no marketplace do Azure para configurações de HA, mas não no BlueXP . O BlueXP  não será capaz de detectá-lo corretamente durante a descoberta.
 | Gama completa de tipos de VM. https://docs.netapp.com/us-en/cloud-volumes-ontap-relnotes/reference-configs-azure.html["Configurações compatíveis no Azure"^] 
 
 
