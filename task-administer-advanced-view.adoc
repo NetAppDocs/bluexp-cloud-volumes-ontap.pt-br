@@ -14,43 +14,31 @@ summary: Se você precisar executar o gerenciamento avançado do Cloud Volumes O
 
 
 [role="lead"]
-Se você precisar executar o gerenciamento avançado do Cloud Volumes ONTAP, poderá fazê-lo usando o Gerenciador de sistemas do ONTAP, que é uma interface de gerenciamento fornecida com um sistema ONTAP. Incluímos a interface do Gerenciador de sistema diretamente no BlueXP  para que você não precise sair do BlueXP  para gerenciamento avançado.
+Os recursos avançados de gerenciamento de armazenamento do Cloud Volumes ONTAP estão disponíveis por meio do ONTAP System Manager, uma interface de gerenciamento fornecida com os sistemas ONTAP . Você pode acessar o System Manager diretamente do BlueXP.
 
 
 
 == Caraterísticas
 
-Você pode executar essas funções de gerenciamento:
+Você pode executar diversas funções de gerenciamento de armazenamento usando o ONTAP System Manager no BlueXP. A lista a seguir inclui algumas dessas funcionalidades, embora não seja exaustiva:
 
-* Gerenciamento avançado de storage
-+
-Gerencie grupos de consistência, compartilhamentos, qtrees, cotas e VMs de armazenamento.
-
-* Gerenciamento de rede
-+
-Gerencie IPspaces, interfaces de rede, portsets e portas ethernet.
-
-* Eventos e empregos
-+
-Ver registos de eventos, alertas do sistema, trabalhos e registos de auditoria.
-
-* Proteção de dados avançada
-+
-Proteja VMs de storage, LUNs e grupos de consistência.
-
-* Gerenciamento de host
-+
-Configurar grupos de iniciadores SAN e clientes NFS.
-
+* Gerenciamento avançado de armazenamento: gerencie grupos de consistência, compartilhamentos, qtrees, cotas e VMs de armazenamento.
+* Movimento de volume: link:task-manage-volumes.html#move-a-volume["Mover um volume para um agregado diferente."]
+* Gerenciamento de rede: gerencie espaços IP, interfaces de rede, conjuntos de portas e portas Ethernet.
+* Gerenciar volumes FlexGroup : Você pode criar e gerenciar volumes FlexGroup somente por meio do Gerenciador de Sistemas. O BlueXP não oferece suporte à criação de volumes FlexGroup .
+* Eventos e trabalhos: visualize logs de eventos, alertas do sistema, trabalhos e logs de auditoria.
+* Proteção avançada de dados: proteja VMs de armazenamento, LUNs e grupos de consistência.
+* Gerenciamento de host: configure grupos de iniciadores SAN e clientes NFS.
+* Gerenciamento de armazenamento de objetos S3: os recursos de gerenciamento de armazenamento S3 no Cloud Volumes ONTAP estão disponíveis somente no System Manager e não no BlueXP.
 
 
 
 
 == Configurações compatíveis
 
-O Cloud Volumes ONTAP 9.10.0 e posterior são compatíveis com o gerenciamento avançado por meio do Gerenciador de sistemas do ONTAP em regiões de nuvem padrão.
+* O gerenciamento avançado de armazenamento por meio do ONTAP System Manager está disponível no Cloud Volumes ONTAP 9.10.0 e posteriores em regiões de nuvem padrão.
+* A integração do System Manager não é suportada nas regiões GovCloud ou em regiões que não têm acesso de saída à Internet.
 
-A integração do System Manager não é suportada nas regiões GovCloud ou em regiões que não têm acesso de saída à Internet.
 
 
 
@@ -58,21 +46,11 @@ A integração do System Manager não é suportada nas regiões GovCloud ou em r
 
 Alguns recursos que aparecem na interface do Gerenciador de sistema não são suportados com o Cloud Volumes ONTAP:
 
-* Disposição em camadas do BlueXP
-+
-O Cloud Volumes ONTAP não é compatível com o serviço de disposição em camadas do BlueXP . Você deve configurar a disposição em camadas de dados no storage de objetos diretamente da visualização padrão do BlueXP  ao criar volumes.
+* BlueXP tiering: O Cloud Volumes ONTAP não oferece suporte ao serviço de BlueXP tiering . Você deve configurar a hierarquização de dados para armazenamento de objetos diretamente na Visualização Padrão do BlueXP ao criar volumes.
+* Níveis: O gerenciamento de agregados (incluindo níveis locais e níveis de nuvem) não é compatível com o Gerenciador de Sistemas. Você deve gerenciar agregados diretamente na Visualização Padrão do BlueXP.
+* Atualizações de firmware: o Cloud Volumes ONTAP não oferece suporte a atualizações automáticas de firmware na página *Cluster > Configurações*.
+* Controle de acesso baseado em função: o controle de acesso baseado em função do Gerenciador do Sistema não é suportado.
 
-* Camadas
-+
-O gerenciamento de agregados (incluindo camadas locais e camadas de nuvem) não é compatível com o System Manager. Você precisa gerenciar agregados diretamente da visualização padrão do BlueXP .
-
-* Atualizações de firmware
-+
-O Cloud Volumes ONTAP não suporta atualizações automáticas de firmware a partir da página *Cluster > Settings*.
-
-
-
-Além disso, o controle de acesso baseado em função do System Manager não é suportado.
 
 
 

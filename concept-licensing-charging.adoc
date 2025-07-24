@@ -23,6 +23,10 @@ Você deve estar familiarizado com o carregamento e uso de capacidade para licen
 Pacotes de licenciamento baseados em capacidade estão disponíveis com os seguintes modelos de consumo:
 
 * *BYOL*: Traga sua própria licença (BYOL). Uma licença adquirida na NetApp que pode ser usada para implantar o Cloud Volumes ONTAP em qualquer provedor de nuvem.
++
+
+NOTE: A NetApp restringiu a compra, extensão e renovação de licenças BYOL. Para obter mais informações, consulte  https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/whats-new.html#restricted-availability-of-byol-licensing-for-cloud-volumes-ontap["Disponibilidade restrita de licenciamento BYOL para Cloud Volumes ONTAP"^] .
+
 
 
 ifdef::azure[]
@@ -37,7 +41,7 @@ endif::azure[]
 
 Observe o seguinte:
 
-* Se você adquirir uma licença da NetApp (BYOL), também precisará assinar a oferta PAYGO no mercado do seu provedor de nuvem.
+* Se você adquirir uma licença da NetApp (BYOL), também precisará assinar a oferta PAYGO no marketplace do seu provedor de nuvem. A NetApp possui licenciamento BYOL restrito. Quando suas licenças BYOL expirarem, você deverá substituí-las por assinaturas do marketplace de nuvem.
 +
 Sua licença sempre será cobrada primeiro, mas você será cobrado pela taxa por hora no mercado nestes casos:
 
@@ -47,7 +51,7 @@ Sua licença sempre será cobrada primeiro, mas você será cobrado pela taxa po
 
 
 * Se você tiver um contrato anual de um mercado, _All_ Cloud Volumes ONTAP sistemas que você implantar serão cobrados contra esse contrato. Você não pode misturar e combinar um contrato de mercado anual com o BYOL.
-* Somente sistemas de nó único com BYOL são compatíveis nas regiões da China.
+* Somente sistemas de nó único com BYOL são suportados nas regiões da China. As implantações na região da China estão isentas das restrições de licenciamento BYOL.
 
 
 
@@ -148,7 +152,7 @@ Para o pacote Essentials, a taxa de capacidade mínima de 4 TIB não se aplica a
 
 === Excesso de idade
 
-Se você exceder sua capacidade BYOL ou se sua licença expirar, será cobrado por excesso de idade a taxas por hora com base na assinatura do marketplace. Os excedentes são cobrados às taxas de mercado, com preferência pelo uso da capacidade disponível de outras licenças primeiro.
+Se você exceder sua capacidade BYOL, será cobrado pelo excedente com base nas taxas horárias da sua assinatura do marketplace. O excedente é cobrado com base nas taxas do marketplace, com preferência pelo uso da capacidade disponível de outras licenças primeiro. Se sua licença BYOL expirar, você precisará migrar para um modelo de licenciamento baseado em capacidade por meio de marketplaces na nuvem.
 
 
 

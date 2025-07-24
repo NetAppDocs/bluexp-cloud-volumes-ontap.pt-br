@@ -86,27 +86,20 @@ Observe que o nome DNS deve corresponder aos requisitos de nomenclatura do DNS d
 
 .Passos
 . SSH para o host do conetor e faça login.
-. Navegue para o seguinte diretório: /Opt/application/NetApp/cloudmanager/docker_occm/data
-. Edite o app.conf adicionando o parâmetro "user-private-dns-zone-settings" com os seguintes pares de palavras-chave-valor:
+. Navegue até o  `/opt/application/netapp/cloudmanager/docker_occm/data` diretório.
+. Editar  `app.conf` adicionando o  `user-private-dns-zone-settings` parâmetro com os seguintes pares de palavra-chave-valor:
 +
-....
-"user-private-dns-zone-settings" : {
-   "resource-group" : "<resource group name of the DNS zone>",
-   "subscription" : "<subscription ID>",
-   "use-existing" : true,
-   "create-private-dns-zone-link" : true
-}
-....
+[source, cli]
+----
+ "user-private-dns-zone-settings" : {
+    "resource-group" : "<resource group name of the DNS zone>",
+    "subscription" : "<subscription ID>",
+    "use-existing" : true,
+    "create-private-dns-zone-link" : true
+ }
+----
 +
-O parâmetro deve ser inserido no mesmo nível que "System-id", como mostrado abaixo:
-
-+
-....
-"system-id" : "<system ID>",
-"user-private-dns-zone-settings" : {
-....
-+
-Observe que a palavra-chave de assinatura é necessária somente se a zona DNS Privada existir em uma assinatura diferente do conetor.
+O  `subscription` A palavra-chave é necessária somente se a zona DNS privada estiver em uma assinatura diferente daquela do Conector.
 
 . Guarde o ficheiro e termine a sessão no conetor.
 +
