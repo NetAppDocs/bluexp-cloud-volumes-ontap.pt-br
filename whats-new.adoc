@@ -83,14 +83,6 @@ https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-deploy-cvo-azure-m
 
 
 
-=== Capacidade de categorizar dados para locatários do Azure
-
-Agora você pode habilitar a disposição em camadas para um locatário do Azure em um cenário em que o ambiente de trabalho do Cloud Volumes ONTAP é criado por um locatário e o BlueXP  Connector é criado por outro. Usando essa funcionalidade, você pode usar o mesmo conetor para categorizar dados para vários locatários do Azure.
-
-https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-tiering.html#requirements-to-tier-data-for-an-azure-tenant["Requisitos para categorizar dados para um locatário do Azure"^]
-
-
-
 == 16 de abril de 2025
 
 
