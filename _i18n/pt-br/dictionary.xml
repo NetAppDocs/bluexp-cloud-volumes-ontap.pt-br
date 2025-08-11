@@ -633,7 +633,6 @@
   <block id="2d51420db26e68ce07b81103e73ac40f" category="list-text">Consistência de aplicativos</block>
   <block id="39cc8f8f6f1d13bb434a4ddc5d57b61b" category="paragraph">Garanta a consistência das cópias Snapshot do NetApp usando o NetApp SnapCenter.</block>
   <block id="b130d62b437f2a119198feb1466a4c3b" category="inline-link">Saiba mais sobre o SnapCenter</block>
-  <block id="17f0fae3c5e44f9a095562194f423343" category="paragraph"><block ref="17f0fae3c5e44f9a095562194f423343" category="inline-link-rx"></block></block>
   <block id="4c5d94eb4dc4bff93f6a96a08ab7b244" category="list-text">Segurança dos dados</block>
   <block id="286994e9e1269d98948cb886c01ca156" category="paragraph">O Cloud Volumes ONTAP é compatível com a criptografia de dados e oferece proteção contra vírus e ransomware.</block>
   <block id="7bf338973426a289a345974f4910386c" category="list-text">Controles de conformidade de privacidade</block>
@@ -2064,8 +2063,6 @@
   <block id="8c4fbb7e9bd5b396b627cc7e7862fbba" category="list-text">No canto superior direito do console BlueXP , clique no ícone de elipses e selecione *Excluir*.</block>
   <block id="4a9ee4aa88ebf38223ea447fe291d222" category="inline-image-macro">Uma captura de tela que mostra o menu disponível no ambiente de trabalho que contém a ação Excluir.</block>
   <block id="ec8e04c7758ae04f1375383b387929a1" category="paragraph"><block ref="ec8e04c7758ae04f1375383b387929a1" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="e46b959133eadbb0d00ac0a308843f30" category="list-text">Na janela Excluir ambiente de trabalho, digite o nome do ambiente de trabalho e clique em *Excluir*.</block>
-  <block id="7d73be13421466d5cf5d832329f74c79" category="paragraph">Pode demorar até 5 minutos para eliminar o ambiente de trabalho.</block>
   <block id="1ddb0e5b328575796533c1e7f5b1f802" category="doc">Implante um par de HA em uma sub-rede compartilhada</block>
   <block id="c81d796f0d5c668dfa8d68823f479c90" category="paragraph">Com<block ref="93089d0988badd859f8a3f19acd5c989" category="inline-link-rx"></block>o , uma configuração do Cloud Volumes ONTAP HA é distribuída por duas contas:</block>
   <block id="ae3f5f74ff8afbb3ad6f13ea4d94e15d" category="list-text">A conta de proprietário da VPC, que possui a rede (VPC, sub-redes, tabelas de rota e grupo de segurança do Cloud Volumes ONTAP)</block>
@@ -5401,7 +5398,6 @@
   <block id="cded3209819889817786a4170eb0e49c" category="inline-link">Habilite as soluções de proteção contra ransomware da NetApp para Cloud Volumes ONTAP</block>
   <block id="d2675df83ff2fbafe199fb06a1fd5d56" category="list-text"><block ref="d2675df83ff2fbafe199fb06a1fd5d56" category="inline-link-rx"></block></block>
   <block id="c2e10e9222f5db93eded2cefa02c0ef5" category="inline-link">Converta uma licença baseada em nó Cloud Volumes ONTAP em licença baseada em capacidade</block>
-  <block id="0fc6c6e7c7c886fe493ee21e8e7be67d" category="paragraph"><block ref="677ce77d69762bd9f63d8a2760e6a0c4" category="inline-link-rx"></block> <block ref="b3c563b157608d2aec77c4e8d2c32e61" category="inline-link-rx"></block></block>
   <block id="322a339b221056f32120ffd18077d44d" category="doc">Criação de VM de storage automatizada por meio das APIs no Azure</block>
   <block id="aa1c2167957b1092da7e43e77867748c" category="paragraph">Agora você pode usar as APIs do BlueXP  para criar, renomear e excluir VMs de armazenamento adicionais de fornecimento de dados para o Cloud Volumes ONTAP no Azure. O uso das APIs automatiza o processo de criação de VM de storage, incluindo a configuração das interfaces de rede necessárias, LIFs e um LIF de gerenciamento, se você precisar usar uma VM de storage para fins de gerenciamento.</block>
   <block id="4a688a36b1b8761ed6587867f87a2cc3" category="inline-link">Gerencie VMs de storage de fornecimento de dados para Cloud Volumes ONTAP no Azure</block>
@@ -5867,7 +5863,6 @@
   <block id="4c441b388bebcddf8c08fb782095b864" category="paragraph"><block ref="4c441b388bebcddf8c08fb782095b864" category="inline-image-macro-rx" type="image"></block></block>
   <block id="9def883103b7b964dcbb0993e3f8a065" category="doc">Fim da disponibilidade das licenças otimizadas</block>
   <block id="cf4dd05cf065c9ae01bc836c5033bb63" category="paragraph">A partir de 11 de agosto de 2025, a licença Cloud Volumes ONTAP Optimized será descontinuada e não estará mais disponível para compra ou renovação nos marketplaces do Azure e do Google Cloud para assinaturas de pagamento conforme o uso (PAYGO).  Se você tiver um contrato anual existente com uma licença otimizada, poderá continuar a usar a licença até o final do contrato.  Quando sua licença otimizada expirar, você poderá optar pelas licenças Cloud Volumes ONTAP Essentials ou Professional.</block>
-  <block id="4e106c84c3dd2cbdc5b24d055fe09562" category="paragraph">No entanto, a capacidade de adicionar ou renovar licenças otimizadas estaria disponível por meio das APIs.</block>
   <block id="2b8e43c95c1d15bc0824064c3dc0f993" category="paragraph">Para obter informações sobre pacotes de licenciamento, consulte<block ref="4b2776d787a70224c2441f63d3888380" category="inline-link-rx"></block> .</block>
   <block id="ed1f600d01a229b43b3196dd2f2e48ca" category="inline-link">Gerenciar licenciamento baseado em capacidade</block>
   <block id="1d4a9a37e700957e9d79664f032cf5ec" category="paragraph">Para obter informações sobre como mudar para um método de carregamento diferente, consulte<block ref="eeeecd1116eaf4db26e064552c04366d" category="inline-link-rx"></block> .</block>
@@ -5885,4 +5880,9 @@
   <block id="219fa750a13ad456df1d25524d9f6ad9" category="list-text">* Uso do pacote Cloud Volumes ONTAP *: Este relatório inclui as seguintes informações para cada pacote:</block>
   <block id="cfba7e7177c8f36e5c073175ecdcec93" category="paragraph">O licenciamento baseado em capacidade permite que você pague pelo Cloud Volumes ONTAP por TiB de capacidade.  O licenciamento baseado em capacidade está disponível na forma de um _pacote_: o pacote Essentials ou Professional.</block>
   <block id="b9d888f58b09c4007db0247286e392b5" category="section-title">11 de agosto de 2025</block>
+  <block id="d7541fdf3e0094adec62a7042b5512d9" category="inline-link">Converter uma licença baseada em nó do Cloud Volumes ONTAP em uma licença baseada em capacidade</block>
+  <block id="249c33a7057b26f2c17f912ee1675174" category="paragraph"><block ref="677ce77d69762bd9f63d8a2760e6a0c4" category="inline-link-rx"></block> <block ref="c718c65e9665241afe238019ab334376" category="inline-link-rx"></block></block>
+  <block id="09027718866a8a3a2edb0bb0eb53c926" category="paragraph">No entanto, a capacidade de adicionar ou renovar licenças otimizadas estará disponível por meio das APIs.</block>
+  <block id="064c8585f26a6a9766e55da306b39425" category="paragraph"><block ref="064c8585f26a6a9766e55da306b39425" category="inline-link-rx"></block></block>
+  <block id="42f21a40b3b95c1fc1fe699b458d9f4f" category="list-text">Na janela Excluir ambiente de trabalho, digite o nome do ambiente de trabalho e clique em *Excluir*.  Pode levar até cinco minutos para excluir o ambiente de trabalho.</block>
 </blocks>

@@ -45,7 +45,7 @@ Alterne entre pools de armazenamento de alto e baixo desempenho sob demanda sem 
 Garanta a consistência das cópias Snapshot do NetApp usando o NetApp SnapCenter.
 
 +
-https://docs.netapp.com/us-en/snapcenter/concept/concept_snapcenter_overview.html["Saiba mais sobre o SnapCenter"^]
+https://docs.netapp.com/us-en/snapcenter/get-started/concept_snapcenter_overview.html["Saiba mais sobre o SnapCenter"^]
 
 * Segurança dos dados
 +

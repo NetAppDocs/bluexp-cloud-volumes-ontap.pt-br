@@ -8,7 +8,7 @@ summary: Utilize o serviço de gestão de chaves do Google para o seu serviço d
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

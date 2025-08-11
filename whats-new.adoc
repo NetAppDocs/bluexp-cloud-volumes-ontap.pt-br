@@ -28,7 +28,7 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 A partir de 11 de agosto de 2025, a licença Cloud Volumes ONTAP Optimized será descontinuada e não estará mais disponível para compra ou renovação nos marketplaces do Azure e do Google Cloud para assinaturas de pagamento conforme o uso (PAYGO).  Se você tiver um contrato anual existente com uma licença otimizada, poderá continuar a usar a licença até o final do contrato.  Quando sua licença otimizada expirar, você poderá optar pelas licenças Cloud Volumes ONTAP Essentials ou Professional.
 
-No entanto, a capacidade de adicionar ou renovar licenças otimizadas estaria disponível por meio das APIs.
+No entanto, a capacidade de adicionar ou renovar licenças otimizadas estará disponível por meio das APIs.
 
 Para obter informações sobre pacotes de licenciamento, consulte https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-licensing.html["Licenciamento para Cloud Volumes ONTAP"^] .
 
@@ -272,7 +272,7 @@ A NetApp planejou o fim da disponibilidade (EOA) e o fim do suporte (EOS) do lic
 
 Para compromissos anuais ou de longo prazo, a NetApp recomenda que você entre em Contato com seu representante da NetApp antes da data da EOA ou da data de expiração da licença para garantir que os pré-requisitos para a transição estejam em vigor. Se você não tiver um contrato de longo prazo para um nó Cloud Volumes ONTAP e executar seu sistema com uma assinatura paga conforme o uso (PAYGO) sob demanda, é importante Planejar sua conversão antes da data EOS. Para contratos de longo prazo e assinaturas PAYGO, você pode usar a ferramenta de conversão de licenças BlueXP  para uma conversão perfeita.
 
-https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"^] https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-convert-node-capacity.html["Converta uma licença baseada em nó Cloud Volumes ONTAP em licença baseada em capacidade"^]
+https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/concept-licensing.html#end-of-availability-of-node-based-licenses["Término da disponibilidade de licenças baseadas em nós"^] https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/task-convert-node-capacity.html["Converter uma licença baseada em nó do Cloud Volumes ONTAP em uma licença baseada em capacidade"^]
 
 
 

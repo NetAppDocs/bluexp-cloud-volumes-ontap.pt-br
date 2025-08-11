@@ -39,10 +39,7 @@ https://docs.netapp.com/us-en/bluexp-classification/concept-cloud-compliance.htm
 +
 image:screenshot_settings_delete.png["Uma captura de tela que mostra o menu disponível no ambiente de trabalho que contém a ação Excluir."]
 
-.. Na janela Excluir ambiente de trabalho, digite o nome do ambiente de trabalho e clique em *Excluir*.
-+
-Pode demorar até 5 minutos para eliminar o ambiente de trabalho.
-
+.. Na janela Excluir ambiente de trabalho, digite o nome do ambiente de trabalho e clique em *Excluir*.  Pode levar até cinco minutos para excluir o ambiente de trabalho.
 
 
 
