@@ -102,36 +102,6 @@ Você pode pagar por capacidade em várias configurações diferentes:
 
 
 
-==== Otimizado
-
-Pague por operações de e/S e capacidade provisionadas separadamente.
-
-* Nó único ou HA da Cloud Volumes ONTAP
-* O carregamento baseia-se em dois componentes de custo: Armazenamento e utilização (e/S).
-+
-Você não será cobrado por e/S relacionadas à replicação de dados (SnapMirror), backups (SnapVault) ou NDMP.
-
-
-
-ifdef::azure[]
-
-* Disponível no mercado do Azure como uma oferta de pagamento conforme o uso ou como um contrato anual
-
-
-endif::azure[]
-
-ifdef::gcp[]
-
-* Disponível no mercado do Google Cloud como uma oferta de pagamento conforme o uso ou como um contrato anual
-
-
-endif::gcp[]
-
-* Adicione qualquer um dos serviços de dados de nuvem da NetApp a um custo extra
-
-
-
-
 ==== Profissional
 
 Pague por capacidade por qualquer tipo de configuração Cloud Volumes ONTAP com backups ilimitados.
@@ -249,7 +219,7 @@ Para obter informações, https://mysupport.netapp.com/info/communications/CPC-0
 
 === Término da disponibilidade de licenças baseadas em nós
 
-A partir de 11 de novembro de 2024, a disponibilidade limitada de licenças baseadas em nós foi encerrada. O suporte para licenciamento baseado em nós termina em 31 de dezembro de 2024.
+A partir de 11 de novembro de 2024, a disponibilidade limitada de licenças baseadas em nós foi encerrada.  O suporte para licenciamento baseado em nós termina em 31 de dezembro de 2024.
 
 Se você tiver um contrato válido baseado em nós que se estende além da data EOA, você pode continuar a usar a licença até que o contrato expire. Uma vez que o contrato expirar, será necessário fazer a transição para o modelo de licenciamento baseado em capacidade. Se não tiver um contrato de longo prazo para um nó Cloud Volumes ONTAP, é importante planear a sua conversão antes da data EOS.
 
