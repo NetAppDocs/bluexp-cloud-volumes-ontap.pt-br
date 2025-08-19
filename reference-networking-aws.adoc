@@ -70,7 +70,7 @@ A autenticação do usuário falha e os seguintes serviços permanecem indispon�
 | Comunicação com os serviços da AWS. | Modos padrão e privado. | O Cloud Volumes ONTAP não pode se comunicar com o serviço AWS para executar operações específicas do BlueXP  na AWS. 
 
 
-| O ponto de extremidade do governo exato para o serviço AWS depende da região da AWS que você está usando. Os endpoints são sufixos com `amazonaws.com` e `c2s.ic.gov`. 	https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/Region.html["AWS SDK"]Consulte e https://docs.aws.amazon.com/general/latest/gr/rande.html["Documentação da Amazon"] para obter mais informações.  a| 
+| O ponto de extremidade governamental exato para o serviço da AWS depende da região da AWS que você está usando.  Os pontos finais são sufixados com `amazonaws.com` e `c2s.ic.gov` .  Consulte	https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/Region.html["AWS SDK"^] e https://docs.aws.amazon.com/general/latest/gr/rande.html["Documentação da AWS"^] para maiores informações.  a| 
 * CloudFormation
 * Nuvem de computação elástica (EC2)
 * Gerenciamento de identidade e acesso (IAM)

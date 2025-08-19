@@ -126,7 +126,7 @@ Você pode identificar facilmente o endereço IP correto do BlueXP  selecionand
 A implantação de uma configuração de HA em uma única zona de disponibilidade (AZ) pode garantir alta disponibilidade de seus dados se uma instância que executa um nó Cloud Volumes ONTAP falhar. Todos os dados podem ser acessados de forma nativa de fora da VPC.
 
 
-NOTE: A BlueXP  cria um https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html["Grupo de posicionamento do AWS Spread"^] e lança os dois nós de HA nesse grupo de posicionamento. O grupo de posicionamento reduz o risco de falhas simultâneas, espalhando as instâncias por um hardware subjacente distinto. Esse recurso melhora a redundância do ponto de vista da computação e não do ponto de vista da falha de disco.
+NOTE: BlueXP cria um https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html["Documentação da AWS: Grupo de posicionamento de spread da AWS"^] e inicia os dois nós HA naquele grupo de posicionamento.  O grupo de posicionamento reduz o risco de falhas simultâneas ao distribuir as instâncias entre hardwares subjacentes distintos.  Esse recurso melhora a redundância de uma perspectiva de computação e não de falha de disco.
 
 
 
@@ -199,7 +199,7 @@ O único tipo de disco suportado é GP2. As seguintes famílias de tipos de inst
 
 NOTE: O Cloud Volumes ONTAP é compatível apenas com essas configurações. Selecionar tipos de disco não suportados ou instâncias não qualificadas na configuração da zona local da AWS pode resultar em falha de implantação. A disposição de dados em categorias para o AWS S3 não está disponível nas zonas locais da AWS devido à falta de conectividade.
 
-Consulte a documentação da AWS para obter os detalhes mais recentes e completos do link:https://aws.amazon.com/about-aws/global-infrastructure/localzones/features/?nc=sn&loc=2["EC2 tipos de instância em zonas locais"^].
+Consulte a documentação da AWS para obter os detalhes mais recentes e completos dolink:https://aws.amazon.com/about-aws/global-infrastructure/localzones/features/?nc=sn&loc=2["Documentação da AWS: Tipos de instância do EC2 em zonas locais"^] .
 
 
 

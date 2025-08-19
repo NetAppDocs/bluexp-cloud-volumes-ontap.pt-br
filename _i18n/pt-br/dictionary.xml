@@ -446,8 +446,6 @@
   <block id="bf20805083b34c4479e326ea7f16966f" category="paragraph">Você pode identificar facilmente o endereço IP correto do BlueXP  selecionando o volume e clicando em *comando de montagem*.</block>
   <block id="9915334dccd6082757486cc7db7c4599" category="section-title">Zona de disponibilidade única</block>
   <block id="4214b1507155cb0c63890d5526690625" category="paragraph">A implantação de uma configuração de HA em uma única zona de disponibilidade (AZ) pode garantir alta disponibilidade de seus dados se uma instância que executa um nó Cloud Volumes ONTAP falhar. Todos os dados podem ser acessados de forma nativa de fora da VPC.</block>
-  <block id="31ac8d1ac9d098205b95d495a0a3f93a" category="inline-link">Grupo de posicionamento do AWS Spread</block>
-  <block id="bf75afe84fa4d8e8637d67f46da78447" category="admonition">A BlueXP  cria um<block ref="69dad99e4ae4952ff167137be3a42452" category="inline-link-rx"></block> e lança os dois nós de HA nesse grupo de posicionamento. O grupo de posicionamento reduz o risco de falhas simultâneas, espalhando as instâncias por um hardware subjacente distinto. Esse recurso melhora a redundância do ponto de vista da computação e não do ponto de vista da falha de disco.</block>
   <block id="7f87e6839b7919bf607ad546427cfbe1" category="section-title">Acesso a dados</block>
   <block id="c60d8180a8553c026163df72ec4bf40d" category="paragraph">Como essa configuração está em uma única AZ, ela não requer endereços IP flutuantes. Você pode usar o mesmo endereço IP para acesso a dados a partir da VPC e de fora da VPC.</block>
   <block id="db164e8195792d0ba62a45d2c6b14f10" category="paragraph">A imagem a seguir mostra uma configuração de HA em uma única AZ. Os dados são acessíveis a partir da VPC e de fora da VPC.</block>
@@ -471,7 +469,6 @@
   <block id="82bce2d16d12d889961dbfbfac9b0015" category="list-text">C5d</block>
   <block id="e1b8054c9cdd622c9eeecfe71f26054a" category="list-text">R5</block>
   <block id="513e8fcb60809102e57ea96961daab7c" category="list-text">R5d</block>
-  <block id="13adeba04a9bbea1e4724de79afe951f" category="inline-link-macro">EC2 tipos de instância em zonas locais</block>
   <block id="5981b27e3ef7455de64560652783a737" category="paragraph">Ao contrário de um cluster do ONTAP, o storage em um par de HA do Cloud Volumes ONTAP não é compartilhado entre nós. Em vez disso, os dados são espelhados de forma síncrona entre os nós para que os dados estejam disponíveis em caso de falha.</block>
   <block id="867df076984163a73ea8ca6499b1bafd" category="paragraph">Você pode usar um par de HA como uma configuração ativo-ativo, na qual ambos os nós fornecem dados aos clientes ou como uma configuração ativo-passivo, na qual o nó passivo responde a solicitações de dados somente se ele tiver ocupado o storage para o nó ativo.</block>
   <block id="6b014a111978e615d8d143759130afe1" category="admonition">Você pode configurar uma configuração ativo-ativo somente quando usar o BlueXP  na visualização do sistema de armazenamento.</block>
@@ -557,8 +554,6 @@
   <block id="2cfe7b7de2a1df6b585bf1321d37fb8a" category="inline-link">Site da NetApp BlueXP </block>
   <block id="4e4c431843fe55f93c074808800bf7d0" category="paragraph">Pacotes de licenciamento baseados em capacidade estão disponíveis com o Cloud Volumes ONTAP 9,7 e versões posteriores.</block>
   <block id="37040d43404231d8205705e4353af733" category="section-title">Limite de capacidade</block>
-  <block id="30603aec25d6436b9b4c18f5e88da521" category="paragraph">Com esse modelo de licenciamento, cada sistema Cloud Volumes ONTAP individual dá suporte a até 2 PIB de capacidade por meio de discos e disposição em camadas no storage de objetos.</block>
-  <block id="28d17a1ec8598824eb0c46f1ef2668af" category="paragraph">Não há limite máximo de capacidade quando se trata da própria licença.</block>
   <block id="170d227d215fb560bb4c8ad4e345183a" category="section-title">Número máximo de sistemas</block>
   <block id="ee39f25358b04b9ab4c35e9b485d2797" category="paragraph">Por exemplo, digamos que você tenha três ambientes de trabalho:</block>
   <block id="35851ad4214e2cb5358ee8d010fd31e9" category="list-text">Um sistema Cloud Volumes ONTAP de nó único com uma VM de storage (essa é a VM de storage padrão criada quando você implanta o Cloud Volumes ONTAP)</block>
@@ -611,7 +606,6 @@
   <block id="d9b8cca0e5a3840c29a71a4c6f13a917" category="inline-link-macro">Saiba mais sobre o NetApp Keystone</block>
   <block id="9eecbfaf12c4b441b4b80b15e69b1763" category="paragraph"><block ref="861512b606f6337e516b8d3562c115c3" category="inline-link-macro-rx"></block>.</block>
   <block id="73511701791994e2ed3cc40c68089746" category="paragraph">As assinaturas do Keystone são compatíveis com pares de HA. Esta opção de licenciamento não é suportada com sistemas de nó único no momento.</block>
-  <block id="aad2b08c0103cffcbb5efae0a56ee747" category="paragraph">Cada sistema Cloud Volumes ONTAP individual dá suporte a até 2 PIB de capacidade por meio de discos e disposição em camadas no storage de objetos.</block>
   <block id="9a762a1c55d92068610f4f2bc3e42d91" category="paragraph">Saiba como começar a usar uma assinatura do Keystone:</block>
   <block id="a2f6a3e98ea1849ed1ab07d821bf6a18" category="section-title">Licenciamento baseado em nó</block>
   <block id="ea4ba4158f6b2b895b0418072f2ba06d" category="paragraph">O licenciamento baseado em nó é o modelo de licenciamento da geração anterior que permitiu licenciar o Cloud Volumes ONTAP por nó. Este modelo de licenciamento não está disponível para novos clientes. O carregamento por nó foi substituído pelos métodos de carregamento por capacidade adicional descritos acima.</block>
@@ -1085,8 +1079,6 @@
   <block id="02531491f0d0247a340a45ad3a6032bf" category="cell">Comunicação com os serviços da AWS.</block>
   <block id="381e070260ac3be2e38deaa9e933f870" category="cell">Modos padrão e privado.</block>
   <block id="976c42b7559c0a758617695729b92226" category="inline-link">AWS SDK</block>
-  <block id="ca6c1b8dd23dea0cefa49ccce01e7bf6" category="inline-link">Documentação da Amazon</block>
-  <block id="6ac9d9128a75fd3ed101cf091ff7b6cd" category="cell">O ponto de extremidade do governo exato para o serviço AWS depende da região da AWS que você está usando. Os endpoints são sufixos com<block ref="3441ddb447d90616fe905a033c8acc75" prefix=" " category="inline-code"></block> e<block ref="9418634abcbc8743a13685b8ac2ee79b" prefix=" " category="inline-code"></block>. <block ref="a5c675e1d96015bd51012d29ec2a093b" category="inline-link-rx"></block>Consulte e<block ref="681746188c4b856bd684247ebb305be7" category="inline-link-rx"></block> para obter mais informações.</block>
   <block id="f01dcf4246a1f130eae10e4fb90b9fed" category="cell">Modo restrito.</block>
   <block id="f8ee8582a6b700d886898642f29f7b30" category="paragraph">Os nós do Cloud Volumes ONTAP exigem acesso de saída à Internet para NetApp AutoSupport, que monitora proativamente a integridade do sistema e envia mensagens para o suporte técnico da NetApp.</block>
   <block id="ea42efb0eb933b55c2c4a89d521450df" category="list-text">https://support.NetApp.com/aods/asupmessage</block>
@@ -2399,7 +2391,6 @@
   <block id="3b7d5a44ee60c424b0f9531a36f99994" category="section-title">Como as conexões de link privado funcionam</block>
   <block id="497286b7c4a76755ff0535ba3414dce0" category="paragraph">Quando o BlueXP  implanta o Cloud Volumes ONTAP no Azure, ele cria um endpoint privado no grupo de recursos. O endpoint privado está associado às contas de armazenamento do Cloud Volumes ONTAP. Como resultado, o acesso ao storage Cloud Volumes ONTAP viaja pela rede backbone da Microsoft.</block>
   <block id="b2de829903c040e99b02d3d155ca0528" category="paragraph">O acesso ao cliente passa pelo link privado quando os clientes estão dentro do mesmo VNet que o Cloud Volumes ONTAP, dentro de VNets peered ou em sua rede local ao usar uma conexão VPN privada ou ExpressRoute ao VNet.</block>
-  <block id="6b29a9cbfcf35db30ad6d2c78c52db5e" category="paragraph">Aqui está um exemplo que mostra o acesso do cliente através de um link privado dentro do mesmo VNet e de uma rede local que tem uma conexão VPN privada ou ExpressRoute.</block>
   <block id="52fbf2576ac1dc00b418ef95b320599d" category="inline-image-macro">Uma imagem conceitual que mostra o acesso aos dados indo para o Cloud Volumes ONTAP e por meio de um endpoint privado e link privado para a conta de armazenamento.</block>
   <block id="9d1991f365ae3121bda2428edb322a71" category="paragraph"><block ref="9d1991f365ae3121bda2428edb322a71" category="inline-image-macro-rx" type="image"></block></block>
   <block id="b8bc704b3f131d1c37611dd5a5c17e1e" category="admonition">Se o conetor e os sistemas Cloud Volumes ONTAP forem implantados em VNets diferentes, você deverá configurar o peering VNet entre o VNet onde o conetor é implantado e o VNet onde os sistemas Cloud Volumes ONTAP são implantados.</block>
@@ -3342,10 +3333,6 @@
   <block id="72d7d9fbd92253175591abfdb19dc6a1" category="summary">Ao implantar o Cloud Volumes ONTAP na AWS, você pode escolher um sistema pré-configurado que corresponda aos requisitos de workload ou criar sua própria configuração. Se você escolher sua própria configuração, você deve entender as opções disponíveis para você.</block>
   <block id="b2908e7df27905e20924b93b3ff0b803" category="list-text"><block ref="b2908e7df27905e20924b93b3ff0b803" category="inline-link-macro-rx"></block></block>
   <block id="64d1ac557c8992bc5d65b98a95e0b497" category="section-title">Escolha uma zona local suportada</block>
-  <block id="b1968c5681446da9bdcedadbf7a34131" category="inline-link-macro">Veja a lista completa de zonas locais</block>
-  <block id="a455e3549f40e60e4a9c2e8c6580a6a2" category="paragraph"><block ref="27bdb425ba8206d688a379332282fbb4" category="inline-link-macro-rx"></block>. As zonas locais têm de estar ativadas antes de poder criar e gerir recursos nessas zonas.</block>
-  <block id="7d273ac4682ff6458339567063ef099c" category="inline-link-macro">Saiba como ativar uma zona local</block>
-  <block id="9d27b872e974d3d08bf3a26f3677a159" category="paragraph"><block ref="4d81cb3a41369feab014b9955336458e" category="inline-link-macro-rx"></block>.</block>
   <block id="8d2b55a9a4f02c74f0e8f911801cac54" category="section-title">Escolha uma instância suportada</block>
   <block id="63c78fe4096c032cda667cb626771016" category="paragraph">O Cloud Volumes ONTAP suporta vários tipos de instância, dependendo do tipo de licença escolhido.</block>
   <block id="d4f1750ecbae7aeb8e4608c6adadf1b3" category="inline-link">Configurações compatíveis com o Cloud Volumes ONTAP na AWS</block>
@@ -3359,14 +3346,10 @@
   <block id="e0b41f490805e1c9225e568015dbb110" category="list-text">Se você tem um aplicativo que é principalmente lido, então escolha um sistema com RAM suficiente.</block>
   <block id="c14377eab733f3bf25cbcceb23f9d56e" category="inline-link">Documentação da AWS: Tipos de instância do Amazon EC2</block>
   <block id="580354b1f24fa8ef966c9b03534fbb27" category="list-text"><block ref="580354b1f24fa8ef966c9b03534fbb27" category="inline-link-rx"></block></block>
-  <block id="95045aac3f1a0a529db1b12967a0963f" category="inline-link">Documentação da AWS: Instâncias otimizadas do Amazon EBS</block>
-  <block id="0e6ebd054c797aebeb43572f74eb0011" category="list-text"><block ref="0e6ebd054c797aebeb43572f74eb0011" category="inline-link-rx"></block></block>
   <block id="d757cc41a0a4e6e6b194e80049cbf2a0" category="list-text">Tipo de disco EBS</block>
   <block id="0a3f1d7ca2daafbb02df2bbde2bafc6c" category="inline-link">Documentação da AWS: Tipos de volume do EBS</block>
   <block id="581bdd28d4bb550c63e17b66214a79cd" category="list-text">A um nível elevado, as diferenças entre os tipos de discos EBS são as seguintes. Para saber mais sobre os casos de uso de discos EBS,<block ref="5f00b7f6405ad1bb7d391aa3c3ef6190" category="inline-link-rx"></block> consulte .</block>
   <block id="c0fab06b29c5ec6deb5e6576db484b1d" category="list-text">_Discos SSD de uso geral (GP3)_ são os SSDs de menor custo que equilibram custo e desempenho para uma ampla variedade de cargas de trabalho. O desempenho é definido em termos de IOPS e taxa de transferência. Os discos de GP3 tb são compatíveis com o Cloud Volumes ONTAP 9,7 e posterior.</block>
-  <block id="132b864ab2e72e06afdebdb7f860125d" category="inline-link">Saiba mais sobre discos GP3 e seu desempenho</block>
-  <block id="a0b61f3f2e5543edaf18db4fd7dcc835" category="paragraph">Quando você seleciona um disco de GP3 tb, o BlueXP  preenche os valores de IOPS e taxa de transferência padrão que fornecem desempenho equivalente a um disco de GP2 tb com base no tamanho de disco selecionado. Você pode aumentar os valores para obter um melhor desempenho a um custo mais alto, mas não apoiamos valores mais baixos porque pode resultar em desempenho inferior. Em suma, mantenha os valores padrão ou aumente-os. Não os abaixe.<block ref="924ae8d46e82b0d529ccc08c02c469ce" category="inline-link-rx"></block>.</block>
   <block id="a787df3b454348b29e66a5e26381efe1" category="inline-link-macro">Saiba mais sobre o suporte ao Elastic volumes</block>
   <block id="0559fee905621255aa0edc1715586e21" category="paragraph">Observe que o Cloud Volumes ONTAP suporta o recurso volumes elásticos do Amazon EBS com discos GP3. <block ref="2f34fac6c8e3e7a84b963b75a5591f20" category="inline-link-macro-rx"></block>.</block>
   <block id="b695a27bd7c4adeb91651c42c9966f81" category="list-text">_Discos SSD de uso geral (GP2)_ equilibram custo e desempenho para uma ampla variedade de cargas de trabalho. A performance é definida em termos de IOPS.</block>
@@ -4730,7 +4713,6 @@
   <block id="84e52d98abcbe81e8699e5833406f2e8" category="section-title">30 de maio de 2021</block>
   <block id="356b234ec5c21cc28a1a5ae1dd7d3d5f" category="paragraph">As seguintes alterações foram introduzidas com a versão 3.9.7 do conetor.</block>
   <block id="29edc853696ed1638805579b54eb4028" category="section-title">Novo pacote profissional na AWS</block>
-  <block id="e7ef0d5bcd1ca0f8f5763e59e8a0fd1b" category="paragraph">Um novo pacote profissional permite que você agrupe o Cloud Volumes ONTAP e o Cloud Backup Service usando um contrato anual do AWS Marketplace. O pagamento é por TIB. Essa assinatura não permite fazer backup dos dados no local.</block>
   <block id="1827d61b158ce26d89c3b3ae6638d1a7" category="paragraph">Se você escolher essa opção de pagamento, poderá provisionar até 2 PIB por sistema Cloud Volumes ONTAP por meio de discos EBS e disposição em camadas em storage de objetos S3 (nó único ou HA).</block>
   <block id="2351127acb653fd60dafc73c8efcb79d" category="inline-link">Página do AWS Marketplace</block>
   <block id="d4fcabbc33266b3ab9bb15073b182bd8" category="paragraph">Aceda ao<block ref="85c21eb306ec4bcbda7252ca6117fc5c" category="inline-link-rx"></block> para ver os detalhes de preços e aceda ao<block ref="0968fd3305fe992c33f9c307fe831560" category="inline-link-rx"></block> para saber mais sobre esta opção de licenciamento.</block>
@@ -4959,7 +4941,6 @@
   <block id="eb99da0ddbfd6f5a24a511ef8df7c577" category="paragraph">O Cloud Volumes ONTAP não é compatível com categorização de dados, disposição em camadas na nuvem e instâncias não qualificadas nas zonas locais da AWS.</block>
   <block id="19af59a268c506bb19268e318e2e9e5f" category="paragraph">A seguir estão exemplos de configurações:</block>
   <block id="02648096bf738946ffc4d338cb4e9d59" category="admonition">O Cloud Volumes ONTAP é compatível apenas com essas configurações. Selecionar tipos de disco não suportados ou instâncias não qualificadas na configuração da zona local da AWS pode resultar em falha de implantação. A disposição de dados em categorias para o AWS S3 não está disponível nas zonas locais da AWS devido à falta de conectividade.</block>
-  <block id="54a223dbcc3dca4a58e9e5bc292e0c6b" category="paragraph">Consulte a documentação da AWS para obter os detalhes mais recentes e completos do <block ref="a4408f4d4cfd81ced6d2ec2b8da89160" category="inline-link-macro-rx"></block>.</block>
   <block id="8d4ac812d0760131bc0db9a92eb2b512" category="paragraph">Cada sistema Cloud Volumes ONTAP que tenha uma licença bring Your own license (BYOL) baseada em nós precisa ter uma licença de sistema instalada com uma assinatura ativa. O BlueXP  simplifica o processo gerenciando licenças para você e exibindo um aviso antes que elas expirem.</block>
   <block id="2316a1561b1b51c9eb0f231cb338cf48" category="summary">Familiarize-se com o carregamento, o modelo de consumo, os preços e as configurações das licenças baseadas na capacidade.</block>
   <block id="24382072604813ac4ccf773eac088de7" category="paragraph">Você deve estar familiarizado com o carregamento e uso de capacidade para licenças baseadas em capacidade</block>
@@ -5862,7 +5843,6 @@
   <block id="759d32287efdf88cd8ac71dccc0ecf8d" category="inline-image-macro">Uma captura de tela que mostra um número de série da conta, uma caixa de seleção verde e o texto Registrado para suporte.</block>
   <block id="4c441b388bebcddf8c08fb782095b864" category="paragraph"><block ref="4c441b388bebcddf8c08fb782095b864" category="inline-image-macro-rx" type="image"></block></block>
   <block id="9def883103b7b964dcbb0993e3f8a065" category="doc">Fim da disponibilidade das licenças otimizadas</block>
-  <block id="cf4dd05cf065c9ae01bc836c5033bb63" category="paragraph">A partir de 11 de agosto de 2025, a licença Cloud Volumes ONTAP Optimized será descontinuada e não estará mais disponível para compra ou renovação nos marketplaces do Azure e do Google Cloud para assinaturas de pagamento conforme o uso (PAYGO).  Se você tiver um contrato anual existente com uma licença otimizada, poderá continuar a usar a licença até o final do contrato.  Quando sua licença otimizada expirar, você poderá optar pelas licenças Cloud Volumes ONTAP Essentials ou Professional.</block>
   <block id="2b8e43c95c1d15bc0824064c3dc0f993" category="paragraph">Para obter informações sobre pacotes de licenciamento, consulte<block ref="4b2776d787a70224c2441f63d3888380" category="inline-link-rx"></block> .</block>
   <block id="ed1f600d01a229b43b3196dd2f2e48ca" category="inline-link">Gerenciar licenciamento baseado em capacidade</block>
   <block id="1d4a9a37e700957e9d79664f032cf5ec" category="paragraph">Para obter informações sobre como mudar para um método de carregamento diferente, consulte<block ref="eeeecd1116eaf4db26e064552c04366d" category="inline-link-rx"></block> .</block>
@@ -5885,4 +5865,30 @@
   <block id="09027718866a8a3a2edb0bb0eb53c926" category="paragraph">No entanto, a capacidade de adicionar ou renovar licenças otimizadas estará disponível por meio das APIs.</block>
   <block id="064c8585f26a6a9766e55da306b39425" category="paragraph"><block ref="064c8585f26a6a9766e55da306b39425" category="inline-link-rx"></block></block>
   <block id="42f21a40b3b95c1fc1fe699b458d9f4f" category="list-text">Na janela Excluir ambiente de trabalho, digite o nome do ambiente de trabalho e clique em *Excluir*.  Pode levar até cinco minutos para excluir o ambiente de trabalho.</block>
+  <block id="667b631b672b77239becd955ba1e71e7" category="paragraph">A partir de 11 de agosto de 2025, a licença Cloud Volumes ONTAP Optimized será descontinuada e não estará mais disponível para compra ou renovação nos marketplaces do Azure e do Google Cloud para assinaturas de pagamento conforme o uso (PAYGO). Se você tiver um contrato anual existente com uma licença otimizada, poderá continuar a usar a licença até o final do contrato. Quando sua licença Otimizada expirar, você poderá optar pelas licenças Cloud Volumes ONTAP Essentials ou Professional no BlueXP.</block>
+  <block id="dbbc36d23f7abd4cb5ee6cd227f80498" category="inline-link">Documentação da AWS: Grupo de posicionamento de spread da AWS</block>
+  <block id="cd41314faa85609018950af8861cbfbe" category="admonition">BlueXP cria um<block ref="5f59c976d9fdf96b4a8b798a6d54af26" category="inline-link-rx"></block> e inicia os dois nós HA naquele grupo de posicionamento.  O grupo de posicionamento reduz o risco de falhas simultâneas ao distribuir as instâncias entre hardwares subjacentes distintos.  Esse recurso melhora a redundância de uma perspectiva de computação e não de falha de disco.</block>
+  <block id="86a51cf4972711c5446e99e4b2c11833" category="inline-link-macro">Documentação da AWS: Tipos de instância do EC2 em zonas locais</block>
+  <block id="afaa46a6555847e8d8780777da6ca9f9" category="paragraph">Consulte a documentação da AWS para obter os detalhes mais recentes e completos do<block ref="a26b1323c095461019edf21935f6a169" category="inline-link-macro-rx"></block> .</block>
+  <block id="8d051a62e2d203f6829d7d7282bfaad2" category="inline-link">Melhores práticas do FabricPool</block>
+  <block id="9eac799f777e7aff4284a547242d2767" category="paragraph">No modelo de licenciamento baseado em capacidade, cada sistema Cloud Volumes ONTAP oferece suporte à hierarquização para armazenamento de objetos, e a capacidade total em camadas pode ser ampliada até o limite de bucket do provedor de nuvem.  Embora a licença não imponha restrições de capacidade, siga as<block ref="c6ca22161b60218024eaf899637cc82e" category="inline-link-rx"></block> para garantir desempenho ideal, confiabilidade e eficiência de custos ao configurar e gerenciar camadas.</block>
+  <block id="325a399a390a2918a7f4f1fec2390521" category="paragraph">Para obter informações sobre os limites de capacidade de cada provedor de nuvem, consulte sua documentação:</block>
+  <block id="b419b4d9d3feb2661e6902f993f2c5e4" category="list-text"><block ref="b419b4d9d3feb2661e6902f993f2c5e4" category="inline-link-rx"></block></block>
+  <block id="6b209360b200c08a554735be2c77d1ca" category="inline-link">Documentação do Azure para discos gerenciados</block>
+  <block id="531b133840ee35cf5193230121ea7443" category="inline-link">Documentação do Azure para armazenamento de blobs</block>
+  <block id="84cdcf6be1c07f6c7a4c6848232c0828" category="list-text"><block ref="045f40e684cda6ce174737ffede86f97" category="inline-link-rx"></block>e<block ref="6782e281e8536503245f524b6778618f" category="inline-link-rx"></block></block>
+  <block id="b0cd7667098b2a3439c52ba1f9334faa" category="inline-link">Documentação do Google Cloud</block>
+  <block id="9ccfe59c1252cf7f615b4c7dab763516" category="list-text"><block ref="9ccfe59c1252cf7f615b4c7dab763516" category="inline-link-rx"></block></block>
+  <block id="6bcfb21e09554dca2e39878feec63052" category="inline-link">Documentação da AWS</block>
+  <block id="63e61f9cfd9e23981290df95189a0086" category="cell">O ponto de extremidade governamental exato para o serviço da AWS depende da região da AWS que você está usando.  Os pontos finais são sufixados com<block ref="3441ddb447d90616fe905a033c8acc75" prefix=" " category="inline-code"></block> e<block ref="9418634abcbc8743a13685b8ac2ee79b" prefix=" " category="inline-code"></block> .  Consulte<block ref="0cc7482cfbec9986689ea592901ca08d" category="inline-link-rx"></block> e<block ref="7b952d7c295132574b9db83c5815e1b6" category="inline-link-rx"></block> para maiores informações.</block>
+  <block id="b52031f66d3dc59a36e6259c1d35e489" category="paragraph">Aqui está um exemplo que mostra o acesso do cliente por meio de um link privado de dentro da mesma VNet e de uma rede local que tem uma VPN privada ou uma conexão ExpressRoute.</block>
+  <block id="e1e38dd53f910aed9fe6abf379cf94d3" category="inline-link-macro">Documentação da AWS: Veja a lista completa de Zonas Locais</block>
+  <block id="01e332ff22fad5ad1f6aef2188fc573c" category="paragraph"><block ref="cf9ca53790fde0f765a118e90595e587" category="inline-link-macro-rx"></block> . As Zonas Locais devem ser habilitadas antes que você possa criar e gerenciar recursos nessas zonas.</block>
+  <block id="ee0ced7b2e597237ee0377d3791326a5" category="inline-link-macro">Documentação da AWS: Introdução às Zonas Locais da AWS</block>
+  <block id="1e6a5fa11b69ede855d9a6997e9787b5" category="paragraph"><block ref="3650844966a3c53f0c75a4d3cbd94e54" category="inline-link-macro-rx"></block> .</block>
+  <block id="87c06bc8df4d2016deb28f10522c8c27" category="inline-link">Documentação da AWS: Instâncias otimizadas para Amazon EBS</block>
+  <block id="abe48585876db48e8f9c628335adc4ae" category="list-text"><block ref="abe48585876db48e8f9c628335adc4ae" category="inline-link-rx"></block></block>
+  <block id="e0770826536ddaadf0db71e22667d483" category="inline-link">Documentação da AWS: Saiba mais sobre discos gp3 e seu desempenho</block>
+  <block id="2fdd250d12304ba30564106a823a4d07" category="paragraph">Quando você seleciona um disco gp3, o BlueXP preenche os valores padrão de IOPS e taxa de transferência que fornecem desempenho equivalente a um disco gp2 com base no tamanho do disco selecionado.  Você pode aumentar os valores para obter melhor desempenho a um custo mais alto, mas não oferecemos suporte a valores menores porque isso pode resultar em desempenho inferior.  Resumindo, mantenha os valores padrões ou aumente-os.  Não os abaixe.<block ref="7f8ffa6c4a580a433518ebbbf51360b2" category="inline-link-rx"></block> .</block>
+  <block id="556df0c07cbea0b78af68a3a3c052441" category="paragraph">Um novo Pacote Profissional permite que você combine o Cloud Volumes ONTAP e o Cloud Backup Service usando um contrato anual do AWS Marketplace.  O pagamento é por TiB.  Esta assinatura não permite que você faça backup de dados locais.</block>
 </blocks>

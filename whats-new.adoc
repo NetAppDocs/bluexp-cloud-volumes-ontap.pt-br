@@ -26,7 +26,7 @@ Os aprimoramentos descritos nesta página são específicos dos recursos do Blue
 
 === Fim da disponibilidade das licenças otimizadas
 
-A partir de 11 de agosto de 2025, a licença Cloud Volumes ONTAP Optimized será descontinuada e não estará mais disponível para compra ou renovação nos marketplaces do Azure e do Google Cloud para assinaturas de pagamento conforme o uso (PAYGO).  Se você tiver um contrato anual existente com uma licença otimizada, poderá continuar a usar a licença até o final do contrato.  Quando sua licença otimizada expirar, você poderá optar pelas licenças Cloud Volumes ONTAP Essentials ou Professional.
+A partir de 11 de agosto de 2025, a licença Cloud Volumes ONTAP Optimized será descontinuada e não estará mais disponível para compra ou renovação nos marketplaces do Azure e do Google Cloud para assinaturas de pagamento conforme o uso (PAYGO). Se você tiver um contrato anual existente com uma licença otimizada, poderá continuar a usar a licença até o final do contrato. Quando sua licença Otimizada expirar, você poderá optar pelas licenças Cloud Volumes ONTAP Essentials ou Professional no BlueXP.
 
 No entanto, a capacidade de adicionar ou renovar licenças otimizadas estará disponível por meio das APIs.
 
@@ -1761,7 +1761,7 @@ As seguintes alterações foram introduzidas com a versão 3.9.7 do conetor.
 
 === Novo pacote profissional na AWS
 
-Um novo pacote profissional permite que você agrupe o Cloud Volumes ONTAP e o Cloud Backup Service usando um contrato anual do AWS Marketplace. O pagamento é por TIB. Essa assinatura não permite fazer backup dos dados no local.
+Um novo Pacote Profissional permite que você combine o Cloud Volumes ONTAP e o Cloud Backup Service usando um contrato anual do AWS Marketplace.  O pagamento é por TiB.  Esta assinatura não permite que você faça backup de dados locais.
 
 Se você escolher essa opção de pagamento, poderá provisionar até 2 PIB por sistema Cloud Volumes ONTAP por meio de discos EBS e disposição em camadas em storage de objetos S3 (nó único ou HA).
 
