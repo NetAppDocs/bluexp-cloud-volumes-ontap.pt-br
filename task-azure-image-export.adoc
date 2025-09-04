@@ -63,22 +63,28 @@ Por exemplo, todas as implantações de nó único com o Cloud Volumes ONTAP 9.1
 |===
 
 
-| *Versão Cloud Volumes ONTAP* | *Método de implantação da VM* | *Nome SKU* 
+| *Versão Cloud Volumes ONTAP* | *Implantação de VM por meio de* | *Nome SKU* 
 
 
-| 9.16.1 e mais tarde | Por meio do método de implantação direta do mercado | ONTAP_cloud_direct 
+| 9.17.1 e posterior | O mercado do Azure | ontap_cloud_direct_gen2 
 
 
-| 9.16.1 e mais tarde | Todas as implantações por meio do BlueXP  | ONTAP_cloud 
+| 9.17.1 e posterior | BlueXP | ontap_cloud_gen2 
 
 
-| 9.15.1 | Todas as implantações por meio do BlueXP  | ONTAP_cloud 
+| 9.16.1 | O mercado do Azure | ONTAP_cloud_direct 
 
 
-| 9.15.0 | Nó único | ONTAP_cloud_byol 
+| 9.16.1 | BlueXP | ONTAP_cloud 
 
 
-| 9.15.0 | Alta disponibilidade | ONTAP_cloud_byol_ha 
+| 9.15.1 | BlueXP | ONTAP_cloud 
+
+
+| 9.15.0 | BlueXP, implantações de nó único | ONTAP_cloud_byol 
+
+
+| 9.15.0 | BlueXP, implantações de alta disponibilidade (HA) | ONTAP_cloud_byol_ha 
 |===
 . Depois de mapear a versão do ONTAP e a imagem do marketplace do Azure, exporte o arquivo VHD do marketplace do Azure usando o Azure Cloud Shell ou o Azure CLI.
 

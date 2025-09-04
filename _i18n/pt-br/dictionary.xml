@@ -4184,7 +4184,6 @@
   <block id="cf153c7d2cb432b6e772832926525a09" category="section-title">Cloud Volumes ONTAP 9.15.1 GA</block>
   <block id="ffa2c93a775db2cb6243bf2a224cf240" category="paragraph">Agora, o BlueXP  pode implantar e gerenciar o lançamento de disponibilidade geral do Cloud Volumes ONTAP 9.15.1 na AWS, Azure e Google Cloud.</block>
   <block id="9f97c3125a701942b4e6e648146819fc" category="inline-link-macro">Saiba mais sobre os novos recursos incluídos nesta versão do Cloud Volumes ONTAP</block>
-  <block id="c2282365523aa8fbb305c5432e90d5d7" category="paragraph"><block ref="6f9b2ccd962907ef2c43f6fa9517a053" category="inline-link-macro-rx"></block>.</block>
   <block id="9cc3df8e0a65f95d62b0d0dc557d0fa9" category="section-title">8 de agosto de 2024</block>
   <block id="e84c1e70dc9a2186ec21e22a3e9cbda0" category="section-title">Pacotes de licenciamento do Edge Cache descontinuados</block>
   <block id="882b50ca44d46bfb8d9502390cfeaf96" category="paragraph">Os pacotes de licenciamento baseados em capacidade do Edge Cache não estarão mais disponíveis para implantações futuras do Cloud Volumes ONTAP. No entanto, você pode usar a API para aproveitar essa funcionalidade.</block>
@@ -5041,7 +5040,6 @@
   <block id="90069a3873814503a767070f04f3c286" category="paragraph">Por exemplo, todas as implantações de nó único com o Cloud Volumes ONTAP 9.15.0 devem ser usadas<block ref="b2b27ade506086d79b3e7defdb321673" prefix=" " category="inline-code"></block> como o nome do SKU.</block>
   <block id="d811ca86e147e8cf2239ee377f1dcd50" category="cell">*Versão Cloud Volumes ONTAP*</block>
   <block id="aadb6d991e4406b990f6fca8b4c83fd6" category="cell">*Nome SKU*</block>
-  <block id="1da19d67e22ac2cb25b90e0604702db1" category="cell">Todas as implantações por meio do BlueXP </block>
   <block id="273062411bc731be8028321277142365" category="cell">ONTAP_cloud</block>
   <block id="6ecba12db0576e8891316b6674fda716" category="paragraph">Agora, você pode ativar o storage WORM (uma gravação, muitas leituras) em um sistema Cloud Volumes ONTAP existente usando o BlueXP . Esse recurso oferece a flexibilidade de habilitar o WORM em um ambiente de trabalho, mesmo que o WORM não tenha sido ativado durante sua criação. Uma vez ativado, você não pode desativar WORM.</block>
   <block id="31ccaa5879eee7a69ef3c48f1004c59c" category="list-text">A alteração do método de cobrança não afeta se você é cobrado por meio de uma licença comprada da NetApp (BYOL) ou da assinatura do mercado do seu provedor de nuvem de pagamento conforme o uso (PAYGO).</block>
@@ -5360,9 +5358,6 @@
   <block id="df65d9be8ade62cf7505e34c307cecad" category="cell">*Tipos de máquina virtual (VM) suportados*</block>
   <block id="b13b643af58b125fac839de04760d5f0" category="cell">Gama completa de tipos de VM. <block ref="ef57b1c89cee8819c5de2b079e4b0640" category="inline-link-rx"></block></block>
   <block id="97c2102867c5b54db1b773f42a540c16" category="list-text">9.16.1 GA</block>
-  <block id="4692723666baa52294f46ef51ee4ec3f" category="cell">*Método de implantação da VM*</block>
-  <block id="95392acbc8522bf81166b3d44b333fca" category="cell">9.16.1 e mais tarde</block>
-  <block id="e6c4c5f3851cefbfb1da8daa3aff1fb0" category="cell">Por meio do método de implantação direta do mercado</block>
   <block id="8c63a56c7facb0a50c8c629b8b10d627" category="cell">ONTAP_cloud_direct</block>
   <block id="3c0acb220a6d083f589c0e9d2c4bb5b9" category="paragraph">A senha deve observar algumas regras. A nova palavra-passe:</block>
   <block id="c3b8a6ca2fd73fcdea07816d50da5780" category="list-text">Não deve conter a palavra<block ref="21232f297a57a5a743894a0e4a801fc3" prefix=" " category="inline-code"></block></block>
@@ -5891,4 +5886,20 @@
   <block id="e0770826536ddaadf0db71e22667d483" category="inline-link">Documentação da AWS: Saiba mais sobre discos gp3 e seu desempenho</block>
   <block id="2fdd250d12304ba30564106a823a4d07" category="paragraph">Quando você seleciona um disco gp3, o BlueXP preenche os valores padrão de IOPS e taxa de transferência que fornecem desempenho equivalente a um disco gp2 com base no tamanho do disco selecionado.  Você pode aumentar os valores para obter melhor desempenho a um custo mais alto, mas não oferecemos suporte a valores menores porque isso pode resultar em desempenho inferior.  Resumindo, mantenha os valores padrões ou aumente-os.  Não os abaixe.<block ref="7f8ffa6c4a580a433518ebbbf51360b2" category="inline-link-rx"></block> .</block>
   <block id="556df0c07cbea0b78af68a3a3c052441" category="paragraph">Um novo Pacote Profissional permite que você combine o Cloud Volumes ONTAP e o Cloud Backup Service usando um contrato anual do AWS Marketplace.  O pagamento é por TiB.  Esta assinatura não permite que você faça backup de dados locais.</block>
+  <block id="d12fe68c4b1ba1d58975f9611e832d67" category="paragraph"><block ref="24db39f20f36cadeb40fc6fee7aff51e" category="inline-link-macro-rx"></block> .</block>
+  <block id="186b3997de3027cf87a351ba0a1f9bf4" category="doc">Cloud Volumes ONTAP 9.17.1 RC</block>
+  <block id="2a0942c706fe1023b055df5cfc6720d2" category="paragraph">Agora você pode usar o BlueXP para implantar e gerenciar o Release Candidate 1 do Cloud Volumes ONTAP 9.17.1 no Azure e no Google Cloud.  No entanto, esta versão não está disponível para implantação e atualização na AWS.</block>
+  <block id="1794b1ebac03efdd38e24eb28c47629a" category="inline-link-macro">Saiba mais sobre esta versão do Cloud Volumes ONTAP</block>
+  <block id="e0a027f4bdcd16cda78c830ace94fc76" category="paragraph"><block ref="539cae97b36c04420caaf667f01300c8" category="inline-link-macro-rx"></block> .</block>
+  <block id="ae76d7929a27ed322b88161e71bfa161" category="list-text">9.17.1 RC1</block>
+  <block id="159b2c36e92d08f58049110227f49823" category="cell">*Implantação de VM por meio de*</block>
+  <block id="ce2276d280ca79bc5d0b33e7903a7d49" category="cell">9.17.1 e posterior</block>
+  <block id="88c8462e1641cb3eee755100b508a86d" category="cell">O mercado do Azure</block>
+  <block id="b8f95e1a74252a7c5089e349f29275e8" category="cell">ontap_cloud_direct_gen2</block>
+  <block id="b8e6637325f666227e9b7e79a403ca80" category="cell">ontap_cloud_gen2</block>
+  <block id="0bd0e673df4c14cae45a11fac30c530b" category="cell">9.16.1</block>
+  <block id="652e1c6e403bbb45f405f8e8b424f73f" category="cell">BlueXP, implantações de nó único</block>
+  <block id="eeea8782a887558399361aec836b75d0" category="cell">BlueXP, implantações de alta disponibilidade (HA)</block>
+  <block id="36991a14fecff3acb300e7240e20124a" category="cell">9.17.1 (somente para Azure e Google Cloud)</block>
+  <block id="ba3c0cba3a3d15ce8426fc737476a59c" category="section-title">4 de setembro de 2025</block>
 </blocks>

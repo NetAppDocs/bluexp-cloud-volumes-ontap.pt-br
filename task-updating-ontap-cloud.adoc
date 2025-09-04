@@ -49,6 +49,9 @@ A versão do Cloud Volumes ONTAP para a qual você pode atualizar depende da ver
 | Versão atual | Versões para as quais você pode atualizar diretamente 
 
 
+| 9.16.1 (somente para Azure e Google Cloud) | 9.17.1 (somente para Azure e Google Cloud) 
+
+
 | 9.15.1 | 9.16.1 (somente para Azure e Google Cloud) 
 
 
