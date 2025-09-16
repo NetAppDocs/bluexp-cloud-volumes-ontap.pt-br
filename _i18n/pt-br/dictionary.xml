@@ -5552,7 +5552,6 @@
   <block id="fdcb4cfaa6fda318a31e37ce29a14e92" category="section-title">Suporte de versão mínima para Flash Cache no Azure</block>
   <block id="d05c6d51d7a4b0bd019498131ff00f16" category="paragraph">A versão mínima do Cloud Volumes ONTAP necessária para configurar o Flash Cache no Azure é 9.13.1 GA. Você só pode usar o ONTAP 9.13.1 GA e versões posteriores para implantar o Flash Cache em sistemas Cloud Volumes ONTAP no Azure.</block>
   <block id="b77891a5294c25aca8a6fda943805ecf" category="doc">Suporte para regiões da China para Cloud Volumes ONTAP 9.13.1 na AWS</block>
-  <block id="3899c7c0df13a38296f1334779a1dfe7" category="paragraph">Agora você pode implantar o Cloud Volumes ONTAP 9.13.1 na AWS nas regiões da China. Isso inclui suporte para implantações de nó único e alta disponibilidade (HA). Depois de implantar o Cloud Volumes ONTAP 9.13.1, você pode atualizá-lo para versões posteriores. Apenas licenças adquiridas diretamente da NetApp são suportadas.</block>
   <block id="abe88f95b23156cb29c433c9ebe92a00" category="inline-link">Mapas de regiões globais para Cloud Volumes ONTAP</block>
   <block id="10df570a0447a18b299f516b2e8498c2" category="paragraph">Para obter informações sobre a disponibilidade regional, consulte o<block ref="f76c632bc8b9c4e032a9d48fcbfa8dc1" category="inline-link-rx"></block>.</block>
   <block id="aa3bf76b3589430467bef386eaec9486" category="doc">Novas regiões com suporte no Azure</block>
@@ -5902,4 +5901,5 @@
   <block id="eeea8782a887558399361aec836b75d0" category="cell">BlueXP, implantações de alta disponibilidade (HA)</block>
   <block id="36991a14fecff3acb300e7240e20124a" category="cell">9.17.1 (somente para Azure e Google Cloud)</block>
   <block id="ba3c0cba3a3d15ce8426fc737476a59c" category="section-title">4 de setembro de 2025</block>
+  <block id="a3f77d8413628b40c09a649cd79a6e02" category="paragraph">Agora você pode implantar o Cloud Volumes ONTAP 9.13.1 na AWS nas regiões da China.  Isso inclui suporte para implantações de nó único e de alta disponibilidade (HA).  Somente licenças adquiridas diretamente da NetApp são suportadas.</block>
 </blocks>
